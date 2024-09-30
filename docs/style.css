@@ -1,0 +1,709 @@
+/* ------- Programming1-2023 ------- */
+html {
+  font-family: "M PLUS Rounded 1c", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+
+  --code-pg-foreground: #24292e;
+  --code-pg-background: #ebebeb;
+
+  --code-ln-foreground: #a8a8a8;
+
+  --code-out-foreground: #ebebeb;
+  --code-out-background: #012456;
+
+  --main-foreground: #24292e;
+  --main-theme-color: #0366d6;
+  --main-theme-lt-color: #47a4f5;
+
+  --main-background: #ebebeb;
+
+  --main-masked-foreground: #888888;
+  --main-masked-background: #ebebeb;
+  --main-masked-bordercolor: #f7e994;
+}
+
+/* ------- 共通 ------- */
+
+.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: var(--main-foreground);
+  line-height: 1.5;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0px 45px;
+}
+
+mjx-container {
+  font-size: 100% !important;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  mjx-container {
+    font-size: 85% !important;
+  }
+}
+
+main.markdown-body p {
+  margin-block-start: 0.7em;
+  margin-block-end: 0.7em;
+  text-indent: 0.7em;
+}
+
+/* ------- AweSome::本体 ------- */
+.markdown-body i.fa-solid {
+  text-indent: 0.15em;
+}
+
+/* ------- ヘッダーとフッター ------- */
+header.markdown-body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+header.markdown-body p {
+  text-align: right;
+  line-height: 1;
+  margin-block-start: 0.3em;
+  margin-block-end: 0.3em;
+}
+
+footer.markdown-body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+footer.markdown-body p {
+  text-align: right;
+}
+
+/* ------- 水平線 ------- */
+.markdown-body hr {
+  margin: 1.5em 0em;
+}
+
+/* ------- 強調 ------- */
+
+.markdown-body strong {
+  color: var(--main-theme-color);
+}
+
+.markdown-body em {
+  font-style: normal;
+  font-weight: normal;
+  padding: 0 0.4em;
+  color: var(--main-background);
+  border-radius: 5px;
+  border-bottom: 0;
+  background-color: var(--main-theme-color);
+}
+
+.markdown-body u {
+  text-decoration: none;
+  background: linear-gradient(transparent 72%, #b8e3ff 28%);
+}
+
+/* ------- 見出し ------- */
+
+.markdown-body h1 {
+  position: relative;
+  padding: 0 0 0 1.6em;
+  border-bottom: 2px solid;
+  color: var(--main-theme-color);
+}
+
+.markdown-body h1::before {
+  position: absolute;
+  left: 0;
+  font-family: "Font Awesome 5 Free";
+  content: "\f121";
+  color: var(--main-theme-color);
+}
+
+.markdown-body h2 {
+  border-bottom: 2px solid;
+}
+
+.markdown-body h3 {
+  border-bottom: 2px solid;
+  padding-left: 0.25em;
+  font-size: 1.3em;
+}
+
+.markdown-body h3 span {
+  display: none;
+}
+
+h1 .header-section-number,
+h2 .header-section-number {
+  padding-right: 0.5em;
+}
+
+/* ------- 図 ------- */
+
+.markdown-body figure {
+  text-align: center;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.markdown-body figcaption {
+  display: none;
+}
+
+.markdown-body figure img {
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+/* ------- リンク ------- */
+
+.markdown-body a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--main-theme-color);
+  margin: 0 0.25em;
+  cursor: pointer;
+  border-bottom: 1.5px dashed;
+  transition: background-color 0.5s;
+}
+
+.markdown-body a:hover {
+  color: var(--main-theme-lt-color);
+}
+
+/* ------- 引用 ------- */
+
+.markdown-body blockquote {
+  margin-left: 1em;
+  margin-right: 1em;
+  padding: 0 0 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+  margin-block-start: 0.7em;
+  margin-block-end: 0.7em;
+}
+
+.markdown-body blockquote p {
+  text-indent: 0;
+}
+
+.markdown-body blockquote u {
+  background: none;
+  border-bottom: 2px solid;
+  border-color: #d9d9d9;
+}
+
+.markdown-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+.markdown-body blockquote > :first-child {
+  margin-top: 0;
+}
+
+/* ------- プログラムコード ------- */
+
+div.sourceCode {
+  overflow-x: auto;
+  background-color: var(--code-pg-background);
+  border-radius: 10px;
+  margin-block-start: 0.7em;
+  margin-block-end: 0.7em;
+  counter-reset: pg-line;
+}
+
+div.sourceCode[data-caption]::before {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  display: block;
+  padding-left: 20px;
+  background: var(--code-pg-foreground);
+  color: var(--code-pg-background);
+  content: attr(data-caption);
+}
+
+/* ------- プログラムコード::行番号 ------- */
+
+.markdown-body code > span > a {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.numberLines code > span > a {
+  color: var(--code-ln-foreground);
+  margin-left: 0;
+  margin-right: 10px;
+  font-weight: normal;
+  border: none;
+  cursor: auto;
+}
+
+.numberLines code > span > a::before {
+  counter-increment: pg-line;
+  content: counter(pg-line, decimal-leading-zero);
+}
+
+@media (max-width: 767px) {
+  .markdown-body code > span > a {
+    display: none;
+  }
+}
+
+/* ------- AweSome::本体 ------- */
+/* .markdown-body i.fa-solid {
+  text-indent: 0.15em;
+} */
+
+/* ------- プログラムコード::本体 ------- */
+
+.markdown-body pre {
+  overflow-x: auto;
+  background: var(--code-out-background);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 16px;
+  margin: 0;
+  overflow: auto;
+  line-height: 1.2;
+  word-wrap: normal;
+  border-radius: 10px;
+}
+
+.markdown-body pre.sourceCode {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+main.markdown-body > pre {
+  margin-block-start: 0.7em;
+  margin-block-end: 0.7em;
+}
+
+div.note > pre {
+  margin-block-start: 0.7em;
+  margin-block-end: 0.7em;
+}
+
+/* ------- プログラムコード::文字 ------- */
+
+.markdown-body code {
+  font-weight: normal;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  padding: 0.15em 0.4em;
+  font-size: 100%;
+  word-break: normal;
+  color: var(--code-pg-foreground);
+  background-color: var(--code-pg-background);
+  border-radius: 5px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.markdown-body pre code {
+  color: var(--code-pg-background);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.markdown-body pre.sourceCode code {
+  color: var(--code-pg-foreground);
+}
+
+/* ------- マスク ------- */
+
+.markdown-body span.masked {
+  font-weight: bold;
+  color: transparent;
+  background-color: #fff57c;
+  padding: 0.05em 0.5em 0.05em 0.3em;
+  border-radius: 8px;
+  border: solid 2px #fff57c;
+  cursor: pointer;
+}
+
+.markdown-body span.masked::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f08e";
+  margin-right: 0.4em;
+  color: var(--main-masked-foreground);
+}
+
+.markdown-body span.masked.open {
+  color: var(--main-theme-color);
+  background-color: transparent;
+  border: solid 2px var(--main-masked-background);
+}
+
+.markdown-body span.masked.open::before {
+  color: #bbbbbb;
+  background-color: transparent;
+}
+
+.markdown-body .masked code {
+  color: transparent;
+  background-color: transparent;
+  padding: 0.05em 0.4em;
+}
+
+.markdown-body .masked.open code {
+  color: var(--code-pg-foreground);
+}
+
+/* ------- 箇条書き ------- */
+
+.markdown-body ul {
+  list-style: none;
+  padding: 0;
+  margin-block-start: 0.7em;
+  margin-block-end: 0.7em;
+  margin: 0 0 0.7em 0;
+}
+
+.markdown-body li ul {
+  margin: 0 0 0.7em -0.5em;
+  padding: 0;
+}
+
+.markdown-body ul p {
+  margin-block-start: 0.2em;
+  margin-block-end: 0.2em;
+}
+
+.markdown-body ul li {
+  position: relative;
+  padding: 0.35em 0 0 1.4em;
+  margin: 0;
+  text-indent: 0.5em;
+}
+
+.markdown-body ul li::before {
+  position: absolute;
+  left: 0;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f1b0";
+  color: var(--main-theme-lt-color);
+}
+
+.markdown-body ul li ul li::before {
+  padding-top: 3px;
+  font-size: 85%;
+}
+
+/* ------- ノート共通 ------- */
+
+.markdown-body div.note {
+  border-radius: 10px;
+  padding: 0 15px;
+  margin: 0.9em 0;
+}
+
+.note p:first-child::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 0.5em;
+}
+
+.note p:first-child {
+  text-indent: 0;
+}
+
+/* ------- ノート Type-（注意事項）------- */
+
+.markdown-body div.type-caution {
+  border: 2px solid #ff7783;
+  background: #ffe5e5;
+}
+
+.type-caution p:first-child::before {
+  content: "\f071";
+  color: #ff3d57;
+}
+
+.type-caution strong {
+  color: #ff3d57;
+}
+
+.type-caution code {
+  background: #ffafb3;
+}
+
+.type-tips ul li::before {
+  color: #ff3d57;
+}
+
+/* ------- ノート Type-senior（上級者）------- */
+
+.markdown-body div.type-senior {
+  border: 2px solid #b688da; /* 3 */
+  background: #ffebff; /* 1 */
+}
+
+.type-senior p:first-child::before {
+  content: "\f6e2";
+  color: #855aa8; /* 4 */
+}
+
+.type-senior strong {
+  color: #855aa8; /* 4 */
+}
+
+.type-senior code {
+  background: #e9b9ff; /* 2 */
+}
+
+.type-senior ul li::before {
+  color: #855aa8;
+}
+
+/* ------- ノート Type-tips------- */
+
+.markdown-body div.type-tips {
+  border: 2px solid #bd9f00; /* 3 */
+  background: #ffffbc; /* 1 */
+}
+
+.type-tips p:first-child::before {
+  content: "\f5ad";
+  color: #887100; /* 4 */
+}
+
+.type-tips strong {
+  color: #887100; /* 4 */
+}
+
+.type-tips code {
+  background: #f4d002; /* 2 */
+}
+
+.type-tips ul li::before {
+  color: #887100;
+}
+
+/* ------- プログラムコードの装飾 ------- */
+
+/* 演算子 */
+code span.op {
+  font-weight: bold;
+}
+
+/* インポート */
+code span.im {
+  color: #963fac;
+  font-weight: bold;
+}
+
+/* キーワード */
+code span.kw {
+  color: #316fa3;
+  font-weight: bold;
+}
+
+/* コメント */
+code span.co {
+  color: #098156;
+}
+
+/* 文字列 */
+code span.st {
+  color: #a31515;
+}
+
+/* 整数 */
+code span.dv {
+  color: #098156;
+}
+
+/* 小数 */
+code span.fl {
+  color: #098156;
+}
+
+/* None */
+code span.va {
+  color: #316fa3;
+}
+
+/* 小数 */
+code span.cf {
+  color: #316fa3;
+  font-weight: bold;
+}
+
+/* MD: 見出し */
+code span.fu {
+  color: #316fa3;
+  font-weight: bold;
+}
+
+/* MD: 箇条書き */
+code span.ss {
+  color: #098156;
+  font-weight: bold;
+}
+
+/* MD: コード */
+code span.in {
+  color: #a31515;
+  font-weight: bold;
+}
+
+/* ------- ナビゲーション ------- */
+
+#g-nav {
+  position: fixed;
+  z-index: 999;
+  top: -480%;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  transition: all 0.4s;
+}
+
+#g-nav.panelactive {
+  top: 0;
+}
+
+#g-nav.panelactive #g-nav-list {
+  /* position: fixed; */
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#g-nav li a {
+  color: #cccccc;
+  text-decoration: none;
+  padding: 8px;
+  font-weight: bold;
+  display: block;
+}
+
+#g-nav li a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+#g-nav ul {
+  z-index: 999;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+#g-nav li {
+  list-style: none;
+  text-align: center;
+}
+
+#g-nav ul > li {
+  font-size: 24px;
+}
+
+#g-nav ul > li > ul > li {
+  font-size: 16px;
+}
+
+#g-nav ul > li > ul > li > ul > li {
+  font-size: 16px;
+}
+
+/* ------- ナビゲーションボタン ------- */
+
+.openbtn-div {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: var(--main-foreground);
+  line-height: 1.5;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0px 45px;
+}
+
+.openbtn {
+  position: fixed;
+  z-index: 9999;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background: rgba(48, 104, 215, 0.8);
+  border-radius: 5px;
+}
+
+.openbtn span {
+  display: inline-block;
+  transition: all 0.4s;
+  position: absolute;
+  left: 14px;
+  height: 2px;
+  border-radius: 5px;
+  background: white;
+  width: 45%;
+}
+
+.openbtn span:nth-of-type(1) {
+  top: 13px;
+}
+
+.openbtn span:nth-of-type(2) {
+  top: 19px;
+}
+
+.openbtn span:nth-of-type(3) {
+  top: 25px;
+}
+
+.openbtn span:nth-of-type(3)::after {
+  content: "Index";
+  position: absolute;
+  top: 5px;
+  left: -4px;
+  color: #fff;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.openbtn.active span:nth-of-type(1) {
+  top: 14px;
+  left: 18px;
+  transform: translateY(6px) rotate(-45deg);
+  width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3) {
+  top: 26px;
+  left: 18px;
+  transform: translateY(-6px) rotate(45deg);
+  width: 30%;
+}
+
+.openbtn.active span:nth-of-type(3)::after {
+  content: "Close";
+  transform: translateY(0) rotate(-45deg);
+  top: 5px;
+  left: 4px;
+}

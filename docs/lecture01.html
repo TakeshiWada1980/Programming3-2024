@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+     <script
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第01回 3I-プログラミング3</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#ガイダンス" id="toc-ガイダンス"><span
+class="toc-section-number">1</span> ガイダンス</a>
+<ul>
+<li><a href="#概要" id="toc-概要"><span
+class="toc-section-number">1.1</span> 概要</a></li>
+<li><a href="#授業の位置づけ" id="toc-授業の位置づけ"><span
+class="toc-section-number">1.2</span> 授業の位置づけ</a></li>
+<li><a href="#本科目を通じて学べる知識スキル"
+id="toc-本科目を通じて学べる知識スキル"><span
+class="toc-section-number">1.3</span>
+本科目を通じて学べる知識・スキル</a></li>
+<li><a href="#成績評価法" id="toc-成績評価法"><span
+class="toc-section-number">1.4</span> 成績評価法</a></li>
+<li><a href="#授業の進め方" id="toc-授業の進め方"><span
+class="toc-section-number">1.5</span> 授業の進め方</a></li>
+</ul></li>
+<li><a href="#最初の目標todoアプリの開発"
+id="toc-最初の目標todoアプリの開発"><span
+class="toc-section-number">2</span>
+最初の目標「Todoアプリの開発」</a></li>
+<li><a href="#javascripttypescriptの概要"
+id="toc-javascripttypescriptの概要"><span
+class="toc-section-number">3</span> JavaScript/TypeScriptの概要</a>
+<ul>
+<li><a href="#javascript-neq-typescript-の実行環境"
+id="toc-javascript-neq-typescript-の実行環境"><span
+class="toc-section-number">3.1</span> JavaScript (<span
+class="math inline">\(\neq\)</span> TypeScript) の実行環境</a></li>
+<li><a href="#もうひとつの-javascript-の実行環境"
+id="toc-もうひとつの-javascript-の実行環境"><span
+class="toc-section-number">3.2</span> もうひとつの JavaScript
+の実行環境</a></li>
+</ul></li>
+<li><a href="#node.js-のインストール"
+id="toc-node.js-のインストール"><span
+class="toc-section-number">4</span> Node.js のインストール</a>
+<ul>
+<li><a href="#インストーラのダウンロード"
+id="toc-インストーラのダウンロード"><span
+class="toc-section-number">4.1</span>
+インストーラのダウンロード</a></li>
+<li><a href="#インストーラの実行" id="toc-インストーラの実行"><span
+class="toc-section-number">4.2</span> インストーラの実行</a></li>
+<li><a href="#インストールされたことの確認"
+id="toc-インストールされたことの確認"><span
+class="toc-section-number">4.3</span>
+インストールされたことの確認</a></li>
+</ul></li>
+<li><a href="#npm-関連の初期設定" id="toc-npm-関連の初期設定"><span
+class="toc-section-number">5</span> npm 関連の初期設定</a>
+<ul>
+<li><a href="#npm-のバージョンアップ"
+id="toc-npm-のバージョンアップ"><span
+class="toc-section-number">5.1</span> npm のバージョンアップ</a></li>
+<li><a href="#typescript-のインストール"
+id="toc-typescript-のインストール"><span
+class="toc-section-number">5.2</span> TypeScript のインストール</a></li>
+<li><a href="#グローバル環境にインストールされたパッケージの確認"
+id="toc-グローバル環境にインストールされたパッケージの確認"><span
+class="toc-section-number">5.3</span>
+グローバル環境にインストールされたパッケージの確認</a></li>
+<li><a href="#トランスパイルとjavascriptプログラムの実行"
+id="toc-トランスパイルとjavascriptプログラムの実行"><span
+class="toc-section-number">5.4</span>
+トランスパイルとJavaScriptプログラムの実行</a></li>
+</ul></li>
+<li><a href="#typescriptの基礎学習のための環境構築"
+id="toc-typescriptの基礎学習のための環境構築"><span
+class="toc-section-number">6</span>
+TypeScriptの基礎学習のための環境構築</a>
+<ul>
+<li><a href="#プロジェクトフォルダの作成"
+id="toc-プロジェクトフォルダの作成"><span
+class="toc-section-number">6.1</span>
+プロジェクトフォルダの作成</a></li>
+<li><a href="#typescriptの設定-1" id="toc-typescriptの設定-1"><span
+class="toc-section-number">6.2</span> TypeScriptの設定 (1)</a></li>
+<li><a href="#typescriptの設定-2" id="toc-typescriptの設定-2"><span
+class="toc-section-number">6.3</span> TypeScriptの設定 (2)</a></li>
+<li><a href="#フォルダの作成" id="toc-フォルダの作成"><span
+class="toc-section-number">6.4</span> フォルダの作成</a></li>
+<li><a
+href="#tsファイルの作成とトランスパイルによるjsファイルの出力と実行"
+id="toc-tsファイルの作成とトランスパイルによるjsファイルの出力と実行"><span
+class="toc-section-number">6.5</span>
+TSファイルの作成とトランスパイルによるJSファイルの出力と実行</a></li>
+<li><a href="#開発を効率的に行なうためのパッケージの追加"
+id="toc-開発を効率的に行なうためのパッケージの追加"><span
+class="toc-section-number">6.6</span>
+開発を効率的に行なうためのパッケージの追加</a></li>
+<li><a href="#ホットリロードの設定" id="toc-ホットリロードの設定"><span
+class="toc-section-number">6.7</span> ホットリロードの設定</a></li>
+<li><a href="#index.ts-に-prac00.ts-を読み込む"
+id="toc-index.ts-に-prac00.ts-を読み込む"><span
+class="toc-section-number">6.8</span> index.ts に prac00.ts
+を読み込む</a></li>
+<li><a href="#練習" id="toc-練習"><span
+class="toc-section-number">6.9</span> 練習</a></li>
+<li><a href="#開発モードでプログラムの実行"
+id="toc-開発モードでプログラムの実行"><span
+class="toc-section-number">6.10</span>
+開発モードでプログラムの実行</a></li>
+<li><a href="#本番モードでプログラムの実行"
+id="toc-本番モードでプログラムの実行"><span
+class="toc-section-number">6.11</span>
+本番モードでプログラムの実行</a></li>
+</ul></li>
+<li><a href="#gitgithub管理" id="toc-gitgithub管理"><span
+class="toc-section-number">7</span> Git/GitHub管理</a>
+<ul>
+<li><a href="#gitignore-の設定" id="toc-gitignore-の設定"><span
+class="toc-section-number">7.1</span> .gitignore の設定</a></li>
+</ul></li>
+<li><a href="#フォーマッタのインストール"
+id="toc-フォーマッタのインストール"><span
+class="toc-section-number">8</span> フォーマッタのインストール</a></li>
+<li><a href="#次週までの宿題" id="toc-次週までの宿題"><span
+class="toc-section-number">9</span> 次週までの宿題</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2024-3I プログラミング3 第01回 講義資料</p>
+      <p>2024年10月03日（木）1・2時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="ガイダンス"><span
+      class="header-section-number">1</span> ガイダンス</h1>
+      <h2 data-number="1.1" id="概要"><span
+      class="header-section-number">1.1</span> 概要</h2>
+      <p>本科目では<a
+      href="https://www.google.com/search?q=Next.js">Next.js</a>をフレームワークに採用した「<strong>ウェブアプリ開発</strong>」を実践形式で学び、実際にオリジナルの<strong>ブログシステム</strong>
+      (記事の閲覧と投稿機能を持つもの)
+      をゼロから開発、デプロイ・公開することを目標としています。デプロイとは
+      <span
+      class="masked">デプロイとは、開発したアプリをサーバにアップロードし、実際に、ユーザーがインターネット経由で利用できる状態</span>
+      にすることです。</p>
+      <p>皆さんが、この授業で開発したウェブアプリは、この先のインターンシップや就職の「選考」のなかで、<strong>自分の能力と経験
+      (実績) を客観的に示すこと</strong>
+      に利用ができます。授業という枠を超え、意欲的に取り組んで欲しいと思います。</p>
+      <h2 data-number="1.2" id="授業の位置づけ"><span
+      class="header-section-number">1.2</span> 授業の位置づけ</h2>
+      <h3 data-number="1.2.1" id="基本情報"><span
+      class="header-section-number">1.2.1</span> 基本情報</h3>
+      <ul>
+      <li>学年・学科: 3年 総合工学システム学科
+      <strong><em>知能情報コース専門科目</em></strong></li>
+      <li>単位数: <strong>2単位</strong>
+      (通年・<strong>学修単位</strong>)</li>
+      <li>卒業要件： DP-D</li>
+      <li>担当教員： Takeshi Wada</li>
+      </ul>
+      <div class="note type-senior">
+      <p><strong>学修単位</strong></p>
+      <p>本科目は、前期の <strong>情報3</strong> や
+      <strong>プログラミング2</strong>
+      と同じく「<strong>学修単位</strong>」の科目であり、<strong>30時間
+      (相当) の対面授業</strong>と、<strong>60時間 (相当)
+      の授業時間外学習</strong> が要求される科目となります。</p>
+      <p>授業については毎週90分を実施し、これを2時間と見なして全15回の講義によって「30時間相当の対面授業」を確保しています。これに加えて、皆さんは授業1回についき、授業時間外に
+      <span class="masked">約4時間の自主的な学習</span>
+      が求められます。そして、この授業は、それらの授業時間外学習を前提としてボリュームや難易度設定をしています。</p>
+      </div>
+      <h3 data-number="1.2.2" id="関連科目"><span
+      class="header-section-number">1.2.2</span> 関連科目</h3>
+      <p>知能情報コースの専門科目は
+      <strong><em>ソフトウェア系</em></strong>、<strong><em>ハードウェア系</em></strong>、<strong><em>応用情報科学系</em></strong>
+      の<strong>3系統</strong>があります。ここでは、<strong>ソフトウェア系</strong>
+      と <strong>応用情報科学系</strong>
+      のなかで本科目と<strong>特に関連がある科目</strong>を挙げています。</p>
+      <ul>
+      <li>2年 通年 (履修単位) <strong>プログラミング1</strong> (Python)
+      <strong><em>済</em></strong>
+      <ul>
+      <li><a
+      href="https://takeshiwada1980.github.io/Programming1-2023/">2023-講義資料</a>/<a
+      href="https://takeshiwada1980.github.io/Programming1-2024/">2024-講義資料</a></li>
+      </ul></li>
+      <li>2年 後期 (履修単位) <strong>マイクロコンピュータ</strong>
+      <strong><em>済</em></strong></li>
+      <li>3年 前期 (学修単位) <strong>プログラミング2</strong> (C言語)
+      <strong><em>済</em></strong></li>
+      <li>3年 前期 (学修単位) <strong>アルゴリズムとデータ構造1</strong>
+      <ul>
+      <li>教科書 <a
+      href="https://www.kspub.co.jp/book/detail/5128442.html">問題解決力を鍛える！アルゴリズムとデータ構造</a></li>
+      </ul></li>
+      <li>3年 通年 (履修単位) <strong>知能情報実験実習</strong>
+      (自然言語処理・スクレイピング/Python)
+      <strong><em>済</em></strong></li>
+      <li>3年 後期 (学修単位) <strong>プログラミング3</strong>
+      (ウェブ系開発) <strong><em>!!! 本科目!!!</em></strong>
+      <ul>
+      <li>Next.js、React、TypeScript</li>
+      <li>参考書 <a
+      href="https://www.amazon.co.jp/dp/B0CD7JKS9K/">これからはじめるReact実践入門
+      コンポーネントの基本からNext.jsによるアプリ開発まで</a></li>
+      </ul></li>
+      </ul>
+      <hr>
+      <p>また、4年生以降は、次のような科目展開がされます。</p>
+      <ul>
+      <li>4年 半期 (学修単位)
+      <strong>アルゴリズムとデータ構造2</strong></li>
+      <li>4年 半期 (学修単位) <strong>データベース工学</strong></li>
+      <li>4年 通年 (履修単位)
+      <strong>マルチメディア情報処理</strong></li>
+      <li>5年 半期 (学修単位)
+      <strong>オートマントと形式言語</strong></li>
+      <li>5年 半期 (学修単位)
+      <strong>オペレーティングシステム(OS)</strong></li>
+      <li>5年 半期 (学修単位) <strong>ソフトウェア工学</strong></li>
+      <li>5年 通年 (履修単位) <strong>人工知能</strong></li>
+      </ul>
+      <h2 data-number="1.3" id="本科目を通じて学べる知識スキル"><span
+      class="header-section-number">1.3</span>
+      本科目を通じて学べる知識・スキル</h2>
+      <p>本科目では<a
+      href="https://www.google.com/search?q=Next.js">Next.js</a>をフレームワークに採用した「<strong>ウェブアプリ開発</strong>」を実践形式で学び、実際にオリジナルの<strong>ブログシステム</strong>
+      (記事の閲覧と投稿機能を持つもの) をゼロから開発、デプロイ (公開)
+      できるようになる知識・スキルの修得を目指します。</p>
+      <p>当初は、バックエンドを <strong>Django
+      (Python)</strong>、フロントエンドを <strong>React
+      (TypeScript/JavaScript)</strong>
+      で開発することを予定していました。しかし、9月中旬のアンケートの結果、<strong>Next.js
+      によるモダン開発の希望が圧倒的多数だった</strong>ので、予定を変更してバックエンドもフロントエンドも
+      <strong><em>Next.js (React)</em></strong>
+      を採用した開発について学びます。</p>
+      <p>Next.js は <span
+      class="masked">Reactを基盤として、バックエンドも含めたウェブアプリ開発環境を提供するフレームワーク</span>
+      です。</p>
+      <p>具体的には、次のような技術やウェブサービスについて学びます。</p>
+      <ul>
+      <li>TypeScript (JavaScript)、<strong>React</strong>、Next.js</li>
+      <li>Tailwind</li>
+      <li><a href="https://microcms.io/">MicroCMS</a></li>
+      <li>SQLite、<a
+      href="https://supabase.com/">Spabase</a>、Prisma</li>
+      <li>GitHub、GitHub Pages、<a
+      href="https://vercel.com/">Vercel</a></li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>Reactとは</strong></p>
+      <p>React は、<strong>SPA</strong> (Single-Page Application)
+      を採用したウェブアプリ（ウェブサービス /
+      ウェブサイト）の開発に特化した
+      <strong>ユーザーインターフェイス構築ライブラリ</strong>
+      (フロントエンドフレームワーク) です。</p>
+      <ul>
+      <li>参考: <a
+      href="https://www.google.com/search?q=Reactとは">Googel検索「Reactとは…」</a></li>
+      </ul>
+      <p>ウェブアプリの開発者に対しては
+      <strong>高度な再利用性と優れた保守性を提供</strong>
+      し、ウェブアプリの利用者には <span
+      class="masked">高速で応答性の高い快適なUI/UX</span>
+      を提供します。Meta社 (旧Facebook社)
+      が開発・保守しているライブラリで、ウェブ版の Facebook や
+      Instagram、メルカリ、LINE、Netflix、Dropbox、UberEats
+      などでガンガンに使われています。</p>
+      <p>ウェブアプリのフロントエンドフレームワークとしては<a
+      href="https://www.google.com/search?q=Vue.jsとは">Vue.js</a>(ビュージェイエス)
+      や<a
+      href="https://www.google.com/search?q=Angularとは">Angular</a>
+      (アンギュラーアンギュラー)、<a
+      href="https://www.google.com/search?q=Svelteとは">Svelte</a>(スヴェルト)
+      なども存在しますが、Reactが最も人気で技術情報も豊富です。</p>
+      </div>
+      <h3 data-number="1.3.1" id="前提とする知識とスキル"><span
+      class="header-section-number">1.3.1</span>
+      前提とする知識とスキル</h3>
+      <p>本科目は、概ね次のような学習経験を積んでいることを
+      <strong>前提</strong> とした内容、授業スピードになります。</p>
+      <ul>
+      <li><strong>HTML/CSS</strong>: 10時間以上
+      <ul>
+      <li>2年通年「プログラミング1」、3年前期「情報3」、1年後期「情報1」(Progate課題)</li>
+      </ul></li>
+      <li><strong>DB/SQL</strong> (SQLite): 6時間以上
+      <ul>
+      <li>2年前期「情報2 (第11回講義・第12回講義)」</li>
+      </ul></li>
+      <li><strong>Git/GitHub</strong> : 16時間以上
+      <ul>
+      <li>2年通年「プログラミング1 (<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture14.html">第14回講義</a>・<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture15.html">第15回講義</a>・<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture16.html">第16回講義</a>・<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture27.html">第27回講義</a>)」、文化祭活動</li>
+      </ul></li>
+      <li><strong>Python</strong>: 120時間以上
+      <ul>
+      <li>2年通年「プログラミング1」、3年前期「知能情報実験実習1」、3年前期「アルゴリズムとデータ構造1」、文化祭活動</li>
+      </ul></li>
+      <li><strong>C言語</strong>: 120時間以上
+      <ul>
+      <li>3年前期「プログラミング2」、2年前期「マイクロコンピュータ」、3年前期「アルゴリズムとデータ構造1」</li>
+      </ul></li>
+      </ul>
+      <p>知識やスキルが不足していると感じる学生は<a
+      href="https://prog-8.com/">Progete</a>などを活用して補習しておいてください。</p>
+      <h2 data-number="1.4" id="成績評価法"><span
+      class="header-section-number">1.4</span> 成績評価法</h2>
+      <p><strong>総合成績</strong>（年度末の最終成績）は、次のように評価します。</p>
+      <ul>
+      <li>課題の提出状況とその内容 <strong><em>80%</em></strong>
+      ならびに授業中に実施する小テスト <strong><em>20%</em></strong>
+      を総合して評価する。</li>
+      <li>100点法により評価し、60点以上を合格とする。</li>
+      </ul>
+      <p>中間試験や期末試験などの筆記形式の定期試験は<strong>実施しません</strong>。</p>
+      <h2 data-number="1.5" id="授業の進め方"><span
+      class="header-section-number">1.5</span> 授業の進め方</h2>
+      <p>「<strong>ウェブアプリ開発とは？</strong>」や「<strong>ウェブアプリ開発とウェブサイト制作の違いは？</strong>」といった座学的な内容は、今後の授業のなかで、順次、説明していきます。初回の授業から、手を動かさずに話を聞いているだけでは実感も湧かず、眠くなってしまうと思うので・・・。</p>
+      <p>気になる人は以下を参考にしてください。</p>
+      <ul>
+      <li>参考: <a
+      href="https://www.youtube.com/results?search_query=Web制作+Web開発+違い">YouTube検索「Web制作
+      Web開発 違い」</a></li>
+      <li>参考: <a
+      href="https://www.google.com/search?q=Web制作+Web開発+違い">Googel検索「Web制作
+      Web開発 違い」</a></li>
+      <li>参考：<a
+      href="https://chatgpt.com/share/66f88f24-6974-8011-bc2c-949da405f109">ChatGPT「Web制作とWeb開発の違いについて教えて」</a></li>
+      </ul>
+      <p>まずは、本日 (第01回)
+      から第05回ぐらいのまでの目標として「<strong>開発環境の構築・設定</strong>」「<strong>モダンTypeScriptの学習</strong>」「<strong>Reactを使ったTodoアプリの開発</strong>」を進めていきます。ここでの「Todoアプリ」は
+      <span class="masked">フロントエンドだけで完結するウェブアプリ
+      (ウェブブラウザを実行環境として動作するアプリ開発)
+      </span>として開発します。</p>
+      <p>その後、データベースや、各ウェブサービスとの連携、ウェブAPI開発などの「<strong>バックエンドの領域</strong>」について学びながら「<strong>オリジナルのブログシステムの開発</strong>」に挑んでいきます。</p>
+      <h1 data-number="2" id="最初の目標todoアプリの開発"><span
+      class="header-section-number">2</span>
+      最初の目標「Todoアプリの開発」</h1>
+      <p>当面 (後期中間試験前の前ぐらいまで)
+      は、次のリンクに示すようなTodoアプリを「<a
+      href="https://www.google.com/search?q=Reac">React</a>」よばれる
+      JavsScriptライブラリ (フレームワーク)
+      を使って開発できるようになること (= <span
+      class="masked">ある程度の意味や内容を理解して実装できるようになること</span>
+      ) を目標にします。</p>
+      <ul>
+      <li>Todoアプリのサンプル
+      (最低限のレベル、点数で言えば合格ラインの60点レベル)</li>
+      <li>Todoアプリのサンプル
+      (ここまでつくれたら素晴らしい！90点超レベル)</li>
+      </ul>
+      <p>そのために、まず、要求されるのが <strong>TypeScript言語
+      (JavaScript言語) の基礎</strong> であり、そのために必要となるのが
+      <strong>開発環境の構築</strong>
+      になります。なお、エディタについては、皆さんも使い慣れているハズの「VSCode」を使用していきます
+      (GitHub Copilotの支援も受けてください)。</p>
+      <h1 data-number="3" id="javascripttypescriptの概要"><span
+      class="header-section-number">3</span>
+      JavaScript/TypeScriptの概要</h1>
+      <p><strong><em>TypeScript</em></strong>
+      (<strong>タイプスクリプト</strong>) は、JavaScript
+      (ジャバスクリプト)
+      に「<strong>静的型付け</strong>」や「<strong>クラスベースのオブジェクト指向</strong>」など導入して拡張したプログラミング言語です。Microsoft
+      によって開発・保守され、<strong>最近の中規模以上のフロントエンド開発</strong>では、TypeScript
+      が <span class="masked">事実上の標準言語 (ほぼ唯一の選択肢)</span>
+      となっています。</p>
+      <p>この授業で学ぶ React や Next.js
+      のほか、<strong>Angular</strong> や <strong>Vue.js</strong>
+      などのウェブアプリ開発の主要フレームワークも TypeScript
+      による開発を推奨しており、実際に多くのウェブ開発現場で TypeScript
+      が採用されています。<strong>プログラミング言語別の求人ランキング</strong>
+      (<a
+      href="https://career.levtech.jp/guide/knowhow/article/918/">参考</a>)
+      においても上位を陣取る言語となっています。</p>
+      <p>なお、TypeScript
+      によるプログラムコードは「<strong>トランスパイラ</strong>」というものを使って、完全なJavaScriptコードに変換できるので、基本的に
+      <span
+      class="masked">「TypeScriptが使える」＝「JavaScriptが使える」</span>
+      と考えて問題ありません。</p>
+      <div class="note type-tips">
+      <p><strong>トランスパイラによるTypeScriptからJavaScriptへの変換</strong></p>
+      <p><code>tsc --target es6 prac00.ts</code> というコマンドで
+      <code>prac00.ts</code> から <code>prac00.js</code>
+      に変換することができます。今回の授業の後半、開発環境が構築ができたら、実際にトランスパイルを体験してもらいます。</p>
+      <p>(変換前)</p>
+      <div class="sourceCode" id="cb1"
+      data-caption="prac00.ts（TypeScriptプログラム）"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">.`</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>}</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+      <p>(変換後)</p>
+      <div class="sourceCode" id="cb2"
+      data-caption="prac00.js（JavaScriptプログラム）"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">,</span> a<span class="op">,</span> b) {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">const</span> sum <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">.`</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>}</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">const</span> userName <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">const</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">const</span> y <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">const</span> result <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+      </div>
+      <h2 data-number="3.1"
+      id="javascript-neq-typescript-の実行環境"><span
+      class="header-section-number">3.1</span> JavaScript (<span
+      class="math inline">\(\neq\)</span> TypeScript) の実行環境</h2>
+      <p>もともと JavaScript は<a
+      href="https://ja.wikipedia.org/wiki/Netscapeシリーズ">Netscape</a>というウェブブラウザにおいて、HTML要素に対して<strong>動的な視覚的効果を与えたり、ダイアログを表示したりするため</strong>に開発された言語であり、<strong>JavaScript
+      の (基本的な) 実行環境</strong> は <span
+      class="masked">ウェブブラウザ (Chrome、Edge、Safari、Firefox など)
+      </span> となります。</p>
+      <div class="note type-tips">
+      <p>「JavaScript」は、当初「<strong>LiveScript</strong>」という名前でした。しかし、<strong>当時の
+      Java の爆発的人気にあやかって JavaScript
+      に改名</strong>しています。念のために「Java」と「JavaScript」は
+      <span class="masked">メロンとメロンパンぐらい違う</span>
+      ので注意してください。完全なる別物です。</p>
+      </div>
+      <p>JavaScriptが「<strong>ウェブブラウザが実行環境である</strong>」というのは、<strong>Python
+      や C言語
+      などのネイティブアプリ開発用の言語と比較して大きな特徴</strong>
+      となります。ウェブブラウザが使える環境であれば OS や
+      デバイスに関係なく JavaScript が実行可能というのは
+      <strong>JavaScript の大きな「強み」</strong> とも言えます。</p>
+      <p>例えば、自分が Python
+      で作成したプログラムを誰かに使ってもらおうとしたら、その利用者のPCに
+      Python
+      の実行環境をインストールしてもらって、さらに必要なパッケージを pip
+      でインストールしてもらって…という非常に高いハードルがありました
+      (Pythonコードを<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture27.html#exeファイル化">EXEファイル化して配付するという手段</a>もありましたが、ファイルサイズも非常に大きく起動も遅いアプリになってしまいました)
+      。</p>
+      <h3 data-number="3.1.1"
+      id="ウェブブラウザで実行されるjavascript"><span
+      class="header-section-number">3.1.1</span>
+      ウェブブラウザで実行されるJavaScript</h3>
+      <p>「<strong>JavaScriptの実行環境がウェブブラウザであること</strong>」を実際に確認してましょう。</p>
+      <p>次の2つのファイルをテキストエディタで作成・保存 (拡張子に注意)
+      し、<code>index.html</code> のほうをダブルクリックして Chrome
+      を起動してください。さらに、Chrome で
+      <strong><em>[F12]</em></strong> を押下して
+      <strong>デベロッパーツール (開発者ツール) </strong>
+      を起動し「<strong>コンソール</strong>」タブを確認してください。</p>
+      <div class="sourceCode" id="cb3" data-caption="index.html"><pre
+      class="sourceCode numberSource html numberLines"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;ja&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;UTF-8&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>&quot;F12&quot;で「コンソール」を開いて結果を確認してください。<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span> </span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;hoge.js&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+      <p><strong>第09行目</strong>
+      で、以下のJavaScriptプログラムを呼び出しています。</p>
+      <div class="sourceCode" id="cb4" data-caption="hoge.js"><pre
+      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="fu">add</span>(a<span class="op">,</span> b) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="kw">const</span> c <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`</span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> と </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> を足すと </span><span class="sc">${</span>c<span class="sc">}</span><span class="vs"> です。`</span>)<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>}</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">add</span>(<span class="dv">10</span><span class="op">,</span><span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">add</span>(<span class="dv">50</span><span class="op">,-</span><span class="dv">30</span>)<span class="op">;</span></span></code></pre></div>
+      <p>次のように <span class="masked">ウェブブラウザを実行環境として
+      JavaScriptプログラム が動くこと</span>
+      が確認できたと思います。</p>
+      <figure>
+      <img src="figs/01/chrome_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、ウェブブラウザで JavaScript を実行するためには <span
+      class="masked">HTMLファイル の内部から JavaScriptプログラム
+      を呼び出す必要</span> があります。<code>hoge.js</code>
+      をダブルクリックしたり、ウェブブラウザ画面にJavaScriptファイルをドラッグアンドドロップしても動作しません。実際に確認してみてください。</p>
+      <div class="note type-caution">
+      <p><strong>注意</strong></p>
+      <p><strong>ウェブブラウザでは「TypeScript」で書かれたプログラムコードを直接実行することはできません</strong>。ウェブブラウザで実行するためには
+      <span class="masked">トランスパイラ</span>
+      を使って、<strong>あらかじめ「TypeScript」を「JavaScript」に変換・配置</strong>
+      しておく必要があります。</p>
+      <p>なお「トランスパイラ
+      (Transpiler)」とは、あるプログラミング言語で書かれたソースコードを、別のプログラミング言語のソースコードに変換するツールのことで「<strong>トランスレート
+      (Translate)</strong>」と「<strong>コンパイル
+      (Compile)</strong>」を組み合わせた造語です。</p>
+      </div>
+      <p>皆さんは、既に「Pyhthon」「C」「Arduino」を学んできているので推測はつくと思いますが
+      <code>hoge.js</code> に記述されるプログラムは、Python
+      で書けば以下のようなものとなります。</p>
+      <div class="sourceCode" id="cb5" data-caption="hoge.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  c <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> と </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss"> を足すと </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss"> です。&#39;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>add(<span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a>add(<span class="dv">50</span>, <span class="op">-</span><span class="dv">30</span>)</span></code></pre></div>
+      <p>Pythonプログラムは、覚えてますよね?</p>
+      <h2 data-number="3.2"
+      id="もうひとつの-javascript-の実行環境"><span
+      class="header-section-number">3.2</span> もうひとつの JavaScript
+      の実行環境</h2>
+      <p>先のセクションで「<strong>JavaScripthはウェブブラウザ上で実行される</strong>」と解説しましたが、実は、もうひとつ
+      <strong><em>Node.js</em></strong>
+      という「ウェブブラウザとは異なるJavaScript実行環境」が存在します。</p>
+      <p>Node.js (ノード・ジェーエス) は、<strong>Windows や Linux
+      などの OS
+      にインストールして利用するJavaScript実行環境</strong>です。Node.jsがインストールされている環境では、先ほどの
+      <code>hoge.js</code> を次のようにターミナル
+      (PowerShellやコマンドプロンプト)
+      から実行できます。HTMLの内部から呼び出すことなく直接的に実行できる点に注意してください。</p>
+      <pre><code>PS C:\Users\xxxx\Desktop&gt; node hoge.js
+10 と 20 を足すと 30 です。
+50 と -30 を足すと 20 です。</code></pre>
+      <p>ウェブブラウザを使えば手軽に実行できる JavaScript を
+      <strong>わざわざ Node.js
+      環境で実行する需要はどこにあるのでしょうか</strong>。需要は「<strong>大きく2つ</strong>」あります
+      (ここから非常にややこしい話になるので注意してください)。</p>
+      <p>まず、1つは、ウェブアプリの <strong>バックエンド (サーバサイド)
+      の実行環境</strong> としての需要があります。既に皆さんは <span
+      class="masked">前期の「知能情報実験実習1」のなかで Flask (Python)
+      を使ってウェブアプリのバックエンド開発</span>
+      を体験していますが、それと同様に <strong>JavaScript/TypeScript
+      でもバックエンド開発</strong> ができます。</p>
+      <p>具体的には<a
+      href="https://www.google.com/search?q=Express.jsとは">Express.js</a>や<a
+      href="https://www.google.com/search?q=Koa.jsとは">Koa.js</a>といったフレームワークを利用して
+      JavaScript/TypeScript
+      言語でバックエンド開発が可能なのですが、そのための実行環境として
+      Node.js が使われます
+      (フロントエンドも、バックエンドも同じ言語で開発できるのはメリットですよね)。</p>
+      <div class="note type-tips">
+      <p><strong>参考</strong></p>
+      <p>Pythonでは<a
+      href="https://www.google.com/search?q=Flask+Python">Flask</a>を用いて次のようにウェブアプリ
+      (バックエンド) を構築できました。</p>
+      <div class="sourceCode" id="cb7" data-caption="app.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">from</span> flask <span class="im">import</span> Flask</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>app <span class="op">=</span> Flask(<span class="va">__name__</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="at">@app.route</span>(<span class="st">&#39;/&#39;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">def</span> hello():</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="cf">return</span> <span class="st">&#39;hello&#39;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb7-10"><a href="#cb7-10"></a>  app.run(host<span class="op">=</span><span class="st">&#39;0.0.0.0&#39;</span>, port<span class="op">=</span><span class="dv">8000</span>)</span></code></pre></div>
+      <p>JavaScriptでは<a
+      href="https://www.google.com/search?q=Express.jsとは">Express.js</a>というフレームワークを使って、次のようにウェブアプリのバックエンドを構築できます。このプログラムは、Node.js
+      がインストールされた環境で <code>node app.js</code>
+      というコマンドで実行できます。ウェブブラウザ上では実行できない
+      JavaScriptプログラム となっています。</p>
+      <div class="sourceCode" id="cb8" data-caption="app.js"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>const express <span class="op">=</span> require(<span class="st">&#39;express&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>const app <span class="op">=</span> express()<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>const port <span class="op">=</span> <span class="dv">8000</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>app.get(<span class="st">&#39;/&#39;</span>, (req, res) <span class="op">=&gt;</span> {</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  res.send(<span class="st">&#39;hello&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>})<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>app.listen(port, () <span class="op">=&gt;</span> {</span>
+<span id="cb8-10"><a href="#cb8-10"></a>  console.log(`Server running at http:<span class="op">//</span>localhost:${port}`)<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>})<span class="op">;</span></span></code></pre></div>
+      <p>なお、Pythonで本格的なバックエンド開発を行なうときは、Flask
+      よりも<a href="https://www.google.com/search?q=Djangoとは">Django
+      (ジャンゴ)</a>という多機能なフレームワークが推奨されます。</p>
+      </div>
+      <p>次に、2つめですが「ウェブブラウザを実行環境として動作するフロントエンドのJavaScriptプログラム」を開発するときに、その<strong>ビルド</strong>
+      (<span class="masked">TypeScript から JavaScript
+      へのトランスパイルを含む</span>) <strong>や開発ツールの実行に
+      Node.js 環境が使われます</strong>。</p>
+      <p>たとえば、<span class="masked">React
+      を使ったフロントエンド開発</span> が<strong>典型的な Node.js
+      の利用シーン</strong>となります。Reactは、あくまでも「<strong>ウェブブラウザを実行環境として機能するフロントエンド用のJavaScriptライブラリ</strong>」ですが、その
+      React を使った JavaScriptプログラム を効率的に開発するために
+      Node.js という JavaScript環境 が必要になってきます
+      (ややこしいですよね)。</p>
+      <p>簡単にまとめると <span
+      class="masked">Reactでつくられたフロントエンドのウェブアプリはウェブブラウザで動作するが、開発中のビルドやツールの利用のために
+      Node.js が必要になる</span> ということです。</p>
+      <p>・・・とはいえ、いまの段階で、上記の文章だけを読んでイメージを掴むことは極めて難しいと思います。これらは、<strong>この先の授業のなかで実例を示しながら解説</strong>していきます。いますぐ解決したいときは、生成AIを活用してください。</p>
+      <p>(プロンプト例)</p>
+      <blockquote>
+      <p>Reactはウェブブラウザで動作するフロントエンドのライブラリなのに、その開発に何故
+      Node.js
+      が必要なのですか？Node.jsを使わずに開発はできないのですか？</p>
+      </blockquote>
+      <p>なお、後半 (第06回講義以降？) で登場する
+      <strong>Next.js</strong> は、上記で説明した <strong>2つの Node.js
+      の用途を統合したようなフレームワーク</strong>
+      になっています。つまり、Node.jsによって「フロントエンド開発の効率化」と「バックエンド機能の提供」を同時に実現し、総合的なフルスタック開発・実行環境を提供しています
+      (ここの部分も現段階で理解する必要はありません)。</p>
+      <h3 data-number="3.2.1" id="定着確認"><span
+      class="header-section-number">3.2.1</span> 定着確認</h3>
+      <ul>
+      <li>Reactは「フロントエンド開発用のライブラリ」と「バックエンド開発用のライブラリ」のどちらか。
+      <ul>
+      <li>答え <span
+      class="masked">フロントエンド開発用のライブラリ</span></li>
+      </ul></li>
+      <li>JavaScript の実行環境を2つ答えよ。
+      <ul>
+      <li>答え <span
+      class="masked">「ウェブブラウザ」と「Node.js」</span></li>
+      </ul></li>
+      <li>次の説明は適切か。「Reactを使ったフロントエンドの “実行”
+      には、Node.js は事実上必須となる」
+      <ul>
+      <li>答え <span
+      class="masked">適切ではない。Reactを使ったフロントエンドの “開発”
+      には、Node.jsは事実上必須ですが、“実行”
+      においては必ずしも必要ではありません。</span></li>
+      </ul></li>
+      <li>次の説明は適切か。「ウェブブラウザでは TypeScriptプログラム
+      は動作しない。」
+      <ul>
+      <li>答え <span
+      class="masked">適切です。ウェブブラウザ上</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="4" id="node.js-のインストール"><span
+      class="header-section-number">4</span> Node.js のインストール</h1>
+      <p>理由はさておき、<strong>React や Next.js
+      を使用したウェブウェブアプリの開発 (TyepScript から
+      JavaScriptへの変換を含む) には Node.js
+      環境が事実上必須である</strong> ことが分かったと思います。</p>
+      <p>ここでは、Windows PC に Node.js
+      をインストールする手順について示します。なお、この講義資料に記載するプログラムは
+      <code>Node.js v20 (LTS)</code>
+      で動作確認をしています。特段の理由がない限り <code>v20</code>
+      のバージョンを使用してください。</p>
+      <p>なお、既に Node.js
+      をインストール済みの場合、再インストールする必要はありません。</p>
+      <h2 data-number="4.1" id="インストーラのダウンロード"><span
+      class="header-section-number">4.1</span>
+      インストーラのダウンロード</h2>
+      <p>Node.js の公式ページ (<a
+      href="https://nodejs.org/en/download/prebuilt-installer">https://nodejs.org/en/download/prebuilt-installer</a>)
+      から Node.js の <strong><em>v20</em></strong> (LTS)
+      をダウンロードしてインストールしてください。<strong>LTS</strong>
+      は <span class="masked">long-term support</span>
+      の略語で「長期サポート」を意味します。<strong>v20</strong> は
+      2026年4月30日 までサポートが予定されています。</p>
+      <figure>
+      <img src="figs/01//nodejs_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>2024年9月12日現在、Node.js v20 系列の最新リリースは
+      <code>v20.17.0</code>
+      です。もし、より新しいマイナーバージョンが公開されている場合は、そちらを利用してください。また、講義資料に記載されているバージョン番号を読み替えてください。</p>
+      <h2 data-number="4.2" id="インストーラの実行"><span
+      class="header-section-number">4.2</span> インストーラの実行</h2>
+      <p>ダウンロードしたインストーラ <code>node-v20.17.0-x64.msi</code>
+      を実行してください。インストーラからの要求があれば管理者権限を与えてください。<strong>インストールに関する設定は「全てデフォルトのまま」で問題ありません
+      (特に変更必要とする項目はありません)</strong>。</p>
+      <h2 data-number="4.3" id="インストールされたことの確認"><span
+      class="header-section-number">4.3</span>
+      インストールされたことの確認</h2>
+      <p>PowerShell から以下のコマンドを実行し「<strong>Node.js
+      が問題なくインストールされていること</strong>」「<strong>Node.js
+      に パス (path)
+      が通っていること</strong>」を確認してください。コマンドプロンプト
+      (cmd)
+      を使用すると、一部の操作やレスポンスが違ってくるので注意してください。</p>
+      <pre><code>PS C:\Users\xxxx&gt; node -v
+v20.17.0</code></pre>
+      <p>なお、以下のコマンドで node のパス (=<span
+      class="masked">Node.jsの本体が配置されているフォルダ位置</span>)
+      が確認できます。</p>
+      <pre><code>PS C:\Users\xxxx&gt; where.exe node
+C:\Program Files\nodejs\node.exe</code></pre>
+      <h1 data-number="5" id="npm-関連の初期設定"><span
+      class="header-section-number">5</span> npm 関連の初期設定</h1>
+      <p>Node.js では <strong>npm (Node Package Manager)</strong>
+      をというツール使ってパッケージ (ライブラリ)
+      の管理をします。ここでのパッケージとは「<strong>JavaScript
+      でアプリの開発するために使用する各種ライブラリのこと</strong>」と考えてください。なお、パッケージは、ウェブ経由で取得するので
+      npm
+      を実行するときにはインターネットに接続している必要があります。</p>
+      <p>Node.js における npm は、Python における<span class="masked">
+      pip のようなもの</span> と考えてください。</p>
+      <h2 data-number="5.1" id="npm-のバージョンアップ"><span
+      class="header-section-number">5.1</span> npm
+      のバージョンアップ</h2>
+      <p>次のコマンドで、グローバル環境での npm
+      の最新版へのアップグレードと、そのバージョン確認を実行してください。
+      2024年9月12日現在、npm の最新リリースは <code>10.8.3</code>
+      です。</p>
+      <pre><code>PS C:\Users\xxxx&gt; npm install -g npm
+PS C:\Users\xxxx&gt; npm -v
+10.8.3</code></pre>
+      <p>ここで <code>npm install</code>
+      は、npmパッケージをインストールするコマンドです。<code>-g</code>
+      オプションは「<strong>グローバル環境</strong>」を指定しています。上記のコマンドは、何度実行しても問題ありません。</p>
+      <p>なお、グローバル環境には
+      <strong>最低限のパッケージだけをインストールすることが推奨</strong>
+      されます。個別の開発で必要なパッケージは、後述する方法でプロジェクトフォルダのなかの
+      <code>node_modules</code>
+      フォルダにインストールすることが推奨されます。<span
+      class="masked">明示的に <code>-g</code> (または
+      <code>--global</code>) オプションを付けない限り</span>
+      パッケージはプロジェクトフォルダ内のローカル環境にインストールされます。</p>
+      <h2 data-number="5.2" id="typescript-のインストール"><span
+      class="header-section-number">5.2</span> TypeScript
+      のインストール</h2>
+      <p>次のコマンドにより、TypeScript
+      を<strong>グローバル環境</strong>にインストールしてください。これにより、TypeScript
+      を JavaScript にトランスパイルする <code>tsc</code>
+      などのコマンドが使用可能になります。</p>
+      <pre><code>PS C:\Users\xxxx&gt; npm install -g typescript</code></pre>
+      <h2 data-number="5.3"
+      id="グローバル環境にインストールされたパッケージの確認"><span
+      class="header-section-number">5.3</span>
+      グローバル環境にインストールされたパッケージの確認</h2>
+      <p>グローバル環境にインストールされたパッケージの一覧は、次のようなコマンドで確認できます。</p>
+      <pre><code>PS C:\Users\xxxx&gt; npm list -g --depth=0
+C:\Users\wada\AppData\Roaming\npm
++-- npm@10.8.3
+`-- typescript@5.6.2</code></pre>
+      <h2 data-number="5.4"
+      id="トランスパイルとjavascriptプログラムの実行"><span
+      class="header-section-number">5.4</span>
+      トランスパイルとJavaScriptプログラムの実行</h2>
+      <p>ここまでの環境構築により、Node.js環境で「<strong>トランスパイル</strong>」と「<strong>JavaScriptプログラムの実行</strong>」ができるようになりました。実際に、これらを試していきます。</p>
+      <p>以下のTypeScriptプログラムを<code>test.ts</code>という名前でデスクトップ
+      (<code>C:\Users\xxxx\Desktop&gt;</code>) に保存してください。</p>
+      <div class="sourceCode" id="cb14"
+      data-caption="test.ts（TypeScriptプログラム）"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">.`</span><span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>}</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+      <p>デスクトップ画面で <code>[Shift]</code>
+      を押下しながら右クリックして「<strong>ターミナルで開く</strong>」を選択して
+      PowerShell か コマンドプロンプト を開いてください。<code>ls</code>
+      か <code>dir</code> で <code>prac00.ts</code>
+      が存在することを確認してください。</p>
+      <figure>
+      <img src="figs/01/ps_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以下のコマンドで <code>prac00.ts</code> を
+      <code>prac00.js</code> にトランスパイルしてください。ここで
+      <code>--target es6</code> イプションは、ES6 (ES2015)
+      の使用に準拠した JavaScript (ECMASCript)
+      に変換することを明示したものです。</p>
+      <pre><code>PS C:\Users\xxxx\Desktop&gt; tsc --target es6 prac00.ts</code></pre>
+      <p>デスクトップに <code>prac00.js</code>
+      が生成されているので、適当なテキストエディタで開いて内容を確認してください。</p>
+      <p>次に、以下のコマンドで生成された <code>prac00.js</code>
+      を実行してください。</p>
+      <pre><code>PS C:\Users\wada\Desktop&gt; node prac00.js
+Hello, Alice! The sum of 10 and 20 is 30.</code></pre>
+      <h3 data-number="5.4.1" id="演習"><span
+      class="header-section-number">5.4.1</span> 演習</h3>
+      <p><code>--target e6</code>
+      のようにオプションを指定しない場合、<strong>「ES5」という古い仕様に準拠した
+      JavaScriptプログラム</strong> (= <span class="masked">Internet
+      Explorer 11 のようなレガシーなブラウザでも動作する JavaScript
+      プログラム</span>)
+      が出力されます。実際に確認してみてください。</p>
+      <p>また、そのプログラムでも、同様の実行結果
+      (=<code>Hello, Alice! The sum of 10 and 20 is 30.</code>)
+      が得られることを確認してください。</p>
+      <h3 data-number="5.4.2" id="定着確認-1"><span
+      class="header-section-number">5.4.2</span> 定着確認</h3>
+      <ul>
+      <li>ライブラリのバージョンに関する文脈において「LTS」とは何の略語か英語で答えよ。
+      <ul>
+      <li>答え <span class="masked">Long-Term Support</span></li>
+      </ul></li>
+      <li>PCにインストールされている Node.js
+      のバージョンを調べるコマンドを答えよ。
+      <ul>
+      <li>答え <span class="masked"><code>node -v</code></span></li>
+      </ul></li>
+      <li><code>hoge.js</code> というJavaScriptプログラムを Node.js
+      環境で実行するためのコマンドを答えよ。
+      <ul>
+      <li>答え <span
+      class="masked"><code>node hoge.js</code></span></li>
+      </ul></li>
+      <li>Node.js におけるパッケージ管理ツールのコマンド名を答えよ。
+      <ul>
+      <li>答え <span class="masked"><code>npm</code></span></li>
+      </ul></li>
+      <li>カレントフォルダにある <code>test.ts</code> という
+      TypeScriptプログラム を、<code>test.js</code> という
+      JavaScriptプログラム
+      変換してカレントフォルダに出力したい。このためのコマンドを答えよ。
+      <ul>
+      <li>答え <span class="masked"><code>tsc test.ts</code></span></li>
+      </ul></li>
+      <li><code>npm install</code>
+      コマンドでパッケージをインストールするとき、特にオプション指定しない場合、それは「グローバルインストール」になるか、それとも「ローカルインストール」になるか答えよ。
+      <ul>
+      <li>答え <span class="masked">ローカル環境</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="6"
+      id="typescriptの基礎学習のための環境構築"><span
+      class="header-section-number">6</span>
+      TypeScriptの基礎学習のための環境構築</h1>
+      <p>プロジェクトフォルダを作成して「<strong>TypeScriptの基礎を学ぶための環境構築</strong>」を行ないます。次回以降の授業でも継続的に使用していく予定なので
+      (課題として提出してもらう可能性もあるので)、プロジェクトフォルダの位置や名前などには、十分に注意してください。</p>
+      <h2 data-number="6.1" id="プロジェクトフォルダの作成"><span
+      class="header-section-number">6.1</span>
+      プロジェクトフォルダの作成</h2>
+      <p>適切な位置 (OneDrive管理下はお勧めしません) に
+      <code>learn-ts-basics</code> というプロジェクトフォルダを作成して
+      VSCode で開いてください。なお、必ず <code>learn-ts-basics</code>
+      が
+      <strong>VSCodeのワークスペースのトップフォルダ（ルートフォルダ）</strong>
+      となるようにしてください。</p>
+      <figure>
+      <img src="figs/01/vscode_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ターミナルから実行するのであれば、以下のようにしてください。この方法であれば、<code>learn-ts-basics</code>
+      が確実に VSCodeのワークスペースのトップフォルダになります。</p>
+      <pre><code>mkdir learn-ts-basics
+cd learn-ts-basics
+code .</code></pre>
+      <h2 data-number="6.2" id="typescriptの設定-1"><span
+      class="header-section-number">6.2</span> TypeScriptの設定 (1)</h2>
+      <p>実際のReact開発に近しい環境を構築して、そこで TypeScript
+      の基礎学習をしていきます。具体的には npm
+      によるパッケージ追加や、ファイル変更を監視してのホットリロード設定
+      (=<span
+      class="masked">自動的にトランスパイル、ビルドして再読み込みして実行すること</span>)
+      などを行なった環境を構築して、TypeScript
+      の基礎を学んでいきます。</p>
+      <p>まずは、<strong>TypeScript に関する基本設定</strong>
+      から行なっていきます。</p>
+      <p>VSCodeで <code>[Ctrl]+[j]</code> のショートカットでターミナル
+      (PowerShell) を開いて、以下のコマンドを実行してください。</p>
+      <pre><code>tsc --init</code></pre>
+      <p><code>tsc</code>
+      は先ほどのトランスパイルに使ったコマンドです。<code>tsc --init</code>
+      のようにオプションをつけて実行すると、トランスパイルに関する各種設定が記述された
+      <code>tsconfig.json</code> という雛形ファイルが作成されます。</p>
+      <p>コマンド実行後、プロジェクトフォルダに
+      <code>tsconfig.json</code>
+      が作成されているはずなので、VSCode上で開いてください。大量の設定が羅列されていますが、大半がコメントアウトで無効になっています。</p>
+      <p>コメントアウトを含んでいると分かりずらいので
+      <strong>コメントされた文は全て削除して保存</strong>
+      してください。以下のような内容だけが残ると思います。これらは
+      <code>tsc</code> コマンドによるトランスパイル (コンパイル)
+      のオプション設定となります。</p>
+      <div class="sourceCode" id="cb19"
+      data-caption="tsconfig.json（TypeScript関連の設定ファイル）"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">{</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es2016&quot;</span><span class="fu">,</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>    <span class="dt">&quot;esModuleInterop&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>    <span class="dt">&quot;forceConsistentCasingInFileNames&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>    <span class="dt">&quot;strict&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">}</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="fu">}</span></span></code></pre></div>
+      <p>JSONファイルでは <span
+      class="masked">最後の項目以外の各項目の末尾にカンマ
+      (<code>,</code>) が</span>
+      必要です。これを忘れるとエラーの原因となるので注意してください。</p>
+      <h3 data-number="6.2.1" id="演習-1"><span
+      class="header-section-number">6.2.1</span> 演習</h3>
+      <p><code>tsconfig.json</code>
+      の各項目が意味することを「生成AI」を利用して簡単に把握してください
+      (詳細に理解する必要はありません、ざっくりと理解してください)。</p>
+      <p>(プロンプトの例)</p>
+      <blockquote>
+      <p>TypeScript の設定ファイル <code>tsconfig.json</code>
+      を以下に示します。各項目の意味について TypeScript
+      初心者向けに概要を説明してください。</p>
+      </blockquote>
+      <div class="note type-senior">
+      <p><strong>esModuleInteropの設定について</strong></p>
+      <p><code>"esModuleInterop":true</code>
+      は、プロジェクトフォルダに含まれるTypeScriptファイルを「<strong>独立したモジュールとして扱うように
+      TypeScript コンパイラに指示する設定</strong>」です。</p>
+      <p>各ファイルがモジュールとして扱われることで「ファイル間のグローバルスコープの共有が防止」されます。例えば、これを設定していないと
+      <code>foo.ts</code> に記述した <code>cosnt hoge="hoge"</code>
+      と、別ファイル <code>bar.ts</code> に記述した
+      <code>cosnt hoge="hoge"</code>
+      で競合が発生することになります。</p>
+      </div>
+      <h2 data-number="6.3" id="typescriptの設定-2"><span
+      class="header-section-number">6.3</span> TypeScriptの設定 (2)</h2>
+      <p>Typescriptの基礎学習用に <code>tsconfig.json</code>
+      を次のようにカスタマイズしてください。</p>
+      <div class="sourceCode" id="cb20"
+      data-caption="tsconfig.json（TypeScript関連の設定ファイル）"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">{</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es2016&quot;</span><span class="fu">,</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="dt">&quot;outDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./dist&quot;</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span><span class="fu">,</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="dt">&quot;rootDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./src&quot;</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span><span class="fu">,</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="dt">&quot;esModuleInterop&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>    <span class="dt">&quot;forceConsistentCasingInFileNames&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>    <span class="dt">&quot;strict&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">}</span> <span class="er">/*</span> <span class="er">カンマをつけないとダメ!!!</span> <span class="er">*/</span><span class="fu">,</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>  <span class="dt">&quot;include&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;src/**/*&quot;</span><span class="ot">]</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="fu">}</span></span></code></pre></div>
+      <p>ここで追加した項目の意味は次のとおりです。</p>
+      <ul>
+      <li><code>"outDir":"./dist"</code>: Typescript を変換して生成した
+      JavaScriptファイル の出力先を <code>./dist</code>
+      (destinationの略) に指定しています。<span
+      class="masked">最終的にユーザーに配付するようなファイルの出力先フォルダ</span>
+      として <code>dist</code>
+      は、よく使われる名前なので覚えておいてください。</li>
+      <li><code>"rootDir":"./src"</code>:
+      トランスパイル対象のソースファイル (TypeScriptファイル)
+      を配置しているルートフォルダを指定しています。</li>
+      <li><code>"include": ["src/**/*"]</code>:
+      トランスパイルの対象とするファイルやディレクトリを指定しています。<code>**</code>
+      はすべてのサブフォルダ、<code>*</code>
+      はすべてのファイルを意味します。つまり、ここでは <span
+      class="masked">プロジェクトフォルダにある <code>src</code>
+      フォルダのなかのファイルのみをコンパイル対象とする</span>
+      という設定になります。</li>
+      </ul>
+      <h3 data-number="6.3.1" id="定着確認-2"><span
+      class="header-section-number">6.3.1</span> 定着確認</h3>
+      <ul>
+      <li>TypeScript
+      のコンパイルオプションなどを記述する設定ファイルの名称を答えよ。
+      <ul>
+      <li>答え <span
+      class="masked"><code>sconfig.json</code></span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="6.4" id="フォルダの作成"><span
+      class="header-section-number">6.4</span> フォルダの作成</h2>
+      <p>現時点でプロジェクトフォルダのなかに <code>src</code> と
+      <code>dist</code>
+      のフォルダが存在していないので作成してください。</p>
+      <figure>
+      <img src="figs/01/vscode_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、VSCodeの <strong>フォルダアイコン</strong> や
+      <strong>ファイルアイコン</strong>
+      をいい感じにしたいときは、拡張機能の <strong>Material Icon
+      Theme</strong> (識別子:<code>pkief.material-icon-theme</code>)
+      をインストールしてください
+      (プログラミング1の授業でも紹介ずみ)。</p>
+      <h2 data-number="6.5"
+      id="tsファイルの作成とトランスパイルによるjsファイルの出力と実行"><span
+      class="header-section-number">6.5</span>
+      TSファイルの作成とトランスパイルによるJSファイルの出力と実行</h2>
+      <p>ここまでの環境構築が問題なくできているかを確認していきます。<code>src</code>
+      フォルダに <code>prac00.ts</code> というファイル (Practiceの略語)
+      を作成して、以下の TypeScriptプログラム
+      を貼り付けて<strong>保存</strong>してください。</p>
+      <div class="sourceCode" id="cb21" data-caption="prac00.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">.`</span><span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>}</span>
+<span id="cb21-5"><a href="#cb21-5"></a></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+      <p>次に、トランスパイルして動作確認します。VSCodeのターミナル
+      (<code>[Ctrl]+[J]</code>でオープン)
+      で以下のコマンドを実行してください。</p>
+      <pre><code>tsc
+node dist/prac00.js</code></pre>
+      <p>先ほどは <code>tsc --target es6 prac00.ts</code>
+      のように引数を指定しましたが <span
+      class="masked">カレントフォルダに <code>tsconfig.json</code>
+      があり、その設定が参照される</span> ので引数は不要です。</p>
+      <p><code>node dist/prac00.js</code>
+      によって、<code>Hello, Alice! The sum of 10 and 20 is 30.</code>
+      のような文字列が出力されれば、ここまでの設定が正しくできています。</p>
+      <h2 data-number="6.6"
+      id="開発を効率的に行なうためのパッケージの追加"><span
+      class="header-section-number">6.6</span>
+      開発を効率的に行なうためのパッケージの追加</h2>
+      <p>ここまでの設定で「TypeScriptを書いて実行する最低限の環境」が構築できました。</p>
+      <p>ここからは <span
+      class="masked">効率的にTypeScript開発を進める</span>
+      ための環境構築をしていきます。React や Next.js
+      を開発するときにも関係してくる内容となります
+      (<code>package.json</code>など)。</p>
+      <p>まず、開発に必要なパッケージ (ライブラリ) として
+      <code>typescript</code>、<code>ts-node</code>、<code>nodemon</code>、<code>@types/node</code>
+      を、<strong>プロジェクトのローカル環境にインストール</strong>していきます。なお、<code>typescript</code>
+      については既にグローバル環境にインストール済みですが、改めてローカル環境にもインストールしておきます。</p>
+      <ul>
+      <li><code>typescript</code>:
+      JavaScriptに静的型付けと他の機能を追加する言語とコンパイラです。</li>
+      <li><code>ts-node</code>: TypeScriptを (JavaScriptに変換せずに)
+      Node.js 上で <strong>直接実行</strong>
+      するためのランタイムです。</li>
+      <li><code>nodemon</code> (ノードモン):
+      ファイルの変更を監視し、自動的に Node.js
+      アプリを再起動するユーティリティです。いわゆる「<strong>ホットリロード</strong>」的な機能を提供します。</li>
+      <li><code>@types/node</code>:
+      Node.jsの型定義ファイルを提供し、TypeScript で Node.js
+      を使用する際の型チェックとコード補完を可能します。</li>
+      </ul>
+      <p>以下のコマンドで <span
+      class="masked">4つのパッケージをまとめてインストールすること</span>
+      ができます。</p>
+      <pre><code>npm i -D typescript ts-node nodemon @types/node</code></pre>
+      <p>また、以下のコマンドでも同じことができます。</p>
+      <pre><code>npm install --save-dev typescript ts-node nodemon @types/node</code></pre>
+      <p>ここで <code>i</code> または <code>install</code>
+      はパッケージの「インストール操作」を意味します。<code>-D</code>
+      または <code>--save-dev</code> は、<span
+      class="masked">開発のときだけに使うパッケージ</span>
+      (=製品としての出力には含めないパッケージとして)
+      としてインストールすることを意味します。</p>
+      <p>コマンド実行後、プロジェクトフォルダのなかに
+      <code>node_modules</code> フォルダと、<code>package.json</code> と
+      <code>package-lock.json</code>
+      という2個のファイルが自動作成されたことを確認してください。</p>
+      <figure>
+      <img src="figs/01/vscode_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><code>node_modules</code>
+      フォルダには、<code>npm install</code> コマンドで <span
+      class="masked">インストールされたパッケージ (本体)
+      と、そのパッケージと依存関係にあるパッケージ (本体)</span>
+      が格納されています。基本的に、皆さんがこの
+      <code>node_modules</code> フォルダを操作することはありません。</p>
+      <p><code>package.json</code> と <code>package-lock.json</code> は
+      <span
+      class="masked">自分のプロジェクトが依存するパッケージを管理するため</span>
+      のファイルになります。Pythonでいうところの
+      <code>requirements.txt</code> <span class="math inline">\(+\
+      \alpha\)</span> が記述されたファイルと考えてください。</p>
+      <ul>
+      <li><code>package.json</code>:
+      プロジェクトの基本情報、設定・構成情報などを記述します。
+      <ul>
+      <li></span>依存関係のセクション (<code>"devDependencies"</code> や
+      <code>"dependencies"</code> の項目) は <code>npm install</code>
+      コマンドなどを実行すると <span class="masked">自動追記</span>
+      されますが、<code>"scripts"</code>
+      などの項目は必要に応じて皆さんが編集することもあります。</li>
+      <li>インストールされたパッケージとそのバージョンの一覧を保持します。</li>
+      <li>スクリプトコマンド（<code>npm run</code>
+      で実行できるコマンド）を定義します。詳しくは後述します。</li>
+      </ul></li>
+      <li><code>package-lock.json</code>:
+      インストールされた全てのパッケージの正確なバージョンと依存関係のツリーを記録するもので、基本的に皆さんが編集することはありません。</li>
+      </ul>
+      <h3 data-number="6.6.1" id="定着確認-3"><span
+      class="header-section-number">6.6.1</span> 定着確認</h3>
+      <ul>
+      <li>Node.js
+      環境で、アプリ開発時だけに使用するライブラリとして「ts-node」をローカルインストールしたい。これを実行するコマンドを答えよ。
+      <ul>
+      <li>答え <span
+      class="masked"><code>npm install --save-dev ts-node</code> または
+      <code>npm i -D ts-node</code></span></li>
+      </ul></li>
+      <li>Node.js 環境において、<code>npm</code>
+      コマンドでライブラリをローカルインストールしたとき、それらは何という名前のフォルダにインストールされるか答えよ。
+      <ul>
+      <li>答え <span
+      class="masked"><code>node_modules</code></span></li>
+      </ul></li>
+      <li>Node.js 環境において、<code>npm</code>
+      コマンドでライブラリをローカルインストールしたとき、その情報が記録されるファイル名を答えよ。
+      <ul>
+      <li>答え <span class="masked"><code>package.json</code> および
+      <code>package-lock.json</code></span></li>
+      </ul></li>
+      <li>Node.js 環境において、スクリプトコマンドを記述するファイルは
+      <code>package.json</code>、
+      <code>package-lock.json</code>、<code>tsconfig.json</code>
+      のうちどれか、答えよ。
+      <ul>
+      <li>答え <span
+      class="masked"><code>package.json</code></span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="6.7" id="ホットリロードの設定"><span
+      class="header-section-number">6.7</span> ホットリロードの設定</h2>
+      <p>先のセクションでインストールした <code>nodemon</code>
+      (ノードモン) を利用して <code>src</code> フォルダ以下の
+      <strong>TypeScriptファイル (.tsファイル)</strong>
+      を監視し、変更があればプログラムが自動的に再実行されるように設定します。この設定により
+      <span class="masked">プログラムを変更後に、ターミナルで
+      <code>tsc ***.ts</code> や <code>node dist/***.js</code>
+      のようにコマンド入力</span>をする必要がなくなります。</p>
+      <p>React や Next.js 開発においても（nodemon
+      とは異なる仕組みですが）ファイルの変更を監視してホットリロードする環境を構築して開発を進めます。</p>
+      <p>まずは、<code>package.json</code> を次のように変更
+      (<code>"scripts"</code> セクションを追記)
+      してください。<strong>追記するする際には カンマ (<code>,</code>)
+      に注意してください。</strong></p>
+      <div class="sourceCode" id="cb25"
+      data-caption="package.json (変更前)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">{</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>    <span class="dt">&quot;@types/node&quot;</span><span class="fu">:</span> <span class="st">&quot;^22.7.4&quot;</span><span class="fu">,</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="dt">&quot;nodemon&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.1.7&quot;</span><span class="fu">,</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>    <span class="dt">&quot;ts-node&quot;</span><span class="fu">:</span> <span class="st">&quot;^10.9.2&quot;</span><span class="fu">,</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="dt">&quot;typescript&quot;</span><span class="fu">:</span> <span class="st">&quot;^5.6.2&quot;</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">}</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="fu">}</span></span></code></pre></div>
+      <div class="sourceCode" id="cb26"
+      data-caption="package.json (変更後)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">{</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>    <span class="dt">&quot;@types/node&quot;</span><span class="fu">:</span> <span class="st">&quot;^22.7.4&quot;</span><span class="fu">,</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>    <span class="dt">&quot;nodemon&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.1.7&quot;</span><span class="fu">,</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>    <span class="dt">&quot;ts-node&quot;</span><span class="fu">:</span> <span class="st">&quot;^10.9.2&quot;</span><span class="fu">,</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>    <span class="dt">&quot;typescript&quot;</span><span class="fu">:</span> <span class="st">&quot;^5.6.2&quot;</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">},</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;node dist/index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;tsc&quot;</span><span class="fu">,</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;nodemon --watch src --ext ts --verbose --exec ts-node src/index.ts&quot;</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a>  <span class="fu">}</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a><span class="fu">}</span></span></code></pre></div>
+      <p>ここで <code>package.json</code> に追加した
+      <code>"scripts"</code> セクションは <span
+      class="masked">プロジェクトで頻繁に使用するコマンドをショートカットとして定義</span>
+      する場所になります。これにより、<strong>多数のオプションをつけた複雑なコマンドも簡単に実行</strong>できるようになります。</p>
+      <p>具体的には <code>npm run start</code> とコマンド入力すると
+      <code>node dist/index.js</code> が実行されるようになります。</p>
+      <p>また <code>npm run dev</code> とコマンド入力すると
+      <code>nodemon --watch src --ext ts --verbose --exec ts-node src/index.ts</code>
+      が実行されるようになります。</p>
+      <p>なお、<code>npm run start</code> だけは <code>npm start</code>
+      のように省略できますが、他のスクリプト (<code>npm run dev</code>)
+      などは省略できません。</p>
+      <p>ここでは、各スクリプトを以下のような処理をするように割り当てました。</p>
+      <ul>
+      <li><strong><em>“start”</em></strong> : <code>dist</code>
+      フォルダに出力されたトランスパイル済みの JavaScript ファイル
+      (<code>index.js</code>)
+      を実行します。最も本番に近い環境での実行になります。事前に
+      <code>npm run build</code> をしておく必要があります。</li>
+      <li><strong><em>“build”</em></strong> : <code>src</code>
+      フォルダのなかの TypeScript ファイルをトランスパイルして、結果を
+      <code>dist</code> フォルダに出力します。<code>tsc</code>
+      だけでこの処理が実行できるのは <span
+      class="masked"><code>tsconfig.json</code>ファイルに詳細なオプションが設定されている</span>
+      ためです。</li>
+      <li><strong><em>“dev”</em></strong> : <code>src</code>
+      フォルダ内の <code>.ts</code>
+      ファイルの変更を監視し、変更があれば自動的にプログラム
+      (<code>index.ts</code>) を再起動します。<code>ts-node</code>
+      を使用することでトランスパイルせずに、TypeScript
+      ファイルを直接実行します。</li>
+      </ul>
+      <h2 data-number="6.8" id="index.ts-に-prac00.ts-を読み込む"><span
+      class="header-section-number">6.8</span> index.ts に prac00.ts
+      を読み込む</h2>
+      <p>TypeScriptの基礎学習では
+      <code>prac00.ts</code>、<code>prac01.ts</code>、<code>prac02.ts</code>
+      のようにファイルを追加作成して、<strong>課題 (練習問題)</strong>
+      に取り組んでもらいます。</p>
+      <p>これらのファイルを追加した際も <code>npm run dev</code>
+      のコマンドで実行確認できるように <code>index.ts</code>
+      というファイルをつくって、そこに各ファイル
+      (<code>prac00.ts</code>、<code>prac01.ts</code>、<code>prac02.ts</code>・・・)
+      を読み込ませるようにしていきます。</p>
+      <p>例えば <code>prac00.ts</code>
+      に記述したプログラムの実行確認をしたいときは、以下のように
+      <code>index.ts</code> を記述します。</p>
+      <div class="sourceCode" id="cb27" data-caption="index.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac00.ts の実行&quot;</span>)<span class="op">;</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="im">import</span> <span class="st">&quot;./prac00&quot;</span><span class="op">;</span></span></code></pre></div>
+      <p>また、次の課題 <code>prac01.ts</code>
+      に取り組むときは以下のようにします。TypeScript/JavaScript は
+      <code>//</code> でコメントアウトします。</p>
+      <div class="sourceCode" id="cb28" data-caption="index.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">// console.log(&quot;■ prac00.ts の実行&quot;);</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="co">// import &quot;./prac00&quot;;</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac01.ts の実行&quot;</span>)<span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="im">import</span> <span class="st">&quot;./prac01&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="note type-caution">
+      <p>実際の開発では、上記の <code>import "./prac00";</code> のように
+      <strong>ファイル名のみでインポートすること</strong>
+      はほとんどありません。実践での import
+      の使用法方法については、それが必要になったタイミングで解説します。</p>
+      </div>
+      <h2 data-number="6.9" id="練習"><span
+      class="header-section-number">6.9</span> 練習</h2>
+      <p>ここまでに構築した環境を実際に使ってみたいと思います。<code>src</code>
+      フォルダに、次のような <code>index.ts</code> と
+      <code>prac01.ts</code> を作成してください。</p>
+      <div class="sourceCode" id="cb29" data-caption="index.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">// console.log(&quot;■ prac00.ts の実行&quot;);</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co">// import &quot;./prac00&quot;;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac01.ts の実行&quot;</span>)<span class="op">;</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="im">import</span> <span class="st">&quot;./prac01&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb30" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Bob&quot;</span><span class="op">;</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi, </span><span class="sc">${</span>userName<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span></code></pre></div>
+      <p>このようにすると、(環境にもよると思いますが) 以下のように
+      <code>prac00.ts</code> と <code>prac01.ts</code>
+      の両方で記述されている <code>userName</code>
+      という変数について「<strong>ブロック スコープの変数 ‘userName’
+      を再宣言することはできません</strong>」のようなエラーがでると思います。</p>
+      <figure>
+      <img src="figs/01/vscode_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>これは、<code>package.json</code> のなかで
+      <code>"esModuleInterop": true</code> (=<span
+      class="masked">各ファイルを独立したモジュールとして扱うように
+      TypeScript コンパイラに指示する設定</span>)
+      を記述しているものの、それが VSCode
+      でうまく認識されないことに起因します。</p>
+      <p>つまり、VSCode に「<code>prac00.ts</code> <strong>と</strong>
+      <code>prac01.ts</code>
+      <strong>に記述されているプログラムが、同じスコープにある</strong>
+      (=同じスコープのなかで <code>userName</code>
+      という変数が再宣言されている)」と判断されてエラーとなっています。</p>
+      <p>これを解決するためには <code>prac00.ts</code> と
+      <code>prac01.ts</code> の先頭に <code>export {};</code>
+      を記述します。これにより、VSCode
+      においても、各ファイルがモジュールとして正しく認識されます。</p>
+      <p>具体的には、以下のようにファイルを書き換えて、再保存してください。</p>
+      <div class="sourceCode" id="cb31" data-caption="prac00.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb31-1"><a href="#cb31-1"></a><span class="im">export</span> {}<span class="op">;</span> <span class="co">// ファイルをモジュールとして扱いスコープを分離するために必要</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>}</span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a></span>
+<span id="cb31-12"><a href="#cb31-12"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb31-13"><a href="#cb31-13"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb32" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb32-1"><a href="#cb32-1"></a><span class="im">export</span> {}<span class="op">;</span> <span class="co">// ファイルをモジュールとして扱いスコープを分離するために必要</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Bob&quot;</span><span class="op">;</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi, </span><span class="sc">${</span>userName<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span></code></pre></div>
+      <p>以上で、<code>index.ts</code>、<code>prac00.ts</code>、<code>prac01.ts</code>
+      についてエディタ上のエラーは消えたと思います。</p>
+      <h2 data-number="6.10" id="開発モードでプログラムの実行"><span
+      class="header-section-number">6.10</span>
+      開発モードでプログラムの実行</h2>
+      <p>実際に「開発モード」でプログラムを実行していきます。</p>
+      <p>ターミナルで <code>npm run dev</code>
+      を実行してください。以下のような文字列が出力されるはずです
+      (実際には、以下の文字列の前後には <code>[nodemon]</code>
+      のマークがついたログもあわせて出力されます)。</p>
+      <pre><code>■ prac01.ts の実行
+Hi, Bob.</code></pre>
+      <p>つづいて、<code>prac01.ts</code> の <strong>第03行目</strong>
+      の <code>Hi</code> を <code>Hey</code>
+      に書き換えて保存してください。nodemon
+      がファイル変更を検知して、プログラムが再実行され、以下のように出力されるはずです。</p>
+      <pre><code>■ prac01.ts の実行
+Hey, Bob.</code></pre>
+      <p>さらに、<code>index.ts</code> の <strong>第01行目</strong> と
+      <strong>第02行目</strong>
+      のコメントアウトを解除して保存してください。今度は、次のような出力が得られると思います。</p>
+      <pre><code>■ prac00.ts の実行
+Hello, Alice! The sum of 10 and 20 is 30
+■ prac01.ts の実行
+Hi, Bob.</code></pre>
+      <p>nodemon を停止するには、ターミナルで <code>[Ctrl]+[C]</code>
+      を押下します。<code>バッチ ジョブを終了しますか (Y/N)?</code>
+      と聞かれるので <code>Y</code> を入力するか、再度
+      <code>[Ctrl]+[C]</code> を押下してください。</p>
+      <h2 data-number="6.11" id="本番モードでプログラムの実行"><span
+      class="header-section-number">6.11</span>
+      本番モードでプログラムの実行</h2>
+      <p>次に「本番モード」でプログラムを実行します。ターミナルからの次のようにコマンドを入力してください。なお
+      <code>npm run start</code> については <code>npm start</code>
+      に省略可能です。</p>
+      <pre><code>npm run build
+npm run start</code></pre>
+      <p><code>dist</code> フォルダに JavaScriptファイル
+      が出力され、それが実行されます。</p>
+      <h1 data-number="7" id="gitgithub管理"><span
+      class="header-section-number">7</span> Git/GitHub管理</h1>
+      <p>このプロジェクトフォルダについて Git管理を有効化し、さらに
+      GitHub に公開していきます。Git / GitHub
+      基本設定は既に完了しているものとします。未設定の場合は<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture14.html">PG1の講義資料</a>を参照して設定してください。</p>
+      <h2 data-number="7.1" id="gitignore-の設定"><span
+      class="header-section-number">7.1</span> .gitignore の設定</h2>
+      <p>プロジェクトフォルダのトップ階層に <code>.gitignore</code>
+      を作成して <code>node_modules</code> フォルダを
+      <strong>Gitの管理対象外</strong>
+      に設定します。<code>node_modules</code> には
+      (パッケージのインストール状況によっては)
+      何千ものファイルが含まれるため、必ず <code>.gitignore</code>
+      に含めるようにしてください。</p>
+      <p>以下のように <code>.gitignore</code>
+      を作成して保存してください。</p>
+      <div class="sourceCode" id="cb37" data-caption=".gitignore"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb37-1"><a href="#cb37-1"></a>/node_modules</span></code></pre></div>
+      <p>現状で以下のようなプロジェクトフォルダの構成になっているはずです。</p>
+      <figure>
+      <img src="figs/01/vscode_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以下の手順で、このプロジェクトフォルダを GitHub に Public
+      なリポジトリとして発行してください。</p>
+      <figure>
+      <img src="figs/01/git_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <figure>
+      <img src="figs/01/git_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>問題なく発行できれば、以下のようにウェブブラウザからリポジトリが確認できるハズです。</p>
+      <figure>
+      <img src="figs/01/git_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>あとは、定期的にファイルの変更、ステージング、コミット、プッシュを行なってください。</p>
+      <h1 data-number="8" id="フォーマッタのインストール"><span
+      class="header-section-number">8</span>
+      フォーマッタのインストール</h1>
+      <p>TypeScript/JavaScript および HTML/CSS の <strong>コード整形
+      (フォーマット)</strong> のために <strong>Prettier</strong>
+      (識別子: <code>esbenp.prettier-vscode</code>) という VSCode
+      の拡張機能に をインストールしておいてください。</p>
+      <figure>
+      <img src="figs/01/vscode_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="9" id="次週までの宿題"><span
+      class="header-section-number">9</span> 次週までの宿題</h1>
+      <ul>
+      <li>次週、小テストを実施します。筆記用具を持参してください。</li>
+      <li>テンプレート文字列
+      (Pythonでいうところの「f文字列」)、変数宣言キーワード
+      (<code>const</code>, <code>let</code>,
+      <code>var</code>)、アロー関数、三項演算子(条件演算子)、undefined、null</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2024/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
