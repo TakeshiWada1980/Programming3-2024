@@ -156,10 +156,10 @@ class="toc-section-number">7</span> Git/GitHub管理</a>
 <ul>
 <li><a href="#gitignore-の設定" id="toc-gitignore-の設定"><span
 class="toc-section-number">7.1</span> .gitignore の設定</a></li>
-<li><a href="#補足-フォーマッタのインストール"
-id="toc-補足-フォーマッタのインストール"><span
-class="toc-section-number">7.2</span> 補足：
-フォーマッタのインストール</a></li>
+<li><a href="#補足-フォーマッタのインストール-と-おまけ"
+id="toc-補足-フォーマッタのインストール-と-おまけ"><span
+class="toc-section-number">7.2</span> 補足： フォーマッタのインストール
+と おまけ</a></li>
 </ul></li>
 <li><a href="#モダンtypescript入門" id="toc-モダンtypescript入門"><span
 class="toc-section-number">8</span> モダンTypeScript入門</a>
@@ -323,6 +323,12 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       (フロントエンドフレームワーク) です。</p>
       <ul>
       <li>参考: <a
+      href="https://ai10pro.github.io/my-portfolio/pages/articles/01_react-study.html">React入門</a>
+      @ 情報3 (課題④) I.A.君による技術解説記事</li>
+      <li>参考: <a
+      href="https://jammaru.github.io/javascript-guide/">Reactの特徴と活用方法</a>
+      @ 情報3 (課題④) N.A.君による技術解説記事</li>
+      <li>参考: <a
       href="https://www.google.com/search?q=Reactとは">Googel検索「Reactとは…」</a></li>
       </ul>
       <p>ウェブアプリの開発者に対しては
@@ -351,6 +357,10 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       <li><strong>HTML/CSS</strong>: 10時間以上
       <ul>
       <li>2年通年「プログラミング1」、3年前期「情報3」、1年後期「情報1」(Progate課題)</li>
+      </ul></li>
+      <li><strong>JavaScript</strong>: 6時間以上
+      <ul>
+      <li>3年前期「情報3」(課題④)</li>
       </ul></li>
       <li><strong>DB/SQL</strong> (SQLite): 6時間以上
       <ul>
@@ -401,18 +411,26 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       href="https://chatgpt.com/share/66f88f24-6974-8011-bc2c-949da405f109">ChatGPT「Web制作とWeb開発の違いについて教えて」</a></li>
       </ul>
       <p>本日 (第01回) から 第05回講義
-      ぐらいのまでは「<strong>開発環境の構築・設定</strong>」「<strong>モダンTypeScriptの学習</strong>」「<strong>Reactを使った「Todoアプリ」の開発</strong>」を目標に進めていきます。ここでの「Todoアプリ」は
+      ぐらいまでは「<strong>開発環境の構築・設定</strong>」「<strong>モダンTypeScriptの学習</strong>」「<strong>Reactを使った「Todoアプリ」の開発</strong>」を目標に進めていきます。ここでの「Todoアプリ」は
       <span class="masked">フロントエンドだけで完結するウェブアプリ
-      (ウェブブラウザを実行環境として動作するアプリ開発)
+      (ウェブブラウザを実行環境とするアプリ)
       </span>として開発します。</p>
       <p>その後、データベースや、各ウェブサービス (microCMS)
       との連携、Next.js
       によるウェブAPI開発などの「<strong>バックエンドの領域</strong>」について学びながら「<strong>オリジナルのブログシステムの開発</strong>」に挑んでいきます。</p>
+      <p>後期中間ぐらいまでの流れ (予定)</p>
+      <ol type="1">
+      <li>モダンTypeScript基礎学習のための環境構築</li>
+      <li>TypeScript基礎学習</li>
+      <li>Reactを使ったTodoアプリのための環境構築</li>
+      <li>Todoアプリ開発（Reactによるフロントエンド開発）のチュートリアル</li>
+      <li>Todoアプリのカスタマイズや作り込み → 前半の大課題</li>
+      </ol>
       <h1 data-number="2" id="最初の目標todoアプリの開発"><span
       class="header-section-number">2</span>
       最初の目標「Todoアプリの開発」</h1>
       <p>後期の中間試験前ぐらいまでは、次のリンクに示すようなTodoアプリを「<a
-      href="https://www.google.com/search?q=Reac">React</a>」よばれる
+      href="https://www.google.com/search?q=Reac">React</a>」とよばれる
       JavsScriptライブラリ (フロントエンド開発フレームワーク)
       を使って開発できるようになること (= <span
       class="masked">ある程度の意味や内容を理解して実装できるようになること</span>
@@ -463,7 +481,7 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       があるとき、<code>tsc --target es6 prac00.ts</code>
       というコマンドで <code>prac00.js</code> という
       JavaScriptプログラム
-      に変換できます。今回の授業の後半で開発環境構築ができたら、実際にトランスパイルをしてもらいます。</p>
+      に変換できます。今回の授業後半で開発環境が構築できたら、実際にトランスパイルをしてもらいます。</p>
       <p>(変換前)</p>
       <div class="sourceCode" id="cb1"
       data-caption="prac00.ts（TypeScriptプログラム）"><pre
@@ -504,16 +522,22 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       <p>「JavaScript」は、当初「<strong>LiveScript</strong>」という名前でした。しかし、<strong>当時の
       Java の爆発的人気にあやかって JavaScript
       に改名</strong>しています。念のために「Java」と「JavaScript」は
-      <span class="masked">メロンとメロンパンぐらい違う</span>
+      <span class="masked">メロンとメロンパンぐらい違う
+      (有名な「たとえ」ですね)</span>
       ので注意してください。完全なる別物です。</p>
+      <ul>
+      <li><a
+      href="https://2ufkpfb9daxnik.github.io/portfolio/javascriptVSjava/index.html">JavaとJavaScriptの比較</a>
+      @ 情報3 (課題④) N.H.君による技術解説記事</li>
+      </ul>
       </div>
-      <p>JavaScriptが「<strong>ウェブブラウザが実行環境である</strong>」というのは、<strong>Python
+      <p>「<strong>JavaScriptは、ウェブブラウザを実行環境として動作する</strong>」というのは、<strong>Python
       や C言語
       などのネイティブアプリ開発用の言語と比較して大きな特徴</strong>
       となります。<span
-      class="masked">ウェブブラウザが使える環境であれば OS や
-      デバイスに依存せず JavaScript が実行可能</span> というのは
-      <strong>JavaScript の大きな「強み」</strong> です。</p>
+      class="masked">ウェブブラウザが使える環境であれば OS や デバイス
+      (スマホやPC) に依存せず JavaScript が実行可能できる</span>
+      というのは <strong>大きな「強み」</strong> といえます。</p>
       <p>例えば、自分が作成した「Pythonプログラム」を誰かに使ってもらおうとしたら、その利用者のPCに
       Python
       の実行環境をインストールしてもらって、さらに必要なパッケージを pip
@@ -553,9 +577,10 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
 <span id="cb4-4"><a href="#cb4-4"></a>}</span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="fu">add</span>(<span class="dv">10</span><span class="op">,</span><span class="dv">20</span>)<span class="op">;</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="fu">add</span>(<span class="dv">50</span><span class="op">,-</span><span class="dv">30</span>)<span class="op">;</span></span></code></pre></div>
-      <p>デベロッパーツールのコンソールタブから、次のように <span
-      class="masked">ウェブブラウザを実行環境として JavaScriptプログラム
-      が動くこと</span> が確認できたと思います。</p>
+      <p>デベロッパーツールのなかの「コンソールタブ」から、次のように
+      <span class="masked">ウェブブラウザを実行環境として
+      JavaScriptプログラム が動くこと</span>
+      が確認できたと思います。</p>
       <figure>
       <img src="figs/01/chrome_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -1135,8 +1160,8 @@ node dist/prac00.js</code></pre>
       が格納されています。基本的に、皆さんがこの
       <code>node_modules</code> フォルダを操作することはありません。</p>
       <p><code>package.json</code> と <code>package-lock.json</code> は
-      <span
-      class="masked">自分のプロジェクトが依存するパッケージを管理するため</span>
+      <span class="masked">自分のプロジェクトが依存するパッケージ
+      (=外部ライブラリ) を管理するため</span>
       のファイルになります。Pythonでいうところの
       <code>requirements.txt</code> <span class="math inline">\(+\
       \alpha\)</span> が記述されたファイルと考えてください。</p>
@@ -1405,17 +1430,18 @@ node dist/prac00.js</code></pre>
       <h2 data-number="6.10" id="開発モードでプログラムの実行"><span
       class="header-section-number">6.10</span>
       開発モードでプログラムの実行</h2>
-      <p>実際に「開発モード」でプログラムを実行していきます。</p>
-      <p>ターミナルで <code>npm run dev</code>
+      <p>実際に「<strong>開発モード</strong>」でプログラムを実行していきます。</p>
+      <p>VSCodeでターミナルを開いて <code>npm run dev</code>
       を実行してください。以下のような文字列が出力されるはずです
-      (実際には、以下の文字列の前後には <code>[nodemon]</code>
-      のマークがついたログもあわせて出力されます)。</p>
+      (実際には <span class="masked">以下の文字列の前後には
+      <code>[nodemon]</code> のマークがついたログ</span>
+      もあわせて出力されます)。</p>
       <pre><code>■ prac01.ts の実行
 Hi, Bob.</code></pre>
       <p>つづいて、<code>prac01.ts</code> の <strong>第03行目</strong>
-      の <code>Hi</code> を <code>Hey</code>
-      に書き換えて保存してください。nodemon
-      がファイル変更を検知して、プログラムが再実行され、以下のように出力されるはずです。</p>
+      を <code>console.log(`Hey, ${userName}.`);</code>に書き換えて
+      <strong>保存</strong> してください。nodemon がファイル変更 (更新)
+      を検知して、自動的にプログラムが再実行され、以下のように出力されるはずです。</p>
       <pre><code>■ prac01.ts の実行
 Hey, Bob.</code></pre>
       <p>さらに、<code>index.ts</code> の <strong>第01行目</strong> と
@@ -1428,20 +1454,21 @@ Hi, Bob.</code></pre>
       <p>nodemon を停止するには、ターミナルで <code>[Ctrl]+[C]</code>
       を押下します。<code>バッチ ジョブを終了しますか (Y/N)?</code>
       と聞かれるので <code>Y</code> を入力するか、再度
-      <code>[Ctrl]+[C]</code> を押下してください。</p>
+      <code>[Ctrl]+[C]</code> を押下すれば nodemon が停止します。</p>
       <h2 data-number="6.11" id="本番モードでプログラムの実行"><span
       class="header-section-number">6.11</span>
       本番モードでプログラムの実行</h2>
-      <p>次に「本番モード」でプログラムを実行します。ターミナルからの次のようにコマンドを入力してください。なお
-      <code>npm run start</code> については <code>npm start</code>
-      に省略可能です。</p>
+      <p>次に「<strong>本番モード</strong>」でプログラムを実行してみます。</p>
+      <p>ターミナルからの次のようにコマンドを入力してください。なお
+      <code>npm run start</code> については、<code>npm start</code>
+      に省略して実行も可能です。</p>
       <pre><code>npm run build
 npm run start</code></pre>
       <p><code>dist</code> フォルダに JavaScriptファイル
       が出力され、それが実行されます。</p>
       <h1 data-number="7" id="gitgithub管理"><span
       class="header-section-number">7</span> Git/GitHub管理</h1>
-      <p>このプロジェクトフォルダについて Git管理を有効化し、さらに
+      <p>ここまで作成してきたプロジェクトフォルダについて<strong>Git管理を有効化</strong>し、さらに
       GitHub に公開していきます。Git / GitHub
       基本設定は既に完了しているものとします。未設定の場合は<a
       href="https://takeshiwada1980.github.io/Programming1-2023/lecture14.html">PG1の講義資料</a>を参照して設定してください。</p>
@@ -1490,22 +1517,26 @@ npm run start</code></pre>
       href="https://takeshiwada1980.github.io/Programming1-2023/lecture14.html#リポジトリの削除">リポジトリの削除</a>
       @ プログラミング1</li>
       </ul>
-      <h2 data-number="7.2" id="補足-フォーマッタのインストール"><span
+      <h2 data-number="7.2"
+      id="補足-フォーマッタのインストール-と-おまけ"><span
       class="header-section-number">7.2</span> 補足：
-      フォーマッタのインストール</h2>
+      フォーマッタのインストール と おまけ</h2>
       <p>TypeScript/JavaScript および HTML/CSS の <strong>コード整形
       (フォーマット)</strong> のために <strong>Prettier</strong>
       (識別子: <code>esbenp.prettier-vscode</code>) という VSCode
-      の拡張機能に をインストールしておいてください。</p>
+      の拡張機能をインストールしておいてください。</p>
       <figure>
       <img src="figs/01/vscode_06.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <ul>
-      <li><strong>vscode-pets</strong> (識別子:
+      <p><strong>vscode-pets</strong> (識別子:
       <code>tonybaloney.vscode-pets</code>)
-      なども、役に立ちませんがおすすめです。</li>
-      </ul>
+      は、役に立ちませんがおすすめです。ペットの種類や背景は、VCCodeの設定項目の
+      <a href="figs/01/vscode_08.png">ここから</a> 変更できます。</p>
+      <figure>
+      <img src="figs/01/vscode_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <h1 data-number="8" id="モダンtypescript入門"><span
       class="header-section-number">8</span> モダンTypeScript入門</h1>
       <p>TypeScript の 開発環境が構築できたので、ここから
@@ -1678,7 +1709,7 @@ Todo 1 =&gt; TypeScriptの勉強（優先度:3)</code></pre>
       <strong>配列を含むとき</strong>、<code>console.log()</code>
       にオブジェクトを与えるだけでは非常に見づらくなります。このようなときは
       <code>console.log(JSON.stringify(todo, null, 2));</code>
-      のようにすることで、整形された出力が得られます。</p>
+      のようにすることで、次のように整形された出力が得られます。</p>
       <pre><code>{
   &quot;name&quot;: &quot;TypeScriptの勉強&quot;,
   &quot;priority&quot;: 3
