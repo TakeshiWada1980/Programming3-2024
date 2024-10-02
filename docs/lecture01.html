@@ -413,7 +413,7 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       最初の目標「Todoアプリの開発」</h1>
       <p>後期の中間試験前ぐらいまでは、次のリンクに示すようなTodoアプリを「<a
       href="https://www.google.com/search?q=Reac">React</a>」よばれる
-      JavsScriptライブラリ (フレームワーク)
+      JavsScriptライブラリ (フロントエンド開発フレームワーク)
       を使って開発できるようになること (= <span
       class="masked">ある程度の意味や内容を理解して実装できるようになること</span>
       ) を目標にします。</p>
@@ -423,7 +423,11 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       (ギリギリ合格水準のレベル、点数で言えば60点😨)</li>
       <li><a
       href="https://takeshiwada1980.github.io/react-todo-app-demo/2">Todoアプリのサンプル</a>
-      (ここまでつくれたら素晴らしい！90点超🎉)</li>
+      (ここまでつくれたら素晴らしい！90点超🎉)
+      <ul>
+      <li>この段階ではフロントエンド開発の範疇なので、ウェブブラウザの
+      localStorage という機能を使用して Todoデータ を保存します。</li>
+      </ul></li>
       </ul>
       <p>そのために、まず、要求されるのが <strong>TypeScript言語
       (JavaScript言語) の基礎</strong> であり、そのために必要となるのが
@@ -1505,20 +1509,22 @@ npm run start</code></pre>
       <h1 data-number="8" id="モダンtypescript入門"><span
       class="header-section-number">8</span> モダンTypeScript入門</h1>
       <p>TypeScript の 開発環境が構築できたので、ここから
-      (本格的には、次週講義から) モダンTypeScript について学んでいきます
-      。</p>
+      (本格的には次週の講義から) <strong>モダンTypeScript</strong>
+      について学んでいきます 。</p>
       <h2 data-number="8.1" id="コンソールメソッド"><span
       class="header-section-number">8.1</span> コンソールメソッド</h2>
       <p>コンソールメソッドは <code>console.log("Hello, World!")</code>
-      のように記述するもので、<strong>主にデバッグや開発時の情報出力</strong>に使用します。<span
+      のように使用するもので
+      <strong>主にデバッグや開発時の情報出力</strong>に利用します。<span
       class="masked">Pythonの <code>print</code> 関数、C言語の
-      <code>printf</code> 関数に</span>
-      相当するものと考えてください。</p>
+      <code>printf</code> 関数</span>
+      に相当するものと考えてください。</p>
       <p>コンソールメソッドには
       <code>console.log()</code>、<code>console.error()</code>、<code>console.warn()</code>、<code>console.info()</code>、<code>console.debug()</code>
-      などの種類が存在します。これらは、C言語の
-      <code>fprintf(stdout, ...)</code> や
-      <code>fprintf(stderr, ...)</code> のように使い分けます。</p>
+      などの種類が存在します。これらは、C言語の <span
+      class="masked"><code>fprintf(stdout, ...)</code> や
+      <code>fprintf(stderr, ...)</code></span>
+      のように使い分けます。</p>
       <p>実行環境によっては、ログレベル (log, error, warn…)
       に応じて、色分けや装飾付きで出力されたり、フィルタリングする機能
       (=<span
