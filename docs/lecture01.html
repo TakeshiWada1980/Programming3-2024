@@ -445,6 +445,9 @@ class="toc-section-number">9</span> 授業時間外学習</a></li>
       <ul>
       <li>この段階ではフロントエンド開発の範疇なので、ウェブブラウザの
       localStorage という機能を使用して Todoデータ を保存します。</li>
+      <li>このアプリはバックエンドを含まないので
+      (多少の設定と工夫は必要ですが) GitHub Pages
+      にデプロイして公開することもできます。</li>
       </ul></li>
       </ul>
       <p>そのために、まず、要求されるのが <strong>TypeScript言語
@@ -826,8 +829,11 @@ PS C:\Users\xxxx&gt; npm -v
       を JavaScript にトランスパイルする <code>tsc</code>
       などのコマンドが使用可能になります。</p>
       <pre><code>PS C:\Users\xxxx&gt; npm install -g typescript</code></pre>
-      <p>うまくいかないとき (パーミッション関連のエラーがでるとき)
-      は「管理者モード」でターミナルをひらいて上記のコマンドを試してみてください。</p>
+      <p>ここが、うまくいかないときは、<a
+      href="https://volta.sh/">Volta</a>
+      などの他のパッケージマネージャがインストールされている可能性があります。Volta
+      をアンインストールするか、あるいは、以降のパッケージ管理を全て
+      Volta に読み替えるなどで対応してください。</p>
       <h2 data-number="5.3"
       id="グローバル環境にインストールされたパッケージの確認"><span
       class="header-section-number">5.3</span>
@@ -877,6 +883,9 @@ C:\Users\wada\AppData\Roaming\npm
       で実行してください。</p>
       <pre><code>PS C:\Users\wada\Desktop&gt; node test.js
 Hello, Alice! The sum of 10 and 20 is 30.</code></pre>
+      <p>ここで失敗する場合は、「PowerShellから、スクリプトが実行できるように設定されていない可能性」があります。以下のコマンドでスクリプトの実行設定を変更して、ターミナルを開きなおして
+      <code>tsc ...</code> を再実行してみてください。</p>
+      <pre><code>C:\Users\xxxx&gt; Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force</code></pre>
       <h3 data-number="5.4.1" id="演習"><span
       class="header-section-number">5.4.1</span> 演習</h3>
       <p><code>--target e6</code>
@@ -974,18 +983,18 @@ code .</code></pre>
       してください。以下のような内容だけが残ると思います。これらは
       <code>tsc</code> コマンドによるトランスパイル (コンパイル)
       のオプション設定となります。</p>
-      <div class="sourceCode" id="cb19"
+      <div class="sourceCode" id="cb20"
       data-caption="tsconfig.json（TypeScript関連の設定ファイル）"><pre
-      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">{</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es2016&quot;</span><span class="fu">,</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>    <span class="dt">&quot;esModuleInterop&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>    <span class="dt">&quot;forceConsistentCasingInFileNames&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a>    <span class="dt">&quot;strict&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">}</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="fu">}</span></span></code></pre></div>
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">{</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es2016&quot;</span><span class="fu">,</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="dt">&quot;esModuleInterop&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="dt">&quot;forceConsistentCasingInFileNames&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="dt">&quot;strict&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">}</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="fu">}</span></span></code></pre></div>
       <p>JSONファイルでは <span
       class="masked">最後の項目以外の各項目の末尾にカンマ
       (<code>,</code>) </span>
@@ -1017,21 +1026,21 @@ code .</code></pre>
       class="header-section-number">6.3</span> TypeScriptの設定 (2)</h2>
       <p>Typescriptの基礎学習用に <code>tsconfig.json</code>
       を次のようにカスタマイズしてください。</p>
-      <div class="sourceCode" id="cb20"
+      <div class="sourceCode" id="cb21"
       data-caption="tsconfig.json（TypeScript関連の設定ファイル）"><pre
-      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">{</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es2016&quot;</span><span class="fu">,</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a>    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>    <span class="dt">&quot;outDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./dist&quot;</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span><span class="fu">,</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>    <span class="dt">&quot;rootDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./src&quot;</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span><span class="fu">,</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a>    <span class="dt">&quot;esModuleInterop&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a>    <span class="dt">&quot;forceConsistentCasingInFileNames&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a>    <span class="dt">&quot;strict&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb20-10"><a href="#cb20-10"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
-<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">}</span> <span class="er">/*</span> <span class="er">カンマをつけないとダメ!!!</span> <span class="er">*/</span><span class="fu">,</span></span>
-<span id="cb20-12"><a href="#cb20-12"></a>  <span class="dt">&quot;include&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;src/**/*&quot;</span><span class="ot">]</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span></span>
-<span id="cb20-13"><a href="#cb20-13"></a><span class="fu">}</span></span></code></pre></div>
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">{</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es2016&quot;</span><span class="fu">,</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="dt">&quot;outDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./dist&quot;</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span><span class="fu">,</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="dt">&quot;rootDir&quot;</span><span class="fu">:</span> <span class="st">&quot;./src&quot;</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span><span class="fu">,</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>    <span class="dt">&quot;esModuleInterop&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>    <span class="dt">&quot;forceConsistentCasingInFileNames&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>    <span class="dt">&quot;strict&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">}</span> <span class="er">/*</span> <span class="er">カンマをつけないとダメ!!!</span> <span class="er">*/</span><span class="fu">,</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a>  <span class="dt">&quot;include&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;src/**/*&quot;</span><span class="ot">]</span> <span class="er">/*</span> <span class="er">追加</span> <span class="er">*/</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="fu">}</span></span></code></pre></div>
       <p>ここで追加した設定が項目の意味は次のとおりです。</p>
       <ul>
       <li><code>"outDir":"./dist"</code> : Typescript を変換して生成した
@@ -1083,18 +1092,18 @@ code .</code></pre>
       フォルダに <code>prac00.ts</code> というファイル (Practiceの略語)
       を作成して、以下の TypeScriptプログラム
       を貼り付けて<strong>保存</strong>してください。</p>
-      <div class="sourceCode" id="cb21" data-caption="prac00.ts"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">.`</span><span class="op">;</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>}</span>
-<span id="cb21-5"><a href="#cb21-5"></a></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb22" data-caption="prac00.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">.`</span><span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>}</span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
       <p>次に、トランスパイルして動作確認します。VSCodeのターミナル
       (<code>[Ctrl]+[J]</code>でオープン)
       で以下のコマンドを実行してください。</p>
@@ -1228,31 +1237,31 @@ node dist/prac00.js</code></pre>
       (<code>"scripts"</code> セクションを追記)
       してください。<strong>追記するする際には カンマ (<code>,</code>)
       に注意してください。</strong></p>
-      <div class="sourceCode" id="cb25"
-      data-caption="package.json (変更前)"><pre
-      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">{</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>    <span class="dt">&quot;@types/node&quot;</span><span class="fu">:</span> <span class="st">&quot;^22.7.4&quot;</span><span class="fu">,</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a>    <span class="dt">&quot;nodemon&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.1.7&quot;</span><span class="fu">,</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a>    <span class="dt">&quot;ts-node&quot;</span><span class="fu">:</span> <span class="st">&quot;^10.9.2&quot;</span><span class="fu">,</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a>    <span class="dt">&quot;typescript&quot;</span><span class="fu">:</span> <span class="st">&quot;^5.6.2&quot;</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">}</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a><span class="fu">}</span></span></code></pre></div>
       <div class="sourceCode" id="cb26"
-      data-caption="package.json (変更後)"><pre
+      data-caption="package.json (変更前)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">{</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb26-3"><a href="#cb26-3"></a>    <span class="dt">&quot;@types/node&quot;</span><span class="fu">:</span> <span class="st">&quot;^22.7.4&quot;</span><span class="fu">,</span></span>
 <span id="cb26-4"><a href="#cb26-4"></a>    <span class="dt">&quot;nodemon&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.1.7&quot;</span><span class="fu">,</span></span>
 <span id="cb26-5"><a href="#cb26-5"></a>    <span class="dt">&quot;ts-node&quot;</span><span class="fu">:</span> <span class="st">&quot;^10.9.2&quot;</span><span class="fu">,</span></span>
 <span id="cb26-6"><a href="#cb26-6"></a>    <span class="dt">&quot;typescript&quot;</span><span class="fu">:</span> <span class="st">&quot;^5.6.2&quot;</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">},</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;node dist/index.js&quot;</span><span class="fu">,</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;tsc&quot;</span><span class="fu">,</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;nodemon --watch src --ext ts --verbose --exec ts-node src/index.ts&quot;</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a>  <span class="fu">}</span></span>
-<span id="cb26-13"><a href="#cb26-13"></a><span class="fu">}</span></span></code></pre></div>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">}</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="fu">}</span></span></code></pre></div>
+      <div class="sourceCode" id="cb27"
+      data-caption="package.json (変更後)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">{</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>    <span class="dt">&quot;@types/node&quot;</span><span class="fu">:</span> <span class="st">&quot;^22.7.4&quot;</span><span class="fu">,</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>    <span class="dt">&quot;nodemon&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.1.7&quot;</span><span class="fu">,</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>    <span class="dt">&quot;ts-node&quot;</span><span class="fu">:</span> <span class="st">&quot;^10.9.2&quot;</span><span class="fu">,</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>    <span class="dt">&quot;typescript&quot;</span><span class="fu">:</span> <span class="st">&quot;^5.6.2&quot;</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">},</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;node dist/index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;tsc&quot;</span><span class="fu">,</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;nodemon --watch src --ext ts --verbose --exec ts-node src/index.ts&quot;</span></span>
+<span id="cb27-12"><a href="#cb27-12"></a>  <span class="fu">}</span></span>
+<span id="cb27-13"><a href="#cb27-13"></a><span class="fu">}</span></span></code></pre></div>
       <p>ここで <code>package.json</code> に追加した
       <code>"scripts"</code> セクションは <span
       class="masked">プロジェクトで頻繁に使用するコマンドをショートカットとして定義</span>
@@ -1300,18 +1309,18 @@ node dist/prac00.js</code></pre>
       <p>例えば <code>prac00.ts</code>
       に記述したプログラムの実行確認をしたいときは、以下のように
       <code>index.ts</code> を記述します。</p>
-      <div class="sourceCode" id="cb27" data-caption="index.ts"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac00.ts の実行&quot;</span>)<span class="op">;</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="im">import</span> <span class="st">&quot;./prac00&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb28" data-caption="index.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac00.ts の実行&quot;</span>)<span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="im">import</span> <span class="st">&quot;./prac00&quot;</span><span class="op">;</span></span></code></pre></div>
       <p>また、次の課題 <code>prac01.ts</code>
       に取り組むときは以下のようにします。TypeScript/JavaScript は
       <code>//</code> でコメントアウトします。</p>
-      <div class="sourceCode" id="cb28" data-caption="index.ts"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">// console.log(&quot;■ prac00.ts の実行&quot;);</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="co">// import &quot;./prac00&quot;;</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac01.ts の実行&quot;</span>)<span class="op">;</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a><span class="im">import</span> <span class="st">&quot;./prac01&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb29" data-caption="index.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">// console.log(&quot;■ prac00.ts の実行&quot;);</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co">// import &quot;./prac00&quot;;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac01.ts の実行&quot;</span>)<span class="op">;</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="im">import</span> <span class="st">&quot;./prac01&quot;</span><span class="op">;</span></span></code></pre></div>
       <div class="note type-caution">
       <p>実際の開発では、上記の <code>import "./prac00";</code> のように
       <strong>ファイル名のみでインポートすること</strong>
@@ -1323,15 +1332,15 @@ node dist/prac00.js</code></pre>
       <p>ここまでに構築した環境を実際に使ってみたいと思います。<code>src</code>
       フォルダに、次のような <code>index.ts</code> と
       <code>prac01.ts</code> を作成してください。</p>
-      <div class="sourceCode" id="cb29" data-caption="index.ts"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">// console.log(&quot;■ prac00.ts の実行&quot;);</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="co">// import &quot;./prac00&quot;;</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a></span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac01.ts の実行&quot;</span>)<span class="op">;</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="im">import</span> <span class="st">&quot;./prac01&quot;</span><span class="op">;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb30" data-caption="prac01.ts"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Bob&quot;</span><span class="op">;</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi, </span><span class="sc">${</span>userName<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb30" data-caption="index.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">// console.log(&quot;■ prac00.ts の実行&quot;);</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="co">// import &quot;./prac00&quot;;</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a></span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac01.ts の実行&quot;</span>)<span class="op">;</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="im">import</span> <span class="st">&quot;./prac01&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb31" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Bob&quot;</span><span class="op">;</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi, </span><span class="sc">${</span>userName<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span></code></pre></div>
       <p>このようにすると、(環境にもよると思いますが) 以下のように
       <code>prac00.ts</code> と <code>prac01.ts</code>
       の両方で記述されている <code>userName</code>
@@ -1357,24 +1366,24 @@ node dist/prac00.js</code></pre>
       を記述します。これにより、VSCode
       においても、各ファイルがモジュールとして正しく認識されます。</p>
       <p>具体的には、以下のようにファイルを書き換えて、再保存してください。</p>
-      <div class="sourceCode" id="cb31" data-caption="prac00.ts"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb31-1"><a href="#cb31-1"></a><span class="im">export</span> {}<span class="op">;</span> <span class="co">// ファイルをモジュールとして扱いスコープを分離するために必要</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
-<span id="cb31-5"><a href="#cb31-5"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb31-6"><a href="#cb31-6"></a>}</span>
-<span id="cb31-7"><a href="#cb31-7"></a></span>
-<span id="cb31-8"><a href="#cb31-8"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
-<span id="cb31-9"><a href="#cb31-9"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb31-10"><a href="#cb31-10"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
-<span id="cb31-11"><a href="#cb31-11"></a></span>
-<span id="cb31-12"><a href="#cb31-12"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
-<span id="cb31-13"><a href="#cb31-13"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb32" data-caption="prac01.ts"><pre
+      <div class="sourceCode" id="cb32" data-caption="prac00.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb32-1"><a href="#cb32-1"></a><span class="im">export</span> {}<span class="op">;</span> <span class="co">// ファイルをモジュールとして扱いスコープを分離するために必要</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Bob&quot;</span><span class="op">;</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi, </span><span class="sc">${</span>userName<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span></code></pre></div>
+<span id="cb32-2"><a href="#cb32-2"></a></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="kw">function</span> <span class="fu">greetAndCalculate</span>(name<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="kw">const</span> sum<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>  <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">! The sum of </span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>sum<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>}</span>
+<span id="cb32-7"><a href="#cb32-7"></a></span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Alice&quot;</span><span class="op">;</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a><span class="kw">const</span> x<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb32-10"><a href="#cb32-10"></a><span class="kw">const</span> y<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb32-11"><a href="#cb32-11"></a></span>
+<span id="cb32-12"><a href="#cb32-12"></a><span class="kw">const</span> result<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="fu">greetAndCalculate</span>(userName<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb33" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">export</span> {}<span class="op">;</span> <span class="co">// ファイルをモジュールとして扱いスコープを分離するために必要</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="kw">const</span> userName<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Bob&quot;</span><span class="op">;</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi, </span><span class="sc">${</span>userName<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span></code></pre></div>
       <p>以上で、<code>index.ts</code>、<code>prac00.ts</code>、<code>prac01.ts</code>
       についてエディタ上のエラーは消えたと思います。</p>
       <div class="note type-tips">
@@ -1383,27 +1392,27 @@ node dist/prac00.js</code></pre>
       class="masked">その変数が有効・参照可能な範囲</span>
       を表す概念です。前期の「プログラミング2」で学習済みのC言語を例に
       (念のために) スコープを復習しておきます。</p>
-      <div class="sourceCode" id="cb33"
+      <div class="sourceCode" id="cb34"
       data-caption="scope-sample.c"><pre
-      class="sourceCode numberSource c numberLines"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="dt">int</span> global_var <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a></span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="dt">void</span> func<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb33-6"><a href="#cb33-6"></a>  <span class="dt">int</span> func_var <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
-<span id="cb33-7"><a href="#cb33-7"></a>  printf<span class="op">(</span><span class="st">&quot;global_var = </span><span class="sc">%d</span><span class="st">, func_var = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> global_var<span class="op">,</span> func_var<span class="op">);</span></span>
-<span id="cb33-8"><a href="#cb33-8"></a><span class="op">}</span></span>
-<span id="cb33-9"><a href="#cb33-9"></a></span>
-<span id="cb33-10"><a href="#cb33-10"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb33-11"><a href="#cb33-11"></a>  <span class="dt">int</span> main_var <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></span>
-<span id="cb33-12"><a href="#cb33-12"></a>  printf<span class="op">(</span><span class="st">&quot;global_var = </span><span class="sc">%d</span><span class="st">, main_var = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> global_var<span class="op">,</span> main_var<span class="op">);</span></span>
-<span id="cb33-13"><a href="#cb33-13"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> loop_var <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> loop_var <span class="op">&lt;</span> <span class="dv">3</span><span class="op">;</span> loop_var<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb33-14"><a href="#cb33-14"></a>    printf<span class="op">(</span><span class="st">&quot;global_var = </span><span class="sc">%d</span><span class="st">, main_var = </span><span class="sc">%d</span><span class="st">, loop_var = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
-<span id="cb33-15"><a href="#cb33-15"></a>            global_var<span class="op">,</span> main_var<span class="op">,</span> loop_var<span class="op">);</span></span>
-<span id="cb33-16"><a href="#cb33-16"></a>  <span class="op">}</span></span>
-<span id="cb33-17"><a href="#cb33-17"></a>  func<span class="op">();</span></span>
-<span id="cb33-18"><a href="#cb33-18"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb33-19"><a href="#cb33-19"></a><span class="op">}</span></span></code></pre></div>
+      class="sourceCode numberSource c numberLines"><code class="sourceCode c"><span id="cb34-1"><a href="#cb34-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="dt">int</span> global_var <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="dt">void</span> func<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>  <span class="dt">int</span> func_var <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a>  printf<span class="op">(</span><span class="st">&quot;global_var = </span><span class="sc">%d</span><span class="st">, func_var = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> global_var<span class="op">,</span> func_var<span class="op">);</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="op">}</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a></span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb34-11"><a href="#cb34-11"></a>  <span class="dt">int</span> main_var <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb34-12"><a href="#cb34-12"></a>  printf<span class="op">(</span><span class="st">&quot;global_var = </span><span class="sc">%d</span><span class="st">, main_var = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> global_var<span class="op">,</span> main_var<span class="op">);</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> loop_var <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> loop_var <span class="op">&lt;</span> <span class="dv">3</span><span class="op">;</span> loop_var<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a>    printf<span class="op">(</span><span class="st">&quot;global_var = </span><span class="sc">%d</span><span class="st">, main_var = </span><span class="sc">%d</span><span class="st">, loop_var = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb34-15"><a href="#cb34-15"></a>            global_var<span class="op">,</span> main_var<span class="op">,</span> loop_var<span class="op">);</span></span>
+<span id="cb34-16"><a href="#cb34-16"></a>  <span class="op">}</span></span>
+<span id="cb34-17"><a href="#cb34-17"></a>  func<span class="op">();</span></span>
+<span id="cb34-18"><a href="#cb34-18"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb34-19"><a href="#cb34-19"></a><span class="op">}</span></span></code></pre></div>
       <p>上記のプログラムの各変数
       (<code>global_var</code>、<code>main_var</code>、<code>func_var</code>、<code>loop_var</code>)
       のスコープは、次のようになります。</p>
@@ -1484,8 +1493,8 @@ npm run start</code></pre>
       に含めるようにしてください。</p>
       <p>以下のように <code>.gitignore</code>
       を作成して保存してください。</p>
-      <div class="sourceCode" id="cb38" data-caption=".gitignore"><pre
-      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb38-1"><a href="#cb38-1"></a>/node_modules</span></code></pre></div>
+      <div class="sourceCode" id="cb39" data-caption=".gitignore"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb39-1"><a href="#cb39-1"></a>/node_modules</span></code></pre></div>
       <p>現状で以下のようなプロジェクトフォルダの構成になっているはずです。</p>
       <figure>
       <img src="figs/01/vscode_05.png" alt="img" />
@@ -1572,14 +1581,14 @@ npm run start</code></pre>
       <code>npm run dev</code> もしくは、<code>tsc</code> のあとに
       <code>node dist/index.js</code> で実行できます
       (基本操作として覚えておいてください)。</p>
-      <div class="sourceCode" id="cb39"
+      <div class="sourceCode" id="cb40"
       data-caption="prac01.ts (コンソールメソッドの基本)"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb39-1"><a href="#cb39-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="co">// 文字列型 (string type) の変数 name の宣言と初期化</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="kw">let</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="co">// 数値型 (number type) の変数 priority の宣言と初期化</span></span>
-<span id="cb39-5"><a href="#cb39-5"></a><span class="kw">let</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb39-6"><a href="#cb39-6"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(name<span class="op">,</span> priority)<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb40-1"><a href="#cb40-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="co">// 文字列型 (string type) の変数 name の宣言と初期化</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="kw">let</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="co">// 数値型 (number type) の変数 priority の宣言と初期化</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="kw">let</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb40-6"><a href="#cb40-6"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(name<span class="op">,</span> priority)<span class="op">;</span></span></code></pre></div>
       <p>(すこし分かりづらいですが) 以下のようにスペースで区切られて
       name と priority が出力されます。</p>
       <pre><code>■ prac01.ts の実行
@@ -1589,9 +1598,9 @@ TypeScriptの勉強 3</code></pre>
       (<i class="fa-solid fa-stopwatch"></i>15分)</h3>
       <p>次のような Date型 (日付・日時型) の変数 <code>deadline</code>
       を追加して、コンソールメソッドで出力してください。</p>
-      <div class="sourceCode" id="cb41" data-caption="Date型の変数"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb41-1"><a href="#cb41-1"></a><span class="co">// Date型の変数 deadline の宣言と初期化</span></span>
-<span id="cb41-2"><a href="#cb41-2"></a><span class="kw">let</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb42" data-caption="Date型の変数"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">// Date型の変数 deadline の宣言と初期化</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="kw">let</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span></code></pre></div>
       <p>Month (月)
       の扱いに注意が必要なことに気づいたでしょうか？また、コンソールメソッドで出力される時刻フォーマットが
       <span class="masked">ISO 8601形式</span>
@@ -1612,14 +1621,14 @@ TypeScriptの勉強 3</code></pre>
       class="masked"><code>変数名 : 型名 = 初期値;</code></span>
       のようにするので注意してください
       (順番が逆になることに慣れてください)。</p>
-      <div class="sourceCode" id="cb42" data-caption="prac01.c"><pre
-      class="sourceCode numberSource c numberLines"><code class="sourceCode c"><span id="cb42-1"><a href="#cb42-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a>  <span class="dt">char</span> name<span class="op">[</span><span class="dv">50</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a>  <span class="dt">int</span> priority <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb42-5"><a href="#cb42-5"></a>  fprintf<span class="op">(</span>stdout<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%s</span><span class="st">, </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> name<span class="op">,</span> priority<span class="op">);</span></span>
-<span id="cb42-6"><a href="#cb42-6"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb42-7"><a href="#cb42-7"></a><span class="op">}</span></span></code></pre></div>
+      <div class="sourceCode" id="cb43" data-caption="prac01.c"><pre
+      class="sourceCode numberSource c numberLines"><code class="sourceCode c"><span id="cb43-1"><a href="#cb43-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="dt">char</span> name<span class="op">[</span><span class="dv">50</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>  <span class="dt">int</span> priority <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a>  fprintf<span class="op">(</span>stdout<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%s</span><span class="st">, </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> name<span class="op">,</span> priority<span class="op">);</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb43-7"><a href="#cb43-7"></a><span class="op">}</span></span></code></pre></div>
       </div>
       <h2 data-number="8.2" id="変数宣言キーワード"><span
       class="header-section-number">8.2</span> 変数宣言キーワード</h2>
@@ -1637,11 +1646,11 @@ TypeScriptの勉強 3</code></pre>
       は、初期化以降、変更される予定がないので、以下のように記述することが強く推奨されます
       (<strong>モダンTypeScript
       においてコード品質や可読性を高めるためのガイドラインとなっています</strong>)。</p>
-      <div class="sourceCode" id="cb43" data-caption="prac01.ts"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a><span class="kw">const</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
-<span id="cb43-3"><a href="#cb43-3"></a><span class="kw">const</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb43-4"><a href="#cb43-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(name<span class="op">,</span> priority)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb44" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="kw">const</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="kw">const</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(name<span class="op">,</span> priority)<span class="op">;</span></span></code></pre></div>
       <p>小テストや課題においても、変更されることがない変数 (定数)
       については <code>const</code> で宣言してください。<code>let</code>
       や <code>var</code>
@@ -1652,12 +1661,12 @@ TypeScriptの勉強 3</code></pre>
       <span class="masked">f文字列</span>
       に相当するものです。バッククォートで囲んで「<code>$</code>マーク」と「波括弧」を組わせて使用します。</p>
       <p>テンプレート文字列の使用例を以下に示します。</p>
-      <div class="sourceCode" id="cb44"
+      <div class="sourceCode" id="cb45"
       data-caption="prac01.ts (テンプレート文字列の利用)"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="kw">const</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
-<span id="cb44-3"><a href="#cb44-3"></a><span class="kw">const</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Todo 1 =&gt; </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">（優先度:</span><span class="sc">${</span>priority<span class="sc">}</span><span class="vs">)`</span>)<span class="op">;</span> <span class="co">// テンプレート文字列</span></span></code></pre></div>
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="kw">const</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="kw">const</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Todo 1 =&gt; </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">（優先度:</span><span class="sc">${</span>priority<span class="sc">}</span><span class="vs">)`</span>)<span class="op">;</span> <span class="co">// テンプレート文字列</span></span></code></pre></div>
       <p>以下のような出力が得られます。</p>
       <pre><code>■ prac01.ts の実行
 Todo 1 =&gt; TypeScriptの勉強（優先度:3)</code></pre>
@@ -1682,14 +1691,14 @@ Todo 1 =&gt; TypeScriptの勉強（優先度:3)</code></pre>
       <strong>オブジェクトリテラル記法</strong>
       (オブジェクトを直接的に記述する方法)
       で、以下のように書き換えることができます。</p>
-      <div class="sourceCode" id="cb46"
+      <div class="sourceCode" id="cb47"
       data-caption="prac01.ts (テンプレート文字列の利用)"><pre
-      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb46-1"><a href="#cb46-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a><span class="kw">const</span> todo <span class="op">=</span> {</span>
-<span id="cb46-3"><a href="#cb46-3"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span> <span class="co">// name = &quot;...&quot; ではない点に要注意</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="co">// priority = &quot;...&quot; ではない点に要注意</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a>}<span class="op">;</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Todo 1 =&gt; </span><span class="sc">${</span>todo<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">（優先度:</span><span class="sc">${</span>todo<span class="op">.</span><span class="at">priority</span><span class="sc">}</span><span class="vs">)`</span>)<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb47-1"><a href="#cb47-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">const</span> todo <span class="op">=</span> {</span>
+<span id="cb47-3"><a href="#cb47-3"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span> <span class="co">// name = &quot;...&quot; ではない点に要注意</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="co">// priority = &quot;...&quot; ではない点に要注意</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a>}<span class="op">;</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Todo 1 =&gt; </span><span class="sc">${</span>todo<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">（優先度:</span><span class="sc">${</span>todo<span class="op">.</span><span class="at">priority</span><span class="sc">}</span><span class="vs">)`</span>)<span class="op">;</span></span></code></pre></div>
       <p>オブジェクトリテラル記法では <span
       class="masked"><code>=</code> ではなく <code>:</code>
       で値を与えること</span> に注意してください
@@ -1777,6 +1786,9 @@ Todo 1 =&gt; TypeScriptの勉強（優先度:3)</code></pre>
       <li>何を学べばよいか分からない人は<a
       href="https://www.youtube.com/results?search_query=モダンTypeScript入門">モダンTypeScript入門</a>
       などのキーワードで「ウェブ検索」や「YouTube検索」して、それを勉強してください。</li>
+      <li>参考: <a
+      href="https://typescriptbook.jp/">サバイバルTypeScript</a>
+      TypeScript の入門ページです。</li>
       </ul></li>
       <li>次回の授業のはじめに「<strong>小テスト</strong>」を実施します。筆記用具を持参してください。</li>
       </ul>
