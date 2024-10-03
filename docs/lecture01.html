@@ -858,23 +858,22 @@ C:\Users\wada\AppData\Roaming\npm
       <p>デスクトップ画面で <code>[Shift]</code>
       を押下しながら右クリックして「<strong>ターミナルで開く</strong>」を選択して
       PowerShell か コマンドプロンプト を開いてください。<code>ls</code>
-      か <code>dir</code> のコマンドで <code>prac00.ts</code>
+      か <code>dir</code> のコマンドで <code>test.ts</code>
       が存在することを確認してください。</p>
       <figure>
       <img src="figs/01/ps_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>以下のコマンドで <code>prac00.ts</code> を
-      <code>prac00.js</code> にトランスパイルしてください。ここで
-      <code>--target es6</code> オプションは、ES6 (ES2015)
-      の使用に準拠した JavaScript (ECMASCript)
-      に変換することを明示したものです。</p>
-      <pre><code>PS C:\Users\xxxx\Desktop&gt; tsc --target es6 prac00.ts</code></pre>
-      <p>デスクトップに <code>prac00.js</code> (JavaScriptプログラム)
+      <p>以下のコマンドで <code>test.ts</code> を <code>test.js</code>
+      にトランスパイルしてください。ここで <code>--target es6</code>
+      オプションは、ES6 (ES2015) の使用に準拠した JavaScript
+      (ECMASCript) に変換することを明示したものです。</p>
+      <pre><code>PS C:\Users\xxxx\Desktop&gt; tsc --target es6 test.ts</code></pre>
+      <p>デスクトップに <code>test.js</code> (JavaScriptプログラム)
       が生成されているので、適当なテキストエディタで開いて内容を確認してください。</p>
-      <p>次に、以下のコマンド (<code>node prac00.js</code>)
+      <p>次に、以下のコマンド (<code>node test.js</code>)
       で実行してください。</p>
-      <pre><code>PS C:\Users\wada\Desktop&gt; node prac00.js
+      <pre><code>PS C:\Users\wada\Desktop&gt; node test.js
 Hello, Alice! The sum of 10 and 20 is 30.</code></pre>
       <h3 data-number="5.4.1" id="演習"><span
       class="header-section-number">5.4.1</span> 演習</h3>
