@@ -1586,13 +1586,18 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       id="reactにおける状態-オブジェクト-の変更の検知-概要"><span
       class="header-section-number">7</span> Reactにおける状態
       (オブジェクト) の変更の検知 ～概要～</h1>
-      <p>Reactでは「<strong>極めて大雑排に言えば、オブジェクトの状態が変更されたことを検知してライブラリが画面を自動で書き換える</strong>」ということが行われます。</p>
+      <p>Reactでは「<strong>極めて大雑排に言えば、「オブジェクト」の状態が変更されたことを検知してライブラリ
+      (React) が自動で画面を書き換える</strong>」ということが行われます
+      (画面=<a href="https://www.google.com/search?q=Domとは">DOM
+      (Document Object Model)</a>。</p>
       <p>ここでのオブジェクトとは、例えば、ここまで何度も登場している
       <code>todo</code>
-      です。そのオブジェクト状態が変更されたとは、例えば
-      <code>name</code> や <code>isDone</code>
-      などのプロパティの変更などを意味します。</p>
-      <p>オブジェクトのプロパティの変更は、以下のように行なうことができます。</p>
+      です。そのオブジェクトの「状態が変更された」とは、例えば
+      <code>name</code> や <code>isDone</code> などの <strong>プロパティ
+      (属性) の変更</strong> を意味します。</p>
+      <p>オブジェクトのプロパティの変更は、以下
+      (<strong>第15行目</strong>・<strong>第16行目</strong>)
+      のように行なうことができます。</p>
       <div class="sourceCode" id="cb61" data-caption="prac04.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb61-1"><a href="#cb61-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
 <span id="cb61-2"><a href="#cb61-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
@@ -1613,31 +1618,34 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb61-17"><a href="#cb61-17"></a></span>
 <span id="cb61-18"><a href="#cb61-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`■ 状態変更後`</span>)<span class="op">;</span></span>
 <span id="cb61-19"><a href="#cb61-19"></a><span class="fu">printTodo</span>(todo1)<span class="op">;</span></span></code></pre></div>
-      <p>実行結果は以下のようになります。確かにプロパティが変更されていることが分かると思います。</p>
+      <p>実行結果は以下のようになります。確かに
+      <strong>第15行目</strong> と <strong>第16行目</strong>
+      の操作でプロパティが変更されていることが分かると思います。</p>
       <pre><code>■ 状態変更前
 (優先度: 3) TypeScriptの勉強 期日: 2024/10/11 09:45
 ■ 状態変更後
 (優先度: 1) COBOLの勉強をする 期日: 2024/10/11 09:45</code></pre>
-      <p>しかし、<strong>極めて重要なポイントとして</strong>、上記のような操作でオブジェクトのプロパティを変更しても、Reactは
+      <p>しかし、<strong>極めて重要なポイントとして</strong>、<strong>上記のような操作でオブジェクトのプロパティを変更しても</strong>、Reactは
       <span
-      class="masked">オブジェクトの状態に変更があったことを検知しません</span>。つまり、オブジェクトを変更しても、それが反映されるように画面の更新
+      class="masked">オブジェクトの状態に変更があったことを検知してくれません</span>。つまり、オブジェクトを変更しても、それを反映するように画面の更新
       (=再レンダリング) をしてくれません😭。</p>
-      <p>Reactがオブジェクトの状態変更を検知しない理由は「<strong>Reactはオブジェクトの</strong>「<strong>参照</strong>」<strong>が変更されたときにのみ再レンダリングするという仕組みになっている</strong>
+      <p>Reactがオブジェクトの状態変更を検知しない理由は「<strong>Reactはオブジェクトの</strong>「<strong>参照</strong>」<strong>が変更されたときに、「オブジェクトが変更された」と検知・判断して画面の再レンダリングするという仕組みになっている</strong>
       (重要)」ためです。さきほどの<a
       href="lecture02.html#オブジェクトの比較-重要">6.2
       オブジェクトの比較</a> の <code>comp2.ts</code>
-      で示したように、<code>=</code>
-      でコピーをしても、あるいはプロパティを変更しても「参照」は変化しません。</p>
+      で示したように、<code>=</code> でコピーをしても、あるいは
+      <strong>プロパティを変更しても「参照」は変化しません</strong>。</p>
       <h2 data-number="7.1"
       id="reactが変更を検知可能なオブジェクトの生成"><span
       class="header-section-number">7.1</span>
       Reactが変更を検知可能なオブジェクトの生成</h2>
-      <p>Reactが変更を検知可能なオブジェクトを生成する方法を解説します。React開発では
+      <p>Reactが変更を検知できるようにオブジェクトを生成する方法を解説します。これは、React開発において
       <strong>特に重要な操作</strong>
       となってくるので、しっかりと覚えておいてください。</p>
       <p>まずは、次のように新たにオブジェクトを生成することで、オリジナル
-      (<code>todo</code>) とは異なる参照を持ったオブジェクト
-      (<code>updatedTodo</code>) を生成できます。</p>
+      (<code>todo</code>) とは <span
+      class="masked">参照が異なるオブジェクト
+      (<code>updatedTodo</code>)</span> を生成できます。</p>
       <div class="sourceCode" id="cb63" data-caption="prac04.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb63-1"><a href="#cb63-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
 <span id="cb63-2"><a href="#cb63-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
