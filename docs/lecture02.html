@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+     <script
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第02回 3I-プログラミング3</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#今回の授業概要と連絡" id="toc-今回の授業概要と連絡"><span
+class="toc-section-number">1</span> 今回の授業概要と連絡</a>
+<ul>
+<li><a href="#小テスト❶" id="toc-小テスト❶"><span
+class="toc-section-number">1.1</span> 小テスト❶</a></li>
+<li><a href="#ここまでの流れ" id="toc-ここまでの流れ"><span
+class="toc-section-number">1.2</span> ここまでの流れ</a></li>
+</ul></li>
+<li><a href="#前回の復習" id="toc-前回の復習"><span
+class="toc-section-number">2</span> 前回の復習</a>
+<ul>
+<li><a href="#静的型付け" id="toc-静的型付け"><span
+class="toc-section-number">2.1</span> 静的型付け</a></li>
+<li><a href="#型推論" id="toc-型推論"><span
+class="toc-section-number">2.2</span> 型推論</a></li>
+<li><a href="#オブジェクトの初期化" id="toc-オブジェクトの初期化"><span
+class="toc-section-number">2.3</span> オブジェクトの初期化</a></li>
+</ul></li>
+<li><a href="#前回講義の演習の解答例と解説"
+id="toc-前回講義の演習の解答例と解説"><span
+class="toc-section-number">3</span> 前回講義の「演習」の解答例と解説</a>
+<ul>
+<li><a href="#問題の確認" id="toc-問題の確認"><span
+class="toc-section-number">3.1</span> 問題の確認</a></li>
+<li><a href="#解説-月-month-の扱いについて"
+id="toc-解説-月-month-の扱いについて"><span
+class="toc-section-number">3.2</span> 解説: 月 (Month)
+の扱いについて</a></li>
+<li><a href="#解説-時刻-タイムゾーン-の扱いについて"
+id="toc-解説-時刻-タイムゾーン-の扱いについて"><span
+class="toc-section-number">3.3</span> 解説: 時刻 (タイムゾーン)
+の扱いについて</a></li>
+<li><a href="#解説-日時の整形出力" id="toc-解説-日時の整形出力"><span
+class="toc-section-number">3.4</span> 解説: 日時の整形出力</a></li>
+<li><a href="#解説-日時の整形出力-関数化1"
+id="toc-解説-日時の整形出力-関数化1"><span
+class="toc-section-number">3.5</span> 解説: 日時の整形出力
+(関数化1)</a></li>
+<li><a href="#解説-日時の整形出力-関数化2"
+id="toc-解説-日時の整形出力-関数化2"><span
+class="toc-section-number">3.6</span> 解説: 日時の整形出力
+(関数化2)</a></li>
+<li><a href="#アロー関数" id="toc-アロー関数"><span
+class="toc-section-number">3.7</span> アロー関数</a></li>
+<li><a href="#関数を別ファイルに分離する"
+id="toc-関数を別ファイルに分離する"><span
+class="toc-section-number">3.8</span>
+関数を別ファイルに分離する</a></li>
+</ul></li>
+<li><a href="#ライブラリのインストールと利用"
+id="toc-ライブラリのインストールと利用"><span
+class="toc-section-number">4</span> ライブラリのインストールと利用</a>
+<ul>
+<li><a href="#dayjsライブラリのインストール"
+id="toc-dayjsライブラリのインストール"><span
+class="toc-section-number">4.1</span>
+dayjsライブラリのインストール</a></li>
+<li><a href="#dayjsライブラリの利用"
+id="toc-dayjsライブラリの利用"><span
+class="toc-section-number">4.2</span> dayjsライブラリの利用</a></li>
+</ul></li>
+<li><a href="#オブジェクトの型定義" id="toc-オブジェクトの型定義"><span
+class="toc-section-number">5</span> オブジェクトの型定義</a>
+<ul>
+<li><a href="#型定義を別ファイルに分離する"
+id="toc-型定義を別ファイルに分離する"><span
+class="toc-section-number">5.1</span>
+型定義を別ファイルに分離する</a></li>
+<li><a href="#オブジェクトを引数に受け取る関数の定義"
+id="toc-オブジェクトを引数に受け取る関数の定義"><span
+class="toc-section-number">5.2</span>
+オブジェクトを引数に受け取る関数の定義</a></li>
+<li><a href="#分割代入" id="toc-分割代入"><span
+class="toc-section-number">5.3</span> 分割代入</a></li>
+<li><a href="#引数の分割代入" id="toc-引数の分割代入"><span
+class="toc-section-number">5.4</span> 引数の分割代入</a></li>
+</ul></li>
+<li><a href="#等価演算子と不等価演算子"
+id="toc-等価演算子と不等価演算子"><span
+class="toc-section-number">6</span> 等価演算子と不等価演算子</a>
+<ul>
+<li><a href="#値の比較" id="toc-値の比較"><span
+class="toc-section-number">6.1</span> 値の比較</a></li>
+<li><a href="#オブジェクトの比較-重要"
+id="toc-オブジェクトの比較-重要"><span
+class="toc-section-number">6.2</span> オブジェクトの比較 (重要)</a></li>
+<li><a href="#オブジェクトの深い比較"
+id="toc-オブジェクトの深い比較"><span
+class="toc-section-number">6.3</span> オブジェクトの深い比較</a></li>
+<li><a href="#三項演算子" id="toc-三項演算子"><span
+class="toc-section-number">6.4</span> 三項演算子</a></li>
+</ul></li>
+<li><a href="#reactにおける状態-オブジェクト-の変更の検知-概要"
+id="toc-reactにおける状態-オブジェクト-の変更の検知-概要"><span
+class="toc-section-number">7</span> Reactにおける状態 (オブジェクト)
+の変更の検知 ～概要～</a>
+<ul>
+<li><a href="#reactが変更を検知可能なオブジェクトの生成"
+id="toc-reactが変更を検知可能なオブジェクトの生成"><span
+class="toc-section-number">7.1</span>
+Reactが変更を検知可能なオブジェクトの生成</a></li>
+</ul></li>
+<li><a href="#授業時間外学習" id="toc-授業時間外学習"><span
+class="toc-section-number">8</span> 授業時間外学習</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2024-3I プログラミング3 第02回 講義資料</p>
+      <p>2024年10月10日（木）1・2時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="今回の授業概要と連絡"><span
+      class="header-section-number">1</span> 今回の授業概要と連絡</h1>
+      <p>本科目は学修単位科目です。大学の授業と同様に、1回の授業あたり4時間相当の授業時間外学習を前提としたボリューム、展開速度となっています。いろいろと忙しいとは思いますが、時間を確保して取り組んでください。</p>
+      <h2 data-number="1.1" id="小テスト❶"><span
+      class="header-section-number">1.1</span> 小テスト❶</h2>
+      <p>小テスト❶を実施します。</p>
+      <h2 data-number="1.2" id="ここまでの流れ"><span
+      class="header-section-number">1.2</span> ここまでの流れ</h2>
+      <p>後期中間試験ぐらいまでの授業の流れ (予定)</p>
+      <ol type="1">
+      <li>モダンTypeScript基礎学習のための環境構築
+      <strong><em>済</em></strong></li>
+      <li>TypeScript基礎学習 <strong>←
+      今回と次回の授業のメイン</strong></li>
+      <li>Reactを使ったTodoアプリのための環境構築</li>
+      <li>Todoアプリ開発（Reactによるフロントエンド開発）のチュートリアル</li>
+      <li>Todoアプリのカスタマイズや作り込み →
+      <strong>後期前半の大課題</strong></li>
+      </ol>
+      <p>まずは、次のようなTodoアプリ
+      (Reactを採用したフロントエンド開発) を目標とします。</p>
+      <ul>
+      <li><a
+      href="https://takeshiwada1980.github.io/react-todo-app-demo/">Todoアプリのサンプル</a>
+      (ギリギリ合格水準のレベル、点数で言えば60点😨)</li>
+      <li><a
+      href="https://takeshiwada1980.github.io/react-todo-app-demo/2">Todoアプリのサンプル</a>
+      (ここまでつくれたら素晴らしい！90点超🎉)</li>
+      </ul>
+      <h1 data-number="2" id="前回の復習"><span
+      class="header-section-number">2</span> 前回の復習</h1>
+      <p>前回の授業内容の重要部分の復習と、プラスアルファの解説をしてきます。</p>
+      <h2 data-number="2.1" id="静的型付け"><span
+      class="header-section-number">2.1</span> 静的型付け</h2>
+      <p>前回講義において「<strong>TypeScriptは「静的型付け言語」であり、変数宣言時には次のようにコロン
+      (<code>:</code>) につづけて型</strong> (<code>string</code> や
+      <code>number</code>)
+      <strong>を示す必要がある</strong>」と解説しました。</p>
+      <div class="sourceCode" id="cb1" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">let</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span> <span class="co">// : string で 文字列型を明示</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">let</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span> <span class="co">// : number で 数値型を明示</span></span></code></pre></div>
+      <p>ここで「<strong>変数に静的な型付けがされる</strong>」とは、(簡単に言えば)
+      変数宣言後、<span
+      class="masked">その変数には宣言時に示した型以外の値を (基本的には)
+      代入できない</span> ということになります。</p>
+      <p>例えば、<code>name: string = ...</code> のように変数宣言された
+      <code>name</code> には <span class="masked">文字列型 (string型)
+      以外の値を入れること</span>
+      はできず、また、<code>priority: number = ...</code>
+      のように変数宣言した <code>priority</code> には数値型 (number型)
+      以外の値を入れることはできません。</p>
+      <p>次のコードを記述し、<strong>実際にエラーとなることを確認</strong>してください。前回構築した環境でプログラムを実行するには、VSCodeで
+      <code>[Ctrl]+[J]</code> のショートカットでターミナルを起動し <span
+      class="masked"><code>npm run dev</code></span> を入力します。</p>
+      <div class="sourceCode" id="cb2"
+      data-caption="prac01.ts (コンパイルエラー)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">export</span> {}</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">let</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">let</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">// number型の値 (4649) を代入&quot;High&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>name <span class="op">=</span> <span class="dv">4649</span><span class="op">;</span> </span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">// string型の値 (&quot;High&quot;) を代入</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>priority <span class="op">=</span> <span class="st">&quot;High&quot;</span><span class="op">;</span></span></code></pre></div>
+      <p>VSCodeなどのエディタ上で (あるいは <code>tsc</code>
+      コマンドの実行ログで)、<strong>第07行目</strong> については <span
+      class="masked">‘number’ を型 ‘string’
+      に割り当てることはできません。(Type ‘number’ is not assignable to
+      type ‘string’.)</span> のようなエラーが表示されます。</p>
+      <p>同様に <strong>第10行目</strong> において「<strong>型 ‘string’
+      を型 ‘number’ に割り当てることはできません。(Type ‘number’ is not
+      assignable to type
+      ‘string’.)</strong>」のようなエラーが表示されます。</p>
+      <figure>
+      <img src="figs/02/vscode_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、TypeScript / JavaScript
+      においては、慣例的に「<strong>変数名
+      (</strong><code>let</code><strong>で宣言)</strong>」や「<strong>ローカルな定数名
+      (</strong><code>const</code><strong>で宣言)</strong>」は <span
+      class="masked">キャメルケース (小文字はじまり)</span>
+      を原則とするので覚えておいてください。</p>
+      <div class="note type-tips">
+      <p><strong>PythonやJavaScriptは動的型付け言語</strong></p>
+      <p>プログラミング1で学んだ <strong>Python</strong> や
+      <strong>JavaScript</strong>
+      は「動的型付け言語」であり、次のような型を意識しないコードを記述をしても問題ありません。</p>
+      <div class="sourceCode" id="cb3"
+      data-caption="type.py (Python)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>name <span class="op">=</span> <span class="st">&#39;TypeScriptの勉強&#39;</span> <span class="co"># 文字列で初期化した変数を...</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>name <span class="op">=</span> <span class="dv">4649</span> <span class="co"># 整数型の値で上書き可能</span></span></code></pre></div>
+      <div class="sourceCode" id="cb4"
+      data-caption="type.js (JavaScript)"><pre
+      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">let</span> name <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span> <span class="co">// 文字列で初期化した変数を...</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>name <span class="op">=</span> <span class="dv">4649</span><span class="op">;</span> <span class="co">// 整数型の値で上書き可能</span></span></code></pre></div>
+      <p>なお、C言語は「静的型付け言語」なので、上記のようなプログラムはコンパイルエラーとなります。</p>
+      </div>
+      <div class="note type-tips">
+      <p><strong>命名規則</strong></p>
+      <p>「<strong>キャメルケース</strong>」とは <span
+      class="masked">小文字で開始して単語区切りに大文字</span>
+      を使用する命名規則です。例えば <code>newName</code> や
+      <code>isDone</code> のように命名するものです。</p>
+      <p>「<strong>パスカルケース</strong>」とは
+      <strong>大文字で開始して単語区切りにも大文字</strong>
+      を使用する命名規則です。例えば <span
+      class="masked"><code>NewName</code> や <code>IsDone</code></span>
+      のように命名するものです。</p>
+      </div>
+      <p>TypeScriptの主要な「型」としては、次のようなものがあります。なお、<code>null</code>
+      と <code>undefined</code> については、あとの授業で扱います。</p>
+      <ul>
+      <li><code>string</code> : 文字列型。</li>
+      <li><code>number</code> : 数値型。<span
+      class="masked">整数型と浮動小数点型</span>
+      の区別はありません。</li>
+      <li><code>boolean</code> : 真偽値型 (ブール型)。<code>true</code>
+      と <code>false</code> の2値だけを扱います。
+      <ul>
+      <li>Python では <span class="masked"><code>True</code> と
+      <code>False</code> のように真偽値のリテラルは大文字開始</span>
+      でしたが、TypeScript では <strong>先頭が小文字</strong>
+      になることに注意してください。</li>
+      </ul></li>
+      <li><code>Date</code> : 日時型。厳密には TyepScript / JavaScreipt
+      の <strong>組込みクラス</strong> である <code>Data</code>
+      のインスタンス (オブジェクト)
+      の型で「日付」と「時刻」を扱うときに使用します。</li>
+      </ul>
+      <h3 data-number="2.1.1" id="定着確認"><span
+      class="header-section-number">2.1.1</span> 定着確認</h3>
+      <ul>
+      <li>TypeScriptにおいて「真偽値」を扱う型を答えよ。プログラム内の表記形式で答えること。
+      <ul>
+      <li>答え <span class="masked"><code>boolean</code></span></li>
+      </ul></li>
+      <li>TypeScriptにおいて「文字列」を扱う型を答えよ。プログラム内の表記形式で答えること。
+      <ul>
+      <li>答え <span class="masked"><code>string</code></span></li>
+      </ul></li>
+      <li>TypeScriptにおいて、浮動小数点数や整数を扱う型を答えよ。プログラム内の表記形式で答えること。
+      <ul>
+      <li>答え <span class="masked"><code>number</code></span></li>
+      </ul></li>
+      <li>TypeScript / JavaScript
+      において、「変数名」や「ローカルな定数名」の表記は慣例的に
+      <code>？？？</code> が使用される。<code>？？？</code>
+      にあてはまる語として最も適切なのは「キャメルケース」「パスカルケース」「スネークケース
+      (大文字)」「スネークケース
+      (小文字)」「ハンガリアン記法」のうち、どれか。
+      <ul>
+      <li>答え <span class="masked">キャメルケース</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.2" id="型推論"><span
+      class="header-section-number">2.2</span> 型推論</h2>
+      <p>ここまで「<strong>TypeScriptでは、変数や定数の宣言時に「型」を明示する必要がある</strong>」と説明してきました。しかし、実際には「<strong>型推論</strong>」という機能があり、(ユーザーが明示的に「型」を記述しなくても)
+      <span class="masked">初期値から型を推論 (推測)
+      して自動的に静的型付け</span> を行なうことができます。</p>
+      <p>例えば、以下のTypeScriptプログラムは <code>:string</code> や
+      <code>:number</code>
+      を明示していませんが、問題なくトランスパイルされます
+      (VSCodeのエディタにもエラーは表示されません)。変数
+      <code>name</code> は <code>"TypeScriptの勉強"</code>
+      という初期値から <span
+      class="masked">文字列型であると推論され、自動的に文字列型に型付け</span>
+      されます。同様に<code>priority</code>
+      は数値型に型付けされます。</p>
+      <div class="sourceCode" id="cb5" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">let</span> name <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">let</span> priority <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span></code></pre></div>
+      <p>各変数が「推論によって、どのように型付けされているか」は、VSCodeで以下のように
+      <strong>変数にカーソルを合わせること</strong> で確認できます。</p>
+      <figure>
+      <img src="figs/02/vscode_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、次のように <code>typeof</code>
+      を使って推論された型を確認することもできます。実際に実行して、どのような結果が得られるか確認してください。<span
+      class="masked"><code>typeof(name)</code> ではなく
+      <code>typeof name</code> </span>
+      のように使用する点に注意してください。</p>
+      <div class="sourceCode" id="cb6"
+      data-caption="prac01.ts (推論された型の確認)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">let</span> name <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">let</span> priority <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`name の型は </span><span class="sc">${</span><span class="kw">typeof</span> name<span class="sc">}</span><span class="vs"> です`</span>)<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`priority の型は </span><span class="sc">${</span><span class="kw">typeof</span> priority<span class="sc">}</span><span class="vs"> です`</span>)<span class="op">;</span></span></code></pre></div>
+      <p>なお、変数が <span class="masked">初期値を持たないとき</span>
+      や、<strong>関数を定義するとき</strong>
+      などは<strong>明示的に型を記述する必要があります</strong>。学習の初期段階では、練習のために明示的に型を記述することをおすすめします。</p>
+      <h3 data-number="2.2.1" id="定着確認-1"><span
+      class="header-section-number">2.2.1</span> 定着確認</h3>
+      <ul>
+      <li>TypeScriptにおいて、変数 <code>hoge</code>
+      の型をコンソール出力したい。<code>`console.log(`変数 hoge の型は ${？？？} です`);`</code>
+      の <code>？？？</code> に記述すべき適切な語を答えよ。
+      <ul>
+      <li>答え <span class="masked"><code>typeof hoge</code></span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="2.3" id="オブジェクトの初期化"><span
+      class="header-section-number">2.3</span> オブジェクトの初期化</h2>
+      <p>TypeScript / JavaScript では、複数の変数をグループ化して
+      (束ねて) <span class="masked">オブジェクト</span>
+      という単位で扱うという解説をしました (参考:<a
+      href="lecture01.html#オブジェクトのコンソール出力-1">前回講義</a>)。ここでの「オブジェクト」とは、既に学習済みの
+      Pythonの「<strong>辞書 (またはクラスのインスタンス)</strong>」や
+      <span class="masked">C言語の「構造体」のようなもの</span>
+      と考えてください。</p>
+      <p>オブジェクトは、次のような「<strong>オブジェクトリテラル記法</strong>」で初期化することができました。</p>
+      <div class="sourceCode" id="cb7"
+      data-caption="prac01.ts (オブジェクトリテラル記法によるオブジェクトの生成)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">const</span> todo <span class="op">=</span> {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>この際、各プロパティ (属性) は <code>キー: 値</code>
+      という形式で定義され、<span class="masked">カンマ <code>,</code>
+      </span> で区切って記述します。学習初期には
+      <strong>以下のような記述ミスが非常に多い</strong>
+      ので注意してください。</p>
+      <div class="sourceCode" id="cb8"
+      data-caption="prac01.ts (記述ミス)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">const</span> todo <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  name <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span>  <span class="co">// 正しくは name : &quot;...&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  priority <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  isDone <span class="op">=</span> <span class="kw">false</span><span class="op">;</span>  <span class="co">// 正しくは ; ではなく , で属性を区切る</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  deadline <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>オブジェクトを <strong>JSON形式</strong>
+      に変換して整形してコンソール出力するためには <span
+      class="masked"><code>console.log(JSON.stringify(todo, null, 2))</code></span>
+      のようにすることも前回に学びました。</p>
+      <p>なお <code>console.log(typeof todo)</code> による出力は <span
+      class="masked"><code>object</code></span> となります。</p>
+      <h1 data-number="3" id="前回講義の演習の解答例と解説"><span
+      class="header-section-number">3</span>
+      前回講義の「演習」の解答例と解説</h1>
+      <h2 data-number="3.1" id="問題の確認"><span
+      class="header-section-number">3.1</span> 問題の確認</h2>
+      <p>前回講義で、次のような<a
+      href="lecture01.html#演習-15分">演習問題</a>に取り組んでもらいました。</p>
+      <p>次のような Date型 (日付・日時型) の変数 <code>deadline</code>
+      を追加して、コンソールメソッドで出力してください。また、<code>dayjs</code>
+      や <code>moment</code> などのライブラリを使わずに「2024/10/02
+      11:45」のようにコンソールに出力する方法について調べてください。</p>
+      <div class="sourceCode" id="cb9" data-caption="Date型の変数"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">// Date型の変数 deadline の宣言と初期化</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">let</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span></code></pre></div>
+      <p>上記について、実際に取り組んでもらって、<strong>皆さんそれぞれが「自分なりの解決策」を見つけていること</strong>を前提に解説していきます。</p>
+      <h2 data-number="3.2" id="解説-月-month-の扱いについて"><span
+      class="header-section-number">3.2</span> 解説: 月 (Month)
+      の扱いについて</h2>
+      <p>まず、これまでのプログラミングの経験から、<code>Date(2024, 10, 2, 11, 45)</code>
+      によって、おそらく「2024年10月2日
+      11時45分」という日時で初期化された値が、変数 <code>deadline</code>
+      に格納されるのだろう・・・と推測したと思います。</p>
+      <p>しかし、実際に <code>console.log(deadline)</code>
+      のように書いてコンソール出力すると、次のような結果になることが確認できたと思います。</p>
+      <pre><code>2024-11-02T02:45:00.000Z</code></pre>
+      <p>上記のような日時表記は<a
+      href="https://www.google.com/search?q=ISO8601とは">ISO8601形式</a>とよばれる書式
+      (フォーマット)
+      となります。私たちの日常生活では登場することは少ないですが、コンピュータやネットの世界ではオーソドックスな日時の表記法になっています。</p>
+      <p>さらに詳しく結果を考察・確認していきます。</p>
+      <p>まずは「<strong>Month (月)</strong>」について <span
+      class="masked">「10月だろう」と推測していたものの出力結果が違った</span>
+      ことに気づいたでしょうか。TypeScript / JavaScrfipt の
+      <code>Date</code> クラスの仕様上、第2引数は
+      <strong>ゼロオリジン</strong> で <code>0</code> から
+      <code>11</code> によって <strong>Month (月)</strong>
+      を与えるようになっています
+      (ややこしいですが、そのような仕様なので仕方がありません)。</p>
+      <p>では、第2引数に <code>12</code> を与えるとどうなるのか (<span
+      class="masked">コンパイルエラーになるのか、実行時エラーになるのか、あるいは別の動作をするのか</span>)
+      を予想したうえで実際に試してみてください。プログラミング1
+      の授業から、繰り返し伝えていますが、このように発想を広げて自ら検証してみることは非常に大事です。</p>
+      <div class="sourceCode" id="cb11"
+      data-caption="prac01.ts (Dateの初期化に関する実験)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">let</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">31</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(deadline)<span class="op">;</span></span></code></pre></div>
+      <p>これから開発しようとしている「Todoアプリ」において、タスクの期限
+      (deadline)
+      が、1ヵ月ずれて扱われることは致命的なので注意してください。</p>
+      <h2 data-number="3.3"
+      id="解説-時刻-タイムゾーン-の扱いについて"><span
+      class="header-section-number">3.3</span> 解説: 時刻 (タイムゾーン)
+      の扱いについて</h2>
+      <p>次に時刻について「11:45」になると推測したと思いますが、実際の出力は
+      <span class="masked"><code>02:45:00.000</code></span>
+      となりました。「<strong>9時間のずれ</strong>」が生じています。</p>
+      <p>つまり、日本のローカル時刻で <code>Date</code> の
+      <strong>第4引数</strong> と <strong>第5引数</strong>
+      を与えたものの、<code>deadline</code> には
+      <strong>協定世界時</strong> (<strong>UTC: Universal time
+      coordinated</strong>) の日時 (時刻)
+      が保持される仕組みになっています。これも、ややこしいと感じるかもしれませんが、仕様なので仕方ありません。</p>
+      <div class="note type-tips">
+      <p><strong>JS / TS
+      実行環境のタイムゾーンを確認する方法</strong></p>
+      <p>現在の JS / TS の実行環境 (Node.jsやウェブブラウザ)
+      が認識しているタイムゾーンは、次のコードで確認することができます。</p>
+      <div class="sourceCode" id="cb12"
+      data-caption="タイムゾーンの確認"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">const</span> timeZone <span class="op">=</span> <span class="bu">Intl</span><span class="op">.</span><span class="fu">DateTimeFormat</span>()<span class="op">.</span><span class="fu">resolvedOptions</span>()<span class="op">.</span><span class="at">timeZone</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Timezone: </span><span class="sc">${</span>timeZone<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <p>おそらく、皆さんの実行環境では
+      <code>Timezone: Asia/Tokyo</code>
+      のようにコンソール出力されると思います。</p>
+      </div>
+      <p>ここでは
+      JS/TSの実行環境によってタイムゾーンが変わることに注意してください。</p>
+      <p>特にウェブアプリのバックエンドを、クラウドサーバ や
+      Dockerなどのコンテナ で構築する場合、タイムゾーンは一般に
+      <code>Timezone: UTC</code>
+      となります。一方で、<strong>フロントエンドのタイムゾーンは利用者環境
+      (OS) によって違ってくる点に注意してください。</strong>。</p>
+      <h2 data-number="3.4" id="解説-日時の整形出力"><span
+      class="header-section-number">3.4</span> 解説: 日時の整形出力</h2>
+      <p>次に、Date型の変数の内容を「<strong>YYYY/MM/DD
+      HH:MM</strong>」のような形式で整形出力する方法について考えていきます。ただし、まずは
+      <strong>外部ライブラリを使用しない前提</strong> とします。</p>
+      <hr>
+      <p>ウェブ検索を利用して整形出力する方法について探す場合は「<a
+      href="https://www.google.com/search?q=JavaScreipt+Date+フォーマット">JavaScript
+      Date
+      フォーマット</a>」などをキーワードに利用します。検索キーワードは
+      <span class="masked">「TypeScript」ではなく「JavaScript」</span>
+      のようにしたほうが情報ヒット率が高くなります。</p>
+      <p>TypeScript固有の内容でなければ、「JavaScript」をキーワードに使うことも方法として覚えておいてください。</p>
+      <hr>
+      <p>GitHub Copilot を利用して解決を試みる場合は、以下のように <span
+      class="masked">処理内容を表すコメント</span>
+      をプログラムに書くことでCopilotがコードを提案してくれます。</p>
+      <figure>
+      <img src="figs/02/vscode_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <hr>
+      <p>次に、ChatGPT や Claude
+      などの生成AIを利用して解決を試みる場合は、次のようなプロンプトを記述します。プロンプトのなかで、プログラムコード全体を
+      <span class="masked">3連バッククォート <code>```</code>
+      で囲む</span>
+      ことで、より適切に読み込みされます。また、プロンプトのなかでもコードの断片は
+      <strong>バッククォートで囲むこと</strong> が推奨されます。</p>
+      <pre><code>次に示す TypeScriptプログラムに続けて、変数 `deadline` の内容を「2024/11/02 11:45」のようにコンソールに整形出力するプログラムを書いてください。実行環境は Node.js、タイムゾーンは `Timezone: Asia/Tokyo` を想定し、外部ライブラリを使用しない前提で記述してください
+
+```
+export {};
+let deadline: Date = new Date(2024, 10, 2, 11, 45);
+console.log(deadline);
+```</code></pre>
+      <p>ここでは、生成AIから<a
+      href="https://chatgpt.com/share/66ff8147-51f8-8011-89ba-37c658c87663">次のような回答</a>が得られた仮定とします。</p>
+      <div class="sourceCode" id="cb14" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">let</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">// 年、月、日、時、分を取得してフォーマット</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="kw">const</span> year <span class="op">=</span> deadline<span class="op">.</span><span class="fu">getFullYear</span>()<span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">const</span> month <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getMonth</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span> <span class="co">// 月は0から始まるため +1</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">const</span> day <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getDate</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">const</span> hours <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getHours</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="kw">const</span> minutes <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getMinutes</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co">// フォーマットした文字列をコンソールに出力</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`</span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>month<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>day<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>hours<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>minutes<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <p><strong>第12行目</strong>では、前回学習した<a
+      href="lecture01.html#テンプレート文字列">テンプレート文字列</a>が使用されています。提案されたプログラムを実行すると、次のように意図した結果を得ることができます。</p>
+      <pre><code>2024/11/02 11:45</code></pre>
+      <p>生成AIを利用したときは、動作確認後に <span
+      class="masked">必ずプログラムの意味を理解</span>
+      するように努めてください。「<strong>プログラムの意味は分からないけど、なんか動いているのでOK</strong>」では、エンジニアをい目指す人間としてダメダメ🤪です
+      (プロの通訳や翻訳家を目指している学生が、生成AIに翻訳させて、そのまま提出するのと同じくらいヤバいです。あるいは「電卓使えば計算できるから
+      <span class="math inline">\(0.8\times 2 - 9.2\)</span>
+      を自力で計算できなくてもOK」という感覚ぐらいヤバいです)。</p>
+      <p>例えば、<strong>第08行目</strong>
+      では「<code>deadline.getHours()</code> <strong>メソッドで 値
+      (number型) を得て、それを</strong> <code>String()</code>
+      <strong>で文字列 (string型) に変換して、さらに文字列の</strong>
+      <code>padStart(2, '0')</code> <strong>メソッドで</strong> <span
+      class="masked">ゼロ埋めの2文字幅</span>
+      <strong>に変換している</strong>」ということを理解し、説明できる必要があります。そのためには、生成AIに「自分の解釈の確認をしてもらったり、不明点を追質問したり、コードを書いて実験したりすること」が必要です。</p>
+      <p>(例)</p>
+      <blockquote>
+      <p>次に示すTypeScriptの第2行目では、deadline.getHours() メソッドで
+      値 (number型、ローカルタイムゾーンに基づいて変換された値)
+      を得て、それを String() で文字列 (string型)
+      に変換して、さらに文字列の padStart(2, ‘0’)
+      メソッドを利用してゼロ埋めの2文字幅に変換している、という解釈は正しいですか。</p>
+      <pre><code>let deadline: Date = new Date(2024, 10, 2, 11, 45);  
+const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
+      </blockquote>
+      <div class="note type-tips">
+      <p><strong>Pythonで日時を扱って整形出力するには?</strong></p>
+      <p>Pythonで、先の <code>prac01.ts</code>
+      と同様のプログラムを書くと次のようになります。</p>
+      <div class="sourceCode" id="cb17"
+      data-caption="Pythonにおける日付の扱い"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime <span class="co"># 日時を扱うための datatime ライブラリ</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>deadline <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">45</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="bu">print</span>(deadline.strftime(<span class="st">&#39;%Y/%m/</span><span class="sc">%d</span><span class="st"> %H:%M&#39;</span>))</span></code></pre></div>
+      <p>実際に、実行してみてください。<span
+      class="masked">実行結果の違いに気づいた</span> でしょうか？</p>
+      <ul>
+      <li><strong>Python</strong> の <code>datetime</code>
+      クラスでは、月 (Month) は <code>1</code> から <code>12</code>
+      の整数で与えて初期化します。1月は <code>1</code>、2月は
+      <code>2</code>、…、12月は <code>12</code> となります。</li>
+      <li><strong>JavaScript</strong> (TypeScript) の <code>Date</code>
+      クラスでは、月 (Month) は <code>0</code> から <code>11</code>
+      の整数で与えて初期化します。1月は <code>0</code>、2月は
+      <code>1</code>、…、12月は <code>11</code> となります。</li>
+      </ul>
+      </div>
+      <h2 data-number="3.5" id="解説-日時の整形出力-関数化1"><span
+      class="header-section-number">3.5</span> 解説: 日時の整形出力
+      (関数化1)</h2>
+      <p>ここまでで、次のコードでDate型のオブジェクトを「2024/11/02
+      11:45」のような形式で出力できることが分かりました
+      (<code>deadline</code> の変数宣言キーワードを <code>let</code>
+      から <code>const</code> に変更しています)。</p>
+      <div class="sourceCode" id="cb18"
+      data-caption="prac01.ts (Date型の整形出力)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">const</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">const</span> year <span class="op">=</span> deadline<span class="op">.</span><span class="fu">getFullYear</span>()<span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">const</span> month <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getMonth</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="kw">const</span> day <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getDate</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="kw">const</span> hours <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getHours</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="kw">const</span> minutes <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getMinutes</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`</span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>month<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>day<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>hours<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>minutes<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <p>しかし、上記のコードは <span class="masked">再利用性</span>
+      について大きな課題があることに気付くと思います。</p>
+      <p>例えば、Todo の「<strong>作成日時</strong>」を
+      <code>createdAt</code> という変数に格納しておいて</p>
+      <pre><code>期日 2024/11/02 11:45 (登録日: 2024/10/11 09:45)
+</code></pre>
+      <p>…のように出力したいとします。</p>
+      <p>上記のコードに準じて愚直にコードを書けば以下のようになってしまいます。実際にコピペして実行してみてください。</p>
+      <div class="sourceCode" id="cb20" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">const</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">const</span> cratedAt<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">;</span> <span class="co">// 引数なしで現在日時を取得</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="kw">const</span> dlYear <span class="op">=</span> deadline<span class="op">.</span><span class="fu">getFullYear</span>()<span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="kw">const</span> dlMonth <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getMonth</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="kw">const</span> dlDay <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getDate</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="kw">const</span> dlHours <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getHours</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="kw">const</span> dlMinutes <span class="op">=</span> <span class="bu">String</span>(deadline<span class="op">.</span><span class="fu">getMinutes</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="kw">const</span> caYear <span class="op">=</span> cratedAt<span class="op">.</span><span class="fu">getFullYear</span>()<span class="op">;</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="kw">const</span> caMonth <span class="op">=</span> <span class="bu">String</span>(cratedAt<span class="op">.</span><span class="fu">getMonth</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="kw">const</span> caDay <span class="op">=</span> <span class="bu">String</span>(cratedAt<span class="op">.</span><span class="fu">getDate</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="kw">const</span> caHours <span class="op">=</span> <span class="bu">String</span>(cratedAt<span class="op">.</span><span class="fu">getHours</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="kw">const</span> caMinutes <span class="op">=</span> <span class="bu">String</span>(cratedAt<span class="op">.</span><span class="fu">getMinutes</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a></span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="kw">const</span> str <span class="op">=</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a>  <span class="vs">`期限 </span><span class="sc">${</span>dlYear<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>dlMonth<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>dlDay<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>dlHours<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>dlMinutes<span class="sc">}</span><span class="vs"> `</span> <span class="op">+</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a>  <span class="vs">`(登録日 </span><span class="sc">${</span>caYear<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>caMonth<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>caDay<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>caHours<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>caMinutes<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(str)<span class="op">;</span></span></code></pre></div>
+      <p>確かに意図する出力は得られますが <strong>保守性</strong> や
+      <strong>再利用性</strong>
+      の面では、あまりにも酷いコード🫠です。既に Python と C言語
+      を学んできている皆さんであれば、<span
+      class="masked">処理の関数化</span>
+      が必要であることが分かると思います。</p>
+      <h2 data-number="3.6" id="解説-日時の整形出力-関数化2"><span
+      class="header-section-number">3.6</span> 解説: 日時の整形出力
+      (関数化2)</h2>
+      <p>Date型のオブジェクトを「引数」として受け取って「YYYY/MM/DD
+      HH:MM」形式の文字列を「戻り値 (返り値)」とする
+      <code>date2str</code>
+      という関数作成を例に、<strong>TypeScriptにおける関数定義の書き方</strong>
+      を学んでいきます。</p>
+      <p>まず、結論から言えば、以下のように <code>date2str</code>
+      関数を定義して呼びだすことができます。</p>
+      <div class="sourceCode" id="cb21"
+      data-caption="prac01.ts (date2str関数の追加)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co">// 関数の定義</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">function</span> <span class="fu">date2str</span>(dt<span class="op">:</span> <span class="bu">Date</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="kw">const</span> year <span class="op">=</span> dt<span class="op">.</span><span class="fu">getFullYear</span>()<span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="kw">const</span> month <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getMonth</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="kw">const</span> day <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getDate</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="kw">const</span> hours <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getHours</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="kw">const</span> minutes <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getMinutes</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>month<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>day<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>hours<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>minutes<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a>}</span>
+<span id="cb21-12"><a href="#cb21-12"></a></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="kw">const</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="kw">const</span> cratedAt<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">;</span> <span class="co">// 引数なしで現在日時を取得</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="co">// 関数の呼出し (テンプレート文字列の内部)</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="kw">let</span> str <span class="op">=</span> <span class="vs">`期限 </span><span class="sc">${</span><span class="fu">date2str</span>(deadline)<span class="sc">}</span><span class="vs"> (登録日 </span><span class="sc">${</span><span class="fu">date2str</span>(cratedAt)<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(str)<span class="op">;</span></span></code></pre></div>
+      <p>特に<strong>第06行目</strong>の関数定義
+      <code>function date2str(dt: Date): string {</code>
+      に注目してください。</p>
+      <figure>
+      <img src="figs/02/vscode_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>TypeScriptでは、関数の定義に <code>function</code>
+      キーワードを使用します (Pythonでは <span
+      class="masked"><code>def</code></span>
+      を使用しました)。そして、丸括弧で囲んで関数内で使用する<strong>引数を型付きで与えて</strong>、さらに、<strong>戻り値の型を記述</strong>します。</p>
+      <p>特に、慣れるまでは、<strong>戻り値の型を記述する位置が分かりづらい</strong>
+      ので注意してください。</p>
+      <p>他にも、関数記述の例を見てみましょう。</p>
+      <p><strong>数値型の2つの引数</strong>を受け取って、<strong>真偽値型を戻り値</strong>とする
+      <code>comp</code> という関数のシグネチャ (=<span
+      class="masked">関数の基本的な情報を定義する部分</span>)
+      は次のようになります。</p>
+      <div class="sourceCode" id="cb22" data-caption="comp"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">function</span> <span class="fu">comp</span>(a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span> )<span class="op">:</span> <span class="dt">boolean</span> { <span class="op">...</span> }</span></code></pre></div>
+      <hr>
+      <p><strong>文字列の1個の引数</strong>を受け取って、<strong>戻り値がない</strong>
+      <code>printWord</code>
+      という関数のシグネチャは次のようになります。TypeScript
+      では、慣例的に関数名についても <span
+      class="masked">キャメルケース</span> が使われます。</p>
+      <div class="sourceCode" id="cb23" data-caption="printWord"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">function</span> <span class="fu">printWord</span>(word<span class="op">:</span> <span class="dt">string</span>)<span class="op">:</span> <span class="dt">void</span> { <span class="op">...</span> }</span></code></pre></div>
+      <p>戻り値が「ない」ことは <sapn><code>void</code></sapn>
+      で表現します。</p>
+      <hr>
+      <p><strong>引数を受け取らず</strong>、<strong>数値型を戻り値</strong>とする
+      <code>dice</code> という関数のシグネチャは次のようになります。</p>
+      <div class="sourceCode" id="cb24" data-caption="dice"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">function</span> <span class="fu">dice</span>()<span class="op">:</span> <span class="dt">number</span> { <span class="op">...</span> }</span></code></pre></div>
+      <p>なお、引数がないことを
+      <code>function dice(void): number { ... }</code> のように
+      <code>void</code> を使って明示することは <span
+      class="masked">できません</span>。</p>
+      <h3 data-number="3.6.1" id="定着確認-2"><span
+      class="header-section-number">3.6.1</span> 定着確認</h3>
+      <ul>
+      <li>引数を受け取らず、数値型を戻り値とする <code>dice</code>
+      という関数のシグネチャを答えよ。</li>
+      <li>数値型の1個の引数 (仮引数を <code>num</code> とする)
+      を受け取り、文字列型を戻り値とする <code>num2str</code>
+      という関数のシグネチャを答えよ。</li>
+      <li>文字列型の2個の引数 (仮引数を <code>word1</code> と
+      <code>word2</code> とする) を受け取り、真偽値型を戻り値とする
+      <code>comp</code> という関数のシグネチャを答えよ。</li>
+      <li>Date型の1個の引数 (仮引数を <code>birthday</code> とする)
+      を受け取り、数値型を戻り値とする <code>getAge</code>
+      という関数のシグネチャを答えよ。</li>
+      </ul>
+      <h2 data-number="3.7" id="アロー関数"><span
+      class="header-section-number">3.7</span> アロー関数</h2>
+      <p>モダンTypeScriptでは <code>function</code>
+      キーワードを使った関数定義よりも、<code>=&gt;</code> を使用した
+      <strong><em>アロー関数</em></strong>
+      という関数定義が一般に使用されます (トレンドになっています)。<span
+      class="masked">ウェブの情報もアロー関数で書かれていることが多い</span>
+      ので、<strong>基本的には</strong> <code>=&gt;</code>
+      <strong>によるアロー関数を使用</strong>するようにしてください。</p>
+      <p>先ほどの <code>date2str</code>
+      は、次のようにアロー関数形式に書き換えができます。</p>
+      <div class="sourceCode" id="cb25" data-caption="書き換え前"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">function</span> <span class="fu">date2str</span>(dt<span class="op">:</span> <span class="bu">Date</span>)<span class="op">:</span> <span class="dt">string</span> { <span class="op">...</span> }</span></code></pre></div>
+      <div class="sourceCode" id="cb26" data-caption="書き換え後"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">const</span> date2str <span class="op">=</span> (dt<span class="op">:</span> <span class="bu">Date</span>)<span class="op">:</span> <span class="dt">string</span> <span class="kw">=&gt;</span> { <span class="op">...</span> }</span></code></pre></div>
+      <p>実際にアロー関数形式に書き換えて、同じようにプログラムが動作することを確認してください。</p>
+      <h3 data-number="3.7.1" id="定着確認-3"><span
+      class="header-section-number">3.7.1</span> 定着確認</h3>
+      <ul>
+      <li>引数を受け取らず、数値型を戻り値とする <code>dice</code>
+      という関数のシグネチャを「アロー関数形式」で答えよ。</li>
+      <li>数値型の1個の引数 (仮引数を <code>num</code> とする)
+      を受け取り、文字列型を戻り値とする <code>num2str</code>
+      という関数のシグネチャを「アロー関数形式」で答えよ。</li>
+      <li>文字列型の2個の引数 (仮引数を <code>word1</code> と
+      <code>word2</code> とする) を受け取り、真偽値型を戻り値とする
+      <code>comp</code>
+      という関数のシグネチャを「アロー関数形式」で答えよ。</li>
+      <li>Date型の1個の引数 (仮引数を <code>birthday</code> とする)
+      を受け取り、数値型を戻り値とする <code>getAge</code>
+      という関数のシグネチャを「アロー関数形式」で答えよ。</li>
+      </ul>
+      <h2 data-number="3.8" id="関数を別ファイルに分離する"><span
+      class="header-section-number">3.8</span>
+      関数を別ファイルに分離する</h2>
+      <p>関数 <code>date2str</code>
+      は、他のプログラムからも使用する可能性があるので、別ファイルに分けて記述します。プロジェクトフォルダに
+      <code>utils</code> (utilitiesの略) を作成して、そのなかに
+      <code>date2str.ts</code> というファイルを作成して、
+      以下のように関数 <code>date2str</code>
+      を抜き出して貼りつけ、保存してください。</p>
+      <div class="sourceCode" id="cb27"
+      data-caption="utils/date2str.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="im">export</span> <span class="kw">const</span> date2str <span class="op">=</span> (dt<span class="op">:</span> <span class="bu">Date</span>)<span class="op">:</span> <span class="dt">string</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="kw">const</span> year <span class="op">=</span> dt<span class="op">.</span><span class="fu">getFullYear</span>()<span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="kw">const</span> month <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getMonth</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="kw">const</span> day <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getDate</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="kw">const</span> hours <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getHours</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="kw">const</span> minutes <span class="op">=</span> <span class="bu">String</span>(dt<span class="op">.</span><span class="fu">getMinutes</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">&quot;0&quot;</span>)<span class="op">;</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>month<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>day<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>hours<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>minutes<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>}<span class="op">;</span></span></code></pre></div>
+      <figure>
+      <img src="figs/02/vscode_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここで、<strong>第01行目</strong> の先頭に <span
+      class="masked"><code>export</code> というキーワード</span>
+      をつけていることに着目してください。この <code>export</code>
+      をつけた関数は
+      <strong>別ファイルに書かれたプログラムから呼び出すことが可能</strong>
+      となります。また関数以外にも、数値や文字列などを格納した変数や定数についても、同様に作用します。</p>
+      <p>実際に <code>utils/date2str.ts</code> のなかの 関数
+      <code>date2str</code> が、<code>prac01.ts</code>
+      から呼び出せることを確認します。<code>prac01.ts</code>
+      を以下のように書き換え、動作することを確かめてください。</p>
+      <div class="sourceCode" id="cb28" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="im">import</span> { date2str } <span class="im">from</span> <span class="st">&quot;./utils/date2str&quot;</span><span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">const</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="kw">const</span> cratedAt<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">;</span> <span class="co">// 引数なしで現在日時を取得</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="kw">let</span> str <span class="op">=</span> <span class="vs">`期限 </span><span class="sc">${</span><span class="fu">date2str</span>(deadline)<span class="sc">}</span><span class="vs"> (登録日 </span><span class="sc">${</span><span class="fu">date2str</span>(cratedAt)<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(str)<span class="op">;</span></span></code></pre></div>
+      <p>上記の <strong>第02行目</strong> で、関数 <code>date2str</code>
+      がインポートされて、<strong>第07行目</strong>
+      で呼び出されています。</p>
+      <p>ここで注意してほしいのことは、<code>index.ts</code>
+      で記述しているように <code>import "./utils/date2str"</code>
+      ではなく <code>import { date2str } from "./utils/date2str";</code>
+      のようにインポートしていることです。通常、TypeScript
+      では、後者の形式を使って <code>export</code>
+      <strong>キーワードをつけた関数や変数だけがインポートされるようにします</strong>。
+      また、<span
+      class="masked"><code>from "./utils/date2str.ts";</code> ではなく
+      <code>from "./utils/date2str";</code>
+      のように拡張子が省略されている</span>
+      ことにも注意してください。</p>
+      <p>次に <code>utils/date2str.ts</code> で <code>export</code>
+      <strong>キーワードを削除すると</strong>、プログラムが動作しなくなることも確認してください。</p>
+      <figure>
+      <img src="figs/02/vscode_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="4" id="ライブラリのインストールと利用"><span
+      class="header-section-number">4</span>
+      ライブラリのインストールと利用</h1>
+      <p>ここまで、関数を自作してDate型を整形出力する方法を解説しました。ここからは
+      <strong>外部のライブラリ (パッケージ)</strong>
+      を利用して同様のことを行なってみます。ここでは<a
+      href="https://www.npmjs.com/package/dayjs">dayjsというライブラリ</a>を使用します。</p>
+      <h2 data-number="4.1" id="dayjsライブラリのインストール"><span
+      class="header-section-number">4.1</span>
+      dayjsライブラリのインストール</h2>
+      <p>プロジェクトに dayjs
+      をローカルインストールするために、以下のコマンドを実行してください。</p>
+      <pre><code>npm i dayjs</code></pre>
+      <p>前回、<a
+      href="lecture01.html#開発を効率的に行なうためのパッケージの追加">開発環境を構築するとき</a>には
+      <code>npm i -D typescript ts-node nodemon @types/node</code>
+      のように <code>-D</code> オプションを付けました。この
+      <code>-D</code> は <span
+      class="masked">開発だけに使用するライブラリ
+      (=トランスパイルされたあとのプログラム実行には不要なライブラリ)</span>
+      をインストールするときにつけます。ここで使用する
+      <code>dayjs</code> は、実行時に使用するライブラリなので
+      <code>-D</code> を <strong>付けず</strong> に <code>npm</code>
+      を実行します。</p>
+      <p>インストールされたことを以下のコマンドで確認してください。</p>
+      <pre><code>npm list --depth=0</code></pre>
+      <p>次のような応答が返ってくると思います。一覧に
+      <code>dayjs@1.11.13</code>
+      が含まれていることを確認してください。<code>@</code>
+      以降はバージョン番号なので、適宜、読み替えてください。</p>
+      <pre><code>npm list --depth=0   
+learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
+├── @types/node@22.7.4
+├── dayjs@1.11.13
+├── nodemon@3.1.7
+├── ts-node@10.9.2
+└── typescript@5.6.2</code></pre>
+      <p><code>-D</code>
+      オプションをつけてインストールしたか、そうでないかは
+      <code>package.json</code>
+      の内容から確認することができます。VSCodeで
+      <code>package.json</code> を確認すると <code>-D</code>
+      を<strong>付けて</strong>インストールしたライブラリ (パッケージ)
+      は <code>"devDependencies"</code>
+      に記述されます。また、<code>-D</code>
+      を<strong>付けずに</strong>インストールしたライブラリは
+      <code>"dependencies"</code> に記述されます。</p>
+      <p>現段階ではまだ利用しませんが <span
+      class="masked">バンドル</span>
+      という処理をする際に、これらの情報が意味を持つようになります。</p>
+      <div class="sourceCode" id="cb32" data-caption="package.json"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">{</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>    <span class="dt">&quot;@types/node&quot;</span><span class="fu">:</span> <span class="st">&quot;^22.7.4&quot;</span><span class="fu">,</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>    <span class="dt">&quot;nodemon&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.1.7&quot;</span><span class="fu">,</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>    <span class="dt">&quot;ts-node&quot;</span><span class="fu">:</span> <span class="st">&quot;^10.9.2&quot;</span><span class="fu">,</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>    <span class="dt">&quot;typescript&quot;</span><span class="fu">:</span> <span class="st">&quot;^5.6.2&quot;</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>  <span class="fu">},</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;node dist/index.js&quot;</span><span class="fu">,</span></span>
+<span id="cb32-10"><a href="#cb32-10"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;tsc&quot;</span><span class="fu">,</span></span>
+<span id="cb32-11"><a href="#cb32-11"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;nodemon --watch src --ext ts --verbose --exec ts-node src/index.ts&quot;</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a>  <span class="fu">},</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a>  <span class="dt">&quot;dependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb32-14"><a href="#cb32-14"></a>    <span class="dt">&quot;dayjs&quot;</span><span class="fu">:</span> <span class="st">&quot;^1.11.13&quot;</span></span>
+<span id="cb32-15"><a href="#cb32-15"></a>  <span class="fu">}</span></span>
+<span id="cb32-16"><a href="#cb32-16"></a><span class="fu">}</span></span></code></pre></div>
+      <div class="note type-tips">
+      <p><strong>バンドル (bundle)</strong>
+      とは、複数のJavaScriptファイルやその <strong>依存関係</strong>
+      を「<strong>1つのファイルにまとめる処理</strong>」のことで、ウェブアプリケーションの配信と実行を効率化するために使用されます。主なバンドルツールには<a
+      href="https://www.google.com/search?q=webpackとは">webpack</a>、<a
+      href="https://www.google.com/search?q=Viteとは">Vite</a>、Turbopack、Parcel
+      などがあります。</p>
+      </div>
+      <div class="note type-tips">
+      <p><strong>依存 (dependency)</strong>
+      とは、そのアプリを正常に動作させるために (あるいは開発するために)
+      必要な外部のパッケージ (ライブラリ) のことを意味します。</p>
+      <p>例えば <code>package.json</code> の
+      <code>devDependencies</code>
+      に記載されているのは、そのアプリを<span class="masked">開発
+      (コンパイルやビルドなど) するために必要なパッケージ</span>
+      になります。また、<code>dependencies</code>
+      に記載されているのは、そのアプリを開発 (コンパイルやビルドなど)
+      するために必要なパッケージになります。</p>
+      </div>
+      <h3 data-number="4.1.1" id="定着確認-4"><span
+      class="header-section-number">4.1.1</span> 定着確認</h3>
+      <ul>
+      <li>プログラムの実行時にも使用する <code>uuid</code>
+      というライブラリを、プロジェクトフォルダにローカルインストールしたい。これを実行するコマンドを答えよ。
+      <ul>
+      <li>答え <span class="masked"><code>npm i uuid</code> または
+      <code>npm install uuid</code></span></li>
+      </ul></li>
+      <li>プログラムの開発時だけに使用する <code>@types/uuid</code>
+      というライブラリを、プロジェクトフォルダにローカルインストールしたい。これを実行するコマンドを答えよ。
+      <ul>
+      <li>答え <span class="masked"><code>npm i -D uuid</code> または
+      <code>npm install --save-dev @types/uuid</code></span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="4.2" id="dayjsライブラリの利用"><span
+      class="header-section-number">4.2</span>
+      dayjsライブラリの利用</h2>
+      <p><code>npm</code> コマンドでインストールしたライブラリは
+      <code>import xxxx from "yyyy";</code> や
+      <code>import { xxx1, xxx2 } from "zzzz";</code>
+      のようにインポートして使用します。</p>
+      <div class="sourceCode" id="cb33" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span> <span class="co">// dayjsのインポート</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="kw">const</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="kw">const</span> cratedAt<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">;</span> <span class="co">// 引数なしで現在日時を取得</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a></span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="kw">const</span> str <span class="op">=</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="vs">`期限 </span><span class="sc">${</span><span class="fu">dayjs</span>(deadline)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY/MM/DD HH:mm&quot;</span>)<span class="sc">}</span><span class="vs">`</span> <span class="op">+</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a>  <span class="vs">`(登録日 </span><span class="sc">${</span><span class="fu">dayjs</span>(cratedAt)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY/MM/DD HH:mm&quot;</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
+<span id="cb33-10"><a href="#cb33-10"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(str)<span class="op">;</span></span></code></pre></div>
+      <p>上記のプログラムでは <strong>第02行目</strong>
+      でインポートされた <code>dayjs</code> を <strong>第08行目</strong>
+      と <strong>第09行目</strong>
+      で呼び出して使用しています。実際に実行して結果を確認してください。また、ここでは
+      <code>"YYYY/MM/DD HH:mm"</code>
+      という文字列が2回登場しているので、これを <code>dtFmt</code>
+      という定数にまとめると次のようなプログラムになります。</p>
+      <div class="sourceCode" id="cb34" data-caption="prac01.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="kw">const</span> dtFmt <span class="op">=</span> <span class="st">&quot;YYYY/MM/DD HH:mm&quot;</span><span class="op">;</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="kw">const</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="kw">const</span> cratedAt<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">;</span> <span class="co">// 引数なしで現在日時を取得</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="kw">const</span> str <span class="op">=</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a>  <span class="vs">`期限 </span><span class="sc">${</span><span class="fu">dayjs</span>(deadline)<span class="op">.</span><span class="fu">format</span>(dtFmt)<span class="sc">}</span><span class="vs">`</span> <span class="op">+</span></span>
+<span id="cb34-10"><a href="#cb34-10"></a>  <span class="vs">`(登録日 </span><span class="sc">${</span><span class="fu">dayjs</span>(cratedAt)<span class="op">.</span><span class="fu">format</span>(dtFmt)<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
+<span id="cb34-11"><a href="#cb34-11"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(str)<span class="op">;</span></span></code></pre></div>
+      <h3 data-number="4.2.1" id="演習-15分"><span
+      class="header-section-number">4.2.1</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i>15分)</h3>
+      <p>次のように「曜日」を含めた出力を得たい。そのような出力が得られるようにプログラムをアップデートしてください
+      (<strong>dayjsライブラリ</strong>を使用することを前提とする)。</p>
+      <pre><code>期限 2024/11/02(土) 11:45(登録日 2024/10/08(火) 14:58)</code></pre>
+      <ul>
+      <li>生成AIやウェブ検索を利用して取り組んでください。</li>
+      </ul>
+      <h1 data-number="5" id="オブジェクトの型定義"><span
+      class="header-section-number">5</span> オブジェクトの型定義</h1>
+      <p>ここからは <code>prac02.ts</code>
+      というファイルにコードを記述していきます。<code>prac02.ts</code>
+      を作成し、<code>index.ts</code>
+      を以下のように書き換えておいてください。</p>
+      <div class="sourceCode" id="cb36" data-caption="index.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb36-1"><a href="#cb36-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac02.ts の実行&quot;</span>)<span class="op">;</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="im">import</span> <span class="st">&quot;./prac02&quot;</span><span class="op">;</span></span></code></pre></div>
+      <p>今回講義の<a href="/lecture02.html#オブジェクトの初期化">2.3
+      オブジェクトの初期化</a>
+      では、次のようにオブジェクトリテラルを使用して <code>todo</code>
+      というオブジェクトを初期化しました。</p>
+      <div class="sourceCode" id="cb37"
+      data-caption="prac02.ts (オブジェクトリテラル記法によるオブジェクトの生成)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">const</span> todo <span class="op">=</span> {</span>
+<span id="cb37-2"><a href="#cb37-2"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>上記では、推論によって <code>name</code> や
+      <code>priority</code> などの <strong>プロパティ (属性)
+      の型付け</strong> が行われています。実際に VSCode で
+      <code>todo</code>
+      にカーソルを合わせると次のように「推論された型」が確認できます。</p>
+      <figure>
+      <img src="figs/02/vscode_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>オブジェクトに対して明示的に「<strong>型</strong>」を与えるときは、次のように
+      <code>type</code>
+      キーワードを使って記述します。<strong>第02行目</strong> から
+      <strong>第07行目</strong>
+      にかけて定義して、<strong>第10行目</strong> で
+      <code>const todo1: Todo = {</code>
+      のようにして、<code>todo1</code> を <code>Todo</code>
+      として型付けしています。</p>
+      <div class="sourceCode" id="cb38" data-caption="prac02.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb38-1"><a href="#cb38-1"></a><span class="co">// Todo型を定義</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="kw">type</span> Todo <span class="op">=</span> {</span>
+<span id="cb38-3"><a href="#cb38-3"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span>  <span class="co">// セミコロンで区切り</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a>  priority<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a>  isDone<span class="op">:</span> <span class="dt">boolean</span><span class="op">;</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a>  deadline<span class="op">:</span> <span class="bu">Date</span><span class="op">;</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>}<span class="op">;</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a></span>
+<span id="cb38-9"><a href="#cb38-9"></a><span class="co">// Todo型のオブジェクトを作成</span></span>
+<span id="cb38-10"><a href="#cb38-10"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb38-11"><a href="#cb38-11"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span>  <span class="co">// カンマで区切り</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb38-13"><a href="#cb38-13"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb38-14"><a href="#cb38-14"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb38-15"><a href="#cb38-15"></a>}<span class="op">;</span></span>
+<span id="cb38-16"><a href="#cb38-16"></a></span>
+<span id="cb38-17"><a href="#cb38-17"></a><span class="co">// Todo型のオブジェクトを作成</span></span>
+<span id="cb38-18"><a href="#cb38-18"></a><span class="kw">const</span> todo2<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb38-19"><a href="#cb38-19"></a>  name<span class="op">:</span> <span class="st">&quot;基礎物理3の宿題&quot;</span><span class="op">,</span></span>
+<span id="cb38-20"><a href="#cb38-20"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb38-21"><a href="#cb38-21"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb38-22"><a href="#cb38-22"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">,</span></span>
+<span id="cb38-23"><a href="#cb38-23"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>なお、「<strong>型定義</strong>」では、各プロパティ (属性) が
+      <span class="masked">セミコロン</span>
+      で区切られている点に注意してください
+      (一方で、オブジェクトリテラルでは各プロパティが
+      <strong>カンマ</strong> で区切られています)。また、型名は慣例的に
+      <span class="masked">大文字からはじめるパスカルケース</span>
+      とする点に注意してください。</p>
+      <p>上記のように <strong>明示的な型付け</strong>
+      をすることで、プログラミングのなかで生じる様々なミスを早期発見できるという恩恵が得られます。例えば、型付けせずに以下のように
+      <code>todo1</code> と <code>todo2</code>
+      を定義すると、それにつづく処理のなかで実行時エラーや予期せぬ結果の出力に悩まされる可能性が「大」です。</p>
+      <div class="sourceCode" id="cb39" data-caption="prac02.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb39-2"><a href="#cb39-2"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>  priority<span class="op">:</span> <span class="st">&quot;3&quot;</span><span class="op">,</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb39-6"><a href="#cb39-6"></a>}<span class="op">;</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a></span>
+<span id="cb39-8"><a href="#cb39-8"></a><span class="kw">const</span> todo2<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb39-9"><a href="#cb39-9"></a>  name<span class="op">:</span> <span class="st">&quot;基礎物理3の宿題&quot;</span><span class="op">,</span></span>
+<span id="cb39-10"><a href="#cb39-10"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb39-11"><a href="#cb39-11"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb39-12"><a href="#cb39-12"></a>  deadlien<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">,</span></span>
+<span id="cb39-13"><a href="#cb39-13"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>上記のコードの「<strong>何が問題か</strong>」に気付けるでしょうか。</p>
+      <p>一方で、明示的に型付けをしていれば、以下のように VSCode
+      のエディタが画面上で<strong>問題箇所をエラーとして表示</strong>してくれるようになります
+      (また <code>tsc</code>
+      のタイミングでもコンパイルエラーとして出力してくれます)。</p>
+      <figure>
+      <img src="figs/02/vscode_08.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <div class="note type-tips">
+      <p><strong>C言語バージョン</strong></p>
+      <p>上記のプログラムを、C言語で「構造体」を使用して記述すると以下のようになります。実際にコードを試したい場合は<a
+      href="https://paiza.io/ja">paiza.io</a>を利用してください。</p>
+      <div class="sourceCode" id="cb40" data-caption="prac02.c"><pre
+      class="sourceCode numberSource c numberLines"><code class="sourceCode c"><span id="cb40-1"><a href="#cb40-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="pp">#include </span><span class="im">&lt;stdbool.h&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a></span>
+<span id="cb40-6"><a href="#cb40-6"></a><span class="co">// Todo構造体を定義</span></span>
+<span id="cb40-7"><a href="#cb40-7"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb40-8"><a href="#cb40-8"></a>  <span class="dt">char</span> name<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb40-9"><a href="#cb40-9"></a>  <span class="dt">int</span> priority<span class="op">;</span></span>
+<span id="cb40-10"><a href="#cb40-10"></a>  <span class="dt">bool</span> isDone<span class="op">;</span></span>
+<span id="cb40-11"><a href="#cb40-11"></a>  <span class="kw">struct</span> tm deadline<span class="op">;</span></span>
+<span id="cb40-12"><a href="#cb40-12"></a><span class="op">}</span> Todo<span class="op">;</span></span>
+<span id="cb40-13"><a href="#cb40-13"></a></span>
+<span id="cb40-14"><a href="#cb40-14"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb40-15"><a href="#cb40-15"></a>  <span class="co">// Todo構造体のオブジェクトを作成</span></span>
+<span id="cb40-16"><a href="#cb40-16"></a>  Todo todo1 <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb40-17"><a href="#cb40-17"></a>    <span class="op">.</span>name <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb40-18"><a href="#cb40-18"></a>    <span class="op">.</span>priority <span class="op">=</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb40-19"><a href="#cb40-19"></a>    <span class="op">.</span>isDone <span class="op">=</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb40-20"><a href="#cb40-20"></a>    <span class="op">.</span>deadline <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb40-21"><a href="#cb40-21"></a>      <span class="op">.</span>tm_year <span class="op">=</span> <span class="dv">2024</span> <span class="op">-</span> <span class="dv">1900</span><span class="op">,</span></span>
+<span id="cb40-22"><a href="#cb40-22"></a>      <span class="op">.</span>tm_mon <span class="op">=</span> <span class="dv">9</span><span class="op">,</span></span>
+<span id="cb40-23"><a href="#cb40-23"></a>      <span class="op">.</span>tm_mday <span class="op">=</span> <span class="dv">11</span><span class="op">,</span></span>
+<span id="cb40-24"><a href="#cb40-24"></a>      <span class="op">.</span>tm_hour <span class="op">=</span> <span class="dv">9</span><span class="op">,</span></span>
+<span id="cb40-25"><a href="#cb40-25"></a>      <span class="op">.</span>tm_min <span class="op">=</span> <span class="dv">45</span></span>
+<span id="cb40-26"><a href="#cb40-26"></a>    <span class="op">}</span></span>
+<span id="cb40-27"><a href="#cb40-27"></a>  <span class="op">};</span></span>
+<span id="cb40-28"><a href="#cb40-28"></a></span>
+<span id="cb40-29"><a href="#cb40-29"></a>  <span class="co">// Todo構造体のオブジェクトを作成</span></span>
+<span id="cb40-30"><a href="#cb40-30"></a>  Todo todo2 <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb40-31"><a href="#cb40-31"></a>    <span class="op">.</span>name <span class="op">=</span> <span class="st">&quot;基礎物理3の宿題&quot;</span><span class="op">,</span></span>
+<span id="cb40-32"><a href="#cb40-32"></a>    <span class="op">.</span>priority <span class="op">=</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb40-33"><a href="#cb40-33"></a>    <span class="op">.</span>isDone <span class="op">=</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb40-34"><a href="#cb40-34"></a>    <span class="op">.</span>deadline <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb40-35"><a href="#cb40-35"></a>      <span class="op">.</span>tm_year <span class="op">=</span> <span class="dv">2024</span> <span class="op">-</span> <span class="dv">1900</span><span class="op">,</span></span>
+<span id="cb40-36"><a href="#cb40-36"></a>      <span class="op">.</span>tm_mon <span class="op">=</span> <span class="dv">9</span><span class="op">,</span></span>
+<span id="cb40-37"><a href="#cb40-37"></a>      <span class="op">.</span>tm_mday <span class="op">=</span> <span class="dv">10</span><span class="op">,</span></span>
+<span id="cb40-38"><a href="#cb40-38"></a>      <span class="op">.</span>tm_hour <span class="op">=</span> <span class="dv">16</span><span class="op">,</span></span>
+<span id="cb40-39"><a href="#cb40-39"></a>      <span class="op">.</span>tm_min <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb40-40"><a href="#cb40-40"></a>    <span class="op">}</span></span>
+<span id="cb40-41"><a href="#cb40-41"></a>  <span class="op">};</span></span>
+<span id="cb40-42"><a href="#cb40-42"></a></span>
+<span id="cb40-43"><a href="#cb40-43"></a>  printf<span class="op">(</span><span class="st">&quot;Todo 1: </span><span class="sc">%s</span><span class="st">, Priority: </span><span class="sc">%d</span><span class="st">, Done: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb40-44"><a href="#cb40-44"></a>          todo1<span class="op">.</span>name<span class="op">,</span> todo1<span class="op">.</span>priority<span class="op">,</span> todo1<span class="op">.</span>isDone <span class="op">?</span> <span class="st">&quot;true&quot;</span> <span class="op">:</span> <span class="st">&quot;false&quot;</span><span class="op">);</span></span>
+<span id="cb40-45"><a href="#cb40-45"></a>  printf<span class="op">(</span><span class="st">&quot;Todo 2: </span><span class="sc">%s</span><span class="st">, Priority: </span><span class="sc">%d</span><span class="st">, Done: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb40-46"><a href="#cb40-46"></a>          todo2<span class="op">.</span>name<span class="op">,</span> todo2<span class="op">.</span>priority<span class="op">,</span> todo2<span class="op">.</span>isDone <span class="op">?</span> <span class="st">&quot;true&quot;</span> <span class="op">:</span> <span class="st">&quot;false&quot;</span><span class="op">);</span></span>
+<span id="cb40-47"><a href="#cb40-47"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb40-48"><a href="#cb40-48"></a><span class="op">}</span></span></code></pre></div>
+      </div>
+      <div class="note type-tips">
+      <p><strong>Pythonバージョン</strong></p>
+      <p>上記のプログラムを、Pythonで「辞書型(<code>dict</code>)」を使用して記述すると以下のようになります。</p>
+      <div class="sourceCode" id="cb41" data-caption="prac02-1.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb41-2"><a href="#cb41-2"></a></span>
+<span id="cb41-3"><a href="#cb41-3"></a>todo1 <span class="op">=</span> {</span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="st">&quot;name&quot;</span>: <span class="st">&quot;TypeScriptの勉強&quot;</span>,</span>
+<span id="cb41-5"><a href="#cb41-5"></a>  <span class="st">&quot;priority&quot;</span>: <span class="dv">3</span>,</span>
+<span id="cb41-6"><a href="#cb41-6"></a>  <span class="st">&quot;isDone&quot;</span>: <span class="va">False</span>,</span>
+<span id="cb41-7"><a href="#cb41-7"></a>  <span class="st">&quot;deadline&quot;</span>: datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">45</span>)</span>
+<span id="cb41-8"><a href="#cb41-8"></a>}</span>
+<span id="cb41-9"><a href="#cb41-9"></a></span>
+<span id="cb41-10"><a href="#cb41-10"></a>todo2 <span class="op">=</span> {</span>
+<span id="cb41-11"><a href="#cb41-11"></a>  <span class="st">&quot;name&quot;</span>: <span class="st">&quot;基礎物理3の宿題&quot;</span>,</span>
+<span id="cb41-12"><a href="#cb41-12"></a>  <span class="st">&quot;priority&quot;</span>: <span class="dv">1</span>,</span>
+<span id="cb41-13"><a href="#cb41-13"></a>  <span class="st">&quot;isDone&quot;</span>: <span class="va">False</span>,</span>
+<span id="cb41-14"><a href="#cb41-14"></a>  <span class="st">&quot;deadline&quot;</span>: datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">16</span>, <span class="dv">0</span>)</span>
+<span id="cb41-15"><a href="#cb41-15"></a>}</span>
+<span id="cb41-16"><a href="#cb41-16"></a></span>
+<span id="cb41-17"><a href="#cb41-17"></a><span class="bu">print</span>(<span class="ss">f&quot;Todo 1: </span><span class="sc">{</span>todo1[<span class="st">&#39;name&#39;</span>]<span class="sc">}</span><span class="ss">, Priority: </span><span class="sc">{</span>todo1[<span class="st">&#39;priority&#39;</span>]<span class="sc">}</span><span class="ss">, Done: </span><span class="sc">{</span>todo1[<span class="st">&#39;isDone&#39;</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb41-18"><a href="#cb41-18"></a><span class="bu">print</span>(<span class="ss">f&quot;Todo 2: </span><span class="sc">{</span>todo2[<span class="st">&#39;name&#39;</span>]<span class="sc">}</span><span class="ss">, Priority: </span><span class="sc">{</span>todo2[<span class="st">&#39;priority&#39;</span>]<span class="sc">}</span><span class="ss">, Done: </span><span class="sc">{</span>todo2[<span class="st">&#39;isDone&#39;</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+      <p>また、<code>Class</code>
+      を使用して記述すると以下のようになります。</p>
+      <div class="sourceCode" id="cb42" data-caption="prac02-1.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb42-2"><a href="#cb42-2"></a></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="kw">class</span> Todo:</span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, priority: <span class="bu">int</span>, is_done: <span class="bu">bool</span>, deadline: datetime):</span>
+<span id="cb42-5"><a href="#cb42-5"></a>    <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb42-6"><a href="#cb42-6"></a>    <span class="va">self</span>.priority <span class="op">=</span> priority</span>
+<span id="cb42-7"><a href="#cb42-7"></a>    <span class="va">self</span>.is_done <span class="op">=</span> is_done</span>
+<span id="cb42-8"><a href="#cb42-8"></a>    <span class="va">self</span>.deadline <span class="op">=</span> deadline</span>
+<span id="cb42-9"><a href="#cb42-9"></a></span>
+<span id="cb42-10"><a href="#cb42-10"></a>  <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb42-11"><a href="#cb42-11"></a>    log <span class="op">=</span> <span class="ss">f&quot;Todo: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss">, Priority: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>priority<span class="sc">}</span><span class="ss">, &quot;</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb42-12"><a href="#cb42-12"></a>        <span class="ss">f&quot;Done: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>is_done<span class="sc">}</span><span class="ss">, Deadline: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>deadline<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb42-13"><a href="#cb42-13"></a>    <span class="cf">return</span> log</span>
+<span id="cb42-14"><a href="#cb42-14"></a></span>
+<span id="cb42-15"><a href="#cb42-15"></a>  <span class="kw">def</span> mark_as_done(<span class="va">self</span>):</span>
+<span id="cb42-16"><a href="#cb42-16"></a>    <span class="va">self</span>.is_done <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb42-17"><a href="#cb42-17"></a></span>
+<span id="cb42-18"><a href="#cb42-18"></a>  <span class="kw">def</span> change_priority(<span class="va">self</span>, new_priority: <span class="bu">int</span>):</span>
+<span id="cb42-19"><a href="#cb42-19"></a>    <span class="va">self</span>.priority <span class="op">=</span> new_priority</span>
+<span id="cb42-20"><a href="#cb42-20"></a></span>
+<span id="cb42-21"><a href="#cb42-21"></a><span class="co"># Todoクラスのインスタンスを作成</span></span>
+<span id="cb42-22"><a href="#cb42-22"></a>todo1 <span class="op">=</span> Todo(</span>
+<span id="cb42-23"><a href="#cb42-23"></a>  name<span class="op">=</span><span class="st">&quot;TypeScriptの勉強&quot;</span>,</span>
+<span id="cb42-24"><a href="#cb42-24"></a>  priority<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb42-25"><a href="#cb42-25"></a>  is_done<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb42-26"><a href="#cb42-26"></a>  deadline<span class="op">=</span>datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">45</span>)</span>
+<span id="cb42-27"><a href="#cb42-27"></a>)</span>
+<span id="cb42-28"><a href="#cb42-28"></a></span>
+<span id="cb42-29"><a href="#cb42-29"></a>todo2 <span class="op">=</span> Todo(</span>
+<span id="cb42-30"><a href="#cb42-30"></a>  name<span class="op">=</span><span class="st">&quot;基礎物理3の宿題&quot;</span>,</span>
+<span id="cb42-31"><a href="#cb42-31"></a>  priority<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb42-32"><a href="#cb42-32"></a>  is_done<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb42-33"><a href="#cb42-33"></a>  deadline<span class="op">=</span>datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">16</span>, <span class="dv">0</span>)</span>
+<span id="cb42-34"><a href="#cb42-34"></a>)</span>
+<span id="cb42-35"><a href="#cb42-35"></a></span>
+<span id="cb42-36"><a href="#cb42-36"></a><span class="bu">print</span>(todo1)</span>
+<span id="cb42-37"><a href="#cb42-37"></a><span class="bu">print</span>(todo2)</span></code></pre></div>
+      </div>
+      <h2 data-number="5.1" id="型定義を別ファイルに分離する"><span
+      class="header-section-number">5.1</span>
+      型定義を別ファイルに分離する</h2>
+      <p>先ほど関数を別のファイルに分離しましたが、
+      (複数のファイルから参照される可能性がある) 型定義を同様に
+      <strong>別ファイルに分離</strong> することができます。</p>
+      <figure>
+      <img src="figs/02/vscode_09.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>実際に <code>types.ts</code>
+      というファイルを作成して「<strong>Todo型の定義</strong>」をそこに移動してください。そして、
+      <code>prac02.ts</code> のなかで
+      <code>import { Todo } from "./types";</code>
+      のようにインポートしてください。</p>
+      <p>なお、<code>types.ts</code> では <span
+      class="masked"><code>Todo</code> に <code>export</code>
+      キーワード</span> を付けることを忘れないようにしてください。</p>
+      <p>(参考)</p>
+      <div class="sourceCode" id="cb43"
+      data-caption="prac02.ts (utils/types.tsの読込み)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span> <span class="co">// 型定義の読込み</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a></span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb43-5"><a href="#cb43-5"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb43-7"><a href="#cb43-7"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb43-8"><a href="#cb43-8"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb43-9"><a href="#cb43-9"></a>}<span class="op">;</span></span>
+<span id="cb43-10"><a href="#cb43-10"></a></span>
+<span id="cb43-11"><a href="#cb43-11"></a><span class="kw">const</span> todo2<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb43-12"><a href="#cb43-12"></a>  name<span class="op">:</span> <span class="st">&quot;基礎物理3の宿題&quot;</span><span class="op">,</span></span>
+<span id="cb43-13"><a href="#cb43-13"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb43-14"><a href="#cb43-14"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb43-15"><a href="#cb43-15"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">,</span></span>
+<span id="cb43-16"><a href="#cb43-16"></a>}<span class="op">;</span></span>
+<span id="cb43-17"><a href="#cb43-17"></a></span>
+<span id="cb43-18"><a href="#cb43-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(todo1<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb43-19"><a href="#cb43-19"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(todo2<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span></code></pre></div>
+      <h2 data-number="5.2"
+      id="オブジェクトを引数に受け取る関数の定義"><span
+      class="header-section-number">5.2</span>
+      オブジェクトを引数に受け取る関数の定義</h2>
+      <p>Todoの型定義を参照して「<strong>Todo
+      オブジェクトを引数として受け取って、その内容をコンソール出力する</strong>
+      <code>printTodo</code>
+      <strong>という関数</strong>」を作成してみます。</p>
+      <p>まず、<code>utils</code> フォルダに <code>printTodo.ts</code>
+      というファイルを作成してください。次に、そのファイルに以下のプログラムを貼付けてください。</p>
+      <div class="sourceCode" id="cb44"
+      data-caption="printTodo.ts "><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;../types&quot;</span><span class="op">;</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="im">export</span> <span class="kw">const</span> printTodo <span class="op">=</span> (todo<span class="op">:</span> Todo)<span class="op">:</span> <span class="dt">void</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb44-5"><a href="#cb44-5"></a>  <span class="kw">const</span> todoSummary <span class="op">=</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>    <span class="vs">`(優先度: </span><span class="sc">${</span>todo<span class="op">.</span><span class="at">priority</span><span class="sc">}</span><span class="vs">) </span><span class="sc">${</span>todo<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">`</span> <span class="op">+</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a>    <span class="vs">` 期日: </span><span class="sc">${</span><span class="fu">dayjs</span>(todo<span class="op">.</span><span class="at">deadline</span>)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY/MM/DD HH:mm&quot;</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todoSummary)<span class="op">;</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a>}<span class="op">;</span></span></code></pre></div>
+      <p><strong>第02行目</strong>でTodo型の定義をインポートしています。<span
+      class="masked">相対パスによる指定</span> になるので
+      (<code>types.ts</code> は1つ上の階層に存在するので)
+      <code>from ../types</code> となります。</p>
+      <p><strong>第04行目</strong>では、アロー関数として
+      <code>printTodo</code>
+      を定義してしています。<code>(todo: Todo)</code> のように
+      Todo型の値を、仮引数 <code>todo</code>
+      として受け取るように記述しています (<a
+      href="https://chatgpt.com/share/6705e1bd-3c10-8011-92b4-53935c70d60f">仮引数と引数の違いとは</a>)。</p>
+      <p>また、<code>prac02.ts</code> で <code>printTodo</code>
+      を使用するためには、次のようにします。<strong>第03行目</strong> で
+      <code>printTodo</code>
+      をインポートしています。相対パスで指定することに注意してください。</p>
+      <div class="sourceCode" id="cb45"
+      data-caption="prac02.ts (printTodoのインポート)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="im">import</span> { printTodo } <span class="im">from</span> <span class="st">&quot;./utils/printTodo&quot;</span><span class="op">;</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="co">// todo1 と todo2 の初期化</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a></span>
+<span id="cb45-7"><a href="#cb45-7"></a><span class="fu">printTodo</span>(todo1)<span class="op">;</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a><span class="fu">printTodo</span>(todo2)<span class="op">;</span></span></code></pre></div>
+      <p>実際に実行すると、次のような出力が得られます。</p>
+      <pre><code>■ prac02.ts の実行
+(優先度: 3) TypeScriptの勉強 期日: 2024/10/11 09:45
+(優先度: 1) 基礎物理3の宿題 期日: 2024/10/10 16:00</code></pre>
+      <h2 data-number="5.3" id="分割代入"><span
+      class="header-section-number">5.3</span> 分割代入</h2>
+      <p>モダンTypeScriptでは <strong><em>分割代入</em></strong>
+      という文法が多用されます。これは、React開発では頻繁に使うことになる文法なので、十分に理解して使えるようになってください。</p>
+      <p>分割代入 (destructuring assignment) とは <span
+      class="masked">オブジェクトから一部の値を抽出して、それを個別の変数に簡単に代入</span>
+      する機能になります。以下のプログラムの <strong>第05行目</strong>
+      が「<strong>分割代入</strong>」の実例になります。</p>
+      <div class="sourceCode" id="cb47"
+      data-caption="printTodo.ts (分割代入の利用例)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb47-1"><a href="#cb47-1"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;../types&quot;</span><span class="op">;</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a></span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="im">export</span> <span class="kw">const</span> printTodo <span class="op">=</span> (todo<span class="op">:</span> Todo)<span class="op">:</span> <span class="dt">void</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb47-5"><a href="#cb47-5"></a>  <span class="kw">const</span> { name<span class="op">,</span> priority<span class="op">,</span> deadline } <span class="op">=</span> todo<span class="op">;</span> <span class="co">// 分割代入</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>  <span class="kw">const</span> todoSummary <span class="op">=</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a>    <span class="vs">`(優先度: </span><span class="sc">${</span>priority<span class="sc">}</span><span class="vs">) </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">`</span> <span class="op">+</span></span>
+<span id="cb47-8"><a href="#cb47-8"></a>    <span class="vs">` 期日: </span><span class="sc">${</span><span class="fu">dayjs</span>(deadline)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY/MM/DD HH:mm&quot;</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todoSummary)<span class="op">;</span></span>
+<span id="cb47-10"><a href="#cb47-10"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>Todo型は
+      <code>name</code>、<code>priority</code>、<code>isDone</code>、<code>deadline</code>
+      の4つのプロパティを持ちますが、このうちの任意の3つを抽出して、<span
+      class="masked">同名の変数</span>に代入しています。</p>
+      <p>これにより、さきほどは <strong>第07行目</strong> を
+      <code>`(優先度: ${todo.priority}) ${todo.name}` +</code>
+      と書いていましたが、ここでは
+      <code>`(優先度: ${priority}) ${name}` +</code>
+      のように短く記述できています。</p>
+      <p>なお、分割代入は
+      <code>const { deadline, priority, name } = todo</code> のように
+      <span
+      class="masked">順番を変えても問題なく動作します</span>。実際に確認してみてください。</p>
+      <p>ここでの分割代入は、次のプログラムと実質的に同じです。</p>
+      <div class="sourceCode" id="cb48"
+      data-caption="printTodo.ts (分割代入の利用例)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb48-1"><a href="#cb48-1"></a><span class="im">export</span> <span class="kw">const</span> printTodo <span class="op">=</span> (todo<span class="op">:</span> Todo)<span class="op">:</span> <span class="dt">void</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="kw">const</span> name <span class="op">=</span> todo<span class="op">.</span><span class="at">name</span><span class="op">;</span>          <span class="co">// 通常の代入</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a>  <span class="kw">const</span> priority <span class="op">=</span> todo<span class="op">.</span><span class="at">priority</span><span class="op">;</span>  <span class="co">// 通常の代入</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>  <span class="kw">const</span> deadline <span class="op">=</span> todo<span class="op">.</span><span class="at">deadline</span><span class="op">;</span>  <span class="co">// 通常の代入</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>  <span class="kw">const</span> todoSummary <span class="op">=</span></span>
+<span id="cb48-6"><a href="#cb48-6"></a>    <span class="vs">`(優先度: </span><span class="sc">${</span>priority<span class="sc">}</span><span class="vs">) </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">`</span> <span class="op">+</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a>    <span class="vs">` 期日: </span><span class="sc">${</span><span class="fu">dayjs</span>(deadline)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY/MM/DD HH:mm&quot;</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb48-8"><a href="#cb48-8"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todoSummary)<span class="op">;</span></span>
+<span id="cb48-9"><a href="#cb48-9"></a>}<span class="op">;</span></span></code></pre></div>
+      <h2 data-number="5.4" id="引数の分割代入"><span
+      class="header-section-number">5.4</span> 引数の分割代入</h2>
+      <p>さらに、次の <strong>第04行目</strong> ように <span
+      class="masked">引数の受け取りに分割代入を適用すること</span>
+      ができます。このテクニックも<strong>React開発のなかで頻繁に利用される</strong>ので「何が行なわれているのか
+      」を正しく読み取れるようになってください。ウェブの解説や、生成AIが出力するサンプルコードも、引数の分割代入を使用していることが多いです。</p>
+      <div class="sourceCode" id="cb49"
+      data-caption="printTodo.ts (引数の分割代入)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb49-1"><a href="#cb49-1"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;../types&quot;</span><span class="op">;</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a></span>
+<span id="cb49-4"><a href="#cb49-4"></a><span class="im">export</span> <span class="kw">const</span> printTodo <span class="op">=</span> ({name<span class="op">,</span> priority<span class="op">,</span> deadline}<span class="op">:</span> Todo)<span class="op">:</span> <span class="dt">void</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="kw">const</span> todoSummary <span class="op">=</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a>    <span class="vs">`(優先度: </span><span class="sc">${</span>priority<span class="sc">}</span><span class="vs">) </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">`</span> <span class="op">+</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a>    <span class="vs">` 期日: </span><span class="sc">${</span><span class="fu">dayjs</span>(deadline)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY/MM/DD HH:mm&quot;</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb49-8"><a href="#cb49-8"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todoSummary)<span class="op">;</span></span>
+<span id="cb49-9"><a href="#cb49-9"></a>}<span class="op">;</span></span></code></pre></div>
+      <h3 data-number="5.4.1" id="定着確認-5"><span
+      class="header-section-number">5.4.1</span> 定着確認</h3>
+      <ul>
+      <li>次に示す <code>greet.ts</code> の <code>greet</code>
+      関数を「アロー関数形式」に書き換えよ。</li>
+      <li>アロー関数形式に書き換えた <code>greet</code>
+      の関数内処理を「分割代入」を利用したものに書き換えよ。</li>
+      <li>アロー関数形式に書き換えた <code>greet</code>
+      を「引数の分割代入」を使ったものに書き換えよ。</li>
+      </ul>
+      <div class="sourceCode" id="cb50" data-caption="greet.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">type</span> User <span class="op">=</span> {</span>
+<span id="cb50-2"><a href="#cb50-2"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a>  age<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb50-4"><a href="#cb50-4"></a>}<span class="op">;</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a></span>
+<span id="cb50-6"><a href="#cb50-6"></a><span class="kw">function</span> <span class="fu">greet</span>(user<span class="op">:</span> User)<span class="op">:</span> <span class="dt">void</span> {</span>
+<span id="cb50-7"><a href="#cb50-7"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`こんにちは、</span><span class="sc">${</span>user<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">さん。</span><span class="sc">${</span>user<span class="op">.</span><span class="at">age</span><span class="sc">}</span><span class="vs">歳ですね。`</span>)<span class="op">;</span></span>
+<span id="cb50-8"><a href="#cb50-8"></a>}<span class="op">;</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a></span>
+<span id="cb50-10"><a href="#cb50-10"></a><span class="kw">const</span> person <span class="op">=</span> { name<span class="op">:</span> <span class="st">&quot;鈴木&quot;</span><span class="op">,</span> age<span class="op">:</span> <span class="dv">30</span> }<span class="op">;</span></span>
+<span id="cb50-11"><a href="#cb50-11"></a><span class="fu">greet</span>(person)<span class="op">;</span></span></code></pre></div>
+      <h3 data-number="5.4.2" id="演習-宿題-20分"><span
+      class="header-section-number">5.4.2</span> 演習 (宿題:
+      <i class="fa-solid fa-stopwatch"></i>20分)</h3>
+      <p>Todo型の引数 (1個) を受け取って「現在時刻が期限
+      (<code>deadline</code>) を過ぎている」かつ「未完了
+      (<code>isDone</code> が <code>false</code>)」のとき
+      <code>true</code> 、そうでないときは <code>false</code>
+      を返す関数を実装してください
+      (アロー関数形式で別ファイルに記述してください)。また、その関数が適切な動作をすることを確認する簡単なテストコードを
+      <code>prac03.ts</code>
+      に記述してください。関数名と、それを記述するファイル名も、処理内容にあわせて適切に設定してください。</p>
+      <p><strong>(ヒント)
+      変数や関数、ファイルの命名にも「生成AI」を活用することができます</strong>。</p>
+      <blockquote>
+      <p>TypeScriptでXXXXアプリを開発しています。XXXXのような処理を行なう関数の名前を複数提案してください。</p>
+      </blockquote>
+      <h3 data-number="5.4.3" id="演習-宿題-20分-1"><span
+      class="header-section-number">5.4.3</span> 演習 (宿題:
+      <i class="fa-solid fa-stopwatch"></i>20分)</h3>
+      <p>Todo型の引数 (1個) を受け取って、完了済みであれば
+      <code>【済】基礎物理3の宿題</code>、未完了で期限を過ぎていなければ
+      <code>【未】基礎物理3の宿題 (期限まで残りXX時間)</code>、期限を過ぎていれば
+      <code>【未】基礎物理3の宿題 (期限をXX時間超過)</code>
+      のような文字列を返す関数
+      (アロー関数形式で、上記の演習と同じファイル内に記述)
+      を実装してください。また、その関数が適切な動作をすることを確認する簡単なテストコードを
+      <code>prac03.ts</code> に記述してください。</p>
+      <ul>
+      <li>戻り値の文字列の内容はカスタイマイズやアレンジ歓迎です。</li>
+      </ul>
+      <h1 data-number="6" id="等価演算子と不等価演算子"><span
+      class="header-section-number">6</span>
+      等価演算子と不等価演算子</h1>
+      <h2 data-number="6.1" id="値の比較"><span
+      class="header-section-number">6.1</span> 値の比較</h2>
+      <p>TypeScript (および JavaScript)
+      において「数値型」や「文字列型」などの<a
+      href="https://chatgpt.com/share/67051f9c-5e2c-8011-bdc6-bd23f6f43e8a">プリミティブ型</a>の値を比較するときは、一般に
+      <code>===</code> (<strong>厳密等価演算子</strong>)
+      を使用することが推奨されます。</p>
+      <p>言語仕様としては <code>==</code> (<strong>等価演算</strong>)
+      も使用可能ですが、こちらは比較の際に <span
+      class="masked">暗黙の型変換が適用</span>
+      されることがあり、その挙動について十分な理解がないままに使用するとバグの原因となります。</p>
+      <p>なお、以下のサンプルコードは現在の構築しているTypeScript環境では実行できません
+      (厳密な型チェックをする設定になっているためトランスパイルの段階でエラーとして扱われます)。試したいときは<a
+      href="https://www.typescriptlang.org/play/">TypeScript
+      Playground</a>を利用してください。</p>
+      <div class="sourceCode" id="cb51"
+      data-caption="厳密等価演算子を使った比較"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb51-1"><a href="#cb51-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">3150</span> <span class="op">===</span> <span class="st">&quot;3150&quot;</span>)<span class="op">;</span> <span class="co">// false</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">0</span> <span class="op">===</span> <span class="st">&quot;&quot;</span>)<span class="op">;</span> <span class="co">// false</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;1,2,3&quot;</span> <span class="op">===</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>])<span class="op">;</span> <span class="co">// false</span></span></code></pre></div>
+      <div class="sourceCode" id="cb52"
+      data-caption="等価演算子を使った比較"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb52-1"><a href="#cb52-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">3150</span> <span class="op">==</span> <span class="st">&quot;3150&quot;</span>)<span class="op">;</span> <span class="co">// true</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">0</span> <span class="op">==</span> <span class="st">&quot;&quot;</span>)<span class="op">;</span> <span class="co">// true</span></span>
+<span id="cb52-3"><a href="#cb52-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;1,2,3&quot;</span> <span class="op">==</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>])<span class="op">;</span> <span class="co">// true</span></span></code></pre></div>
+      <p>このようなことがあるため、特に学習初期段階では <code>==</code>
+      の使用を避け、<code>===</code>
+      を使用する習慣をつけることが望ましいです。基本的には <span
+      class="masked"><code>==</code> でなければ実現できない処理</span>
+      は存在しません。<code>===</code>
+      と必要に応じての明示的な型変換を組み合わせることで、あらゆる比較操作が可能です。</p>
+      <p>同様に「等価ではないこと」を判定するためには <code>!==</code>
+      (<strong>厳密不等価演算子</strong>) を使用するようにしてください
+      (<code>!=</code> の使用は避けてください)。</p>
+      <h2 data-number="6.2" id="オブジェクトの比較-重要"><span
+      class="header-section-number">6.2</span> オブジェクトの比較
+      (重要)</h2>
+      <p>厳密等価演算子 (<code>==</code>) あるいは等価演算子
+      (<code>==</code>)
+      による「<strong>オブジェクトの比較</strong>」では、<span
+      class="masked">オブジェクトの「参照」の比較</span>
+      が行われ、参照が同じであれば <code>true</code>、そうでなければ
+      <code>false</code>
+      を返します。配列についても同様に「<strong>参照の比較</strong>」が行なわれます。</p>
+      <p>オブジェクトの「参照」とは、C言語で言えば「<strong>ポインタ</strong>」、Pythonで言えば「<strong>オブジェクトID</strong>」に相当するものです。</p>
+      <p>例えば、以下の <code>todo1</code> と <code>todo2</code>
+      は、同じプロパティを持っていますが、<strong>それぞれ別のオブジェクト</strong>
+      (つまり、異なる「参照」、C言語的に言えば異なる「アドレス」、Pythont的に言えば異なる「オブジェクトID」)
+      であるため、<strong>第18行目</strong> の出力は <span
+      class="masked"><code>false</code></span> となります。</p>
+      <div class="sourceCode" id="cb53" data-caption="comp1.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb53-1"><a href="#cb53-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a></span>
+<span id="cb53-4"><a href="#cb53-4"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb53-5"><a href="#cb53-5"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb53-7"><a href="#cb53-7"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb53-8"><a href="#cb53-8"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb53-9"><a href="#cb53-9"></a>}<span class="op">;</span></span>
+<span id="cb53-10"><a href="#cb53-10"></a></span>
+<span id="cb53-11"><a href="#cb53-11"></a><span class="kw">const</span> todo2<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb53-12"><a href="#cb53-12"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb53-13"><a href="#cb53-13"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb53-14"><a href="#cb53-14"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb53-15"><a href="#cb53-15"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb53-16"><a href="#cb53-16"></a>}<span class="op">;</span></span>
+<span id="cb53-17"><a href="#cb53-17"></a></span>
+<span id="cb53-18"><a href="#cb53-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todo1 <span class="op">===</span> todo2)<span class="op">;</span> <span class="co">// 比較結果は「false」</span></span></code></pre></div>
+      <p>一方で、次の <code>comp2.ts</code> の <strong>第18行目</strong>
+      の出力は <span class="masked"><code>true</code></span>
+      となります。</p>
+      <p><strong>第13行目</strong> の <code>todo2 = todo1</code>
+      で行われるのは、いわゆる「<strong>浅いコピー</strong> (Shallow
+      Copy) =
+      参照のコピー」であるため、そのような結果になります。この「<strong>浅いコピー</strong>」についてはPG1の<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture13.html#リストの浅いコピーと深いコピー">第13回講語</a>で丁寧に解説しているので再読してください。</p>
+      <div class="sourceCode" id="cb54" data-caption="comp2.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb54-1"><a href="#cb54-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a></span>
+<span id="cb54-4"><a href="#cb54-4"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb54-5"><a href="#cb54-5"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb54-9"><a href="#cb54-9"></a>}<span class="op">;</span></span>
+<span id="cb54-10"><a href="#cb54-10"></a></span>
+<span id="cb54-11"><a href="#cb54-11"></a><span class="co">// ここで行なわれるのは「浅いコピー」、</span></span>
+<span id="cb54-12"><a href="#cb54-12"></a><span class="co">// つまり「参照」のコピーであることに注意</span></span>
+<span id="cb54-13"><a href="#cb54-13"></a><span class="kw">const</span> todo2 <span class="op">=</span> todo1<span class="op">;</span></span>
+<span id="cb54-14"><a href="#cb54-14"></a></span>
+<span id="cb54-15"><a href="#cb54-15"></a>todo2<span class="op">.</span><span class="at">name</span> <span class="op">=</span> <span class="st">&quot;COBOLの勉強をする&quot;</span><span class="op">;</span></span>
+<span id="cb54-16"><a href="#cb54-16"></a>todo2<span class="op">.</span><span class="at">priority</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb54-17"><a href="#cb54-17"></a></span>
+<span id="cb54-18"><a href="#cb54-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todo1 <span class="op">===</span> todo2)<span class="op">;</span> <span class="co">// 比較結果は「true」</span></span></code></pre></div>
+      <p>既にPG1で、同様の内容を学んできていると思うので理解できると思いますが
+      <code>console.log(todo1.name);</code> を実行したとき、その出力は
+      <span class="masked"><code>COBOLの勉強をする</code></span>
+      となります。</p>
+      <h2 data-number="6.3" id="オブジェクトの深い比較"><span
+      class="header-section-number">6.3</span>
+      オブジェクトの深い比較</h2>
+      <p>参照の比較ではなく、<strong>オブジェクトのプロパティがすべて等しいかを比較する</strong>ためには、つまり、<strong>深い比較
+      (Deep Comparison)</strong>
+      をするためにためには、カスタム比較関数を定義する必要があります
+      (ライブラリを使うという手段もありますが…)。以下に Todo
+      型オブジェクトの深い比較をするための関数 <code>deepEqual</code>
+      の実装例を示します。</p>
+      <div class="sourceCode" id="cb55"
+      data-caption="utils/deepEqual.ts (深い比較を行なうためのカスタム比較関数)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb55-1"><a href="#cb55-1"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;../types&quot;</span><span class="op">;</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a></span>
+<span id="cb55-3"><a href="#cb55-3"></a><span class="im">export</span> <span class="kw">const</span> deepEqual <span class="op">=</span> (todo1<span class="op">:</span> Todo<span class="op">,</span> todo2<span class="op">:</span> Todo)<span class="op">:</span> <span class="dt">boolean</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb55-4"><a href="#cb55-4"></a>  <span class="cf">if</span> (todo1 <span class="op">===</span> todo2) {</span>
+<span id="cb55-5"><a href="#cb55-5"></a>    <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>  }</span>
+<span id="cb55-7"><a href="#cb55-7"></a></span>
+<span id="cb55-8"><a href="#cb55-8"></a>  <span class="cf">if</span> (</span>
+<span id="cb55-9"><a href="#cb55-9"></a>    todo1<span class="op">.</span><span class="at">name</span> <span class="op">===</span> todo2<span class="op">.</span><span class="at">name</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb55-10"><a href="#cb55-10"></a>    todo1<span class="op">.</span><span class="at">priority</span> <span class="op">===</span> todo2<span class="op">.</span><span class="at">priority</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb55-11"><a href="#cb55-11"></a>    todo1<span class="op">.</span><span class="at">isDone</span> <span class="op">===</span> todo2<span class="op">.</span><span class="at">isDone</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb55-12"><a href="#cb55-12"></a>    todo1<span class="op">.</span><span class="at">deadline</span><span class="op">.</span><span class="fu">getTime</span>() <span class="op">===</span> todo2<span class="op">.</span><span class="at">deadline</span><span class="op">.</span><span class="fu">getTime</span>()</span>
+<span id="cb55-13"><a href="#cb55-13"></a>  ) {</span>
+<span id="cb55-14"><a href="#cb55-14"></a>    <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb55-15"><a href="#cb55-15"></a>  }</span>
+<span id="cb55-16"><a href="#cb55-16"></a></span>
+<span id="cb55-17"><a href="#cb55-17"></a>  <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb55-18"><a href="#cb55-18"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>以上の <code>deepEqual</code>
+      を使用することで、<code>todo1</code> と <code>todo2</code>
+      を同一とみなすような深い比較が可能となります。</p>
+      <div class="sourceCode" id="cb56" data-caption="comp.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb56-1"><a href="#cb56-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="im">import</span> { deepEqual } <span class="im">from</span> <span class="st">&quot;./utils/deepEqual&quot;</span><span class="op">;</span> <span class="co">// 追加</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a></span>
+<span id="cb56-5"><a href="#cb56-5"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb56-6"><a href="#cb56-6"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb56-8"><a href="#cb56-8"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb56-9"><a href="#cb56-9"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb56-10"><a href="#cb56-10"></a>}<span class="op">;</span></span>
+<span id="cb56-11"><a href="#cb56-11"></a></span>
+<span id="cb56-12"><a href="#cb56-12"></a><span class="kw">const</span> todo2<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb56-13"><a href="#cb56-13"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb56-14"><a href="#cb56-14"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb56-15"><a href="#cb56-15"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb56-16"><a href="#cb56-16"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb56-17"><a href="#cb56-17"></a>}<span class="op">;</span></span>
+<span id="cb56-18"><a href="#cb56-18"></a></span>
+<span id="cb56-19"><a href="#cb56-19"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todo1 <span class="op">===</span> todo2)<span class="op">;</span> <span class="co">// 浅い比較 false</span></span>
+<span id="cb56-20"><a href="#cb56-20"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">deepEqual</span>(todo1<span class="op">,</span> todo2))<span class="op">;</span> <span class="co">// 深い比較 true</span></span></code></pre></div>
+      <p>実際に <code>utils/deepEqual.ts</code>
+      を実装して実験してください。</p>
+      <h2 data-number="6.4" id="三項演算子"><span
+      class="header-section-number">6.4</span> 三項演算子</h2>
+      <p>React開発では、<strong>条件演算子 (三項演算子)</strong>
+      も頻繁に使われるので覚えておいてください。条件演算子の基本構文は次のようになります。</p>
+      <pre><code>条件 ? 真の場合の値 : 偽の場合の値</code></pre>
+      <p>上記の <code>条件</code>
+      の部分には「真偽値の変数」や「各種比較演算子を使った式」を与えます。<code>if</code>
+      構文を使うよりも短く簡潔に記述ができます。以下に例を示します。</p>
+      <div class="sourceCode" id="cb58" data-caption="prac04.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb58-1"><a href="#cb58-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a></span>
+<span id="cb58-4"><a href="#cb58-4"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb58-5"><a href="#cb58-5"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb58-7"><a href="#cb58-7"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb58-8"><a href="#cb58-8"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb58-9"><a href="#cb58-9"></a>}<span class="op">;</span></span>
+<span id="cb58-10"><a href="#cb58-10"></a></span>
+<span id="cb58-11"><a href="#cb58-11"></a><span class="kw">const</span> state <span class="op">=</span> todo1<span class="op">.</span><span class="at">isDone</span> <span class="op">?</span> <span class="st">&quot;【済】&quot;</span> <span class="op">:</span> <span class="st">&quot;【未】&quot;</span><span class="op">;</span> <span class="co">// 条件演算子</span></span>
+<span id="cb58-12"><a href="#cb58-12"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`</span><span class="sc">${</span>state<span class="sc">}${</span>todo1<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <p>React開発では、以下のようにオブジェクトの状態によって適用する
+      CSS (画面上の装飾) を切り替えるために <strong>条件演算子
+      (三項演算子)</strong> が使用されます。</p>
+      <div class="sourceCode" id="cb59"
+      data-caption="優先度に基づくスタイリング"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">const</span> style <span class="op">=</span> todo<span class="op">.</span><span class="at">priority</span> <span class="op">===</span> <span class="dv">1</span> <span class="op">?</span> <span class="st">&quot;font-bold&quot;</span> <span class="op">:</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb60"
+      data-caption="タスクの完了状態に基づくスタイリング"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">const</span> style <span class="op">=</span> todo<span class="op">.</span><span class="at">isDone</span> <span class="op">?</span> <span class="st">&quot;text-gray-500 line-through&quot;</span> <span class="op">:</span> <span class="st">&quot;text-slate-800&quot;</span><span class="op">;</span></span></code></pre></div>
+      <p>(参考)
+      上記のコードの処理と完全一致しているわけではないので注意してください。</p>
+      <figure>
+      <img src="figs/02/todo_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="7"
+      id="reactにおける状態-オブジェクト-の変更の検知-概要"><span
+      class="header-section-number">7</span> Reactにおける状態
+      (オブジェクト) の変更の検知 ～概要～</h1>
+      <p>Reactでは「<strong>極めて大雑排に言えば、オブジェクトの状態が変更されたことを検知してライブラリが画面を自動で書き換える</strong>」ということが行われます。</p>
+      <p>ここでのオブジェクトとは、例えば、ここまで何度も登場している
+      <code>todo</code>
+      です。そのオブジェクト状態が変更されたとは、例えば
+      <code>name</code> や <code>isDone</code>
+      などのプロパティの変更などを意味します。</p>
+      <p>オブジェクトのプロパティの変更は、以下のように行なうことができます。</p>
+      <div class="sourceCode" id="cb61" data-caption="prac04.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb61-1"><a href="#cb61-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="im">import</span> { printTodo } <span class="im">from</span> <span class="st">&quot;./utils/printTodo&quot;</span><span class="op">;</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a></span>
+<span id="cb61-5"><a href="#cb61-5"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb61-6"><a href="#cb61-6"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb61-7"><a href="#cb61-7"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb61-8"><a href="#cb61-8"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb61-10"><a href="#cb61-10"></a>}<span class="op">;</span></span>
+<span id="cb61-11"><a href="#cb61-11"></a></span>
+<span id="cb61-12"><a href="#cb61-12"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`■ 状態変更前`</span>)<span class="op">;</span></span>
+<span id="cb61-13"><a href="#cb61-13"></a><span class="fu">printTodo</span>(todo1)<span class="op">;</span></span>
+<span id="cb61-14"><a href="#cb61-14"></a></span>
+<span id="cb61-15"><a href="#cb61-15"></a>todo1<span class="op">.</span><span class="at">name</span> <span class="op">=</span> <span class="st">&quot;COBOLの勉強をする&quot;</span><span class="op">;</span> <span class="co">// プロパティの変更</span></span>
+<span id="cb61-16"><a href="#cb61-16"></a>todo1<span class="op">.</span><span class="at">priority</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// プロパティの変更</span></span>
+<span id="cb61-17"><a href="#cb61-17"></a></span>
+<span id="cb61-18"><a href="#cb61-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`■ 状態変更後`</span>)<span class="op">;</span></span>
+<span id="cb61-19"><a href="#cb61-19"></a><span class="fu">printTodo</span>(todo1)<span class="op">;</span></span></code></pre></div>
+      <p>実行結果は以下のようになります。確かにプロパティが変更されていることが分かると思います。</p>
+      <pre><code>■ 状態変更前
+(優先度: 3) TypeScriptの勉強 期日: 2024/10/11 09:45
+■ 状態変更後
+(優先度: 1) COBOLの勉強をする 期日: 2024/10/11 09:45</code></pre>
+      <p>しかし、<strong>極めて重要なポイントとして</strong>、上記のような操作でオブジェクトのプロパティを変更しても、Reactは
+      <span
+      class="masked">オブジェクトの状態に変更があったことを検知しません</span>。つまり、オブジェクトを変更しても、それが反映されるように画面の更新
+      (=再レンダリング) をしてくれません😭。</p>
+      <p>Reactがオブジェクトの状態変更を検知しない理由は「<strong>Reactはオブジェクトの</strong>「<strong>参照</strong>」<strong>が変更されたときにのみ再レンダリングするという仕組みになっている</strong>
+      (重要)」ためです。さきほどの<a
+      href="lecture02.html#オブジェクトの比較-重要">6.2
+      オブジェクトの比較</a> の <code>comp2.ts</code>
+      で示したように、<code>=</code>
+      でコピーをしても、プロパティを変更しても「参照」は変化しません。</p>
+      <h2 data-number="7.1"
+      id="reactが変更を検知可能なオブジェクトの生成"><span
+      class="header-section-number">7.1</span>
+      Reactが変更を検知可能なオブジェクトの生成</h2>
+      <p>Reactが変更を検知可能なオブジェクトの生成する方法を解説します。React開発では重要な操作となってくるので、しっかりと覚えておいてください。</p>
+      <p>まずは、次のように新たにオブジェクトを作成することで、オリジナル
+      (<code>todo</code>) とは異なる参照を持ったオブジェクト
+      (<code>updatedTodo</code>) を生成できます。</p>
+      <div class="sourceCode" id="cb63" data-caption="prac04.ts"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb63-1"><a href="#cb63-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a></span>
+<span id="cb63-4"><a href="#cb63-4"></a><span class="kw">const</span> todo<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb63-5"><a href="#cb63-5"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb63-6"><a href="#cb63-6"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb63-7"><a href="#cb63-7"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb63-8"><a href="#cb63-8"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb63-9"><a href="#cb63-9"></a>}<span class="op">;</span></span>
+<span id="cb63-10"><a href="#cb63-10"></a></span>
+<span id="cb63-11"><a href="#cb63-11"></a><span class="co">// Reactの状態管理に適した</span></span>
+<span id="cb63-12"><a href="#cb63-12"></a><span class="co">// todo とは参照は異なる updatedTodo を生成</span></span>
+<span id="cb63-13"><a href="#cb63-13"></a><span class="kw">const</span> updatedTodo<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb63-14"><a href="#cb63-14"></a>  name<span class="op">:</span> <span class="st">&quot;COBOLの勉強をする&quot;</span><span class="op">,</span><span class="co">// 変更</span></span>
+<span id="cb63-15"><a href="#cb63-15"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span>             <span class="co">// 変更</span></span>
+<span id="cb63-16"><a href="#cb63-16"></a>  isDone<span class="op">:</span> todo<span class="op">.</span><span class="at">isDone</span><span class="op">,</span>     <span class="co">// todo の値を引き継ぐ</span></span>
+<span id="cb63-17"><a href="#cb63-17"></a>  deadline<span class="op">:</span> todo<span class="op">.</span><span class="at">deadline</span><span class="op">,</span> <span class="co">// todo の値を引き継ぐ</span></span>
+<span id="cb63-18"><a href="#cb63-18"></a>}<span class="op">;</span></span>
+<span id="cb63-19"><a href="#cb63-19"></a></span>
+<span id="cb63-20"><a href="#cb63-20"></a><span class="co">// todo と updatedTodo のtodo の値を参照が「異なること」を確認</span></span>
+<span id="cb63-21"><a href="#cb63-21"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todo <span class="op">!==</span> updatedTodo)<span class="op">;</span> <span class="co">// true であれば OK</span></span></code></pre></div>
+      <p>ただし、多数のプロパティを持ったオブジェクトについて上記の方法は非常に冗長になります。例えば20個のプロパティを持ったオブジェクトについて、1個のプロパティだけを変更する場合でも、20個のプロパティを列挙する必要があります
+      (コードの可読性が低下します)。</p>
+      <p>そのようなときに、次のような <strong>スプレッド構文</strong>
+      が利用されます。</p>
+      <div class="sourceCode" id="cb64"
+      data-caption="prac04.ts (部分抜粋)"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">const</span> updatedTodo<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb64-2"><a href="#cb64-2"></a>  <span class="op">...</span>todo<span class="op">,</span> <span class="co">// スプレッド構文</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a>  name<span class="op">:</span> <span class="st">&quot;COBOLの勉強をする&quot;</span><span class="op">,</span> <span class="co">// 変更</span></span>
+<span id="cb64-4"><a href="#cb64-4"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="co">// 変更</span></span>
+<span id="cb64-5"><a href="#cb64-5"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>スプレッド構文は、オブジェクトのプロパティを展開して新しいオブジェクトに組み込む強力な機能です。これにより、元のオブジェクトのプロパティをコピーしつつ、特定のプロパティだけを変更するコードを短く書くことができます。</p>
+      <p>なお、スプレッド構文を使用する際、プロパティを記述する順序に注意してください。あとに記述するプロパティは、前のプロパティを上書きします。</p>
+      <div class="sourceCode" id="cb65" data-caption="不適切な記述"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb65-1"><a href="#cb65-1"></a><span class="kw">const</span> updatedTodo<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb65-2"><a href="#cb65-2"></a>  name<span class="op">:</span> <span class="st">&quot;COBOLの勉強をする&quot;</span><span class="op">,</span></span>
+<span id="cb65-3"><a href="#cb65-3"></a>  <span class="op">...</span>todo<span class="op">,</span></span>
+<span id="cb65-4"><a href="#cb65-4"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>上記の場合、priority は <code>3</code>
+      に更新されますが、<code>name</code> は <code>todo</code> の値
+      (<code>TypeScriptの勉強"</code>) で上書きされてしまいます。</p>
+      <h3 data-number="7.1.1" id="定着確認-6"><span
+      class="header-section-number">7.1.1</span> 定着確認</h3>
+      <p>次のプログラムにつづけて、<code>isDone</code> が
+      <code>true</code> に変更されたオブジェクトを
+      <code>updatedTodo</code> に得よ。</p>
+      <p>ただし、Reactが <code>todo</code> との差異を検知可能なように
+      <code>updatedTodo</code> の参照は、<code>todo</code>
+      の参照とは異なるようにすること。また、スプレッド構文を使用して記述すること。</p>
+      <div class="sourceCode" id="cb66" data-caption="演習"><pre
+      class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb66-1"><a href="#cb66-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a></span>
+<span id="cb66-4"><a href="#cb66-4"></a><span class="kw">const</span> todo<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb66-5"><a href="#cb66-5"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
+<span id="cb66-6"><a href="#cb66-6"></a>  priority<span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb66-7"><a href="#cb66-7"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb66-8"><a href="#cb66-8"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
+<span id="cb66-9"><a href="#cb66-9"></a>}<span class="op">;</span></span></code></pre></div>
+      <h1 data-number="8" id="授業時間外学習"><span
+      class="header-section-number">8</span> 授業時間外学習</h1>
+      <ul>
+      <li>本科目は「<strong>学修単位科目</strong>」です。今回の講義内容
+      +アルファ に関して <strong>4時間相当の授業時間外学習</strong>
+      に取り組んでください。疑問点や不明点などを「生成AI」で調べて深堀したり、C言語やPythonプログラムを
+      TypeScript に移植したりすることをお勧めします。</li>
+      <li>次回の授業のはじめに「<strong>小テスト</strong>」を実施します。筆記用具を持参してください。</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2024/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
