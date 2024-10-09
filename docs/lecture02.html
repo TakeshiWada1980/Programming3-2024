@@ -459,12 +459,12 @@ class="toc-section-number">8</span> 授業時間外学習</a></li>
       <p>次に時刻について「11:45」になると推測したと思いますが、実際の出力は
       <span class="masked"><code>02:45:00.000</code></span>
       となりました。「<strong>9時間のずれ</strong>」が生じています。</p>
-      <p>つまり、日本のローカル時刻で <code>Date</code> の
-      <strong>第4引数</strong> と <strong>第5引数</strong>
-      を与えたものの、<code>deadline</code> には
+      <p>つまり、<code>Date</code> の <strong>第4引数</strong> と
+      <strong>第5引数</strong>
+      を日本のローカル時刻で与えたものの、<code>deadline</code> には
       <strong>協定世界時</strong> (<strong>UTC: Universal time
       coordinated</strong>) の日時 (時刻)
-      が保持される仕組みになっています。これも、ややこしいと感じるかもしれませんが、仕様なので仕方ありません。</p>
+      が記録される仕組みになっています。これも、ややこしいと感じるかもしれませんが、仕様なので仕方ありません。</p>
       <div class="note type-tips">
       <p><strong>JS / TS
       実行環境のタイムゾーンを確認する方法</strong></p>
@@ -478,29 +478,29 @@ class="toc-section-number">8</span> 授業時間外学習</a></li>
       <code>Timezone: Asia/Tokyo</code>
       のようにコンソール出力されると思います。</p>
       </div>
-      <p>ここでは
-      JS/TSの実行環境によってタイムゾーンが変わることに注意してください。</p>
+      <p>ここでは <span
+      class="masked">JS/TSの実行環境によってタイムゾーンが変わること</span>
+      に注意してください。</p>
       <p>特にウェブアプリのバックエンドを、クラウドサーバ や
       Dockerなどのコンテナ で構築する場合、タイムゾーンは一般に
       <code>Timezone: UTC</code>
       となります。一方で、<strong>フロントエンドのタイムゾーンは利用者環境
-      (OS) によって違ってくる点に注意してください。</strong>。</p>
+      (OS) によって違ってくることに注意してください。</strong>。</p>
       <h2 data-number="3.4" id="解説-日時の整形出力"><span
       class="header-section-number">3.4</span> 解説: 日時の整形出力</h2>
       <p>次に、Date型の変数の内容を「<strong>YYYY/MM/DD
       HH:MM</strong>」のような形式で整形出力する方法について考えていきます。ただし、まずは
       <strong>外部ライブラリを使用しない前提</strong> とします。</p>
       <hr>
-      <p>ウェブ検索を利用して整形出力する方法について探す場合は「<a
+      <p>ウェブ検索を利用して「Date型の日時を整形出力する方法」について探す場合は「<a
       href="https://www.google.com/search?q=JavaScreipt+Date+フォーマット">JavaScript
-      Date
-      フォーマット</a>」などをキーワードに利用します。検索キーワードは
+      Date フォーマット</a>」などをキーワードにします。検索キーワードは
       <span class="masked">「TypeScript」ではなく「JavaScript」</span>
-      のようにしたほうが情報ヒット率が高くなります。</p>
-      <p>TypeScript固有の内容でなければ、「JavaScript」をキーワードに使うことも方法として覚えておいてください。</p>
+      としたほうが情報のヒット率が高くなります。</p>
+      <p>TypeScript固有の内容でなければ「JavaScript」をキーワードに使うことも方法として覚えておいてください。</p>
       <hr>
       <p>GitHub Copilot を利用して解決を試みる場合は、以下のように <span
-      class="masked">処理内容を表すコメント</span>
+      class="masked">処理内容を的確に表現したコメント</span>
       をプログラムに書くことでCopilotがコードを提案してくれます。</p>
       <figure>
       <img src="figs/02/vscode_01.png" alt="img" />
@@ -538,16 +538,17 @@ console.log(deadline);
       <p><strong>第12行目</strong>では、前回学習した<a
       href="lecture01.html#テンプレート文字列">テンプレート文字列</a>が使用されています。提案されたプログラムを実行すると、次のように意図した結果を得ることができます。</p>
       <pre><code>2024/11/02 11:45</code></pre>
-      <p>生成AIを利用したときは、動作確認後に <span
+      <p>生成AIを利用してプログラムを得たときには、動作確認後に <span
       class="masked">必ずプログラムの意味を理解</span>
-      するように努めてください。「<strong>プログラムの意味は分からないけど、なんか動いているのでOK</strong>」では、エンジニアをい目指す人間としてダメダメ🤪です
-      (プロの通訳や翻訳家を目指している学生が、生成AIに翻訳させて、そのまま提出するのと同じくらいヤバいです。あるいは「電卓使えば計算できるから
+      するように努めてください。「<strong>プログラムの意味は分からないけど、なんか動いているのでOK</strong>」では、エンジニアを目指す人間としてダメダメ🤪です
+      (プロの通訳や翻訳家を目指している学生が、生成AIに翻訳させて、そのまま提出するのと同じくらいヤバいです。あるいは「電卓を使えば計算できるから
       <span class="math inline">\(0.8\times 2 - 9.2\)</span>
       を自力で計算できなくてもOK」という感覚ぐらいヤバいです)。</p>
       <p>例えば、<strong>第08行目</strong>
       では「<code>deadline.getHours()</code> <strong>メソッドで 値
-      (number型) を得て、それを</strong> <code>String()</code>
-      <strong>で文字列 (string型) に変換して、さらに文字列の</strong>
+      (number型・ローカルタイムゾーンに基づいた「時」)
+      を得て、それを</strong> <code>String()</code> <strong>で文字列
+      (string型) に変換して、さらに文字列の</strong>
       <code>padStart(2, '0')</code> <strong>メソッドで</strong> <span
       class="masked">ゼロ埋めの2文字幅</span>
       <strong>に変換している</strong>」ということを理解し、説明できる必要があります。そのためには、生成AIに「自分の解釈の確認をしてもらったり、不明点を追質問したり、コードを書いて実験したりすること」が必要です。</p>
@@ -561,6 +562,8 @@ console.log(deadline);
       <pre><code>let deadline: Date = new Date(2024, 10, 2, 11, 45);  
 const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       </blockquote>
+      <p><br />
+      </p>
       <div class="note type-tips">
       <p><strong>Pythonで日時を扱って整形出力するには?</strong></p>
       <p>Pythonで、先の <code>prac01.ts</code>
@@ -570,7 +573,8 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime <span class="co"># 日時を扱うための datatime ライブラリ</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a>deadline <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">45</span>)</span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="bu">print</span>(deadline.strftime(<span class="st">&#39;%Y/%m/</span><span class="sc">%d</span><span class="st"> %H:%M&#39;</span>))</span></code></pre></div>
-      <p>実際に、実行してみてください。<span
+      <p>実際に実行してみてください (<a
+      href="https://paiza.io/ja">paiza.io</a>) 。<span
       class="masked">実行結果の違いに気づいた</span> でしょうか？</p>
       <ul>
       <li><strong>Python</strong> の <code>datetime</code>
@@ -586,10 +590,10 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       <h2 data-number="3.5" id="解説-日時の整形出力-関数化1"><span
       class="header-section-number">3.5</span> 解説: 日時の整形出力
       (関数化1)</h2>
-      <p>ここまでで、次のコードでDate型のオブジェクトを「2024/11/02
-      11:45」のような形式で出力できることが分かりました
-      (<code>deadline</code> の変数宣言キーワードを <code>let</code>
-      から <code>const</code> に変更しています)。</p>
+      <p>ここまでの内容で、次のようなコードでDate型のオブジェクトを「<strong>2024/11/02
+      11:45</strong>」のような形式で出力できることが分かりました。<code>deadline</code>
+      の変数宣言キーワードを <code>let</code> から <code>const</code>
+      に変更しています。</p>
       <div class="sourceCode" id="cb18"
       data-caption="prac01.ts (Date型の整形出力)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
@@ -603,13 +607,13 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
 <span id="cb18-9"><a href="#cb18-9"></a></span>
 <span id="cb18-10"><a href="#cb18-10"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`</span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>month<span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>day<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>hours<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>minutes<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
       <p>しかし、上記のコードは <span class="masked">再利用性</span>
-      について大きな課題があることに気付くと思います。</p>
+      の面で大きな課題があることに気付くと思います。</p>
       <p>例えば、Todo の「<strong>作成日時</strong>」を
       <code>createdAt</code> という変数に格納しておいて</p>
       <pre><code>期日 2024/11/02 11:45 (登録日: 2024/10/11 09:45)
 </code></pre>
       <p>…のように出力したいとします。</p>
-      <p>上記のコードに準じて愚直にコードを書けば以下のようになってしまいます。実際にコピペして実行してみてください。</p>
+      <p>上記のコードに準じて愚直にコードを書くと以下のようになってしまいます。実際にコピペして実行してみてください。</p>
       <div class="sourceCode" id="cb20" data-caption="prac01.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a></span>
@@ -637,17 +641,18 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       の面では、あまりにも酷いコード🫠です。既に Python と C言語
       を学んできている皆さんであれば、<span
       class="masked">処理の関数化</span>
-      が必要であることが分かると思います。</p>
+      で解決できることに気付くと思います。</p>
       <h2 data-number="3.6" id="解説-日時の整形出力-関数化2"><span
       class="header-section-number">3.6</span> 解説: 日時の整形出力
       (関数化2)</h2>
       <p>Date型のオブジェクトを「引数」として受け取って「YYYY/MM/DD
       HH:MM」形式の文字列を「戻り値 (返り値)」とする
-      <code>date2str</code>
-      という関数作成を例に、<strong>TypeScriptにおける関数定義の書き方</strong>
+      <code>date2str</code> という関数の作成を例に
+      <strong>TypeScriptにおける関数定義の書き方</strong>
       を学んでいきます。</p>
-      <p>まず、結論から言えば、以下のように <code>date2str</code>
-      関数を定義して呼びだすことができます。</p>
+      <p>まず、結論から言えば、以下の
+      <strong>第04行目</strong>から<strong>第11行目</strong>
+      のように関数 <code>date2str</code> が定義できます。</p>
       <div class="sourceCode" id="cb21"
       data-caption="prac01.ts (date2str関数の追加)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
@@ -668,7 +673,7 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
 <span id="cb21-16"><a href="#cb21-16"></a><span class="co">// 関数の呼出し (テンプレート文字列の内部)</span></span>
 <span id="cb21-17"><a href="#cb21-17"></a><span class="kw">let</span> str <span class="op">=</span> <span class="vs">`期限 </span><span class="sc">${</span><span class="fu">date2str</span>(deadline)<span class="sc">}</span><span class="vs"> (登録日 </span><span class="sc">${</span><span class="fu">date2str</span>(cratedAt)<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
 <span id="cb21-18"><a href="#cb21-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(str)<span class="op">;</span></span></code></pre></div>
-      <p>特に<strong>第06行目</strong>の関数定義
+      <p>特に<strong>第04行目</strong>の関数定義の部分
       <code>function date2str(dt: Date): string {</code>
       に注目してください。</p>
       <figure>
@@ -679,17 +684,16 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       キーワードを使用します (Pythonでは <span
       class="masked"><code>def</code></span>
       を使用しました)。そして、丸括弧で囲んで関数内で使用する<strong>引数を型付きで与えて</strong>、さらに、<strong>戻り値の型を記述</strong>します。</p>
-      <p>特に、慣れるまでは、<strong>戻り値の型を記述する位置が分かりづらい</strong>
-      ので注意してください。</p>
+      <p>特に、慣れるまでは「<strong>戻り値の型を記述する位置が分かりづらい</strong>」ので注意してください。</p>
       <p>他にも、関数記述の例を見てみましょう。</p>
-      <p><strong>数値型の2つの引数</strong>を受け取って、<strong>真偽値型を戻り値</strong>とする
+      <p><strong>2個の数値型の引数</strong>を受け取って、<strong>真偽値型を戻り値</strong>とする
       <code>comp</code> という関数のシグネチャ (=<span
       class="masked">関数の基本的な情報を定義する部分</span>)
       は次のようになります。</p>
       <div class="sourceCode" id="cb22" data-caption="comp"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">function</span> <span class="fu">comp</span>(a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span> )<span class="op">:</span> <span class="dt">boolean</span> { <span class="op">...</span> }</span></code></pre></div>
       <hr>
-      <p><strong>文字列の1個の引数</strong>を受け取って、<strong>戻り値がない</strong>
+      <p><strong>1個の文字列型の引数</strong>を受け取って、<strong>戻り値を持たない</strong>
       <code>printWord</code>
       という関数のシグネチャは次のようになります。TypeScript
       では、慣例的に関数名についても <span
@@ -712,13 +716,13 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       <ul>
       <li>引数を受け取らず、数値型を戻り値とする <code>dice</code>
       という関数のシグネチャを答えよ。</li>
-      <li>数値型の1個の引数 (仮引数を <code>num</code> とする)
+      <li>1個の数値型の引数 (仮引数を <code>num</code> とする)
       を受け取り、文字列型を戻り値とする <code>num2str</code>
       という関数のシグネチャを答えよ。</li>
-      <li>文字列型の2個の引数 (仮引数を <code>word1</code> と
+      <li>2個の文字列型の引数 (仮引数を <code>word1</code> と
       <code>word2</code> とする) を受け取り、真偽値型を戻り値とする
       <code>comp</code> という関数のシグネチャを答えよ。</li>
-      <li>Date型の1個の引数 (仮引数を <code>birthday</code> とする)
+      <li>1個のDate型の引数 (仮引数を <code>birthday</code> とする)
       を受け取り、数値型を戻り値とする <code>getAge</code>
       という関数のシグネチャを答えよ。</li>
       </ul>
@@ -728,7 +732,7 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       キーワードを使った関数定義よりも、<code>=&gt;</code> を使用した
       <strong><em>アロー関数</em></strong>
       という関数定義が一般に使用されます (トレンドになっています)。<span
-      class="masked">ウェブの情報もアロー関数で書かれていることが多い</span>
+      class="masked">ウェブの情報も「アロー関数」で書かれていることが多い</span>
       ので、<strong>基本的には</strong> <code>=&gt;</code>
       <strong>によるアロー関数を使用</strong>するようにしてください。</p>
       <p>先ほどの <code>date2str</code>
@@ -743,14 +747,14 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       <ul>
       <li>引数を受け取らず、数値型を戻り値とする <code>dice</code>
       という関数のシグネチャを「アロー関数形式」で答えよ。</li>
-      <li>数値型の1個の引数 (仮引数を <code>num</code> とする)
+      <li>1個の数値型の引数 (仮引数を <code>num</code> とする)
       を受け取り、文字列型を戻り値とする <code>num2str</code>
       という関数のシグネチャを「アロー関数形式」で答えよ。</li>
-      <li>文字列型の2個の引数 (仮引数を <code>word1</code> と
+      <li>2個の文字列型の引数 (仮引数を <code>word1</code> と
       <code>word2</code> とする) を受け取り、真偽値型を戻り値とする
       <code>comp</code>
       という関数のシグネチャを「アロー関数形式」で答えよ。</li>
-      <li>Date型の1個の引数 (仮引数を <code>birthday</code> とする)
+      <li>1個のDate型の引数 (仮引数を <code>birthday</code> とする)
       を受け取り、数値型を戻り値とする <code>getAge</code>
       という関数のシグネチャを「アロー関数形式」で答えよ。</li>
       </ul>
@@ -758,11 +762,11 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       class="header-section-number">3.8</span>
       関数を別ファイルに分離する</h2>
       <p>関数 <code>date2str</code>
-      は、他のプログラムからも使用する可能性があるので、別ファイルに分けて記述します。プロジェクトフォルダに
+      は、他のプログラムからも使用する可能性があるので別ファイルに分けて記述します。プロジェクトフォルダに
       <code>utils</code> (utilitiesの略) を作成して、そのなかに
       <code>date2str.ts</code> というファイルを作成して、
       以下のように関数 <code>date2str</code>
-      を抜き出して貼りつけ、保存してください。</p>
+      を抜き出して貼りつけて保存してください。</p>
       <div class="sourceCode" id="cb27"
       data-caption="utils/date2str.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="im">export</span> <span class="kw">const</span> date2str <span class="op">=</span> (dt<span class="op">:</span> <span class="bu">Date</span>)<span class="op">:</span> <span class="dt">string</span> <span class="kw">=&gt;</span> {</span>
@@ -782,14 +786,14 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       をつけていることに着目してください。この <code>export</code>
       をつけた関数は
       <strong>別ファイルに書かれたプログラムから呼び出すことが可能</strong>
-      となります。また関数以外にも、数値や文字列などを格納した変数や定数についても、同様に作用します。</p>
-      <p>実際に <code>utils/date2str.ts</code> のなかの 関数
-      <code>date2str</code> が、<code>prac01.ts</code>
+      となります。また関数以外にも、数値や文字列などを格納した変数や定数についても同様に作用します。</p>
+      <p>実際に <code>utils/date2str.ts</code> に定義した関数
+      <code>date2str</code> が、別ファイルの <code>prac01.ts</code>
       から呼び出せることを確認します。<code>prac01.ts</code>
       を以下のように書き換え、動作することを確かめてください。</p>
       <div class="sourceCode" id="cb28" data-caption="prac01.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="im">import</span> { date2str } <span class="im">from</span> <span class="st">&quot;./utils/date2str&quot;</span><span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="im">import</span> { date2str } <span class="im">from</span> <span class="st">&quot;./utils/date2str&quot;</span><span class="op">;</span> <span class="co">// 関数date2strをインポート</span></span>
 <span id="cb28-3"><a href="#cb28-3"></a></span>
 <span id="cb28-4"><a href="#cb28-4"></a><span class="kw">const</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span>
 <span id="cb28-5"><a href="#cb28-5"></a><span class="kw">const</span> cratedAt<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">;</span> <span class="co">// 引数なしで現在日時を取得</span></span>
@@ -797,20 +801,21 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
 <span id="cb28-7"><a href="#cb28-7"></a><span class="kw">let</span> str <span class="op">=</span> <span class="vs">`期限 </span><span class="sc">${</span><span class="fu">date2str</span>(deadline)<span class="sc">}</span><span class="vs"> (登録日 </span><span class="sc">${</span><span class="fu">date2str</span>(cratedAt)<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
 <span id="cb28-8"><a href="#cb28-8"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(str)<span class="op">;</span></span></code></pre></div>
       <p>上記の <strong>第02行目</strong> で、関数 <code>date2str</code>
-      がインポートされて、<strong>第07行目</strong>
+      がインポートされ <strong>第07行目</strong>
       で呼び出されています。</p>
-      <p>ここで注意してほしいのことは、<code>index.ts</code>
-      で記述しているように <code>import "./utils/date2str"</code>
-      ではなく <code>import { date2str } from "./utils/date2str";</code>
-      のようにインポートしていることです。通常、TypeScript
+      <p>ここで注意してほしいことは、<code>index.ts</code>
+      に記述したような <code>import "./utils/date2str"</code>
+      の形式ではなく
+      <code>import { date2str } from "./utils/date2str";</code>
+      の形式でインポートしていることです。通常、TypeScript
       では、後者の形式を使って <code>export</code>
-      <strong>キーワードをつけた関数や変数だけがインポートされるようにします</strong>。
+      <strong>キーワードをつけた関数や変数「だけ」がインポートされるようにします</strong>。
       また、<span
       class="masked"><code>from "./utils/date2str.ts";</code> ではなく
       <code>from "./utils/date2str";</code>
-      のように拡張子が省略されている</span>
+      のように「拡張子」が省略されている</span>
       ことにも注意してください。</p>
-      <p>次に <code>utils/date2str.ts</code> で <code>export</code>
+      <p>なお <code>utils/date2str.ts</code> で <code>export</code>
       <strong>キーワードを削除すると</strong>、プログラムが動作しなくなることも確認してください。</p>
       <figure>
       <img src="figs/02/vscode_05.png" alt="img" />
@@ -819,14 +824,14 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       <h1 data-number="4" id="ライブラリのインストールと利用"><span
       class="header-section-number">4</span>
       ライブラリのインストールと利用</h1>
-      <p>ここまで、関数を自作してDate型を整形出力する方法を解説しました。ここからは
+      <p>関数を自作してDate型を整形出力する方法について解説しました。ここからは
       <strong>外部のライブラリ (パッケージ)</strong>
       を利用して同様のことを行なってみます。ここでは<a
-      href="https://www.npmjs.com/package/dayjs">dayjsというライブラリ</a>を使用します。</p>
+      href="https://www.npmjs.com/package/dayjs">dayjs</a>というライブラリを使用します。</p>
       <h2 data-number="4.1" id="dayjsライブラリのインストール"><span
       class="header-section-number">4.1</span>
       dayjsライブラリのインストール</h2>
-      <p>プロジェクトに dayjs
+      <p>プロジェクフォルダに dayjs
       をローカルインストールするために、以下のコマンドを実行してください。</p>
       <pre><code>npm i dayjs</code></pre>
       <p>前回、<a
@@ -835,7 +840,7 @@ const hours = String(deadline.getHours()).padStart(2, &#39;0&#39;);</code></pre>
       のように <code>-D</code> オプションを付けました。この
       <code>-D</code> は <span
       class="masked">開発だけに使用するライブラリ
-      (=トランスパイルされたあとのプログラム実行には不要なライブラリ)</span>
+      (=トランスパイルされたあとのプログラムの実行には不要なライブラリ)</span>
       をインストールするときにつけます。ここで使用する
       <code>dayjs</code> は、実行時に使用するライブラリなので
       <code>-D</code> を <strong>付けず</strong> に <code>npm</code>
@@ -900,19 +905,20 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       に記載されているのは、そのアプリを<span class="masked">開発
       (コンパイルやビルドなど) するために必要なパッケージ</span>
       になります。また、<code>dependencies</code>
-      に記載されているのは、そのアプリを開発 (コンパイルやビルドなど)
-      するために必要なパッケージになります。</p>
+      に記載されているのは、そのアプリを開発するため
+      (コンパイルやビルドなどをするため)
+      に必要なパッケージになります。</p>
       </div>
       <h3 data-number="4.1.1" id="定着確認-4"><span
       class="header-section-number">4.1.1</span> 定着確認</h3>
       <ul>
-      <li>プログラムの実行時にも使用する <code>uuid</code>
+      <li>アプリのの実行時に使用する <code>uuid</code>
       というライブラリを、プロジェクトフォルダにローカルインストールしたい。これを実行するコマンドを答えよ。
       <ul>
       <li>答え <span class="masked"><code>npm i uuid</code> または
       <code>npm install uuid</code></span></li>
       </ul></li>
-      <li>プログラムの開発時だけに使用する <code>@types/uuid</code>
+      <li>アプリの開発時だけに使用する <code>@types/uuid</code>
       というライブラリを、プロジェクトフォルダにローカルインストールしたい。これを実行するコマンドを答えよ。
       <ul>
       <li>答え <span class="masked"><code>npm i -D uuid</code> または
@@ -926,7 +932,9 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <code>import xxxx from "yyyy";</code> や
       <code>import { xxx1, xxx2 } from "zzzz";</code>
       のようにインポートして使用します。</p>
-      <div class="sourceCode" id="cb33" data-caption="prac01.ts"><pre
+      <p>dayjs は、次のようにインポートして使用します。</p>
+      <div class="sourceCode" id="cb33"
+      data-caption="prac01.ts (dayjsのインポート)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">export</span> {}<span class="op">;</span></span>
 <span id="cb33-2"><a href="#cb33-2"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span> <span class="co">// dayjsのインポート</span></span>
 <span id="cb33-3"><a href="#cb33-3"></a></span>
@@ -970,14 +978,14 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <p>ここからは <code>prac02.ts</code>
       というファイルにコードを記述していきます。<code>prac02.ts</code>
       を作成し、<code>index.ts</code>
-      を以下のように書き換えておいてください。</p>
+      を以下のように書き換えてください。</p>
       <div class="sourceCode" id="cb36" data-caption="index.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb36-1"><a href="#cb36-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;■ prac02.ts の実行&quot;</span>)<span class="op">;</span></span>
 <span id="cb36-2"><a href="#cb36-2"></a><span class="im">import</span> <span class="st">&quot;./prac02&quot;</span><span class="op">;</span></span></code></pre></div>
-      <p>今回講義の<a href="/lecture02.html#オブジェクトの初期化">2.3
+      <p>今回講義の<a href="lecture02.html#オブジェクトの初期化">2.3
       オブジェクトの初期化</a>
-      では、次のようにオブジェクトリテラルを使用して <code>todo</code>
-      というオブジェクトを初期化しました。</p>
+      では、次のようなオブジェクトリテラルを使用して <code>todo</code>
+      を初期化しました。</p>
       <div class="sourceCode" id="cb37"
       data-caption="prac02.ts (オブジェクトリテラル記法によるオブジェクトの生成)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">const</span> todo <span class="op">=</span> {</span>
@@ -986,7 +994,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb37-4"><a href="#cb37-4"></a>  isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
 <span id="cb37-5"><a href="#cb37-5"></a>  deadline<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">,</span></span>
 <span id="cb37-6"><a href="#cb37-6"></a>}<span class="op">;</span></span></code></pre></div>
-      <p>上記では、推論によって <code>name</code> や
+      <p>上記では、実は　推論によって <code>name</code> や
       <code>priority</code> などの <strong>プロパティ (属性)
       の型付け</strong> が行われています。実際に VSCode で
       <code>todo</code>
@@ -997,12 +1005,12 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       </figure>
       <p>オブジェクトに対して明示的に「<strong>型</strong>」を与えるときは、次のように
       <code>type</code>
-      キーワードを使って記述します。<strong>第02行目</strong> から
-      <strong>第07行目</strong>
+      キーワードを使って「型」を定義して使用します。<strong>第02行目</strong>
+      から <strong>第07行目</strong>
       にかけて定義して、<strong>第10行目</strong> で
       <code>const todo1: Todo = {</code>
       のようにして、<code>todo1</code> を <code>Todo</code>
-      として型付けしています。</p>
+      型として型付けしています。</p>
       <div class="sourceCode" id="cb38" data-caption="prac02.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb38-1"><a href="#cb38-1"></a><span class="co">// Todo型を定義</span></span>
 <span id="cb38-2"><a href="#cb38-2"></a><span class="kw">type</span> Todo <span class="op">=</span> {</span>
@@ -1037,7 +1045,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <p>上記のように <strong>明示的な型付け</strong>
       をすることで、プログラミングのなかで生じる様々なミスを早期発見できるという恩恵が得られます。例えば、型付けせずに以下のように
       <code>todo1</code> と <code>todo2</code>
-      を定義すると、それにつづく処理のなかで実行時エラーや予期せぬ結果の出力に悩まされる可能性が「大」です。</p>
+      を定義すると、それに続く処理のなかで実行時エラーや予期せぬ結果の出力に悩まされる可能性が「大」です。</p>
       <div class="sourceCode" id="cb39" data-caption="prac02.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">const</span> todo1<span class="op">:</span> Todo <span class="op">=</span> {</span>
 <span id="cb39-2"><a href="#cb39-2"></a>  name<span class="op">:</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">,</span></span>
@@ -1053,8 +1061,8 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb39-12"><a href="#cb39-12"></a>  deadlien<span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2024</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">,</span></span>
 <span id="cb39-13"><a href="#cb39-13"></a>}<span class="op">;</span></span></code></pre></div>
       <p>上記のコードの「<strong>何が問題か</strong>」に気付けるでしょうか。</p>
-      <p>一方で、明示的に型付けをしていれば、以下のように VSCode
-      のエディタが画面上で<strong>問題箇所をエラーとして表示</strong>してくれるようになります
+      <p>一方、もし明示的に型付けをしていれば、以下のように VSCode
+      のエディタ画面上で<strong>問題箇所をエラーとして表示</strong>してくれるようになります
       (また <code>tsc</code>
       のタイミングでもコンパイルエラーとして出力してくれます)。</p>
       <figure>
@@ -1154,35 +1162,29 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb42-12"><a href="#cb42-12"></a>        <span class="ss">f&quot;Done: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>is_done<span class="sc">}</span><span class="ss">, Deadline: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>deadline<span class="sc">}</span><span class="ss">&quot;</span></span>
 <span id="cb42-13"><a href="#cb42-13"></a>    <span class="cf">return</span> log</span>
 <span id="cb42-14"><a href="#cb42-14"></a></span>
-<span id="cb42-15"><a href="#cb42-15"></a>  <span class="kw">def</span> mark_as_done(<span class="va">self</span>):</span>
-<span id="cb42-16"><a href="#cb42-16"></a>    <span class="va">self</span>.is_done <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb42-17"><a href="#cb42-17"></a></span>
-<span id="cb42-18"><a href="#cb42-18"></a>  <span class="kw">def</span> change_priority(<span class="va">self</span>, new_priority: <span class="bu">int</span>):</span>
-<span id="cb42-19"><a href="#cb42-19"></a>    <span class="va">self</span>.priority <span class="op">=</span> new_priority</span>
-<span id="cb42-20"><a href="#cb42-20"></a></span>
-<span id="cb42-21"><a href="#cb42-21"></a><span class="co"># Todoクラスのインスタンスを作成</span></span>
-<span id="cb42-22"><a href="#cb42-22"></a>todo1 <span class="op">=</span> Todo(</span>
-<span id="cb42-23"><a href="#cb42-23"></a>  name<span class="op">=</span><span class="st">&quot;TypeScriptの勉強&quot;</span>,</span>
-<span id="cb42-24"><a href="#cb42-24"></a>  priority<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb42-25"><a href="#cb42-25"></a>  is_done<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb42-26"><a href="#cb42-26"></a>  deadline<span class="op">=</span>datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">45</span>)</span>
-<span id="cb42-27"><a href="#cb42-27"></a>)</span>
-<span id="cb42-28"><a href="#cb42-28"></a></span>
-<span id="cb42-29"><a href="#cb42-29"></a>todo2 <span class="op">=</span> Todo(</span>
-<span id="cb42-30"><a href="#cb42-30"></a>  name<span class="op">=</span><span class="st">&quot;基礎物理3の宿題&quot;</span>,</span>
-<span id="cb42-31"><a href="#cb42-31"></a>  priority<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb42-32"><a href="#cb42-32"></a>  is_done<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb42-33"><a href="#cb42-33"></a>  deadline<span class="op">=</span>datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">16</span>, <span class="dv">0</span>)</span>
-<span id="cb42-34"><a href="#cb42-34"></a>)</span>
-<span id="cb42-35"><a href="#cb42-35"></a></span>
-<span id="cb42-36"><a href="#cb42-36"></a><span class="bu">print</span>(todo1)</span>
-<span id="cb42-37"><a href="#cb42-37"></a><span class="bu">print</span>(todo2)</span></code></pre></div>
+<span id="cb42-15"><a href="#cb42-15"></a><span class="co"># Todoクラスのインスタンスを作成</span></span>
+<span id="cb42-16"><a href="#cb42-16"></a>todo1 <span class="op">=</span> Todo(</span>
+<span id="cb42-17"><a href="#cb42-17"></a>  name<span class="op">=</span><span class="st">&quot;TypeScriptの勉強&quot;</span>,</span>
+<span id="cb42-18"><a href="#cb42-18"></a>  priority<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb42-19"><a href="#cb42-19"></a>  is_done<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb42-20"><a href="#cb42-20"></a>  deadline<span class="op">=</span>datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">45</span>)</span>
+<span id="cb42-21"><a href="#cb42-21"></a>)</span>
+<span id="cb42-22"><a href="#cb42-22"></a></span>
+<span id="cb42-23"><a href="#cb42-23"></a>todo2 <span class="op">=</span> Todo(</span>
+<span id="cb42-24"><a href="#cb42-24"></a>  name<span class="op">=</span><span class="st">&quot;基礎物理3の宿題&quot;</span>,</span>
+<span id="cb42-25"><a href="#cb42-25"></a>  priority<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb42-26"><a href="#cb42-26"></a>  is_done<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb42-27"><a href="#cb42-27"></a>  deadline<span class="op">=</span>datetime(<span class="dv">2024</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">16</span>, <span class="dv">0</span>)</span>
+<span id="cb42-28"><a href="#cb42-28"></a>)</span>
+<span id="cb42-29"><a href="#cb42-29"></a></span>
+<span id="cb42-30"><a href="#cb42-30"></a><span class="bu">print</span>(todo1)</span>
+<span id="cb42-31"><a href="#cb42-31"></a><span class="bu">print</span>(todo2)</span></code></pre></div>
       </div>
       <h2 data-number="5.1" id="型定義を別ファイルに分離する"><span
       class="header-section-number">5.1</span>
       型定義を別ファイルに分離する</h2>
-      <p>先ほど関数を別のファイルに分離しましたが、
-      (複数のファイルから参照される可能性がある) 型定義を同様に
+      <p>先ほどは関数を別のファイルに分離しましたが、同様に
+      (複数のファイルから参照される可能性がある) 型定義も
       <strong>別ファイルに分離</strong> することができます。</p>
       <figure>
       <img src="figs/02/vscode_09.png" alt="img" />
@@ -1249,8 +1251,8 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       Todo型の値を、仮引数 <code>todo</code>
       として受け取るように記述しています (<a
       href="https://chatgpt.com/share/6705e1bd-3c10-8011-92b4-53935c70d60f">仮引数と引数の違いとは</a>)。</p>
-      <p>また、<code>prac02.ts</code> で <code>printTodo</code>
-      を使用するためには、次のようにします。<strong>第03行目</strong> で
+      <p>また、<code>prac02.ts</code> で、関数 <code>printTodo</code>
+      を使用するためには次のようにします。<strong>第03行目</strong> で
       <code>printTodo</code>
       をインポートしています。相対パスで指定することに注意してください。</p>
       <div class="sourceCode" id="cb45"
@@ -1259,7 +1261,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb45-2"><a href="#cb45-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
 <span id="cb45-3"><a href="#cb45-3"></a><span class="im">import</span> { printTodo } <span class="im">from</span> <span class="st">&quot;./utils/printTodo&quot;</span><span class="op">;</span></span>
 <span id="cb45-4"><a href="#cb45-4"></a></span>
-<span id="cb45-5"><a href="#cb45-5"></a><span class="co">// todo1 と todo2 の初期化</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="co">// todo1 と todo2 の初期化処理 (略)</span></span>
 <span id="cb45-6"><a href="#cb45-6"></a></span>
 <span id="cb45-7"><a href="#cb45-7"></a><span class="fu">printTodo</span>(todo1)<span class="op">;</span></span>
 <span id="cb45-8"><a href="#cb45-8"></a><span class="fu">printTodo</span>(todo2)<span class="op">;</span></span></code></pre></div>
@@ -1270,9 +1272,10 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <h2 data-number="5.3" id="分割代入"><span
       class="header-section-number">5.3</span> 分割代入</h2>
       <p>モダンTypeScriptでは <strong><em>分割代入</em></strong>
-      という文法が多用されます。これは、React開発では頻繁に使うことになる文法なので、十分に理解して使えるようになってください。</p>
+      という文法が多用されます。分割代入はReact開発でも頻繁に使うことになる文法なので、十分に理解して使えるようになってください。</p>
       <p>分割代入 (destructuring assignment) とは <span
-      class="masked">オブジェクトから一部の値を抽出して、それを個別の変数に簡単に代入</span>
+      class="masked">オブジェクトから一部の値 (プロパティ)
+      を抽出して、それを個別の変数に簡単に代入</span>
       する機能になります。以下のプログラムの <strong>第05行目</strong>
       が「<strong>分割代入</strong>」の実例になります。</p>
       <div class="sourceCode" id="cb47"
@@ -1289,9 +1292,9 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb47-10"><a href="#cb47-10"></a>}<span class="op">;</span></span></code></pre></div>
       <p>Todo型は
       <code>name</code>、<code>priority</code>、<code>isDone</code>、<code>deadline</code>
-      の4つのプロパティを持ちますが、このうちの任意の3つを抽出して、<span
-      class="masked">同名の変数</span>に代入しています。</p>
-      <p>これにより、さきほどは <strong>第07行目</strong> を
+      の4つのプロパティを持ちますが、このうちの任意の3つを抽出して <span
+      class="masked">同名の変数</span> に代入しています。</p>
+      <p>さきほどは <strong>第07行目</strong> を
       <code>`(優先度: ${todo.priority}) ${todo.name}` +</code>
       と書いていましたが、ここでは
       <code>`(優先度: ${priority}) ${name}` +</code>
@@ -1300,7 +1303,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <code>const { deadline, priority, name } = todo</code> のように
       <span
       class="masked">順番を変えても問題なく動作します</span>。実際に確認してみてください。</p>
-      <p>ここでの分割代入は、次のプログラムと実質的に同じです。</p>
+      <p>この分割代入は、次のようなプログラムと実質的に同じとなります。</p>
       <div class="sourceCode" id="cb48"
       data-caption="printTodo.ts (分割代入の利用例)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb48-1"><a href="#cb48-1"></a><span class="im">export</span> <span class="kw">const</span> printTodo <span class="op">=</span> (todo<span class="op">:</span> Todo)<span class="op">:</span> <span class="dt">void</span> <span class="kw">=&gt;</span> {</span>
@@ -1317,7 +1320,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <p>さらに、次の <strong>第04行目</strong> ように <span
       class="masked">引数の受け取りに分割代入を適用すること</span>
       ができます。このテクニックも<strong>React開発のなかで頻繁に利用される</strong>ので「何が行なわれているのか
-      」を正しく読み取れるようになってください。ウェブの解説や、生成AIが出力するサンプルコードも、引数の分割代入を使用していることが多いです。</p>
+      」を正しく読み取れるようになってください。ウェブの解説や、生成AIが出力するサンプルコードでも、引数の分割代入が使用されていることが多いです。</p>
       <div class="sourceCode" id="cb49"
       data-caption="printTodo.ts (引数の分割代入)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb49-1"><a href="#cb49-1"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span></span>
@@ -1359,7 +1362,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       (<code>isDone</code> が <code>false</code>)」のとき
       <code>true</code> 、そうでないときは <code>false</code>
       を返す関数を実装してください
-      (アロー関数形式で別ファイルに記述してください)。また、その関数が適切な動作をすることを確認する簡単なテストコードを
+      (アロー関数形式で別ファイルに記述してください)。また、その関数が適切に動作をすることを確認する簡単なテストコードを
       <code>prac03.ts</code>
       に記述してください。関数名と、それを記述するファイル名も、処理内容にあわせて適切に設定してください。</p>
       <p><strong>(ヒント)
@@ -1376,7 +1379,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <code>【未】基礎物理3の宿題 (期限をXX時間超過)</code>
       のような文字列を返す関数
       (アロー関数形式で、上記の演習と同じファイル内に記述)
-      を実装してください。また、その関数が適切な動作をすることを確認する簡単なテストコードを
+      を実装してください。また、その関数が適切に動作をすることを確認する簡単なテストコードを
       <code>prac03.ts</code> に記述してください。</p>
       <ul>
       <li>戻り値の文字列の内容はカスタイマイズやアレンジ歓迎です。</li>
@@ -1395,10 +1398,6 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       も使用可能ですが、こちらは比較の際に <span
       class="masked">暗黙の型変換が適用</span>
       されることがあり、その挙動について十分な理解がないままに使用するとバグの原因となります。</p>
-      <p>なお、以下のサンプルコードは現在の構築しているTypeScript環境では実行できません
-      (厳密な型チェックをする設定になっているためトランスパイルの段階でエラーとして扱われます)。試したいときは<a
-      href="https://www.typescriptlang.org/play/">TypeScript
-      Playground</a>を利用してください。</p>
       <div class="sourceCode" id="cb51"
       data-caption="厳密等価演算子を使った比較"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb51-1"><a href="#cb51-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">3150</span> <span class="op">===</span> <span class="st">&quot;3150&quot;</span>)<span class="op">;</span> <span class="co">// false</span></span>
@@ -1409,8 +1408,11 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb52-1"><a href="#cb52-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">3150</span> <span class="op">==</span> <span class="st">&quot;3150&quot;</span>)<span class="op">;</span> <span class="co">// true</span></span>
 <span id="cb52-2"><a href="#cb52-2"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">0</span> <span class="op">==</span> <span class="st">&quot;&quot;</span>)<span class="op">;</span> <span class="co">// true</span></span>
 <span id="cb52-3"><a href="#cb52-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;1,2,3&quot;</span> <span class="op">==</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>])<span class="op">;</span> <span class="co">// true</span></span></code></pre></div>
-      <p>このようなことがあるため、特に学習初期段階では <code>==</code>
-      の使用を避け、<code>===</code>
+      <p>なお、上記のサンプルコードは現在構築しているTypeScript環境では実行できません
+      (厳密な型チェックをする設定になっているためトランスパイルの段階でエラーとして扱われます)。試したいときは<a
+      href="https://www.typescriptlang.org/play/">TypeScript
+      Playground</a>を利用してください。</p>
+      <p>学習初期段階では <code>==</code> の使用を避け、<code>===</code>
       を使用する習慣をつけることが望ましいです。基本的には <span
       class="masked"><code>==</code> でなければ実現できない処理</span>
       は存在しません。<code>===</code>
@@ -1430,7 +1432,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       を返します。配列についても同様に「<strong>参照の比較</strong>」が行なわれます。</p>
       <p>オブジェクトの「参照」とは、C言語で言えば「<strong>ポインタ</strong>」、Pythonで言えば「<strong>オブジェクトID</strong>」に相当するものです。</p>
       <p>例えば、以下の <code>todo1</code> と <code>todo2</code>
-      は、同じプロパティを持っていますが、<strong>それぞれ別のオブジェクト</strong>
+      は、同じ値のプロパティを持っていますが、<strong>それぞれ別のオブジェクト</strong>
       (つまり、異なる「参照」、C言語的に言えば異なる「アドレス」、Pythont的に言えば異なる「オブジェクトID」)
       であるため、<strong>第18行目</strong> の出力は <span
       class="masked"><code>false</code></span> となります。</p>
@@ -1481,15 +1483,15 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb54-17"><a href="#cb54-17"></a></span>
 <span id="cb54-18"><a href="#cb54-18"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todo1 <span class="op">===</span> todo2)<span class="op">;</span> <span class="co">// 比較結果は「true」</span></span></code></pre></div>
       <p>既にPG1で、同様の内容を学んできていると思うので理解できると思いますが
+      <code>comp2.ts</code> の最後で
       <code>console.log(todo1.name);</code> を実行したとき、その出力は
-      <span class="masked"><code>COBOLの勉強をする</code></span>
-      となります。</p>
+      <span class="masked">「COBOLの勉強をする」</span> となります。</p>
       <h2 data-number="6.3" id="オブジェクトの深い比較"><span
       class="header-section-number">6.3</span>
       オブジェクトの深い比較</h2>
-      <p>参照の比較ではなく、<strong>オブジェクトのプロパティがすべて等しいかを比較する</strong>ためには、つまり、<strong>深い比較
-      (Deep Comparison)</strong>
-      をするためにためには、カスタム比較関数を定義する必要があります
+      <p>参照の比較ではなく、<strong>オブジェクトのプロパティがすべて等しいかを比較するためには</strong>、つまり、<strong>深い比較
+      (Deep Comparison)
+      をするためには</strong>、カスタム比較関数を自作する必要があります
       (ライブラリを使うという手段もありますが…)。以下に Todo
       型オブジェクトの深い比較をするための関数 <code>deepEqual</code>
       の実装例を示します。</p>
@@ -1562,7 +1564,7 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb58-12"><a href="#cb58-12"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`</span><span class="sc">${</span>state<span class="sc">}${</span>todo1<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
       <p>React開発では、以下のようにオブジェクトの状態によって適用する
       CSS (画面上の装飾) を切り替えるために <strong>条件演算子
-      (三項演算子)</strong> が使用されます。</p>
+      (三項演算子)</strong> がよく使用されます。</p>
       <div class="sourceCode" id="cb59"
       data-caption="優先度に基づくスタイリング"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">const</span> style <span class="op">=</span> todo<span class="op">.</span><span class="at">priority</span> <span class="op">===</span> <span class="dv">1</span> <span class="op">?</span> <span class="st">&quot;font-bold&quot;</span> <span class="op">:</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span></code></pre></div>
@@ -1620,13 +1622,15 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       href="lecture02.html#オブジェクトの比較-重要">6.2
       オブジェクトの比較</a> の <code>comp2.ts</code>
       で示したように、<code>=</code>
-      でコピーをしても、プロパティを変更しても「参照」は変化しません。</p>
+      でコピーをしても、あるいはプロパティを変更しても「参照」は変化しません。</p>
       <h2 data-number="7.1"
       id="reactが変更を検知可能なオブジェクトの生成"><span
       class="header-section-number">7.1</span>
       Reactが変更を検知可能なオブジェクトの生成</h2>
-      <p>Reactが変更を検知可能なオブジェクトの生成する方法を解説します。React開発では重要な操作となってくるので、しっかりと覚えておいてください。</p>
-      <p>まずは、次のように新たにオブジェクトを作成することで、オリジナル
+      <p>Reactが変更を検知可能なオブジェクトを生成する方法を解説します。React開発では
+      <strong>特に重要な操作</strong>
+      となってくるので、しっかりと覚えておいてください。</p>
+      <p>まずは、次のように新たにオブジェクトを生成することで、オリジナル
       (<code>todo</code>) とは異なる参照を持ったオブジェクト
       (<code>updatedTodo</code>) を生成できます。</p>
       <div class="sourceCode" id="cb63" data-caption="prac04.ts"><pre
@@ -1696,8 +1700,17 @@ learn-ts-basics@ C:\Users\xxxx\Documents\learn-ts-basics
       <ul>
       <li>本科目は「<strong>学修単位科目</strong>」です。今回の講義内容
       +アルファ に関して <strong>4時間相当の授業時間外学習</strong>
-      に取り組んでください。疑問点や不明点などを「生成AI」で調べて深堀したり、C言語やPythonプログラムを
-      TypeScript に移植したりすることをお勧めします。</li>
+      に取り組んでください。疑問点や不明点などを「生成AI」で調べて深堀りしたり、C言語やPythonプログラムを
+      TypeScript に移植したりすることをお勧めします。
+      <ul>
+      <li>次回の授業では「配列」について取り上げ、<code>map</code> や
+      <code>filter</code> などの <strong>配列操作メソッド</strong>
+      (高階関数) を扱います。これらは React
+      で頻度に使われるものになります。予習することを強く推奨します。</li>
+      <li>YouTube検索: <a
+      href="https://www.youtube.com/results?search_query=typescript+map">TypeScript
+      map</a></li>
+      </ul></li>
       <li>次回の授業のはじめに「<strong>小テスト</strong>」を実施します。筆記用具を持参してください。</li>
       </ul>
       <!-- ---------------------------------------- -->
