@@ -10,8 +10,11 @@ const todo: Todo = {
   deadline: new Date(2024, 9, 11, 9, 45),
 };
 
-// ここを編集
-// const updatedTodo =
+const updatedTodo: Todo = {
+  ...todo,
+  isDone: true,
+  deadline: new Date(2024, 9, 30),
+};
 
 // todo と updatedTodo の参照が「異なること」を念のために確認
 assert.notEqual(todo, updatedTodo);
