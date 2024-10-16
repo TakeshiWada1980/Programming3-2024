@@ -355,9 +355,9 @@ class="toc-section-number">9</span> 宿題</a></li>
       <code>todo</code>
       の参照先を変更していることにもなります。そのため、実行結果を確認すると
       <code>todo</code> の <code>name</code> も <span
-      class="masked">COBOLの勉強</span> に変更されています。</p>
+      class="masked">Learn COBOL</span> に変更されています。</p>
       <p>このようにオリジナルのデータ (<code>todo</code>)
-      のプロパティを上書きすることから、このようなアプローチは「<strong>状態直接操作</strong>」や「<strong>破壊的更新」、「</strong>ミュータブルなオブジェクト更新**」のように呼ばれます。</p>
+      のプロパティを上書きすることから、このようなアプローチは「<strong>状態直接操作</strong>」や「<strong>破壊的更新</strong>」、「<strong>ミュータブルなオブジェクト更新</strong>」のように呼ばれます。</p>
       <p>この授業のなかでは、このようなオブジェクトの操作を <span
       class="masked">「ミュータブルなオブジェクト更新」</span>
       のように表現してきます。<strong>ミュータブル (Mutable)</strong>
@@ -416,7 +416,7 @@ class="toc-section-number">9</span> 宿題</a></li>
 }</code></pre>
       <p>この方法は、以下の図に示すように、オリジナルのデータ
       (<code>todo</code>)
-      は変化させずに、<strong>プロパティを変更した新しいオブジェクト</strong>
+      は変化させずに、別途、<strong>プロパティを変更した新しいオブジェクト</strong>
       (<code>updatedTodo</code>) を作成するアプローチであり、<span
       class="masked">「イミュータブルなオブジェクト更新」</span>
       のように呼ばれます。新しいオブジェクトが生成された証拠に、<strong>第20行目</strong>
@@ -464,8 +464,30 @@ class="toc-section-number">9</span> 宿題</a></li>
       しているためです。適切に画面が再レンダリングされなければ、内部的にデータが書き換わっていても、利用者が見ている画面上にはそれが反映されていないという困った状態になります。</p>
       <p>このようなことから、Reactを使った開発では
       <strong>イミュータブルなオブジェクト更新を原則</strong>
-      とする必要があります。</p>
-      <p>また、今回講義では「<strong>配列</strong>」を学びますが、配列についても「ミュータブルな更新」と「イミュータブルな更新」が存在します。こちらも同様に「<strong>イミュータブルな配列更新</strong>」をする必要があります
+      とする必要があります。以下は、<span
+      class="masked">Reactにおける画面更新の基本的な流れと仕組み</span>
+      になります。</p>
+      <ol type="1">
+      <li>イミュータブルな操作によって新しいオブジェクトを生成する。</li>
+      <li>新しく生成されたオブジェクトは、元のオブジェクトとは
+      <strong>異なる参照</strong>（C言語でいえばポインタ、Pythonで言えばオブジェクトID）を持つ。</li>
+      <li>新しく生成されたオブジェクトをReactの <strong>状態
+      (state)</strong> にセットする (主に <a
+      href="https://www.google.com/search?q=useStateとは">useStateフック</a>
+      を利用)、あるいは、子コンポーネントの<a
+      href="https://www.google.com/search?q=React+propsとは">Props</a>(プロップス)
+      に渡す。
+      <ul>
+      <li><code>useState</code> や <code>Props</code>
+      については次回以降に詳しく学びます。</li>
+      </ul></li>
+      <li>Reactは、Pros や state にセットされた
+      <strong>オブジェクトの参照の変化</strong>
+      を検知し、画面の再レンダリング (<a
+      href="https://www.google.com/search?q=DOM操作">DOM操作</a>)
+      をする。</li>
+      </ol>
+      <p>なお、今回講義では「<strong>配列</strong>」を学びますが、配列についても「ミュータブルな更新」と「イミュータブルな更新」が存在します。こちらも同様に「<strong>イミュータブルな配列更新</strong>」をする必要があります
       (React開発の前提で)。</p>
       <h3 data-number="3.2.1" id="演習①"><span
       class="header-section-number">3.2.1</span> 演習①</h3>
@@ -584,7 +606,7 @@ class="toc-section-number">9</span> 宿題</a></li>
       <h2 data-number="4.2" id="型と宣言"><span
       class="header-section-number">4.2</span> 型と宣言</h2>
       <p>まずは、シンプルに数値型や文字列型などの<a
-      href="https://developer.mozilla.org/ja/docs/Glossary/Primitive">プリミティブデータ</a>の「配列」から万でいきます。TypeScript
+      href="https://developer.mozilla.org/ja/docs/Glossary/Primitive">プリミティブデータ</a>の「配列」から学んでいきます。TypeScript
       では、次のように C言語ライクに 配列 (Array)
       を宣言・初期化します。</p>
       <div class="sourceCode" id="cb8"
