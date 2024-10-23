@@ -604,12 +604,13 @@ code .</code></pre>
       <h3 data-number="2.8.2" id="設定ファイルの追加"><span
       class="header-section-number">2.8.2</span> 設定ファイルの追加</h3>
       <p>プロジェクトに Tailwind CSS
-      を適用するために、設定ファイルを追加して、既存のファイルを書き換えます。</p>
+      を適用するために設定ファイルを追加して、既存のファイルを書き換えます。</p>
       <p>まず、プロジェクトフォルダ直下 ( <code>src</code>
-      の内部ではないので注意! ) に <code>tailwind.config.js</code>
+      <strong>の内部ではないので注意!</strong> ) に
+      <code>tailwind.config.js</code>
       を新規作成して、次の内容を貼付けて保存してください。</p>
       <div class="sourceCode" id="cb15"
-      data-caption="tailwind.config.js (第01行目を消さないこと)"><pre
+      data-caption="tailwind.config.js (第01行目のコメントを消さないこと)"><pre
       class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;tailwindcss&#39;).Config} */</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="im">export</span> <span class="im">default</span> {</span>
 <span id="cb15-3"><a href="#cb15-3"></a>  <span class="dt">content</span><span class="op">:</span> [<span class="st">&quot;./index.html&quot;</span><span class="op">,</span> <span class="st">&quot;./src/**/*.{js,ts,jsx,tsx}&quot;</span>]<span class="op">,</span></span>
@@ -641,16 +642,16 @@ code .</code></pre>
       によるスタイリングが有効</span> になります。</p>
       <p>各ファイルとも保存されていることを再確認してください。</p>
       <p>この状態で <code>npm run dev</code>
-      で動作確認すると、デフォルトのスタイルを含めて、全ての CSS
-      が剝がされた状態のアプリ画面になります。境界線が無くなって分かりづらいですが「count
+      で動作確認すると、デフォルトのスタイルを含めて、<strong>全ての CSS
+      が剝がされた状態のアプリ画面</strong>になります。境界線が無くなって分かりづらいですが「<strong>count
       is
-      0」のボタンを押下すると、カウントアップは問題なく動作します。</p>
+      0</strong>」の文字を押下すると、カウントアップは問題なく機能します。</p>
       <h3 data-number="2.8.3" id="tailwind-によるスタイリング"><span
       class="header-section-number">2.8.3</span> TailWind
       によるスタイリング</h3>
-      <p>Appコンポーネントが記述されている <code>src/App.tsx</code>
-      に、<strong>Tailwind CSS
-      によるスタイリング</strong>を適用していきます。次のように書き換えてください。</p>
+      <p>Appコンポーネントが記述されている <code>src/App.tsx</code> に
+      <strong>Tailwind CSS によるスタイリング</strong>
+      を適用していきます。次のように書き換えてください。</p>
       <div class="sourceCode" id="cb18"
       data-caption="src/App.tsx (Tailwind CSS の適用)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
@@ -680,16 +681,16 @@ code .</code></pre>
       しているJSX構文の内部) になります。</p>
       <p>いずれも <strong>HTMLタグ</strong>
       (厳密には<strong>JSXタグ</strong>) に <code>className</code>
-      属性を追加して、そこにTailwindのクラスを記述しています。<strong>HTMLタグ</strong>では
-      <code>class</code>
+      属性を追加して、そこに <strong>Tailwindのクラス</strong>
+      (<code>mx-4</code> や <code>font-bold</code> など)
+      を記述しています。<strong>HTMLタグ</strong>では <code>class</code>
       属性にCSSクラスを記述しましたが、<strong>JSXタグ</strong>
-      (<code>.jsx</code> や
-      <code>.tsx</code>ファイルのなかで利用可能な構文) では
-      <code>className</code> 属性にクラスを記述します。</p>
+      (<code>.jsx</code> や <code>.tsx</code>ファイルで利用可能な構文)
+      では <code>className</code> 属性にクラスを記述します。</p>
       <div class="note type-tips">
       <p><strong>HTMLとCSS</strong></p>
-      <p>「<strong>HTML</strong>」と「<strong>CSS</strong>」の基礎は、情報3の「第11回講義」と「第12回講義」で学習済みです。以下のように、CSSファイル
-      <code>main.css</code>
+      <p>「<strong>HTML</strong>」と「<strong>CSS</strong>」の基礎は、情報3の「第11回講義」と「第12回講義」で学習済みです。</p>
+      <p>以下のように、CSSファイル <code>main.css</code>
       を作成し、そこに「CSSクラス」を独自に定義して
       <code>&lt;div class="container" &gt;</code> のように
       <code>class</code>
@@ -713,11 +714,13 @@ code .</code></pre>
 <span id="cb20-5"><a href="#cb20-5"></a>} </span></code></pre></div>
       </div>
       <p>以上で Tailwind CSS の適用が完了しました。</p>
-      <p><code>npm run dev</code>
-      で動作確認してください。<strong>マウスカーソルをボタンに重ねると
-      (ホバーすると) 色が変わること</strong>や、<span
+      <p><code>npm run dev</code> で動作確認してください。</p>
+      <p><strong>ボタンにマウスカーソルを重ねると (ホバーすると)
+      色が変わること</strong>や、<span
       class="masked">ウィンドウ幅を変えても左右 (X方向)
-      の余白が適切に調整されること</span> も確認してください。</p>
+      の余白が適切に調整されること</span>
+      も確認してください。また、レスポンシブデザインになっていることも確認してください
+      (デベロッパツールでモバイル表示に切り替えてみてください)。</p>
       <figure>
       <img src="figs/04/app_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -728,7 +731,7 @@ code .</code></pre>
       でアプリを実行しているときは <span
       class="masked">ホットリロード</span>
       が有効になります。つまり、コードを書き換えて保存すると、<strong>その結果が自動でウェブブラウザに反映されます</strong>。</p>
-      <p>開発モードでアプリを起動し、以下のように
+      <p>実際に開発モードでアプリを起動し、以下のように
       <code>src/App.tsx</code> のコードを書き替えて保存すると、それが
       <strong>どのように画面に反映されるか</strong>
       を確認してください。</p>
@@ -738,7 +741,7 @@ code .</code></pre>
       <ul>
       <li>つまり <span
       class="masked"><code>&lt;h1 className="font-bold text-2xl mb-4 text-violet-600"&gt;TodoApp&lt;/h1&gt;</code></span>
-      のようにする。</li>
+      のようにしてください。</li>
       </ul></li>
       <li><code>&lt;button&gt;</code> タグのクラスを
       <code>rounded-md</code> から <code>rounded-full</code>
@@ -756,7 +759,7 @@ code .</code></pre>
       <h3 data-number="2.8.5" id="tailwind-スタイルの調べ方"><span
       class="header-section-number">2.8.5</span> Tailwind
       スタイルの調べ方</h3>
-      <p><code>className</code> 属性で設定するスタイル
+      <p><code>className</code> 属性を使って設定する各種スタイル
       (ユーティリティクラス)
       については、都度、解説していきますが、自分で調べたいときは<a
       href="https://tailwindcss.com/">Tailwindの公式ページ</a>や生成AIを活用してください。</p>
@@ -775,20 +778,20 @@ code .</code></pre>
       <h1 data-number="3" id="ポート設定のカスタマイズ"><span
       class="header-section-number">3</span>
       ポート設定のカスタマイズ</h1>
-      <p>Viteで構築したプロジェクトは、デフォルト設定だと
-      <strong>開発モード</strong>（<code>npm run dev</code> で実行）は
+      <p>Viteで構築したプロジェクトは、デフォルト設定では
+      <strong>開発モード</strong>（<code>npm run dev</code> で実行）が
       <strong>4173番ポート</strong> で起動します。このポート番号は
       <code>vite.config.ts</code>
       から任意に設定ができます。後期中間以降に利用する<a
-      href="https://www.google.com/search?q=Next.jsとは">Next.js</a>では
+      href="https://www.google.com/search?q=Next.jsとは">Next.js</a>では開発サーバが
       <strong>3000番ポート</strong>
-      で開発サーバが起動するので、それにあわせて、ここでも
+      で起動するので、それにあわせて、ここでも
       <strong>3000番ポート</strong>
       で開発サーバが起動するように設定を変更してみます。</p>
       <p>プロジェクトフォルダの直下にある <code>vite.config.ts</code>
       を、次のように変更してください。</p>
       <div class="sourceCode" id="cb21"
-      data-caption="vite.config.ts"><pre
+      data-caption="vite.config.ts (ポート番号の変更)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1"></a><span class="im">import</span> { defineConfig } <span class="im">from</span> <span class="st">&quot;vite&quot;</span><span class="op">;</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="im">import</span> react <span class="im">from</span> <span class="st">&quot;@vitejs/plugin-react&quot;</span><span class="op">;</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a></span>
@@ -849,8 +852,8 @@ code .</code></pre>
 <span id="cb23-21"><a href="#cb23-21"></a>}<span class="op">;</span></span>
 <span id="cb23-22"><a href="#cb23-22"></a></span>
 <span id="cb23-23"><a href="#cb23-23"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
-      <p>すると、この <code>const hoge = "Hoge"</code>
-      が次のように「エラー」の扱いになってしまいます🤮。</p>
+      <p>すると、追記した <code>const hoge = "Hoge"</code>
+      の部分で次のように「エラー」が発生します🤮。</p>
       <blockquote>
       <p>‘hoge’ is assigned a value but never used.
       eslint@typescript-eslint/no-unused-vars<br />
@@ -1053,7 +1056,8 @@ code .</code></pre>
       (<code>npm run dev</code>) で実行したときに、各ファイル
       (各コンポーネント) が読み込まれていく順番について解説します
       (特にここでは「分かりやすさ」を優先するため、厳密な説明ではない部分があるので注意してください)。</p>
-      <p>まず、プロジェクトフォルダ直下にある <code>index.html</code>
+      <p>まず一番初めにプロジェクトフォルダ直下にある
+      <code>index.html</code>
       が読み込まれます。このようにプログラム実行の開始点 (起点)
       となるものを <span class="masked">エントリーポイント</span>
       といいます。</p>
@@ -1071,7 +1075,7 @@ code .</code></pre>
 <span id="cb30-11"><a href="#cb30-11"></a>    <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;module&quot;</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;/src/main.tsx&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
 <span id="cb30-12"><a href="#cb30-12"></a>  <span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb30-13"><a href="#cb30-13"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
-      <p>上記の <strong>第11行目</strong> に記述される
+      <p>次に、上記の <strong>第11行目</strong> に記述される
       <code>&lt;script type="module" src="/src/main.tsx"&gt;&lt;/script&gt;</code>
       によって <code>/src/main.tsx</code> が読み込まれます。</p>
       <p>そして <code>main.tsx</code> の <strong>第06行目</strong> の
@@ -1079,7 +1083,7 @@ code .</code></pre>
       class="masked"><code>document.getElementById('root')</code></span>
       によって、<code>index.html</code> の <strong>第10行目</strong> の
       <code>&lt;div id="root"&gt;&lt;/div&gt;</code> の領域（idが
-      <code>root</code> のdiv要素）に
+      <code>root</code> のdiv要素）に対して
       <code>&lt;StrictMode&gt;&lt;App /&gt;&lt;/StrictMode&gt;</code>
       というコンポーネントがレンダリング (描画) されます。</p>
       <div class="sourceCode" id="cb31" data-caption="src/main.tsx"><pre
@@ -1094,11 +1098,16 @@ code .</code></pre>
 <span id="cb31-9"><a href="#cb31-9"></a>  <span class="op">&lt;/</span>StrictMode<span class="op">&gt;,</span></span>
 <span id="cb31-10"><a href="#cb31-10"></a>)</span></code></pre></div>
       <p>ここでレンダリングされる <code>&lt;App /&gt;</code>
-      コンポーネントの実体は、<code>src/main.tsx</code> の
+      コンポーネントの実体は <code>src/main.tsx</code> の
       <strong>第03行目</strong> で読み込んでいる <code>App.tsx</code>
       となります。なお、<code>&lt;StrictMode&gt;...&lt;StrictMode&gt;</code>
       コンポーネントについては、いまは無視してください
       (気になる人は検索か生成AIで解決してください)。</p>
+      <p>そして、以下のような <code>App.tsx</code>
+      によって、「<strong>TodoApp</strong>」という見出しや「<strong>count
+      is 0</strong>」というボタンが画面に表示され、また
+      <strong>第05行目</strong> の関数 <code>countUp</code>
+      によってカウントアップが機能します。</p>
       <div class="sourceCode" id="cb32" data-caption="src/App.tsx"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb32-1"><a href="#cb32-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a></span>
@@ -1122,7 +1131,7 @@ code .</code></pre>
 <span id="cb32-20"><a href="#cb32-20"></a>}<span class="op">;</span></span>
 <span id="cb32-21"><a href="#cb32-21"></a></span>
 <span id="cb32-22"><a href="#cb32-22"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
-      <p>以上、整理すると開発モードでは、以下のようにファイルが読み込まれると考えてください
+      <p>以上、整理すると開発モードでは、以下のような順番でファイルが読み込まれていくと考えてください
       (プログラムがネスト構造になっていると考えてください)。</p>
       <ol type="1">
       <li><code>index.html</code> が読み込まれ、その内部で …</li>
@@ -1134,7 +1143,7 @@ code .</code></pre>
       <strong>Appコンポーネント</strong>のなかに、<strong>TodoListコンポーネント</strong>
       (<code>src/TodoList.tsx</code>) を配置して、さらに、その内部に
       <strong>Todoコンポーネント</strong> (<code>src/Todo.tsx</code>)
-      を配置していきます。その場合、以下のようになります。</p>
+      を配置していきます。その場合は以下のようになります。</p>
       <ol type="1">
       <li><code>index.html</code> が読み込まれ、その内部で …</li>
       <li><code>src/main.tsx</code> が読み込まれ、その内部で …</li>
@@ -1148,13 +1157,13 @@ code .</code></pre>
       <h2 data-number="5.1" id="ビルド-バンドル-出力"><span
       class="header-section-number">5.1</span> ビルド (バンドル)
       出力</h2>
-      <p>開発モードでは、上記のように個別のファイルが読み込まれてアプリが実行されますが、ビルド
-      (<code>npm run build</code>)
+      <p>ビルド (<code>npm run build</code>)
       を実行すると、最適化されたプロダクトが「<strong>distフォルダ</strong>」に出力されます。</p>
       <p>このプロダクトは <span class="masked">トランスパイル
       (TypeScript<span
       class="math inline">\(\to\)</span>JavaScript)、最適化、バンドル</span>
-      などのビルド処理によってロジックとファイルが集約されたもので、<code>index.html</code>
+      などの処理によって
+      <strong>ロジックとファイルが集約されたもの</strong>で、<code>index.html</code>
       をエントリポイントとして <code>assets/index-XXXX.js</code> や
       <code>assets/index-XXXX.css</code>
       が読み込まれるシンプルな構成になります。</p>
@@ -1180,8 +1189,9 @@ code .</code></pre>
       とは、JavaScript XML の略で、JavaScript (TypeScript)
       プログラムのなかに <span class="masked">HTMLのようなタグ</span>
       を記述できるようにした拡張構文を指します。</p>
-      <p>例えば「<strong>ウェルカムメッセージを表示するようなコンポーネント</strong>」をTodoアプリに組み込みたいときは、<code>src/WelcomeMessage.tsx</code>
-      を以下のように作成します。コンポーネントを記述したファイルは、大文字からはじまる<a
+      <p>例えば「<strong>ウェルカムメッセージを表示するようなコンポーネント</strong>」をTodoアプリに組み込みたいときは、以下のように
+      <code>src/WelcomeMessage.tsx</code>
+      を作成します。コンポーネントを記述したファイルは、大文字からはじまる<a
       href="https://www.google.com/search?q=パスカルケースとは">パスカルケース</a>で名前を設定します。</p>
       <div class="sourceCode" id="cb33"
       data-caption="src/WelcomeMessage.tsx"><pre
@@ -1212,7 +1222,7 @@ code .</code></pre>
 <span id="cb33-25"><a href="#cb33-25"></a><span class="co">// 他のファイルで WelcomeMessage を import できるようにする</span></span>
 <span id="cb33-26"><a href="#cb33-26"></a><span class="im">export</span> <span class="im">default</span> WelcomeMessage<span class="op">;</span></span></code></pre></div>
       <p>そして、<code>src/App.tsx</code>
-      で、以下のようにインポートして組み込みます。</p>
+      なかで以下のようにインポートして組み込みます。</p>
       <div class="sourceCode" id="cb34" data-caption="src/App.tsx"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a><span class="im">import</span> WelcomeMessage <span class="im">from</span> <span class="st">&quot;./WelcomeMessage&quot;</span><span class="op">;</span> <span class="co">// 追加</span></span>
@@ -1239,9 +1249,15 @@ code .</code></pre>
 <span id="cb34-23"><a href="#cb34-23"></a></span>
 <span id="cb34-24"><a href="#cb34-24"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
       <p><strong>第02行目</strong>で「WelcomeMessageコンポーネント」を読込み、<strong>第13行目</strong>で
-      <code>&lt;WelcomeMessage name="太郎" /&gt;</code>
-      のように組み込んでいます。ここでは <code>name</code>
-      という引数が、どのようにWelcomeMessageコンポーネントに渡されているかを確認してください。</p>
+      <code>&lt;WelcomeMessage name="寝屋川タヌキ" /&gt;</code>
+      のように組み込んでいます。ここでは <span
+      class="masked"><code>name</code>
+      という引数が、どのようにWelcomeMessageコンポーネントに渡されているか
+      (対応関係)</span>
+      をよく確認してください。例えば「<code>name="寝屋川タヌキ"</code>
+      ではなく <code>userName="寝屋川タヌキ"</code>
+      のように名前をウェルカムメッセージコンポーネントに渡したいときは、<code>WelcomeMessage.tsx</code>
+      のどこを書き換えるべきか」が分かるでしょうか？</p>
       <p>なお、JSX要素のなかでは、コメントは
       <code>{/* コメント */}</code> のように記述します。</p>
       <div class="note type-caution">
@@ -1271,6 +1287,10 @@ code .</code></pre>
       <code>uncompletedCount=6</code> ではなく <span
       class="masked"><code>uncompletedCount={6}</code></span>
       のようにしてください。</li>
+      <li>ウェルカムメッセージコンポーネントが
+      <code>uncompletedCount</code>
+      を受け取るためには、<code>WelcomeMessage.tsx</code> のなかの
+      <code>Props</code> の型定義の変更が必要です。</li>
       <li>解答例は<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/04/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
       </ul></li>
@@ -1282,7 +1302,7 @@ code .</code></pre>
       という特別な仕組みで管理します。この「状態」が更新されると、Reactが<strong>変更を検知</strong>し、<strong>関連するコンポーネントだけ</strong>を自動的に再レンダリング
       (つまり再描画して値の変更を反映) します。</p>
       <p>何らかの値 (例えば「現在のカウント」)
-      を「<strong>状態</strong>」として扱い、その変更に応じて画面を再レンダリングするには、通常の変数として定義するのでは不十分であり、<span
+      を「<strong>状態</strong>」として扱い、その変更に応じて画面を再レンダリングするには、<strong>通常の変数として定義するのでは不十分</strong>であり、<span
       class="masked">フックス (Hooks) という機能を利用して値を管理
       (保持・更新) </span>
       することが求められます。Reactには、状態管理のために様々な Hooks
@@ -1290,14 +1310,19 @@ code .</code></pre>
       <code>useState</code> という フック (Hook) になります。</p>
       <p>サンプルとして示したアプでは、<strong>カウント値が更新されたとき</strong>に、それを即座に画面に自動反映させたいので、<strong>第04行目</strong>
       のように <code>useState</code> を使って、カウント値を保持する変数
-      <code>count</code> と、それを更新する専用関数
-      <code>setCount</code>
+      <code>count</code> と、<span
+      class="masked">それを更新するための専用関数
+      <code>setCount</code></span>
       を導入しています。なお、<code>useState</code>
-      の引数には初期値を設定します。</p>
+      の引数には初期値を与えます
+      (例えば、カウントを「7」から開始したいときは <span
+      class="masked"><code>const [count, setCount] = useState(7);</code></span>
+      とします)。</p>
       <ul>
       <li><code>useState(0)</code> は
-      <code>useState&lt;number&gt;(0)</code>
-      のように型を明示して初期化することも可能です。</li>
+      <code>useState&lt;number&gt;(0)</code> のように
+      <strong>扱う値の型を明示して初期化</strong>
+      することも可能です。</li>
       </ul>
       <p>そして、現在のカウント値を得たいときは <code>count</code>
       を参照し、更新したいときは <code>setCount(newCount)</code>
@@ -1306,10 +1331,10 @@ code .</code></pre>
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb35-1"><a href="#cb35-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
 <span id="cb35-2"><a href="#cb35-2"></a></span>
 <span id="cb35-3"><a href="#cb35-3"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb35-4"><a href="#cb35-4"></a>  <span class="kw">const</span> [count<span class="op">,</span> setCount] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a>  <span class="kw">const</span> countUp <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="kw">const</span> [count<span class="op">,</span> setCount] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span> <span class="co">// ここに注目</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="kw">const</span> countUp <span class="op">=</span> () <span class="kw">=&gt;</span> { </span>
 <span id="cb35-6"><a href="#cb35-6"></a>    <span class="kw">const</span> newCount <span class="op">=</span> count <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb35-7"><a href="#cb35-7"></a>    <span class="fu">setCount</span>(newCount)<span class="op">;</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a>    <span class="fu">setCount</span>(newCount)<span class="op">;</span> <span class="co">// ここにも注目。</span></span>
 <span id="cb35-8"><a href="#cb35-8"></a>  }<span class="op">;</span></span>
 <span id="cb35-9"><a href="#cb35-9"></a>  <span class="cf">return</span> (</span>
 <span id="cb35-10"><a href="#cb35-10"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mx-4 mt-10 max-w-2xl md:mx-auto&quot;</span><span class="op">&gt;</span></span>
@@ -1326,7 +1351,8 @@ code .</code></pre>
 <span id="cb35-21"><a href="#cb35-21"></a></span>
 <span id="cb35-22"><a href="#cb35-22"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
       <p>一方で、以下のように <code>useState</code>
-      を使用せずに実装するとボタンを押下しても画面が更新されません。実際に試してみてください。</p>
+      <strong>を使用せずに実装</strong>するとボタンを押下しても画面が更新されません
+      (=カウント表示が変わらない)。実際に試してみてください。</p>
       <div class="sourceCode" id="cb36"
       data-caption="src/App.tsx (NGな実装例)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
@@ -1350,8 +1376,7 @@ code .</code></pre>
 <span id="cb36-19"><a href="#cb36-19"></a></span>
 <span id="cb36-20"><a href="#cb36-20"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
       <p>ただし、<code>[F12]</code>
-      でデベロッパーツールを起動して、コンソールタブからログを確認すると
-      <strong>画面上の「カウント値」が更新されないだけ</strong>で、<span
+      でデベロッパーツールを起動して、コンソールタブからログを確認してみると、<strong>画面上の「カウント値」が更新されないだけ</strong>で、<span
       class="masked">内部的には変数 <code>count</code>
       は正常に更新されていること</span> が確認できます。</p>
       <figure>
@@ -1360,10 +1385,10 @@ code .</code></pre>
       </figure>
       <p>これらのことから「<strong>変更をトリガーに再レンダリングする必要ない値</strong>」については通常の変数として扱い、逆に「<strong>値の変更をトリガーに再レンダリングしたいもの</strong>」は
       <span class="masked">useState を使って「状態」として扱う</span>
-      必要あるということが分かると思います。</p>
+      必要があることが分かると思います。</p>
       <h2 data-number="6.3" id="練習"><span
       class="header-section-number">6.3</span> 練習</h2>
-      <p>次のように、カウント値の表示部をボタンの外に移動し、ボタンを「1Up」と「10Up」の2個に増やすようにアプリを拡張してみます。</p>
+      <p>次のように、カウント値の表示部をボタンの外に移動し、ボタンを「<strong>1Up</strong>」と「<strong>10Up</strong>」の2個に増やすようにアプリを拡張してみます。</p>
       <figure>
       <img src="figs/04/app_05.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -1428,10 +1453,11 @@ code .</code></pre>
       <code>space-x-2</code> を <code>space-x-4</code>
       に変更するとどのようになるか確認してください。確認後は元に戻しておいてください。</li>
       </ul>
-      <p>このプログラムには冗長な記述が多いのでリファクタリングしていきます。関数
+      <p>このプログラムには冗長な記述が多いので<a
+      href="https://www.google.com/search?q=リファクタリングとは">リファクタリング</a>していきます。関数
       <code>countUp1</code> と <code>countUp10</code>
       は、以下のように省略形で (1行で) 書き換えが可能です。<a
-      href="lecture03.html#第7形態-省略形">前回講義</a>の応用になります。</p>
+      href="lecture03.html#第7形態-省略形">前回講義</a>で学んだアロー関数形式の応用です。</p>
       <div class="sourceCode" id="cb38"
       data-caption="src/App.tsx (Before)" data-startFrom="5"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 4;"><span id="cb38-5"><a href="#cb38-5"></a><span class="kw">const</span> countUp1 <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
@@ -1447,19 +1473,19 @@ code .</code></pre>
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 4;"><span id="cb39-5"><a href="#cb39-5"></a><span class="kw">const</span> countUp1 <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="fu">setCount</span>(count <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
 <span id="cb39-6"><a href="#cb39-6"></a><span class="kw">const</span> countUp10 <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="fu">setCount</span>(count <span class="op">+</span> <span class="dv">10</span>)<span class="op">;</span></span></code></pre></div>
       <p>実際に書き換えて、問題なく動作することが確認してください。</p>
-      <p>さらに、次のように引数をとるように変更して、<code>onClick</code>
+      <p>さらに、関数が引数を受け取るように変更して、<code>onClick</code>
       での呼び出しを <span><code>onClick={() =&gt; countUpN(1)}</code>
       や <code>onClick={() =&gt; countUpN(10)}</code></span>
-      のようにすると、さらにスマートに記述することができます
-      (全体のコードは<a
+      とすると、さらにスマートに記述ができます (全体のコードは<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/04/code02.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照)。</p>
       <div class="sourceCode" id="cb40"
       data-caption="src/App.tsx (After2)" data-startFrom="5"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 4;"><span id="cb40-5"><a href="#cb40-5"></a><span class="kw">const</span> countUpN <span class="op">=</span> (n<span class="op">:</span> <span class="dt">number</span>) <span class="kw">=&gt;</span> <span class="fu">setCount</span>(count <span class="op">+</span> n)<span class="op">;</span></span></code></pre></div>
       <p>また、関数 <code>countUpN</code> を削除して<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/04/code03.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のように
-      <code>onClick</code>
-      に直接処理を記述するような方法もあります。</p>
+      <code>onClick</code> に <span
+      class="masked">直接処理を記述するような実装</span>
+      もあります。</p>
       <h3 data-number="6.3.1" id="演習-2"><span
       class="header-section-number">6.3.1</span> 演習</h3>
       <p>次のように、カウントをリセットするボタンを実装してください。</p>
@@ -1587,20 +1613,20 @@ npm i -D @types/react-fontawesome</code></pre>
       class="header-section-number">7.3</span>
       TodoListコンポーネントの作成</h2>
       <p>Todoリストを表示するための「<strong>TodoListコンポーネント</strong>」を作成します。<code>src/TodoList.tsx</code>
-      を作成して、以下の内容を記述してください。ここでは、練習のためにコードのコピペではなくコードを打ち込んでください。<a
-      href="lecture03.html#react開発の支援機能">前回講義で紹介</a>で案内しているように
+      を作成して、以下の内容を記述してください。ここでは、練習のために<strong>コピペ</strong>ではなく<strong>コードを打ち込んで</strong>ください。<a
+      href="lecture03.html#react開発の支援機能">前回講義で紹介</a>しているように
       <code>ES7+React/Redux/Reac1t-Native snippets</code>
-      をVSCodeの拡張機能としてインストールしている場合は
-      <code>rafce</code>
-      と打ち込むと、<strong>アロー関数形式のReactコンポーネントのテンプレート</strong>
-      が利用できます。</p>
+      をVSCodeの拡張機能としてインストールしていると、次の図のように
+      <code>rafce</code> と打ち込むだけで
+      <strong>アロー関数形式のReactコンポーネントのテンプレート</strong>
+      が得られます。</p>
       <figure>
       <img src="figs/03/vscode_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>ここで定義する <code>TodoList</code>
-      は、Reactの関数コンポーネントなので、必ず<a
-      href="https://www.google.com/search?q=パスカルケースとは">パスカルケース</a>で名前を付けるようにしてください。また、ファイルの名前も同じくパスカルケースにしてください。</p>
+      は、Reactの関数コンポーネントなので必ず<a
+      href="https://www.google.com/search?q=パスカルケースとは">パスカルケース</a>としてください。また、同様に、ファイルの名前もパスカルケースとしてください。</p>
       <div class="sourceCode" id="cb47"
       data-caption="src/TodoList.tsx"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb47-1"><a href="#cb47-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
@@ -1628,31 +1654,31 @@ npm i -D @types/react-fontawesome</code></pre>
 <span id="cb47-23"><a href="#cb47-23"></a>}<span class="op">;</span></span>
 <span id="cb47-24"><a href="#cb47-24"></a></span>
 <span id="cb47-25"><a href="#cb47-25"></a><span class="im">export</span> <span class="im">default</span> TodoList<span class="op">;</span></span></code></pre></div>
-      <p>このコンポーネントは、Todo型の配列を <strong>Props
-      (プロップス)</strong>
-      として受け取り、先頭から3件分について「名前」を「優先度」を表示ししています。なお、Reactの文脈で
-      Props とは Properties の略称で、<span
-      class="masked">コンポーネントが受け取る引数のようなもの</span>
+      <p>このコンポーネントは、Todo型の配列 <code>todos</code> を
+      <strong>Props (プロップス)</strong>
+      として受け取り、先頭から3件分のTodoの「名前」を「優先度」を表示しています。なお、Reactの文脈において
+      Props とは <strong>Properties の略称</strong>で、<span
+      class="masked">コンポーネントが受け取る「引数」のようなもの</span>
       と考えてください。</p>
       <p>なお、ここでの <strong>第12行目</strong> から
       <strong>第20行目</strong>
-      のコードは酷いものですが、これは後から書き換えていきます。</p>
+      のコードは酷いものですが、これは後で書き換えします。</p>
       <h2 data-number="7.4" id="appコンポーネントの編集"><span
       class="header-section-number">7.4</span>
       Appコンポーネントの編集</h2>
       <p><code>src/App.tsx</code>
-      を次のように編集してください。<strong>第04行目</strong>では、<a
+      を次のように編集してください。<strong>第04行目</strong> では<a
       href="lecture04.html#reactにおけるコンポーネントとは">さきほど作成</a>したウェルカムメッセージのコンポーネント
       (<code>src/WelcomeMessage.tsx</code>)
-      をインポートしています。同様に
-      <strong>第05行目</strong>では、Todoリストのコンポーネント(<code>src/TodoList.tsx</code>)
+      をインポートしています。同様に <strong>第05行目</strong>
+      では、Todoリストのコンポーネント(<code>src/TodoList.tsx</code>)
       をインポートしています。</p>
       <p>また、<strong>第03行目</strong>では、Todoリストの初期データとして
       <code>initTodos</code>
       をインポートしています。なお、インポートする際に <span
       class="masked">波括弧 <code>{ }</code>
       をつけてインポートしているケースと、そうでないケースがあること</span>
-      に気づくと思います。生成AIで解決してください。</p>
+      に気づくと思います。これらの理由については生成AIで解決してください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>Node.js 環境で TypeScript
@@ -1689,12 +1715,12 @@ npm i -D @types/react-fontawesome</code></pre>
 <span id="cb48-26"><a href="#cb48-26"></a>}<span class="op">;</span></span>
 <span id="cb48-27"><a href="#cb48-27"></a></span>
 <span id="cb48-28"><a href="#cb48-28"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
-      <p>編集後、保存操作をして
-      <strong>開発モード</strong>でアプリを実行してください
-      (<code>npm run dev</code>)。次のような実行結果が得られると思います。<code>[F12]</code>
-      でデベロッパーツールを起動してコンソール出力
-      (<strong>第12行目</strong>による <code>initTodos</code> の出力)
-      も確認してください。</p>
+      <p>編集後、保存してから <strong>開発モード</strong>
+      でアプリを実行してください
+      (<code>npm run dev</code>)。次のような実行結果が得られると思います。さらに、ブラウザで
+      <code>[F12]</code> を押下して <strong>デベロッパーツール</strong>
+      を起動してコンソール出力 (<strong>第12行目</strong> で行われている
+      <code>initTodos</code> の出力) も確認してください。</p>
       <figure>
       <img src="figs/04/app_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -1728,14 +1754,14 @@ npm i -D @types/react-fontawesome</code></pre>
       TodoListコンポーネントのブラッシュアップ</h2>
       <p>現状の <code>src/TodoList.tsx</code> は、<code>todos</code>
       の要素数に関わらず <span
-      class="masked">固定で3件のTodoしか表示すること</span>
-      ができません。しかも、<code>todos</code>
-      の要素数が2個以下のときは、実行時エラーが生じます
+      class="masked">固定で「3件」のTodoしか表示すること</span>
+      ができません。しかも、<code>todos</code> の要素数が
+      <strong>2個以下のときは実行時エラー</strong> が生じます
       (Todoが1個も表示されなくなります)。</p>
       <p>そこで、前回講義で学んだ <span
       class="masked">mapメソッド</span> を利用して、<code>todos</code>
       の要素数にあわせて表示するように変えたいと思います。この
-      mapメソッドを使うテクニック は
+      mapメソッドを使うテクニックは
       <strong>Reactでは定番中の定番処理</strong>
       となるので確実に読解かつ記述できるようにしてください。</p>
       <div class="sourceCode" id="cb49"
@@ -1765,8 +1791,8 @@ npm i -D @types/react-fontawesome</code></pre>
 <span id="cb49-23"><a href="#cb49-23"></a>}<span class="op">;</span></span>
 <span id="cb49-24"><a href="#cb49-24"></a></span>
 <span id="cb49-25"><a href="#cb49-25"></a><span class="im">export</span> <span class="im">default</span> TodoList<span class="op">;</span></span></code></pre></div>
-      <p>上記を次のように書き換えます。前回講義の<a
-      href="lecture03.html#オブジェクト型の配列に対するmapの適用">オブジェクト型の配列に対するmapの適用</a>を参考にしながら、この処理を理解してください。</p>
+      <p>上記のプログラムを次のように書き換えます。前回講義の<a
+      href="lecture03.html#オブジェクト型の配列に対するmapの適用">オブジェクト型の配列に対するmapの適用</a>を参考にしながら、この書き換えを理解してください。</p>
       <div class="sourceCode" id="cb50"
       data-caption="src/TodoList.tsx (After)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb50-1"><a href="#cb50-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
@@ -1801,20 +1827,22 @@ npm i -D @types/react-fontawesome</code></pre>
 <span id="cb50-30"><a href="#cb50-30"></a><span class="im">export</span> <span class="im">default</span> TodoList<span class="op">;</span></span></code></pre></div>
       <p>書き換え後のプログラムでは、<code>todos</code> が <span
       class="masked">空配列のとき (<code>todos.length === 0</code>
-      のとき) </span>
-      には、Todoリストの代わりに「現在、登録されているタスクはありません。」というメッセージを表示するようにしています。</p>
-      また、map の戻り値となる一番外側のJSX要素 (この例では
-      <code>&lt;div&gt;</code> 要素)
+      のとき)</span>
+      には、Todoリストの代わりに「<strong>現在、登録されているタスクはありません。</strong>」というメッセージを表示するようにしています。</p>
+      <p>また、map の戻り値となる<strong>一番外側のJSX要素</strong>
+      (この例では <code>&lt;div&gt;</code> 要素)
       については、<strong>第22行目</strong> のように <span
       class="masked">必ず <code>key</code>
-      属性を設定してください</span>。<code>key</code>
-      の値は、ユニークな値 (配列内の他要素と重複のない一意な値)
-      であれば何でも問題ありません。例えば、Todoの「名前」が絶対に重複しないのであれば
-      <div key={todo.name}>
-      <p>でも問題ありません。</p>
-      <p><code>key</code> 属性を設定しなと、実行時に
+      属性を設定してください</span>。<code>key</code> の値は <span
+      class="masked">ユニークな値
+      (配列内の他要素と重複のない一意な値)</span>
+      であれば何であっても問題ありません。例えば、Todoの「<strong>名前
+      (</strong><code>name</code><strong>)</strong>」が絶対に重複しないのであれば
+      <code>&lt;div key={todo.name}&gt;</code>
+      としても問題ありません。</p>
+      <p><code>key</code> 属性を設定していないと、実行時に
       <code>Each child in a list should have a unique "key" prop</code>
-      という警告が表示されます。また、再レンダリングに際して、意図した動作をしなくなる可能性があります。詳しくは生成AIで解決してください。</p>
+      という警告が表示されます。また、再レンダリングに際して意図した動作をしなくなる可能性があります。詳しい原理は生成AIで解決してください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>Reactを使ったウェブアプリを開発しています。配列のmapメソッドを使用してJSXを構成する際、key属性が要求されるのは何故ですか。Reactは何のためにkey属性を必要としますか。</p>
@@ -1824,24 +1852,27 @@ npm i -D @types/react-fontawesome</code></pre>
       <p>前回講義で学んだように、Todoの並び替えは「配列のsortメソッド」を利用して行なうことができます。例えば、優先度を昇順
       (1 <span class="math inline">\(\to\)</span> 2 <span
       class="math inline">\(\to\)</span> 3の順)
-      にしたいときは、<strong>第09行目</strong>を以下のように書き換えます。</p>
+      にしたいときは、<strong>第09行目</strong>の
+      <code>const todos = props.todos;</code>
+      を以下のように書き換えます。</p>
       <div class="sourceCode" id="cb51"><pre
       class="sourceCode ts"><code class="sourceCode typescript"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> todos <span class="op">=</span> [<span class="op">...</span>props<span class="op">.</span><span class="at">todos</span>]<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">priority</span> <span class="op">-</span> b<span class="op">.</span><span class="at">priority</span>)<span class="op">;</span></span></code></pre></div>
       <p>前回講義の<a
-      href="lecture03.html#複数のソートキーを使ったオブジェクト配列の並び替え">複数のソートキーを使ったオブジェクト配列の並び替え</a>を参考にして、第1ソートキーを
-      <code>isDone</code> (未完了を先に表示)、第2ソートキーを
+      href="lecture03.html#複数のソートキーを使ったオブジェクト配列の並び替え">複数のソートキーを使ったオブジェクト配列の並び替え</a>を参考にして、<strong>第1ソートキー</strong>を
+      <code>isDone</code>
+      (未完了を先に表示)、<strong>第2ソートキー</strong>を
       <code>deadline</code>
-      に並び替えたTodoリストが表示されるようにしてください。</p>
+      として並び替えたTodoリストが表示されるようにしてください。</p>
       <h3 data-number="7.5.2" id="演習-宿題-120分"><span
       class="header-section-number">7.5.2</span> 演習 (宿題:
       <i class="fa-solid fa-stopwatch"></i>120分)</h3>
-      <p>主に <code>src/TodoList.tsx</code> <strong>JSX (HTML)</strong>
-      と <strong>Tailwind CSS</strong>
+      <p>主に <code>src/TodoList.tsx</code> の <strong>JSX
+      (HTML)</strong> と <strong>Tailwind CSS</strong>
       に編集を加えてTodoリストコンポーネントの表示を
       <strong>自分流にカスタイマイズ</strong>
-      してみてください。これは、UI/UXの設計練習も兼ねています。また、後期前半の大課題に関連する内容になります。</p>
+      してみてください。これは、UI/UXの設計練習も兼ねています。また、後期前半の大課題に関連する内容にもなってきます。</p>
       <p>なお、現時点では「チェックボックス」や「ボタン」などの要素追加やスタイリングは不要です
-      (これらは次回講義で扱います)。</p>
+      (これらの内容は次回講義で扱います)。</p>
       <p><strong>(Todoリストのカスタマイズの例)</strong></p>
       <figure>
       <img src="figs/04/app_08.png" alt="img" />
