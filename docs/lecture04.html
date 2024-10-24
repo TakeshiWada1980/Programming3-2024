@@ -1038,9 +1038,15 @@ code .</code></pre>
 <span id="cb28-32"><a href="#cb28-32"></a>    }<span class="op">,</span></span>
 <span id="cb28-33"><a href="#cb28-33"></a>  }</span>
 <span id="cb28-34"><a href="#cb28-34"></a>)<span class="op">;</span></span></code></pre></div>
-      <p>さらに、プロジェクトフォルダの直下に <code>.vscode</code>
-      フォルダを作成して、そのなかに <code>settings.json</code>
-      を作成して以下を記述してください。</p>
+      <p>さらに、<strong>プロジェクトフォルダの直下</strong>に
+      <code>.vscode</code> フォルダを作成して、そのなかに
+      <code>settings.json</code>
+      を作成して以下を記述してください。<code>setting.json</code>
+      ではなく <code>settings.json</code>
+      なので注意してください。なお、最後の
+      <code>"css.lint.unknownAtRules": "ignore"</code> の設定によって
+      <code>src/index.css</code>
+      で表示されていたエラーが抑制されます。</p>
       <pre><code>{
   &quot;editor.formatOnSave&quot;: true,
   &quot;editor.formatOnPaste&quot;: true,
