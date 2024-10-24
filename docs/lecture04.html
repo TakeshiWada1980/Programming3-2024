@@ -1047,14 +1047,16 @@ code .</code></pre>
       <code>"css.lint.unknownAtRules": "ignore"</code> の設定によって
       <code>src/index.css</code>
       で表示されていたエラーが抑制されます。</p>
-      <pre><code>{
-  &quot;editor.formatOnSave&quot;: true,
-  &quot;editor.formatOnPaste&quot;: true,
-  &quot;editor.formatOnType&quot;: true,
-  &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,
-  &quot;editor.codeActionsOnSave&quot;: [&quot;source.fixAll.eslint&quot;],
-  &quot;css.lint.unknownAtRules&quot;: &quot;ignore&quot;
-}</code></pre>
+      <div class="sourceCode" id="cb29"
+      data-caption=".vscode/etting.json"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">{</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="dt">&quot;editor.formatOnSave&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="dt">&quot;editor.formatOnPaste&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="dt">&quot;editor.formatOnType&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>  <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;esbenp.prettier-vscode&quot;</span><span class="fu">,</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="dt">&quot;editor.codeActionsOnSave&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;source.fixAll.eslint&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="dt">&quot;css.lint.unknownAtRules&quot;</span><span class="fu">:</span> <span class="st">&quot;ignore&quot;</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="fu">}</span></span></code></pre></div>
       <p>以上で設定が完了です。</p>
       <p>VSCodeで <code>src/App.tsx</code> を開くと、以下のように
       <code>className</code>
