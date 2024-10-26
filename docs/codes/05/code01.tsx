@@ -100,7 +100,7 @@ const App = () => {
             value={
               newTodoDeadline
                 ? dayjs(newTodoDeadline).format("YYYY-MM-DDTHH:mm")
-                : undefined
+                : ""
             }
             onChange={updateDeadline}
             className="rounded-md border border-gray-400 px-2 py-0.5"
