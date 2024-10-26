@@ -26,8 +26,9 @@ const App = () => {
   };
 
   const updateDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const dt = e.target.value;
-    setNewTodoDeadline(dt ? new Date(dt) : null);
+    const dt = e.target.value; // UIで日時が未設定のときは空文字列 "" が dt に格納される
+    console.log(`UI操作で日時が "${dt}" (${typeof dt}型) に変更されました。`);
+    setNewTodoDeadline(dt === "" ? null : new Date(dt));
   };
 
   const addNewTodo = () => {
