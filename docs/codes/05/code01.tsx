@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Todo } from "./types";
-import { initTodos } from "./initTodo";
+import { initTodos } from "./initTodos";
 import WelcomeMessage from "./WelcomeMessage";
 import TodoList from "./TodoList";
 import { v4 as uuid } from "uuid";
@@ -100,7 +100,7 @@ const App = () => {
             id="deadline"
             value={
               newTodoDeadline
-                ? dayjs(newTodoDeadline).format("YYYY-MM-DDTHH:mm")
+                ? dayjs(newTodoDeadline).format("YYYY-MM-DDTHH:mm:ss")
                 : ""
             }
             onChange={updateDeadline}
@@ -117,7 +117,6 @@ const App = () => {
           追加
         </button>
       </div>
-      <div className="mt-5"></div>
     </div>
   );
 };

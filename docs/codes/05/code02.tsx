@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Todo } from "./types";
-import { initTodos } from "./initTodo";
+import { initTodos } from "./initTodos";
 import WelcomeMessage from "./WelcomeMessage";
 import TodoList from "./TodoList";
 import { v4 as uuid } from "uuid";
@@ -22,8 +22,8 @@ const App = () => {
 
   // ▼▼ 追加
   const isValidTodoName = (name: string): string => {
-    if (name.length < 2 || name.length > 16) {
-      return "2文字以上、16文字以内で入力してください";
+    if (name.length < 2 || name.length > 32) {
+      return "2文字以上、32文字以内で入力してください";
     } else {
       return "";
     }
@@ -93,7 +93,7 @@ const App = () => {
                 "grow rounded-md border p-2",
                 newTodoNameError && "border-red-500 outline-red-500"
               )}
-              placeholder="2文字以上、16文字以内で入力してください"
+              placeholder="2文字以上、32文字以内で入力してください"
             />
           </div>
           {newTodoNameError && (
@@ -134,7 +134,7 @@ const App = () => {
             id="deadline"
             value={
               newTodoDeadline
-                ? dayjs(newTodoDeadline).format("YYYY-MM-DDTHH:mm")
+                ? dayjs(newTodoDeadline).format("YYYY-MM-DDTHH:mm:ss")
                 : ""
             }
             onChange={updateDeadline}
@@ -153,7 +153,6 @@ const App = () => {
           追加
         </button>
       </div>
-      <div className="mt-5"></div>
     </div>
   );
 };
