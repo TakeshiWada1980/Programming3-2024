@@ -1805,6 +1805,14 @@ class="toc-section-number">12</span> 課題1</a></li>
       href="https://www.youtube.com/watch?v=4INjmxXaPxU">初心者向け！ReactのuseEffectが何してるのか20分で説明</a>@
       Code Tips (動画) や<a
       href="https://www.google.com/search?q=react+useeffect+解説">ウェブ検索</a>、生成AIを活用してください。</p>
+      <p>この他、永続化の処理では「LocalStorageには文字列しか保存できない」という制約に対応するために
+      <code>JSON.parse()</code> や <code>JSON.stringify()</code>
+      を利用しています。特に、Date型の値は <code>JSON.stringify()</code>
+      によって文字型に変換・保存された後、<code>JSON.stringify()</code>
+      にはDate型の値に復元されない点に注意してください
+      (文字列型として復元されます)。そのため <strong>第21行目</strong>
+      のような工夫がされています。</p>
+      <p>以上のように、この永続化の処理は様々な工夫が詰められているので、色々と実験したり読み解いたりして理解を深めてください。</p>
       <h1 data-number="11"
       id="reactアプリを-github-pages-にデプロイする手順"><span
       class="header-section-number">11</span> Reactアプリを GitHub Pages
