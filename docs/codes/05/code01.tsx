@@ -12,9 +12,7 @@ const App = () => {
   const [newTodoPriority, setNewTodoPriority] = useState(3);
   const [newTodoDeadline, setNewTodoDeadline] = useState<Date | null>(null); // ◀◀ 追加
 
-  const uncompletedCount = initTodos.filter(
-    (todo: Todo) => !todo.isDone
-  ).length;
+  const uncompletedCount = todos.filter((todo: Todo) => !todo.isDone).length;
 
   const updateNewTodoName = (e: React.ChangeEvent<HTMLInputElement>) => {
     // あとでバリデーションなどの処理をここに追加する

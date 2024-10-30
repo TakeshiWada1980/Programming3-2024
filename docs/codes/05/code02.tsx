@@ -16,9 +16,7 @@ const App = () => {
   const [newTodoDeadline, setNewTodoDeadline] = useState<Date | null>(null);
   const [newTodoNameError, setNewTodoNameError] = useState("");
 
-  const uncompletedCount = initTodos.filter(
-    (todo: Todo) => !todo.isDone
-  ).length;
+  const uncompletedCount = todos.filter((todo: Todo) => !todo.isDone).length;
 
   // ▼▼ 追加
   const isValidTodoName = (name: string): string => {

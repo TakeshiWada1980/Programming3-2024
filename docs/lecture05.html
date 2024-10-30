@@ -233,7 +233,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">const</span> [todos<span class="op">,</span> setTodos] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Todo[]<span class="op">&gt;</span>(initTodos)<span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> initTodos<span class="op">.</span><span class="fu">filter</span>(</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> todos<span class="op">.</span><span class="fu">filter</span>(</span>
 <span id="cb1-10"><a href="#cb1-10"></a>    (todo<span class="op">:</span> Todo) <span class="kw">=&gt;</span> <span class="op">!</span>todo<span class="op">.</span><span class="at">isDone</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>  )<span class="op">.</span><span class="at">length</span><span class="op">;</span> <span class="co">// 未完了タスクの数え上げ</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a></span>
@@ -285,7 +285,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb2-7"><a href="#cb2-7"></a></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb2-9"><a href="#cb2-9"></a>  <span class="kw">const</span> [todos<span class="op">,</span> setTodos] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Todo[]<span class="op">&gt;</span>(initTodos)<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> initTodos<span class="op">.</span><span class="fu">filter</span>(</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> todos<span class="op">.</span><span class="fu">filter</span>(</span>
 <span id="cb2-11"><a href="#cb2-11"></a>    (todo<span class="op">:</span> Todo) <span class="kw">=&gt;</span> <span class="op">!</span>todo<span class="op">.</span><span class="at">isDone</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a>  )<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a></span>
@@ -492,7 +492,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb6-8"><a href="#cb6-8"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb6-9"><a href="#cb6-9"></a>  <span class="kw">const</span> [todos<span class="op">,</span> setTodos] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Todo[]<span class="op">&gt;</span>(initTodos)<span class="op">;</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a>  <span class="kw">const</span> [newTodoName<span class="op">,</span> setNewTodoName] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span> <span class="co">// ◀◀ 追加</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> initTodos<span class="op">.</span><span class="fu">filter</span>(</span>
+<span id="cb6-11"><a href="#cb6-11"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> todos<span class="op">.</span><span class="fu">filter</span>(</span>
 <span id="cb6-12"><a href="#cb6-12"></a>    (todo<span class="op">:</span> Todo) <span class="kw">=&gt;</span> <span class="op">!</span>todo<span class="op">.</span><span class="at">isDone</span></span>
 <span id="cb6-13"><a href="#cb6-13"></a>  )<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
 <span id="cb6-14"><a href="#cb6-14"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(todos<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
@@ -668,7 +668,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb8-10"><a href="#cb8-10"></a>  <span class="kw">const</span> [newTodoName<span class="op">,</span> setNewTodoName] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
 <span id="cb8-11"><a href="#cb8-11"></a>  <span class="kw">const</span> [newTodoPriority<span class="op">,</span> setNewTodoPriority] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">3</span>)<span class="op">;</span> <span class="co">// ◀◀ 追加</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> initTodos<span class="op">.</span><span class="fu">filter</span>(</span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> todos<span class="op">.</span><span class="fu">filter</span>(</span>
 <span id="cb8-14"><a href="#cb8-14"></a>    (todo<span class="op">:</span> Todo) <span class="kw">=&gt;</span> <span class="op">!</span>todo<span class="op">.</span><span class="at">isDone</span></span>
 <span id="cb8-15"><a href="#cb8-15"></a>  )<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
 <span id="cb8-16"><a href="#cb8-16"></a></span>
@@ -1747,7 +1747,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb40-11"><a href="#cb40-11"></a>  <span class="kw">const</span> [initialized<span class="op">,</span> setInitialized] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">false</span>)<span class="op">;</span> <span class="co">// ◀◀ 追加</span></span>
 <span id="cb40-12"><a href="#cb40-12"></a>  <span class="kw">const</span> localStorageKey <span class="op">=</span> <span class="st">&quot;TodoApp&quot;</span><span class="op">;</span> <span class="co">// ◀◀ 追加</span></span>
 <span id="cb40-13"><a href="#cb40-13"></a></span>
-<span id="cb40-14"><a href="#cb40-14"></a>  <span class="co">// App コンポーネントの初回レンダリング時にLocalStorageからTodoデータを復元</span></span>
+<span id="cb40-14"><a href="#cb40-14"></a>  <span class="co">// App コンポーネントの初回実行時のみLocalStorageからTodoデータを復元</span></span>
 <span id="cb40-15"><a href="#cb40-15"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
 <span id="cb40-16"><a href="#cb40-16"></a>    <span class="kw">const</span> todoJsonStr <span class="op">=</span> localStorage<span class="op">.</span><span class="fu">getItem</span>(localStorageKey)<span class="op">;</span></span>
 <span id="cb40-17"><a href="#cb40-17"></a>    <span class="cf">if</span> (todoJsonStr <span class="op">&amp;&amp;</span> todoJsonStr <span class="op">!==</span> <span class="st">&quot;[]&quot;</span>) {</span>
@@ -1766,21 +1766,45 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb40-30"><a href="#cb40-30"></a></span>
 <span id="cb40-31"><a href="#cb40-31"></a>  <span class="co">// 状態 todos または initialized に変更があったときTodoデータを保存</span></span>
 <span id="cb40-32"><a href="#cb40-32"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb40-33"><a href="#cb40-33"></a>    <span class="cf">if</span> (<span class="op">!</span>initialized) {</span>
+<span id="cb40-33"><a href="#cb40-33"></a>    <span class="cf">if</span> (initialized) {</span>
 <span id="cb40-34"><a href="#cb40-34"></a>      localStorage<span class="op">.</span><span class="fu">setItem</span>(localStorageKey<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(todos))<span class="op">;</span></span>
 <span id="cb40-35"><a href="#cb40-35"></a>    }</span>
 <span id="cb40-36"><a href="#cb40-36"></a>  }<span class="op">,</span> [todos<span class="op">,</span> initialized])<span class="op">;</span></span>
 <span id="cb40-37"><a href="#cb40-37"></a></span>
-<span id="cb40-38"><a href="#cb40-38"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> initTodos<span class="op">.</span><span class="fu">filter</span>(</span>
+<span id="cb40-38"><a href="#cb40-38"></a>  <span class="kw">const</span> uncompletedCount <span class="op">=</span> todos<span class="op">.</span><span class="fu">filter</span>(</span>
 <span id="cb40-39"><a href="#cb40-39"></a>    (todo<span class="op">:</span> Todo) <span class="kw">=&gt;</span> <span class="op">!</span>todo<span class="op">.</span><span class="at">isDone</span></span>
 <span id="cb40-40"><a href="#cb40-40"></a>  )<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
 <span id="cb40-41"><a href="#cb40-41"></a></span>
 <span id="cb40-42"><a href="#cb40-42"></a>  <span class="co">// ～ 以下、省略 ～</span></span></code></pre></div>
       <p>ここでは <code>useEffect</code> が重要な役割を果たします。</p>
-      <p><code>useEffect</code> については <a
+      <p>まず、<strong>第15行目</strong> ～ <strong>第29行目</strong> の
+      <code>useEffect(() =&gt; {...}, [])</code> によって
+      Appコンポーネントの <span class="masked">初回の実行時のみ
+      (ブラウザでリロードされたときは、そのリロードの実行時のみ)</span>
+      LocalStorage から Todoデータ をロードして <code>todos</code>
+      にセットする仕組みをつくっています。</p>
+      <p>また、<strong>第32行目</strong> ～ <strong>第36行目</strong> の
+      <code>useEffect(() =&gt; {...}, [todos, initialized])</code>
+      によって <code>todos</code> (または <code>initialized</code>)
+      に更新があるときに、LocalStorage に <code>todos</code>
+      をセーブする仕組みをつくっています。</p>
+      <p>じつは、ここまでの解説では、あえて触れていはいなかったのですが、「<strong>Reactによる画面更新のための再レンダリング</strong>」=<span
+      class="masked">第04回行目からの App関数 を再実行</span>
+      という内部処理になっています。つまり、新規タスクの名前設定用の
+      <strong>テキストボックスに1文字入力するたびに</strong>
+      Reactにより画面の再レンダリングが実行されますが、その裏側では「<strong>App関数の再実行</strong>」が行なわれています
+      (このあたりの仕組みは後述の動画を参照してください)。そのため、<code>useEffect</code>
+      を利用しないと <span
+      class="masked">テキストボックスに1文字打ち込むたびにTodoデータのロードやセーブが実行</span>
+      されてしまいます。ここでは、LocalStorage
+      を使っているため頻繁にロードとセーブをしても大きな問題はありません。しかし、一般的なウェブアプリでは
+      <strong>ウェブAPIを使ってデータの永続化</strong>
+      を行なうため、テキストボックスに１文字打ち込むたびにAPIを叩くような実装にすると、<span
+      class="masked">短期間でAPIの利用上限に到達したり、膨大な課金が発生</span>してしまいます。注意してください。</p>
+      <p><code>useEffect</code> の理解については <a
       href="https://www.youtube.com/watch?v=4INjmxXaPxU">初心者向け！ReactのuseEffectが何してるのか20分で説明</a>@
-      Code Tips (動画) や、<a
-      href="https://www.google.com/search?q=react+useeffect+解説">ウェブ検索</a>を参照してください。</p>
+      Code Tips (動画) や<a
+      href="https://www.google.com/search?q=react+useeffect+解説">ウェブ検索</a>、生成AIを活用してください。</p>
       <h1 data-number="11"
       id="reactアプリを-github-pages-にデプロイする手順"><span
       class="header-section-number">11</span> Reactアプリを GitHub Pages
@@ -1990,7 +2014,7 @@ Published</code></pre>
       <p>以上で、(フロントエンドだけで処理が完結するような) React
       を使った Todoアプリ
       の「<strong>チュートリアル</strong>」は完了です。</p>
-      <p>このチュートリアルで学んだことをベースに
+      <p>このチュートリアルで学んだことをベースとして
       <strong>オリジナルのTodoアプリ</strong> を開発して、GitHub Pages
       にデプロイし、その URL
       を提出してください。提出するURLは「リポジトリのURL
