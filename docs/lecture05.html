@@ -44,22 +44,34 @@
         <!-- ---------------------------------------- -->
          <ul>
 <li><a href="#連絡" id="toc-連絡"><span
-class="toc-section-number">1</span> 連絡</a></li>
+class="toc-section-number">1</span> 連絡</a>
+<ul>
+<li><a href="#情報提供" id="toc-情報提供"><span
+class="toc-section-number">1.1</span> 情報提供</a></li>
+<li><a href="#ここまでの流れ" id="toc-ここまでの流れ"><span
+class="toc-section-number">1.2</span> ここまでの流れ</a></li>
+</ul></li>
 <li><a href="#新規タスクの追加" id="toc-新規タスクの追加"><span
 class="toc-section-number">2</span> 新規タスクの追加</a>
 <ul>
+<li><a href="#動作確認" id="toc-動作確認"><span
+class="toc-section-number">2.1</span> 動作確認</a></li>
 <li><a href="#ng-todos配列に対するミュータブルな操作"
 id="toc-ng-todos配列に対するミュータブルな操作"><span
-class="toc-section-number">2.1</span> NG:
+class="toc-section-number">2.2</span> NG:
 Todos配列に対するミュータブルな操作</a></li>
 </ul></li>
-<li><a href="#新規タスクの名前を設定するテキストボックスの追加"
-id="toc-新規タスクの名前を設定するテキストボックスの追加"><span
+<li><a href="#新規タスクの名前設定テキストボックスの追加"
+id="toc-新規タスクの名前設定テキストボックスの追加"><span
 class="toc-section-number">3</span>
-新規タスクの名前を設定するテキストボックスの追加</a>
+新規タスクの名前設定テキストボックスの追加</a>
 <ul>
+<li><a href="#ユーザによるui操作と状態更新の対応付け"
+id="toc-ユーザによるui操作と状態更新の対応付け"><span
+class="toc-section-number">3.1</span>
+ユーザによるUI操作と状態更新の対応付け</a></li>
 <li><a href="#ラベルタグの設定" id="toc-ラベルタグの設定"><span
-class="toc-section-number">3.1</span> ラベルタグの設定</a></li>
+class="toc-section-number">3.2</span> ラベルタグの設定</a></li>
 </ul></li>
 <li><a href="#優先度を設定するラジオボタンの追加"
 id="toc-優先度を設定するラジオボタンの追加"><span
@@ -172,14 +184,39 @@ class="toc-section-number">12</span> 課題1</a></li>
       <!-- ---------------------------------------- -->
       <h1 data-number="1" id="連絡"><span
       class="header-section-number">1</span> 連絡</h1>
+      <h2 data-number="1.1" id="情報提供"><span
+      class="header-section-number">1.1</span> 情報提供</h2>
       <ul>
       <li><a
       href="https://news.yahoo.co.jp/articles/f752a2040e8bc9603576f174a12e7a05ec670f84">「次の電車間に合う？」がわかる運行掲示板、学生が1万円で作った！大学に設置、職員にも好評</a><span
       class="citation" data-cites="Yahoo">@Yahoo</span>!News
       <ul>
-      <li>技術的には皆さんでも開発可能だと思います。アイデアは積極的にカタチにして発表していきましょう。</li>
+      <li>技術的には皆さんでも十分に開発可能だと思います。アイデアは積極的にカタチにして行動していきましょう。</li>
       </ul></li>
       </ul>
+      <h2 data-number="1.2" id="ここまでの流れ"><span
+      class="header-section-number">1.2</span> ここまでの流れ</h2>
+      <p>本科目は学修単位科目です。<strong>1回の授業あたり、皆さんが「4時間相当の授業時間外学習」をすることを前提</strong>
+      としたボリュームと展開速度となっています。1週間の間隔をあけての90分だけの取り組みで理解・習得できる内容ではないので注意してください。</p>
+      <p>初回授業から後期中間試験ぐらいまでの授業の流れ</p>
+      <ol type="1">
+      <li>モダンTypeScript基礎学習のための環境構築
+      <strong><em>済</em></strong></li>
+      <li>TypeScript基礎学習 <strong><em>済</em></strong>
+      <ul>
+      <li>React / Next.js
+      開発に関連する文法や機能だけを集中的に学びました。</li>
+      </ul></li>
+      <li>Reactを使ったTodoアプリのための環境構築
+      <strong><em>済</em></strong></li>
+      <li>Todoアプリ開発（Reactによるフロントエンド開発）のチュートリアル
+      <strong>← 今回の授業</strong></li>
+      <li>Todoアプリのカスタマイズや作り込み →
+      <strong><em>課題1</em></strong>
+      <ul>
+      <li>詳細は<a href="lecture05.html#課題1">こちら</a>を参照。</li>
+      </ul></li>
+      </ol>
       <h1 data-number="2" id="新規タスクの追加"><span
       class="header-section-number">2</span> 新規タスクの追加</h1>
       <p>現在のTodoリストに「<strong>新しいタスク (Todo)
@@ -223,10 +260,10 @@ class="toc-section-number">12</span> 課題1</a></li>
       <code>newTodos</code> を生成する。
       <ul>
       <li>ここで<a
-      href="lecture03.html#要素の追加-イミュータブルな変更">イミュータブルな配列操作</a>をすることがポイントです。</li>
+      href="lecture03.html#要素の追加-イミュータブルな変更">イミュータブルな配列操作</a>を使うことがポイントです。</li>
       </ul></li>
       <li>状態を変更する関数 <code>setTodos</code> に
-      <code>newTodos</code> を与える (Reactの作法に則って状態を更新する)
+      <code>newTodos</code> を与える (React的な作法に則って状態を更新)
       <ul>
       <li><code>setTodos</code> は上記プログラムの
       <strong>第08行目</strong> で <code>useState</code>
@@ -236,7 +273,7 @@ class="toc-section-number">12</span> 課題1</a></li>
       <p>以上の手順でTodoリストを更新し、<span
       class="masked">適切に画面が再レンダリング</span> されるように
       <code>src/App.tsx</code>
-      をアップデートします。具体的には、次のように実装します。</p>
+      をアップデートしていきます。具体的には、次のように実装します。</p>
       <div class="sourceCode" id="cb2"
       data-caption="src/App.tsx (Todoの追加を実装)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
@@ -295,75 +332,90 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb2-54"><a href="#cb2-54"></a>}<span class="op">;</span></span>
 <span id="cb2-55"><a href="#cb2-55"></a></span>
 <span id="cb2-56"><a href="#cb2-56"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
-      <p>上記のプログラムでは、<strong>新しいタスクを追加するための</strong>
-      <code>addNewTodo</code> <strong>という関数</strong>を
+      <p>上記のプログラムでは、<strong>新しいタスクを追加するための「addNewTodo」という関数</strong>を
       <strong>第15～26行</strong>
       にアロー関数形式で実装しています。JavaScript (TypeScript) では、<a
       href="https://www.google.com/search?q=プログラム+クロージャとは">クロージャ</a>という仕組みによって
       <span
-      class="masked">「関数内に定義される関数の内部で、親となる関数が持つ変数にアクセスが可能」</span>
-      となります。ここで「<strong>関数
+      class="masked">「関数のなかに定義される関数の内部で、親となる関数が持つ変数にアクセスすることが可能」</span>
+      となっています。ここで「<strong>関数
       addNewTodo</strong>」は「<strong>関数App</strong>」の内部で定義されているため、<strong>第24行目</strong>
-      のようにaddNewTodo関数の外側にある変数 <code>todos</code>
-      が参照可能になっています。なお、<strong>Python</strong>
-      もクロージャが使えますが、<strong>C言語</strong>では利用できません
+      のように <strong>addNewTodo関数の外側にある変数</strong>
+      <code>todos</code>
+      の参照が可能になっています。なお、<strong>Python</strong>
+      にもクロージャの仕組みがありますが、<strong>C言語</strong>ではクロージャは利用できません
       (そもそもC言語では、関数内部に関数を定義することができません)。</p>
-      <p>UI関連としては <strong>第40～49行目</strong>
-      を追加しています。特に <strong>第44行目</strong> の
+      <p>UIに関連したものとしては
+      <strong>第40行目</strong>～<strong>第49行目</strong>
+      にJSX要素を追加しています。特に <strong>第44行目</strong> の
       <code>onClick={addNewTodo}</code>
-      によって、ボタンがクリックされたときに <strong>第15行目</strong>
-      で定義している関数 <code>addNewTodo</code>
-      を呼び出しています。<span
-      class="masked"><code>onClick={addNewTodo()}</code></span>
-      とすると意図した動作をしないので注意してください。</p>
-      <p>実際に <code>npm run dev</code>
-      で実行すると、以下の図ように「<strong>追加</strong>」ボタンを押下するたびにリストに「新しいタスク」が追加されていきます。</p>
+      によって、ボタンがクリックしたときに <strong>第15行目</strong>
+      の「addNewTodo関数」が呼び出されるようになっている点に注目してください。なお、ここで
+      <span class="masked"><code>onClick={addNewTodo()}</code></span>
+      とすると間違いが多いので注意してください。もし、両者の違いが分からないときは生成AIを使って解決してください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>TypeScript環境のReactで「Todoアプリ」を開発しています。ボタンを押下したとき
+      に <code>addNewTodo</code> という関数 (引数なし)
+      を実行したいです。このようなときは、ボタンの属性を
+      <code>onClick={addNewTodo}</code>
+      のように設定すると習いました。なぜ、<code>onClick={addNewTodo()}</code>
+      のように書かないのですか？</p>
+      </blockquote>
+      <h2 data-number="2.1" id="動作確認"><span
+      class="header-section-number">2.1</span> 動作確認</h2>
+      <p><code>src/App.tsx</code> を更新・保存して、開発モード
+      (<code>npm run dev</code>)
+      でアプリを実行してください。以下の図ように「<strong>追加</strong>」ボタンを押下するたびに、<strong>リスト末尾</strong>に「新しいタスク」が追加されていくことが確認できます。</p>
       <figure>
       <img src="figs/05/app_02.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>※ 実際の実行画面 (Todoリストの外観)
-      は「<strong>TodoListコンポーネント</strong>」の実装によって変化します。前回講義の宿題として、TodoListコンポーネントカスタマイズしてもらっているので、表示画面の外観は学生によって異なるはずです。</p>
-      <p>※ <code>src/initTodos.ts</code> は <a
+      は「<strong>TodoListコンポーネント</strong>
+      (<code>src/TodoList.tsx</code>)」の実装によって変化します。<a
+      href="lecture04.html#演習-宿題-120分">前回講義の宿題</a>として、TodoListコンポーネントをカスタマイズしてもらっているので、実行画面の外観は各々で異なるはずです。</p>
+      <p>※ Todoリストの初期値 (<code>src/initTodos.ts</code>) は <a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/05/code03.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を使用しています。</p>
       <div class="note type-caution">
       <p><strong>注意</strong></p>
       <p>前回講義の<a
-      href="lecture04.html#演習-3">演習</a>で、<code>TodoList.tsx</code>
-      のなかで次のように <code>todos</code> の
+      href="lecture04.html#演習-3">演習</a>の一環で、<code>TodoList.tsx</code>
+      の内部で次のように <code>todos</code> の
       <strong>並び替え処理</strong> を実装している場合は、、、</p>
       <div class="sourceCode" id="cb3"
       data-caption="src/TodoList.tsx (抜粋・変更前)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">const</span> todos <span class="op">=</span> [<span class="op">...</span>props<span class="op">.</span><span class="at">todos</span>]<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">priority</span> <span class="op">-</span> b<span class="op">.</span><span class="at">priority</span>)<span class="op">;</span></span></code></pre></div>
-      <p>一時的に、次のように元に戻しておいてください
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">// 優先度順に todos を並び替え</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">const</span> todos <span class="op">=</span> [<span class="op">...</span>props<span class="op">.</span><span class="at">todos</span>]<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">priority</span> <span class="op">-</span> b<span class="op">.</span><span class="at">priority</span>)<span class="op">;</span></span></code></pre></div>
+      <p>一時的に、<strong>並び替えを無効</strong>にしておいてください
       (initTodosの順番に表示されるようにしておいてください)。</p>
       <div class="sourceCode" id="cb4"
       data-caption="src/TodoList.tsx (抜粋・変更後)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">// const todos = [...props.todos].sort((a, b) =&gt; a.priority - b.priority);</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">const</span> todos <span class="op">=</span> props<span class="op">.</span><span class="at">todos</span><span class="op">;</span></span></code></pre></div>
       </div>
-      <h3 data-number="2.0.1" id="演習-3分"><span
-      class="header-section-number">2.0.1</span> 演習
+      <h3 data-number="2.1.1" id="演習-3分"><span
+      class="header-section-number">2.1.1</span> 演習
       <i class="fa-solid fa-stopwatch"></i>3分</h3>
       <ul>
-      <li>新規タクスをリストの「<strong>末尾</strong>」ではなく「<strong>先頭</strong>」に追加するように変更してください。
+      <li>新規タクスをTodoリストの「<strong>末尾</strong>」ではなく「<strong>先頭</strong>」に追加するように変更してください。
       <ul>
       <li><strong>答え</strong> <span
       class="masked"><code>const updatedTodos = [...todos, newTodo]</code>
       を <code>const updatedTodos = [newTodo, ...todos]</code>
-      に変更する</span></li>
+      に変更</span></li>
       </ul></li>
       </ul>
       <p>確認後は、元に戻しておいてください
-      (「末尾」に追加するように戻しておいてください)。</p>
-      <h2 data-number="2.1"
+      (「末尾」に新規タスクを追加するように戻しておいてください)。</p>
+      <h2 data-number="2.2"
       id="ng-todos配列に対するミュータブルな操作"><span
-      class="header-section-number">2.1</span> NG:
+      class="header-section-number">2.2</span> NG:
       Todos配列に対するミュータブルな操作</h2>
       <p>理解を深めるために<a
-      href="lecture03.html#参考-要素の追加と削除-ミュータブルな配列操作">ミュータブルな配列操作</a>で
-      <code>todos</code>
-      を更新するとどうなるかを確認します。ミュータブルな操作で
+      href="lecture03.html#参考-要素の追加と削除-ミュータブルな配列操作">ミュータブルな配列操作</a>を使って
+      <code>todos</code> を更新するとどうなるか?
+      について実験・確認しておきます。ミュータブルな操作を使って
       <code>addNewTodo</code> を実装した例を以下に示します。特に
       <strong>第09行目</strong> に着目してください。</p>
       <div class="sourceCode" id="cb5"
@@ -380,51 +432,54 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">setTodos</span>(todos)<span class="op">;</span></span>
 <span id="cb5-11"><a href="#cb5-11"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(todos<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span> <span class="co">// todosの内容を表示</span></span>
 <span id="cb5-12"><a href="#cb5-12"></a>}<span class="op">;</span></span></code></pre></div>
-      <p>実際に上記のように <code>addNewTodo</code>
-      を実装すると、追加ボタンを押下しても <span
+      <p>上記のように <code>addNewTodo</code>
+      を実装すると、「追加」のボタンを押下しても <span
       class="masked">ウェブ画面上にはタスクが追加されない</span>
-      ことが確認できます。ただし、<strong>デベロッパーツール</strong>
-      (<code>[F12]</code> で起動) から <strong>第11行目</strong>
-      のコンソール出力を確認すると、以下のように
-      <strong>内部的には新しいタスクが正常に追加されていること</strong>
-      が確認できます。</p>
+      ことが確認できます。ただし、<strong>第11行目</strong>
+      で行っているのコンソール出力を <strong>デベロッパーツール</strong>
+      (<code>[F12]</code> で起動) から確認すると、以下のように
+      <strong>内部的には <code>todos</code>
+      の末尾に新しいタスクが正常に追加されていること</strong>が確認できます。</p>
       <figure>
       <img src="figs/05/app_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>つまり、<code>push</code> メソッドなどの
       <strong>ミュータブルな配列操作</strong> で変更した配列を
-      <code>setTodos</code> に与えても <span
-      class="masked">Reactは再レンダリングをしてくれない</span>
-      ということになります。React は <code>setTodos</code>
-      に引数に与えた <strong>オブジェクトに参照</strong>
+      <code>setTodos</code> に与えても <span class="masked">React
+      は画面の再レンダリングはしない</span>
+      ということが確認できました。React は <code>setTodos</code>
+      の引数に与えた <strong>オブジェクトの参照</strong>
       (C言語で言えばポインタ、Pythonで言えばオブジェクトID)
-      が変化していたときに「<strong>変更が生じた</strong>」と判断して再レンダリングする、ということを覚えおいてください。</p>
+      が、前回から変化しているときに
+      <strong>変更が生じたと判断して</strong>
+      (=<strong>変更を検知して</strong>)
+      画面を再レンダリングする、という仕組みなっていることを覚えておいてください。</p>
       <h1 data-number="3"
-      id="新規タスクの名前を設定するテキストボックスの追加"><span
+      id="新規タスクの名前設定テキストボックスの追加"><span
       class="header-section-number">3</span>
-      新規タスクの名前を設定するテキストボックスの追加</h1>
+      新規タスクの名前設定テキストボックスの追加</h1>
       <p><strong>新規タスクの名前</strong> (=Todoオブジェクトの
       <code>name</code> プロパティ)
       を設定するための「<strong>テキストボックス</strong>」を追加します。参考動画
-      (<a
+      (=<a
       href="https://www.youtube.com/watch?v=nRCNL9T3J98">1から簡単なTodoアプリを作ってReactの1歩を踏み出してみよう</a>)
-      のなかでは、テキストボックス関連の処理を <span
-      class="masked"><code>useRef</code> という Hook
-      </span>で実装していましたが、ここでは、<strong>バリデーション</strong>
-      などを実装するために <code>useState</code>
-      を使って実装します。</p>
+      においては、テキストボックス関連の処理を <span
+      class="masked">「useRef」という React Hook</span>
+      で実装していましたが、ここでは、あとから
+      <strong>バリデーション</strong>
+      などの処理を追加するために「useState」を使って実装します。</p>
       <figure>
       <img src="figs/05/app_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>なお、システム開発の文脈において <strong>バリデーション
-      (Validation)</strong> とは データの書式や内容のチェック、例えば
-      <span
-      class="masked">文字数が規定範囲内に収まっているか、有効なメールアドレスかどうか</span>
-      といったチェックのことを指します。</p>
+      <p>なお、アプリ開発の文脈において「バリデーション
+      (Validation)」とは
+      <strong>データの書式や内容のチェック</strong>、例えば <span
+      class="masked">文字数が規定範囲内に収まっているか、文字列が有効なメールアドレス形式になっているかどうか</span>
+      といったチェック処理を指します。</p>
       <p>以下に、新規タスクの<strong>名前</strong> (<code>name</code>)
-      を設定するための「<strong>テキストボックス</strong>」を実装する例を以下に示します。</p>
+      を設定するための「<strong>テキストボックス</strong>」を実装した例を示します。</p>
       <div class="sourceCode" id="cb6"
       data-caption="src/App.tsx (テキストボックスの追加)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
@@ -504,61 +559,68 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb6-75"><a href="#cb6-75"></a>}<span class="op">;</span></span>
 <span id="cb6-76"><a href="#cb6-76"></a></span>
 <span id="cb6-77"><a href="#cb6-77"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
-      <p>Reactアプリで <strong>テキストボックス</strong> や
-      <strong>チェックボックス</strong>、<strong>ラジオボタン</strong>
-      などの <code>&lt;input&gt;</code>
-      <strong>タグを利用するとき</strong>は、一般に <span
+      <p>ウェブアプリにおいて「<strong>テキストボックス</strong>」や「<strong>チェックボックス</strong>」「<strong>ラジオボタン</strong>」など入力系UI
+      (フォーム入力) には「<code>&lt;input&gt;</code> タグ」を利用します
+      (参考: <a
+      href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/input">フォーム入力の種類</a>)。そして、React開発においては、一般に
+      <code>&lt;input&gt;</code> タグは <span
       class="masked"><code>useRef</code> または <code>useState</code>
-      を組み合わせて使用</span>
-      します。ここでは「新規タスクの名前」をテキストボックスから得たいので、<strong>第10行目</strong>
+      を組み合わせて使用</span> します。</p>
+      <p>ここでは「新規タスクの名前」をテキストボックスから得たいので、<strong>第10行目</strong>
       において <code>useState</code> から<span class="masked">「変数
       <code>newTodoName</code>」と「関数
       <code>setNewTodoName</code>」</span> を生成しています (つまり
       <code>newTodoName</code>
-      を「<strong>状態</strong>」として扱うようにに実装しています)。また
-      <strong>第10行目</strong> では <code>newTodoName</code> の初期値に
+      を「<strong>状態</strong>」として扱うように実装しています)。また
+      <strong>第10行目</strong> では <code>newTodoName</code> の初期値を
       <strong>空文字</strong> <code>""</code>
-      を設定しています。なお、<code>useState&lt;string&gt;("");</code>
-      のように型を明示して初期化することも可能です
+      に設定しています。なお、<strong>第10行目</strong> は
+      <code>useState&lt;string&gt;("");</code>
+      のように<strong>型を明示して初期化することも可能</strong>です
       (型推論が可能なときに型を省略するか、明示するかは (個人開発では)
       自由に決めてください)。</p>
+      <h2 data-number="3.1"
+      id="ユーザによるui操作と状態更新の対応付け"><span
+      class="header-section-number">3.1</span>
+      ユーザによるUI操作と状態更新の対応付け</h2>
       <p><strong>第57行目</strong> では、この <code>newTodoName</code>
       の内容がテキストボックスに反映されるように
       <code>&lt;input&gt;</code> タグの <strong>value属性</strong> を
       <code>value={newTodoName}</code> のように設定しています。</p>
-      <p>ただし、これだけでは<strong>逆方向の値の反映がされません</strong>。つまり、<span
+      <p>ただし、これだけでは<strong>逆方向の値の反映がされません</strong>。具体的には
+      <span
       class="masked">ユーザによるテキストボックスの編集操作が、変数
       <code>newTodoName</code> に対して</span>
       反映されません。これを反映するには、まず <strong>第58行目</strong>
       のように <code>onChange={updateNewTodoName}</code>
       とする必要があります。これにより、<strong>テキストボックスで文字列を編集するたびに</strong>、<strong>第17行目</strong>
-      で定義している関数 <code>updateNewTodoName</code>
-      がコールされるようになります
-      (呼び出されるようになります)。この際、コールされる関数には
-      <code>React.ChangeEvent&lt;HTMLInputElement&gt;</code>
-      型の引数が渡されます。この引数には、型の名前が表すように <span
+      で定義している「updateNewTodoName関数」がコールされるようになります
+      (呼び出されるようになります)。この際、コールされる関数には「<code>React.ChangeEvent&lt;HTMLInputElement&gt;</code>
+      型の引数」が渡されます。この引数には、型の名前が表すように <span
       class="masked">HTML の Input要素
-      の変更イベントに関する詳細情報</span> が格納されています。関数
-      <code>updateNewTodoName</code> は、<strong>第17行目</strong>
-      で、それを <code>e</code> という仮引数で受け取って
-      <code>e.target.value</code> から変更された文字列を取得して
-      <code>setNewTodoName</code> に与えています
-      (<strong>第19行目</strong>)。</p>
-      <h3 data-number="3.0.1" id="演習"><span
-      class="header-section-number">3.0.1</span> 演習</h3>
+      の変更イベントに関する各種情報</span> が格納されています。</p>
+      <p><strong>第17行目</strong>
+      の「updateNewTodoName関数」では、それを <code>e</code>
+      という仮引数で受け取って <code>e.target.value</code>
+      から「変更された文字列」を取得して、<strong>第19行目</strong>
+      で<code>setNewTodoName</code> にセットしています。</p>
+      <h3 data-number="3.1.1" id="演習"><span
+      class="header-section-number">3.1.1</span> 演習</h3>
       <p><strong>第59行目</strong> のCSSクラスから <code>grow</code>
-      を削除するとどのようになるか確認してください。</p>
-      <h2 data-number="3.1" id="ラベルタグの設定"><span
-      class="header-section-number">3.1</span> ラベルタグの設定</h2>
-      <p>上記のサンプルコードでは <strong>ラベルタグ</strong>
-      <code>&lt;label&gt;</code> を利用しています。</p>
-      <p>ラベルタグの <strong>htmlFor属性</strong>
-      に紐づけたいインプット要素の <code>id</code> を設定すると (例えば
-      <code>htmlFor="newTodoName"</code> のように設定すると) <span
-      class="masked">ラベルをクリックしたときに対応するインプットがアクティブ</span>
+      を削除するとテキストボックスのスタイリングがどのように変化するか確認してください。</p>
+      <h2 data-number="3.2" id="ラベルタグの設定"><span
+      class="header-section-number">3.2</span> ラベルタグの設定</h2>
+      <p>ここでの実装例では、テキストボックス (インプット要素) に対して
+      <strong>ラベルタグ</strong> <code>&lt;label&gt;</code>
+      を組み合わせて使用しています。ラベルタグの
+      <strong>htmlFor属性</strong> に対して「紐づけたいインプット要素の
+      <code>id</code>」を設定すると (例えば、<strong>第51行目</strong>
+      のように <code>htmlFor="newTodoName"</code> のように設定すると)
+      ラベルをクリックしたときに <span
+      class="masked">対応するインプットがアクティブ</span>
       になります。</p>
-      <div class="sourceCode" id="cb7" data-caption="src/App.tsx (抜粋)"
-      data-startFrom="50"><pre
+      <div class="sourceCode" id="cb7"
+      data-caption="src/App.tsx (抜粋・再掲)" data-startFrom="50"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 49;"><span id="cb7-50"><a href="#cb7-50"></a><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex items-center space-x-2&quot;</span><span class="op">&gt;</span></span>
 <span id="cb7-51"><a href="#cb7-51"></a>  <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span> htmlFor<span class="op">=</span><span class="st">&quot;newTodoName&quot;</span><span class="op">&gt;</span></span>
 <span id="cb7-52"><a href="#cb7-52"></a>    名前</span>
@@ -572,9 +634,10 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb7-60"><a href="#cb7-60"></a>    placeholder<span class="op">=</span><span class="st">&quot;2文字以上、32文字以内で入力してください&quot;</span></span>
 <span id="cb7-61"><a href="#cb7-61"></a>  <span class="op">/&gt;</span></span>
 <span id="cb7-62"><a href="#cb7-62"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span></code></pre></div>
-      <p>些細な工夫ですが、UI/UX の向上に繋がるので
-      <code>&lt;input&gt;</code> と <code>&lt;label&gt;</code>
-      はセットで使用することを意識するようにしてください。</p>
+      <p>些細な工夫ですが、確実に UI/UX の向上に繋がるので
+      <code>&lt;input&gt;</code> と <code>&lt;label&gt;</code> は
+      <strong>セットで使用すること</strong>
+      を意識するようにしてください。</p>
       <figure>
       <img src="figs/05/app_06.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -588,8 +651,9 @@ class="toc-section-number">12</span> 課題1</a></li>
       <img src="figs/05/app_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>ラジオボタンには、属性を <code>type="radio"</code>
-      のように設定した <code>&lt;input&gt;</code> タグを使用します。</p>
+      <p>ラジオボタンには、<strong>第76行目</strong> のように属性を
+      <code>type="radio"</code> のように設定した
+      <code>&lt;input&gt;</code> タグを使用します。</p>
       <div class="sourceCode" id="cb8"
       data-caption="src/App.tsx (ラジオボタンの追加)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
@@ -692,10 +756,10 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb8-98"><a href="#cb8-98"></a></span>
 <span id="cb8-99"><a href="#cb8-99"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code></pre></div>
       <p>はじめに <strong>第11行目</strong>
-      で、新規タスクの優先度を状態として管理するための
+      で、新規タスクの優先度を「状態」として管理するための
       <code>newTodoPriority</code> と <code>setNewTodoPriority</code>
-      を準備していることを確認してください。また、初期値として <span
-      class="masked">数値型の <code>3</code></span>
+      を用意していることを確認してください。また、その初期値として <span
+      class="masked">「数値型」の <code>3</code></span>
       を設定していることを確認してください。</p>
       <p>そして、ラジオボタンが操作されたタイミングで
       <strong>第23行目</strong> で定義した
@@ -704,33 +768,43 @@ class="toc-section-number">12</span> 課題1</a></li>
       で状態が更新される仕組みになっていることを確認してください。なお、<code>e.target.value</code>
       で取得される値は <span
       class="masked"><code>&lt;input&gt;</code>タグの種別や属性設定に関係なく常に「文字列型」になること</span>
-      に注意してください。</p>
+      に注意してください。そのため <strong>第24行目</strong>
+      では、<code>Number</code>
+      関数を使って「文字列型」から「数値型」に変換して
+      <code>setNewTodoPriority</code> にセットしています。</p>
+      <p>Number関数を使用していないと、次のようにエラーとなります。</p>
+      <figure>
+      <img src="figs/05/vscode_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <hr />
-      <p>次に、以下の点を意識しながら <strong>第69行目</strong> ～
-      <strong>第84行</strong> のコードを読解してください。</p>
+      <p>JSX部分の「ラジオボタンの実装」は、「テキストボックスの実装」と比較すると<strong>かなり複雑</strong>になっています。次に、以下の点を意識しながら
+      <strong>第69行目</strong> ～ <strong>第84行</strong>
+      のコードを読解してください。</p>
       <ul>
       <li>前回講義で<a
       href="lecture04.html#todolistコンポーネントのブラッシュアップ">解説</a>したようにJSX構文のなかで
       <code>map</code> を利用するときは <span class="masked">map
       の戻り値となる最外殻の要素には「key属性」</span>
       を設定する必要がありました。そのため <strong>第72行目</strong>
-      にはkey属性を設定しています。
+      に「key属性」を設定しています。
       <ul>
-      <li>key属性を設定しないとブラウザのコンソールに「App.tsx:69
-      Warning: Each child in a list should have a unique “key”
-      prop.」のような警告が表示されます。</li>
+      <li>key属性を設定しないとブラウザのコンソールに「<strong>Warning:
+      Each child in a list should have a unique “key”
+      prop.</strong>」のような警告が表示されます。</li>
       </ul></li>
       <li>テキストボックスを実装したときは <code>&lt;label&gt;</code> と
       <code>&lt;input&gt;</code> を並列に配置しました
       (いわゆる「兄弟」の関係になるように配置しました)
       。一方で、ここでは <span class="masked"><code>&lt;input&gt;</code>
-      が <code>&lt;label&gt;</code> の子要素</span>
-      になっています。このように <code>&lt;input&gt;</code> を
-      <code>&lt;label&gt;</code> の子要素とすると
+      が <code>&lt;label&gt;</code> の子要素</span> になるように配置
+      (いわゆる「親子」の関係になるように配置)しています。このように
+      <code>&lt;input&gt;</code> を <code>&lt;label&gt;</code>
+      の子要素とすると
       「htmlFor属性」を設定せずに両者の紐づけが可能になります。
       <ul>
-      <li>(ラジオボタンの本体ではなく)「1」「2」「3」という文字列のクリックでも
-      <strong>対応するラジオボタンがアクティブになること</strong>
+      <li>(ラジオボタンの本体ではなく)「1」「2」「3」という文字列のクリックすることでも
+      <strong>対応するラジオボタンを選択できること</strong>
       を確認してください。</li>
       <li>ラベルとインプットの対応付けという意味では
       <strong>第74行目</strong>
@@ -739,13 +813,13 @@ class="toc-section-number">12</span> 課題1</a></li>
       のように設定しています。</li>
       </ul></li>
       <li>ラジオボタンでは
-      <strong>「name属性」が同じものがグループ化</strong> されて、<span
+      <strong>「name属性が同じもの」がグループ化</strong> されて、<span
       class="masked">そのグループのなかで1個のボタンだけが選択できる</span>
       ようになります。そのため <strong>第75行目</strong>
       では各ボタンとも共通で <code>name="priorityGroup"</code>
       を設定しています。ただし、この実装では <code>onChange</code> と
       <code>checked</code>
-      によってラジオボタンの選択を制御しているため、「name属性」を設定していなくともラジオボタンとして意図した動作をします。ただし、一般的な作法として「name属性」を設定しています。</li>
+      で選択を制御しているため、「name属性」を設定していなくともラジオボタンとしての動作をします。ただし、ここでも一般的な作法として「name属性」を設定しています。</li>
       </ul>
       <h2 data-number="4.1" id="補足-onchange属性の設定"><span
       class="header-section-number">4.1</span> 補足:
@@ -753,8 +827,8 @@ class="toc-section-number">12</span> 課題1</a></li>
       <p><strong>第23行目</strong> の関数
       <code>updateNewTodoPriority</code>
       を<strong>定義せず</strong>に、<strong>第79行目</strong> の
-      <code>onChange</code> に次のように <span
-      class="masked">優先度を設定する処理を「アロー関数形式」で直接的に記述すること</span>
+      <code>onChange</code> に <span
+      class="masked">「アロー関数形式」で「優先度を設定する処理」を直接的に記述すること</span>
       も可能です。</p>
       <div class="sourceCode" id="cb9"
       data-caption="src/App.tsx (優先度を設定する処理をonChangeに直接記述)"><pre
@@ -766,113 +840,117 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb9-6"><a href="#cb9-6"></a>  checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> value}</span>
 <span id="cb9-7"><a href="#cb9-7"></a>  onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">updateNewTodoPriority</span>(e)} <span class="co">// ◀◀ 注目</span></span>
 <span id="cb9-8"><a href="#cb9-8"></a><span class="op">/&gt;</span></span></code></pre></div>
-      <p>上記のようなテクニックは、Reactでは頻繁に使われるので覚えておいてください
-      (特に処理が短い場合は、こちらの記法が推奨されます)。</p>
+      <p>上記のようなテクニックは、Reactでは頻繁に使われるので覚えておいてください。特に処理が短い場合は、こちらの記法が推奨されます。また、ここでは<strong>型推論が有効になるので</strong>、以下のように長々と「型」を記述しなくても良いことも嬉しいです。</p>
+      <div class="sourceCode" id="cb10" data-caption="型を明示する例"
+      data-startFrom="7"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb10-7"><a href="#cb10-7"></a>onChange<span class="op">=</span>{(e<span class="op">:</span>React<span class="op">.</span><span class="at">ChangeEvent</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> <span class="fu">updateNewTodoPriority</span>(e)}</span></code></pre></div>
       <h2 data-number="4.2"
       id="補足-mapを使用せずにラジオボタンを構成する例"><span
       class="header-section-number">4.2</span> 補足:
       mapを使用せずにラジオボタンを構成する例</h2>
       <p><code>map</code> を使用せずに <strong>第69行目</strong> ～
-      <strong>第84行目</strong>
-      のJSXを記述すると次のようになります。</p>
-      <div class="sourceCode" id="cb10"
+      <strong>第84行目</strong> のJSXを記述すると
+      (ラジオボタンを実装すると) 次のようになります。</p>
+      <div class="sourceCode" id="cb11"
       data-caption="src/App.tsx (抜粋・mapを使用せずにラジオボタンを構成)"
       data-startFrom="66"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 65;"><span id="cb10-66"><a href="#cb10-66"></a><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-5&quot;</span><span class="op">&gt;</span></span>
-<span id="cb10-67"><a href="#cb10-67"></a>  <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span>優先度<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb10-68"><a href="#cb10-68"></a>  <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
-<span id="cb10-69"><a href="#cb10-69"></a>    <span class="op">&lt;</span>input</span>
-<span id="cb10-70"><a href="#cb10-70"></a>      id<span class="op">=</span><span class="st">&quot;priority-1&quot;</span></span>
-<span id="cb10-71"><a href="#cb10-71"></a>      name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
-<span id="cb10-72"><a href="#cb10-72"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
-<span id="cb10-73"><a href="#cb10-73"></a>      value<span class="op">=</span><span class="st">&quot;1&quot;</span></span>
-<span id="cb10-74"><a href="#cb10-74"></a>      checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> <span class="dv">1</span>}</span>
-<span id="cb10-75"><a href="#cb10-75"></a>      onChange<span class="op">=</span>{updateNewTodoPriority}</span>
-<span id="cb10-76"><a href="#cb10-76"></a>    <span class="op">/&gt;</span></span>
-<span id="cb10-77"><a href="#cb10-77"></a>    <span class="op">&lt;</span>span<span class="op">&gt;</span><span class="dv">1</span><span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
-<span id="cb10-78"><a href="#cb10-78"></a>  <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
-<span id="cb10-79"><a href="#cb10-79"></a>  <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
-<span id="cb10-80"><a href="#cb10-80"></a>    <span class="op">&lt;</span>input</span>
-<span id="cb10-81"><a href="#cb10-81"></a>      id<span class="op">=</span><span class="st">&quot;priority-2&quot;</span></span>
-<span id="cb10-82"><a href="#cb10-82"></a>      name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
-<span id="cb10-83"><a href="#cb10-83"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
-<span id="cb10-84"><a href="#cb10-84"></a>      value<span class="op">=</span><span class="st">&quot;2&quot;</span></span>
-<span id="cb10-85"><a href="#cb10-85"></a>      checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> <span class="dv">2</span>}</span>
-<span id="cb10-86"><a href="#cb10-86"></a>      onChange<span class="op">=</span>{updateNewTodoPriority}</span>
-<span id="cb10-87"><a href="#cb10-87"></a>    <span class="op">/&gt;</span></span>
-<span id="cb10-88"><a href="#cb10-88"></a>    <span class="op">&lt;</span>span<span class="op">&gt;</span><span class="dv">2</span><span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
-<span id="cb10-89"><a href="#cb10-89"></a>  <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
-<span id="cb10-90"><a href="#cb10-90"></a>  <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
-<span id="cb10-91"><a href="#cb10-91"></a>    <span class="op">&lt;</span>input</span>
-<span id="cb10-92"><a href="#cb10-92"></a>      id<span class="op">=</span><span class="st">&quot;priority-3&quot;</span></span>
-<span id="cb10-93"><a href="#cb10-93"></a>      name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
-<span id="cb10-94"><a href="#cb10-94"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
-<span id="cb10-95"><a href="#cb10-95"></a>      value<span class="op">=</span><span class="st">&quot;3&quot;</span></span>
-<span id="cb10-96"><a href="#cb10-96"></a>      checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> <span class="dv">3</span>}</span>
-<span id="cb10-97"><a href="#cb10-97"></a>      onChange<span class="op">=</span>{updateNewTodoPriority}</span>
-<span id="cb10-98"><a href="#cb10-98"></a>    <span class="op">/&gt;</span></span>
-<span id="cb10-99"><a href="#cb10-99"></a>    <span class="op">&lt;</span>span<span class="op">&gt;</span><span class="dv">3</span><span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
-<span id="cb10-100"><a href="#cb10-100"></a>  <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
-<span id="cb10-101"><a href="#cb10-101"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span></code></pre></div>
-      <p><code>map</code>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 65;"><span id="cb11-66"><a href="#cb11-66"></a><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-5&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-67"><a href="#cb11-67"></a>  <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span>優先度<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-68"><a href="#cb11-68"></a>  <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-69"><a href="#cb11-69"></a>    <span class="op">&lt;</span>input</span>
+<span id="cb11-70"><a href="#cb11-70"></a>      id<span class="op">=</span><span class="st">&quot;priority-1&quot;</span></span>
+<span id="cb11-71"><a href="#cb11-71"></a>      name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
+<span id="cb11-72"><a href="#cb11-72"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
+<span id="cb11-73"><a href="#cb11-73"></a>      value<span class="op">=</span><span class="st">&quot;1&quot;</span></span>
+<span id="cb11-74"><a href="#cb11-74"></a>      checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> <span class="dv">1</span>}</span>
+<span id="cb11-75"><a href="#cb11-75"></a>      onChange<span class="op">=</span>{updateNewTodoPriority}</span>
+<span id="cb11-76"><a href="#cb11-76"></a>    <span class="op">/&gt;</span></span>
+<span id="cb11-77"><a href="#cb11-77"></a>    <span class="op">&lt;</span>span<span class="op">&gt;</span><span class="dv">1</span><span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
+<span id="cb11-78"><a href="#cb11-78"></a>  <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb11-79"><a href="#cb11-79"></a>  <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-80"><a href="#cb11-80"></a>    <span class="op">&lt;</span>input</span>
+<span id="cb11-81"><a href="#cb11-81"></a>      id<span class="op">=</span><span class="st">&quot;priority-2&quot;</span></span>
+<span id="cb11-82"><a href="#cb11-82"></a>      name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
+<span id="cb11-83"><a href="#cb11-83"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
+<span id="cb11-84"><a href="#cb11-84"></a>      value<span class="op">=</span><span class="st">&quot;2&quot;</span></span>
+<span id="cb11-85"><a href="#cb11-85"></a>      checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> <span class="dv">2</span>}</span>
+<span id="cb11-86"><a href="#cb11-86"></a>      onChange<span class="op">=</span>{updateNewTodoPriority}</span>
+<span id="cb11-87"><a href="#cb11-87"></a>    <span class="op">/&gt;</span></span>
+<span id="cb11-88"><a href="#cb11-88"></a>    <span class="op">&lt;</span>span<span class="op">&gt;</span><span class="dv">2</span><span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
+<span id="cb11-89"><a href="#cb11-89"></a>  <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb11-90"><a href="#cb11-90"></a>  <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-91"><a href="#cb11-91"></a>    <span class="op">&lt;</span>input</span>
+<span id="cb11-92"><a href="#cb11-92"></a>      id<span class="op">=</span><span class="st">&quot;priority-3&quot;</span></span>
+<span id="cb11-93"><a href="#cb11-93"></a>      name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
+<span id="cb11-94"><a href="#cb11-94"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
+<span id="cb11-95"><a href="#cb11-95"></a>      value<span class="op">=</span><span class="st">&quot;3&quot;</span></span>
+<span id="cb11-96"><a href="#cb11-96"></a>      checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> <span class="dv">3</span>}</span>
+<span id="cb11-97"><a href="#cb11-97"></a>      onChange<span class="op">=</span>{updateNewTodoPriority}</span>
+<span id="cb11-98"><a href="#cb11-98"></a>    <span class="op">/&gt;</span></span>
+<span id="cb11-99"><a href="#cb11-99"></a>    <span class="op">&lt;</span>span<span class="op">&gt;</span><span class="dv">3</span><span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
+<span id="cb11-100"><a href="#cb11-100"></a>  <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb11-101"><a href="#cb11-101"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span></code></pre></div>
+      <p>重複する部分が多いので <code>map</code>
       を使ってJSXを構成するほうがスマートであることが分かると思います。</p>
       <h2 data-number="4.3"
       id="ラジオボタンのラベルに任意の値を使用する方法"><span
       class="header-section-number">4.3</span>
       ラジオボタンのラベルに任意の値を使用する方法</h2>
-      <p>次のようにラジオボタンのラベルに任意の値 (例えば
-      <strong>高・中・低</strong> など)
+      <p>ラジオボタンの「ラベル」を次のように<strong>任意の値</strong>
+      (例えば <strong>高・中・低</strong> など)
       を設定したいときの実装例を示します。</p>
       <figure>
       <img src="figs/05/app_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>JSXを次のように変更します。<code>[1,2,3]</code> を
-      <code>["高", "中", "低"]</code>
+      <p>このようにするためには、JSXを次のように変更します。<code>[1,2,3]</code>
+      を <code>["高", "中", "低"]</code>
       に変えて、その他、いくつかの属性を変えています。</p>
-      <div class="sourceCode" id="cb11"
+      <div class="sourceCode" id="cb12"
       data-caption="src/App.tsx (抜粋)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb11-1"><a href="#cb11-1"></a><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-5&quot;</span><span class="op">&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span>優先度<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  {[<span class="st">&quot;高&quot;</span><span class="op">,</span> <span class="st">&quot;中&quot;</span><span class="op">,</span> <span class="st">&quot;低&quot;</span>]<span class="op">.</span><span class="fu">map</span>((value<span class="op">,</span> index) <span class="kw">=&gt;</span> ( <span class="co">// ◀◀ 注目 index を追加</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="op">&lt;</span>label key<span class="op">=</span>{value} className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>      <span class="op">&lt;</span>input</span>
-<span id="cb11-6"><a href="#cb11-6"></a>        id<span class="op">=</span>{<span class="vs">`priority-</span><span class="sc">${</span>value<span class="sc">}</span><span class="vs">`</span>}</span>
-<span id="cb11-7"><a href="#cb11-7"></a>        name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>        <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>        value<span class="op">=</span>{value}</span>
-<span id="cb11-10"><a href="#cb11-10"></a>        checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> index <span class="op">+</span> <span class="dv">1</span>} <span class="co">// ◀◀ 注目</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>        onChange<span class="op">=</span>{updateNewTodoPriority}</span>
-<span id="cb11-12"><a href="#cb11-12"></a>      <span class="op">/&gt;</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>      <span class="op">&lt;</span>span<span class="op">&gt;</span>{value}<span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a>    <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a>  ))}</span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span></code></pre></div>
-      <p>関数 <code>updateNewTodoPriority</code>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-5&quot;</span><span class="op">&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span>優先度<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  {[<span class="st">&quot;高&quot;</span><span class="op">,</span> <span class="st">&quot;中&quot;</span><span class="op">,</span> <span class="st">&quot;低&quot;</span>]<span class="op">.</span><span class="fu">map</span>((value<span class="op">,</span> index) <span class="kw">=&gt;</span> ( <span class="co">// ◀◀ 注目 index を追加</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="op">&lt;</span>label key<span class="op">=</span>{value} className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1&quot;</span><span class="op">&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>      <span class="op">&lt;</span>input</span>
+<span id="cb12-6"><a href="#cb12-6"></a>        id<span class="op">=</span>{<span class="vs">`priority-</span><span class="sc">${</span>value<span class="sc">}</span><span class="vs">`</span>}</span>
+<span id="cb12-7"><a href="#cb12-7"></a>        name<span class="op">=</span><span class="st">&quot;priorityGroup&quot;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>        <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>        value<span class="op">=</span>{value}</span>
+<span id="cb12-10"><a href="#cb12-10"></a>        checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> index <span class="op">+</span> <span class="dv">1</span>} <span class="co">// ◀◀ 注目</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>        onChange<span class="op">=</span>{updateNewTodoPriority}</span>
+<span id="cb12-12"><a href="#cb12-12"></a>      <span class="op">/&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>      <span class="op">&lt;</span>span<span class="op">&gt;</span>{value}<span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>    <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>  ))}</span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span></code></pre></div>
+      <p>さらに、上記の変更にあわせて関数
+      <code>updateNewTodoPriority</code>
       を次のようにします。上記の変更によって <code>e.target.value</code>
       の値が <code>高</code>、<code>中</code>、<code>低</code>
       のいずれかになるので、それを <code>switch</code>
       で振り分けています。</p>
-      <div class="sourceCode" id="cb12"
+      <div class="sourceCode" id="cb13"
       data-caption="src/App.tsx (抜粋)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">const</span> updateNewTodoPriority <span class="op">=</span> (e<span class="op">:</span> React<span class="op">.</span><span class="at">ChangeEvent</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="cf">switch</span> (e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>) {</span>
-<span id="cb12-3"><a href="#cb12-3"></a>    <span class="cf">case</span> <span class="st">&quot;高&quot;</span><span class="op">:</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>      <span class="fu">setNewTodoPriority</span>(<span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>      <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>    <span class="cf">case</span> <span class="st">&quot;中&quot;</span><span class="op">:</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>      <span class="fu">setNewTodoPriority</span>(<span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>      <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="cf">case</span> <span class="st">&quot;低&quot;</span><span class="op">:</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>      <span class="fu">setNewTodoPriority</span>(<span class="dv">3</span>)<span class="op">;</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a>      <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a>  }</span>
-<span id="cb12-13"><a href="#cb12-13"></a>}<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">const</span> updateNewTodoPriority <span class="op">=</span> (e<span class="op">:</span> React<span class="op">.</span><span class="at">ChangeEvent</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="cf">switch</span> (e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>) {</span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="cf">case</span> <span class="st">&quot;高&quot;</span><span class="op">:</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>      <span class="fu">setNewTodoPriority</span>(<span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>      <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="cf">case</span> <span class="st">&quot;中&quot;</span><span class="op">:</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>      <span class="fu">setNewTodoPriority</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>      <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="cf">case</span> <span class="st">&quot;低&quot;</span><span class="op">:</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>      <span class="fu">setNewTodoPriority</span>(<span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>      <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>  }</span>
+<span id="cb13-13"><a href="#cb13-13"></a>}<span class="op">;</span></span></code></pre></div>
       <p>なお、上記の以外にも <span
       class="masked"><code>value={value}</code> を
-      <code>value={index+1}</code></span> にするような方法もあります
-      (この方法の場合は <code>updateNewTodoPriority</code>
-      の変更は不要です)。</p>
+      <code>value={index+1}</code></span>
+      のようにしてしまうスマートな方法もあります (この方法では、そもそも
+      <code>updateNewTodoPriority</code>
+      を変更する必要がありません)。</p>
       <h1 data-number="5" id="期限を設定する日時設定uiの追加"><span
       class="header-section-number">5</span>
       期限を設定する日時設定UIの追加</h1>
@@ -885,8 +963,8 @@ class="toc-section-number">12</span> 課題1</a></li>
       <p>日時設定UIには、属性を <code>type="datetime-local"</code>
       に設定した <code>&lt;input&gt;</code>
       タグを使用します。なお、Chrome において「<strong>2024/10/31 ()
-      17:20</strong>」のように括弧の内部が表示されないのでは仕様 (バグ?)
-      です。</p>
+      17:20</strong>」のように<strong>括弧の内部が表示されない</strong>のは仕様
+      (バグ?) です。</p>
       <ul>
       <li>新規タスクの期限設定を実装した <code>src/App.tsx</code>
       の全体のコードは<a
@@ -896,54 +974,52 @@ class="toc-section-number">12</span> 課題1</a></li>
       class="header-section-number">5.1</span> 日時情報の更新
       (UI→コード)</h2>
       <p><a
-      href="lecture04.html#準備-初期データの作成">前回講義</a>のなかで設計したように「<strong>特に期限を設定しないTood</strong>」については
+      href="lecture04.html#準備-初期データの作成">前回講義</a>で仕様を決めたように「<strong>特に期限を設定しないTood</strong>」については
       <span class="masked"><code>deadline</code> を
       <code>null</code></span> として扱うものとします。</p>
-      <div class="sourceCode" id="cb13"
+      <div class="sourceCode" id="cb14"
       data-caption="src/types.ts (再掲)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">export type</span> Todo <span class="op">=</span> {</span>
-<span id="cb13-2"><a href="#cb13-2"></a>  id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  isDone<span class="op">:</span> <span class="dt">boolean</span><span class="op">;</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>  priority<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">|</span> <span class="dt">null</span><span class="op">;</span> <span class="co">// ◀◀ 注目</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>}<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">export type</span> Todo <span class="op">=</span> {</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  isDone<span class="op">:</span> <span class="dt">boolean</span><span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  priority<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">|</span> <span class="dt">null</span><span class="op">;</span> <span class="co">// ◀◀ 注目</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>}<span class="op">;</span></span></code></pre></div>
       <p>そのため、<strong>第13行目</strong> (<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/05/code01.tsx">全体コード<i class="fa-solid fa-person-chalkboard"></i></a>)
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/05/code01.tsx">全体コード<i class="fa-solid fa-person-chalkboard"></i></a>参照)
       のように、期限を扱う「状態」については
       <code>useState&lt;Date | null&gt;</code> のように
       <strong>型を明示して初期化</strong>
-      しています。このように、その値が
-      <strong>「Date型」または「null」のどちらかになり得るような型</strong>
+      する必要があります。このように、値が<strong>「Date型」または「null」のどちらかになり得るような型</strong>
       を <span class="masked">Union型 (ユニオン型)</span>
-      とよびます。Union型は <strong>初期値から型推論が不可能</strong>
-      であるため明示的に指示する必要があります。</p>
-      <div class="sourceCode" id="cb14"
+      とよびます。Union型では <strong>初期値から型推論が不可能</strong>
+      であるため明示的に型を示す必要があります。</p>
+      <div class="sourceCode" id="cb15"
       data-caption="src/App.tsx (抜粋・期限を扱う状態の初期化)"
       data-startFrom="13"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 12;"><span id="cb14-13"><a href="#cb14-13"></a><span class="kw">const</span> [newTodoDeadline<span class="op">,</span> setNewTodoDeadline] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="bu">Date</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 12;"><span id="cb15-13"><a href="#cb15-13"></a><span class="kw">const</span> [newTodoDeadline<span class="op">,</span> setNewTodoDeadline] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="bu">Date</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
       <p>もし、ここで次のように <strong>型を指定せずに初期化</strong>
-      すると、<code>newTodoDeadline</code> は <span
-      class="masked">「null型」の変数 (=値として <code>null</code>
-      のみを持つことができる変数)</span>
+      してしまうと、<code>newTodoDeadline</code> は <span
+      class="masked">null型の変数 (=値として <code>null</code>
+      だけを持つことができる変数)</span>
       になってしまうので注意してください。</p>
-      <div class="sourceCode" id="cb15"
-      data-caption="src/App.tsx (抜粋・NG実装)" data-startFrom="13"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 12;"><span id="cb15-13"><a href="#cb15-13"></a><span class="kw">const</span> [newTodoDeadline<span class="op">,</span> setNewTodoDeadline] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
-      <p>つづいて <strong>第28行目</strong>
-      では、<strong>日時設定UIでユーザにより値が変更されたとき</strong>
-      にコールされる <code>updateDeadline</code>
-      関数を定義しています。</p>
       <div class="sourceCode" id="cb16"
+      data-caption="src/App.tsx (抜粋・NG実装)" data-startFrom="13"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 12;"><span id="cb16-13"><a href="#cb16-13"></a><span class="kw">const</span> [newTodoDeadline<span class="op">,</span> setNewTodoDeadline] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
+      <p>つづいて <strong>第28行目</strong> からは、以下のように
+      <strong>日時設定UIでユーザにより値が変更されたとき</strong>
+      にコールされる「updateDeadline関数」を定義しています。</p>
+      <div class="sourceCode" id="cb17"
       data-caption="src/App.tsx (抜粋)" data-startFrom="28"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 27;"><span id="cb16-28"><a href="#cb16-28"></a><span class="kw">const</span> updateDeadline <span class="op">=</span> (e<span class="op">:</span> React<span class="op">.</span><span class="at">ChangeEvent</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
-<span id="cb16-29"><a href="#cb16-29"></a>  <span class="kw">const</span> dt <span class="op">=</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span><span class="op">;</span> <span class="co">// UIで日時が未設定のときは空文字列 &quot;&quot; が dt に格納される</span></span>
-<span id="cb16-30"><a href="#cb16-30"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`UI操作で日時が &quot;</span><span class="sc">${</span>dt<span class="sc">}</span><span class="vs">&quot; (</span><span class="sc">${</span><span class="kw">typeof</span> dt<span class="sc">}</span><span class="vs">型) に変更されました。`</span>)<span class="op">;</span></span>
-<span id="cb16-31"><a href="#cb16-31"></a>  <span class="fu">setNewTodoDeadline</span>(dt <span class="op">===</span> <span class="st">&quot;&quot;</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(dt))<span class="op">;</span></span>
-<span id="cb16-32"><a href="#cb16-32"></a>}<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 27;"><span id="cb17-28"><a href="#cb17-28"></a><span class="kw">const</span> updateDeadline <span class="op">=</span> (e<span class="op">:</span> React<span class="op">.</span><span class="at">ChangeEvent</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-29"><a href="#cb17-29"></a>  <span class="kw">const</span> dt <span class="op">=</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span><span class="op">;</span> <span class="co">// UIで日時が未設定のときは空文字列 &quot;&quot; が dt に格納される</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`UI操作で日時が &quot;</span><span class="sc">${</span>dt<span class="sc">}</span><span class="vs">&quot; (</span><span class="sc">${</span><span class="kw">typeof</span> dt<span class="sc">}</span><span class="vs">型) に変更されました。`</span>)<span class="op">;</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a>  <span class="fu">setNewTodoDeadline</span>(dt <span class="op">===</span> <span class="st">&quot;&quot;</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(dt))<span class="op">;</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a>}<span class="op">;</span></span></code></pre></div>
       <p>日時設定UIを操作して日時を選択すると
       <code>e.target.value</code> からは <span
-      class="masked">「<code>2024-11-30T15:30</code>」のような「ISO8601形式で日時を表す文字列」</span>
+      class="masked">「2024-11-30T15:30」のようなISO8601形式の文字列</span>
       が得られます。実際に <strong>第30行目</strong>
       のコンソール出力の内容を確認してください。また、以下の図のように日時設定UIで「<strong>削除</strong>」を選択したときは
       <code>e.target.value</code> からは <strong>空文字</strong>
@@ -952,66 +1028,69 @@ class="toc-section-number">12</span> 課題1</a></li>
       <img src="figs/05/app_08.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>このような「<strong>2024-11-30T15:30形式の文字列</strong>」もしくは「<strong>文字列</strong>」を、<code>Date | null</code>
+      <p>このような「<strong>2024-11-30T15:30形式の文字列</strong>」もしくは「<strong>空文字</strong>」を、<code>Date | null</code>
       型の <code>deadline</code>
-      にセットするために、<strong>第31行目</strong> において
+      にセットするために、<strong>第31行目</strong> では
       <code>dt === "" ? null : new Date(dt)</code> のように
-      <strong>条件演算子</strong>
-      を使った変換をしています。条件演算子については<a
+      <strong>条件演算子</strong> を使った変換をしています。条件演算子
+      (三項演算子) については<a
       href="lecture02.html#三項演算子">第02回講義</a>で学習済みです。</p>
       <p>これにより、<code>dt === ""</code>
       が「真」となるとき、<code>newTodoDeadline</code> には
       <code>null</code> がセットされます。また、そうでないときは <span
       class="masked"><code>new Date("2024-11-30T15:30")</code>
       で生成される「Data型オブジェクト」</span>が
-      <code>newTodoDeadline</code> にセットされます。<code>Date</code>
-      は <code>"2024-11-30T15:30"</code>
+      <code>newTodoDeadline</code> にセットされます。<a
+      href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date">Dateクラス</a>は
+      <code>"2024-11-30T15:30"</code>
       形式の文字列を使った初期化にも対応しています
       (ただし、ブラウザ互換性などを考慮して、より安全に使用するためには
       <code>new Date(Date.parse(dt))</code>
       とすることが<strong>推奨</strong>されます)。</p>
       <p>なお、空文字 <code>""</code> は、単体で <code>false</code>
-      の扱いになるため (<span
-      class="masked">空文字は「falsyな値」であるため</span>)、次のように記述することもできます。</p>
-      <div class="sourceCode" id="cb17"
+      として評価されるため (<span
+      class="masked">空文字は「falsyな値」であるため</span>)、<strong>第31行目</strong>は、次のように記述することもできます。</p>
+      <div class="sourceCode" id="cb18"
       data-caption="src/App.tsx (抜粋)" data-startFrom="31"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 30;"><span id="cb17-31"><a href="#cb17-31"></a><span class="fu">setNewTodoDeadline</span>(dt <span class="op">?</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">parse</span>(dt)) <span class="op">:</span> <span class="dt">null</span>)<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 30;"><span id="cb18-31"><a href="#cb18-31"></a><span class="fu">setNewTodoDeadline</span>(dt <span class="op">?</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">parse</span>(dt)) <span class="op">:</span> <span class="dt">null</span>)<span class="op">;</span></span></code></pre></div>
       <h2 data-number="5.2" id="日時情報の更新-コードui"><span
       class="header-section-number">5.2</span> 日時情報の更新
       (コード→UI)</h2>
-      <p>上記とは逆に、コード (<code>Date | null</code> 型の
-      <code>deadline</code>) から日時設定UIに値を反映させるために
-      <strong>第101行目</strong> では、以下のように工夫して
+      <p>上記とは逆に、<code>Date | null</code> 型の
+      <code>deadline</code> から、日時設定UI (日時設定フォーム)
+      に値を反映させるために、 <strong>第101行目</strong>
+      で以下のように工夫を行なってhttps://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date
       <strong>value属性</strong> を設定しています。</p>
-      <div class="sourceCode" id="cb18"
+      <div class="sourceCode" id="cb19"
       data-caption="src/App.tsx (抜粋)" data-startFrom="98"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 97;"><span id="cb18-98"><a href="#cb18-98"></a><span class="op">&lt;</span>input</span>
-<span id="cb18-99"><a href="#cb18-99"></a>  <span class="kw">type</span><span class="op">=</span><span class="st">&quot;datetime-local&quot;</span></span>
-<span id="cb18-100"><a href="#cb18-100"></a>  id<span class="op">=</span><span class="st">&quot;deadline&quot;</span></span>
-<span id="cb18-101"><a href="#cb18-101"></a>  value<span class="op">=</span>{</span>
-<span id="cb18-102"><a href="#cb18-102"></a>    newTodoDeadline</span>
-<span id="cb18-103"><a href="#cb18-103"></a>      <span class="op">?</span> <span class="fu">dayjs</span>(newTodoDeadline)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY-MM-DDTHH:mm:ss&quot;</span>)</span>
-<span id="cb18-104"><a href="#cb18-104"></a>      <span class="op">:</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb18-105"><a href="#cb18-105"></a>  }</span>
-<span id="cb18-106"><a href="#cb18-106"></a>  onChange<span class="op">=</span>{updateDeadline}</span>
-<span id="cb18-107"><a href="#cb18-107"></a>  className<span class="op">=</span><span class="st">&quot;rounded-md border border-gray-400 px-2 py-0.5&quot;</span></span>
-<span id="cb18-108"><a href="#cb18-108"></a><span class="op">/&gt;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 97;"><span id="cb19-98"><a href="#cb19-98"></a><span class="op">&lt;</span>input</span>
+<span id="cb19-99"><a href="#cb19-99"></a>  <span class="kw">type</span><span class="op">=</span><span class="st">&quot;datetime-local&quot;</span></span>
+<span id="cb19-100"><a href="#cb19-100"></a>  id<span class="op">=</span><span class="st">&quot;deadline&quot;</span></span>
+<span id="cb19-101"><a href="#cb19-101"></a>  value<span class="op">=</span>{</span>
+<span id="cb19-102"><a href="#cb19-102"></a>    newTodoDeadline</span>
+<span id="cb19-103"><a href="#cb19-103"></a>      <span class="op">?</span> <span class="fu">dayjs</span>(newTodoDeadline)<span class="op">.</span><span class="fu">format</span>(<span class="st">&quot;YYYY-MM-DDTHH:mm:ss&quot;</span>)</span>
+<span id="cb19-104"><a href="#cb19-104"></a>      <span class="op">:</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb19-105"><a href="#cb19-105"></a>  }</span>
+<span id="cb19-106"><a href="#cb19-106"></a>  onChange<span class="op">=</span>{updateDeadline}</span>
+<span id="cb19-107"><a href="#cb19-107"></a>  className<span class="op">=</span><span class="st">&quot;rounded-md border border-gray-400 px-2 py-0.5&quot;</span></span>
+<span id="cb19-108"><a href="#cb19-108"></a><span class="op">/&gt;</span></span></code></pre></div>
       <p><code>null</code> は単体で <code>false</code> の扱いになるため
       (<span class="masked"><code>null</code>
       は「falsyな値」であるため</span>)、<code>newTodoDeadline</code> が
       <code>null</code> のときは、value属性に「空文字 <code>""</code>
       」がセットされます。</p>
       <p>一方で <code>newTodoDeadline</code> が <code>null</code>
-      以外のときは、value属性に「ISO8601形式
+      以外のときは、<code>dayjs</code>
+      を利用してvalue属性に「ISO8601形式
       <code>"YYYY-MM-DDTHH:mm:ss"</code>
-      に変換された文字列」がセットされます (注意:
+      に変換された文字列」がセットされるようにしています (注意:
       ここでは<strong>「秒」まで指定しないと Safari
       では意図した動作をしない可能性</strong>があります)。</p>
       <p>このように「日時」に関しては、<span
       class="masked">コードとUIの間で双方向の型変換</span>
       が必要となり、ブラウザによる挙動の違い
       (対応している日時フォーマットの違い)
-      や、<strong>タイムゾーン</strong>、使用するライブラリを十分に考慮しながら慎重に実装する必要があります。</p>
+      や<strong>タイムゾーン</strong>、使用するライブラリを十分に考慮しながら慎重に実装する必要があります。</p>
       <h2 data-number="5.3" id="truthyな値とfalsyな値"><span
       class="header-section-number">5.3</span>
       「truthyな値」と「falsyな値」</h2>
@@ -1074,33 +1153,34 @@ class="toc-section-number">12</span> 課題1</a></li>
       <h1 data-number="6" id="バリデーション"><span
       class="header-section-number">6</span> バリデーション</h1>
       <p>現状では、新規タクスの「名前」のテキストボックスが空欄であっても、「追加」のボタンを押下すればタスクが追加できてしまいます。ここでは「<strong>2文字以上、32文字以内でテキストボックスに名前が入力されていないとき」はタスクが追加できないように設定</strong>していきます。</p>
-      <p>単純には <code>addNewTodo</code> 関数の先頭に、次のような処理
+      <p>単純には「addNewTodo関数」の先頭に、次のような処理
       (<strong>第02行目～第04行目</strong>)
       を追加すれば、この処理が可能になります。実際に試してみてください。</p>
-      <div class="sourceCode" id="cb19"
+      <div class="sourceCode" id="cb20"
       data-caption="src/App.tsx (抜粋・バリデーション機能の実装)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">const</span> addNewTodo <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="cf">if</span> (newTodoName<span class="op">.</span><span class="at">length</span> <span class="op">&lt;</span> <span class="dv">2</span> <span class="op">||</span> newTodoName<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">32</span>) {</span>
-<span id="cb19-3"><a href="#cb19-3"></a>    <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  }</span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="kw">const</span> newTodo<span class="op">:</span> Todo <span class="op">=</span> {</span>
-<span id="cb19-6"><a href="#cb19-6"></a>    id<span class="op">:</span> <span class="fu">uuid</span>()<span class="op">,</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a>    name<span class="op">:</span> newTodoName<span class="op">,</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>    isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>    priority<span class="op">:</span> newTodoPriority<span class="op">,</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a>    deadline<span class="op">:</span> newTodoDeadline<span class="op">,</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a>  }<span class="op">;</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a>  <span class="kw">const</span> updatedTodos <span class="op">=</span> [<span class="op">...</span>todos<span class="op">,</span> newTodo]<span class="op">;</span></span>
-<span id="cb19-13"><a href="#cb19-13"></a>  <span class="fu">setTodos</span>(updatedTodos)<span class="op">;</span></span>
-<span id="cb19-14"><a href="#cb19-14"></a>  <span class="fu">setNewTodoName</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
-<span id="cb19-15"><a href="#cb19-15"></a>  <span class="fu">setNewTodoPriority</span>(<span class="dv">3</span>)<span class="op">;</span></span>
-<span id="cb19-16"><a href="#cb19-16"></a>  <span class="fu">setNewTodoDeadline</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb19-17"><a href="#cb19-17"></a>}<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">const</span> addNewTodo <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="cf">if</span> (newTodoName<span class="op">.</span><span class="at">length</span> <span class="op">&lt;</span> <span class="dv">2</span> <span class="op">||</span> newTodoName<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">32</span>) {</span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  }</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="kw">const</span> newTodo<span class="op">:</span> Todo <span class="op">=</span> {</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    id<span class="op">:</span> <span class="fu">uuid</span>()<span class="op">,</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>    name<span class="op">:</span> newTodoName<span class="op">,</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>    isDone<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>    priority<span class="op">:</span> newTodoPriority<span class="op">,</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>    deadline<span class="op">:</span> newTodoDeadline<span class="op">,</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>  }<span class="op">;</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>  <span class="kw">const</span> updatedTodos <span class="op">=</span> [<span class="op">...</span>todos<span class="op">,</span> newTodo]<span class="op">;</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>  <span class="fu">setTodos</span>(updatedTodos)<span class="op">;</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>  <span class="fu">setNewTodoName</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a>  <span class="fu">setNewTodoPriority</span>(<span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>  <span class="fu">setNewTodoDeadline</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a>}<span class="op">;</span></span></code></pre></div>
       <p>上記の処理によって、「追加」のボタンを押下しても
       <code>newTodoName</code>
-      が条件を満たしていなければタスクが追加できないようにはなりました。しかし、このままでは
+      が条件を満たしていなければタスクが追加できないようになりました。しかし、このままでは
       <strong>UI/UX 的には大きな課題</strong>が残ります
-      (ユーザが「<strong>なんでタスクが追加できないの?</strong>」に気づきにくい不親切なUI/UXになっている)。</p>
+      (ユーザが「<strong>なぜタスクが追加できないのか</strong>」に気づきづらい不親切な
+      UI/UX になっている)。</p>
       <p>そこで、条件を満たしていないときは、以下のように<strong>画面上に注意喚起のメッセージを表示</strong>するようにアプリを改良していきます。このために
       <code>newTodoNameError</code> という <strong>文字列型の変数
       (状態)</strong>
@@ -1117,43 +1197,44 @@ class="toc-section-number">12</span> 課題1</a></li>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <ul>
-      <li><code>src/App.tsx</code> の全体のコードは<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/05/code02.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。まずは、コピペして動作を確認してみるほうが分かりやすいと思います。</li>
+      <li>このバリデーションを実装した <code>src/App.tsx</code>
+      の全体のコードは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/05/code02.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。まずは、コピペして動作を確認することからはじめたほうが分かりやすいと思います。</li>
       </ul>
       <p>特に <strong>第81行目</strong> から <strong>第110行目</strong>
       にかけて大幅に書き換えをしています
       (その他の部分についても編集や追記があるので注意してください)。</p>
-      <div class="sourceCode" id="cb20"
+      <div class="sourceCode" id="cb21"
       data-caption="src/App.tsx (抜粋)" data-startFrom="81"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 80;"><span id="cb20-81"><a href="#cb20-81"></a>{<span class="co">/* 編集: ここから... */</span>}</span>
-<span id="cb20-82"><a href="#cb20-82"></a><span class="op">&lt;</span>div<span class="op">&gt;</span></span>
-<span id="cb20-83"><a href="#cb20-83"></a>  <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex items-center space-x-2&quot;</span><span class="op">&gt;</span></span>
-<span id="cb20-84"><a href="#cb20-84"></a>    <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span> htmlFor<span class="op">=</span><span class="st">&quot;newTodoName&quot;</span><span class="op">&gt;</span></span>
-<span id="cb20-85"><a href="#cb20-85"></a>      名前</span>
-<span id="cb20-86"><a href="#cb20-86"></a>    <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
-<span id="cb20-87"><a href="#cb20-87"></a>    <span class="op">&lt;</span>input</span>
-<span id="cb20-88"><a href="#cb20-88"></a>      id<span class="op">=</span><span class="st">&quot;newTodoName&quot;</span></span>
-<span id="cb20-89"><a href="#cb20-89"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;text&quot;</span></span>
-<span id="cb20-90"><a href="#cb20-90"></a>      value<span class="op">=</span>{newTodoName}</span>
-<span id="cb20-91"><a href="#cb20-91"></a>      onChange<span class="op">=</span>{updateNewTodoName}</span>
-<span id="cb20-92"><a href="#cb20-92"></a>      className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
-<span id="cb20-93"><a href="#cb20-93"></a>        <span class="st">&quot;grow rounded-md border p-2&quot;</span><span class="op">,</span></span>
-<span id="cb20-94"><a href="#cb20-94"></a>        newTodoNameError <span class="op">&amp;&amp;</span> <span class="st">&quot;border-red-500 outline-red-500&quot;</span></span>
-<span id="cb20-95"><a href="#cb20-95"></a>      )}</span>
-<span id="cb20-96"><a href="#cb20-96"></a>      placeholder<span class="op">=</span><span class="st">&quot;2文字以上、32文字以内で入力してください&quot;</span></span>
-<span id="cb20-97"><a href="#cb20-97"></a>    <span class="op">/&gt;</span></span>
-<span id="cb20-98"><a href="#cb20-98"></a>  <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb20-99"><a href="#cb20-99"></a>  {newTodoNameError <span class="op">&amp;&amp;</span> (</span>
-<span id="cb20-100"><a href="#cb20-100"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;ml-10 flex items-center space-x-1 text-sm font-bold text-red-500 &quot;</span><span class="op">&gt;</span></span>
-<span id="cb20-101"><a href="#cb20-101"></a>      <span class="op">&lt;</span>FontAwesomeIcon</span>
-<span id="cb20-102"><a href="#cb20-102"></a>        icon<span class="op">=</span>{faTriangleExclamation}</span>
-<span id="cb20-103"><a href="#cb20-103"></a>        className<span class="op">=</span><span class="st">&quot;mr-0.5&quot;</span></span>
-<span id="cb20-104"><a href="#cb20-104"></a>      <span class="op">/&gt;</span></span>
-<span id="cb20-105"><a href="#cb20-105"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span>{newTodoNameError}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb20-106"><a href="#cb20-106"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb20-107"><a href="#cb20-107"></a>  )}</span>
-<span id="cb20-108"><a href="#cb20-108"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb20-109"><a href="#cb20-109"></a>{<span class="co">/* ...ここまで */</span>}</span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 80;"><span id="cb21-81"><a href="#cb21-81"></a>{<span class="co">/* 編集: ここから... */</span>}</span>
+<span id="cb21-82"><a href="#cb21-82"></a><span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb21-83"><a href="#cb21-83"></a>  <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex items-center space-x-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb21-84"><a href="#cb21-84"></a>    <span class="op">&lt;</span>label className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span> htmlFor<span class="op">=</span><span class="st">&quot;newTodoName&quot;</span><span class="op">&gt;</span></span>
+<span id="cb21-85"><a href="#cb21-85"></a>      名前</span>
+<span id="cb21-86"><a href="#cb21-86"></a>    <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb21-87"><a href="#cb21-87"></a>    <span class="op">&lt;</span>input</span>
+<span id="cb21-88"><a href="#cb21-88"></a>      id<span class="op">=</span><span class="st">&quot;newTodoName&quot;</span></span>
+<span id="cb21-89"><a href="#cb21-89"></a>      <span class="kw">type</span><span class="op">=</span><span class="st">&quot;text&quot;</span></span>
+<span id="cb21-90"><a href="#cb21-90"></a>      value<span class="op">=</span>{newTodoName}</span>
+<span id="cb21-91"><a href="#cb21-91"></a>      onChange<span class="op">=</span>{updateNewTodoName}</span>
+<span id="cb21-92"><a href="#cb21-92"></a>      className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
+<span id="cb21-93"><a href="#cb21-93"></a>        <span class="st">&quot;grow rounded-md border p-2&quot;</span><span class="op">,</span></span>
+<span id="cb21-94"><a href="#cb21-94"></a>        newTodoNameError <span class="op">&amp;&amp;</span> <span class="st">&quot;border-red-500 outline-red-500&quot;</span></span>
+<span id="cb21-95"><a href="#cb21-95"></a>      )}</span>
+<span id="cb21-96"><a href="#cb21-96"></a>      placeholder<span class="op">=</span><span class="st">&quot;2文字以上、32文字以内で入力してください&quot;</span></span>
+<span id="cb21-97"><a href="#cb21-97"></a>    <span class="op">/&gt;</span></span>
+<span id="cb21-98"><a href="#cb21-98"></a>  <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb21-99"><a href="#cb21-99"></a>  {newTodoNameError <span class="op">&amp;&amp;</span> (</span>
+<span id="cb21-100"><a href="#cb21-100"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;ml-10 flex items-center space-x-1 text-sm font-bold text-red-500 &quot;</span><span class="op">&gt;</span></span>
+<span id="cb21-101"><a href="#cb21-101"></a>      <span class="op">&lt;</span>FontAwesomeIcon</span>
+<span id="cb21-102"><a href="#cb21-102"></a>        icon<span class="op">=</span>{faTriangleExclamation}</span>
+<span id="cb21-103"><a href="#cb21-103"></a>        className<span class="op">=</span><span class="st">&quot;mr-0.5&quot;</span></span>
+<span id="cb21-104"><a href="#cb21-104"></a>      <span class="op">/&gt;</span></span>
+<span id="cb21-105"><a href="#cb21-105"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span>{newTodoNameError}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb21-106"><a href="#cb21-106"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb21-107"><a href="#cb21-107"></a>  )}</span>
+<span id="cb21-108"><a href="#cb21-108"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb21-109"><a href="#cb21-109"></a>{<span class="co">/* ...ここまで */</span>}</span></code></pre></div>
       <p>このコードのなかで特に注意してほしいのは
       <strong>第99行目</strong> の論理演算子 <code>&amp;&amp;</code>
       を使った処理になります。この処理は、React
@@ -1163,14 +1244,14 @@ class="toc-section-number">12</span> 課題1</a></li>
       <code>{ hoge &amp;&amp; (&lt;div&gt;こんにちは&lt;/div&gt;)}</code>
       というコードを書くと、変数 <code>hoge</code> が
       <code>false</code>、<code>null</code>、<code>undefined</code>
-      のいずれかのときは、そこに何もレンダリングされません (つまり
-      <code>{...}</code>
+      のいずれかのときは、<strong>そこに何もレンダリングされません</strong>
+      (つまり <code>{...}</code>
       の部分が存在していないのと同等の扱いとなります)。</p>
-      <p>一方で、<code>hoge</code> が
-      <strong>truthyな値</strong>のときは
-      <code>&lt;div&gt;こんにちは&lt;/div&gt;</code>
-      がレンダリングされます。ただし、<strong>falseな値</strong>
-      のときでも例外的に、以下のようになるので注意してください。</p>
+      <p>一方で、<code>hoge</code> が <strong>truthyな値</strong>
+      のときは <code>&lt;div&gt;こんにちは&lt;/div&gt;</code>
+      がレンダリングされます。ただし、<strong>falseな値</strong> でも
+      <code>0</code> と <code>""</code>
+      は例外的に、以下のようになるので注意してください。</p>
       <ul>
       <li><code>hoge</code> が <code>0</code> のときは、<span
       class="masked">数値の「0」がレンダリング</span> されます。</li>
@@ -1185,64 +1266,60 @@ class="toc-section-number">12</span> 課題1</a></li>
       <code>twMerge</code> は <span class="masked">Tailwind CSS
       のクラスを衝突を回避しながら結合する機能を持った関数</span>
       となります。</p>
-      <div class="sourceCode" id="cb21"
+      <div class="sourceCode" id="cb22"
       data-caption="src/App.tsx (抜粋)" data-startFrom="8"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 7;"><span id="cb21-8"><a href="#cb21-8"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span> <span class="co">// ◀◀ 追加</span></span></code></pre></div>
-      <p><code>twMerge("grow rounded-md border p-2", newTodoNameError &amp;&amp; "border-red-500 outline-red-500")}</code>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 7;"><span id="cb22-8"><a href="#cb22-8"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span> <span class="co">// ◀◀ 追加</span></span></code></pre></div>
+      <p><strong>第92行目</strong>の
+      <code>twMerge("grow rounded-md border p-2", newTodoNameError &amp;&amp; "border-red-500 outline-red-500")}</code>
       は、<code>newTodoNameError</code> が「<strong>空文字</strong>
-      <code>""</code> のとき」は
-      <code>twMerge("grow rounded-md border p-2")</code>
+      <code>""</code> のとき」は <span
+      class="masked"><code>twMerge("grow rounded-md border p-2")</code></span>
       と等価になります。</p>
       <p>そうでないときは
       <code>twMerge("grow rounded-md border p-2", "border-red-500 outline-red-500")}</code>
-      と等価になります。</p>
-      <p>つまり、新規タスクの名前に不備があるときは <span
+      と等価になります。つまり、新規タスクの名前に不備があるとき
+      (文字数が 2文字以上32文字以内になっていないとき) <span
       class="masked">テキストボックスの枠を赤線にするクラスを追加する仕組み</span>
       をつくっています。</p>
-      <div class="note type-tips">
-      <p><strong>Tailwind CSS におけるクラスの衝突とは🤔</strong></p>
-      <p>Tailwind CSS では、</p>
-      <div class="sourceCode" id="cb22"
-      data-caption="src/App.tsx (抜粋)" data-startFrom="8"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 7;"><span id="cb22-8"><a href="#cb22-8"></a><span class="op">&lt;</span>h1 className<span class="op">=</span>{<span class="st">&quot;text-red-600 &quot;</span> <span class="op">+</span> <span class="st">&quot;text-red-400&quot;</span>}<span class="op">&gt;</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a>  TodoApp</span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="op">&lt;/</span>h1<span class="op">&gt;</span></span></code></pre></div>
-      </div>
-      <p>引数で指定されたtailwindのクラスを衝突しないように</p>
+      <p><code>twMerge</code> の必要性については <a
+      href="https://www.youtube.com/watch?v=LMixhEfxI9k">Tailwind
+      CSS初心者が絶対ハマる落とし穴</a>@ ムーザルちゃんねる (動画)
+      を参考にしてください。</p>
       <h2 data-number="6.1" id="補足-react-hook-form-と-zod"><span
       class="header-section-number">6.1</span> 補足: React Hook Form と
       Zod</h2>
-      <p>テキストボックスやラジオボタンなどを用いた
+      <p>Reactにおいて、テキストボックスやラジオボタンなどを用いた
       <strong>フォーム処理</strong> には<a
       href="https://www.react-hook-form.com/">ReactHookForm</a>というライブラリが活用できます。このTodoアプリのように入力項目が少ない場合は、現状のように
       useState
       を使ったシンプルな実装で十分ですが、フォームの規模が大きくなるほど
       <strong>ReactHookFormの導入効果</strong> が高まります。</p>
       <p>また、フォームのバリデーションには<a
-      href="https://www.google.com/search?q=react+zodとは">zod</a>というライブラリが活用できます。これは、ReactHookFormと組み合わせて使用可能であり、以下ような型安全ななバリデーションルールを宣言的に記述できます。TypeScriptとの相性も良く、入力値の型推論も自動的に行われるため、開発効率の向上が期待できます。</p>
+      href="https://www.google.com/search?q=react+zodとは">zod</a>というライブラリが活用できます。これは、ReactHookFormと組み合わせて使用可能であり、以下ような型安全なバリデーションルールを宣言的に記述できます。TypeScriptとの相性も良く、入力値の型推論も自動的に行われるため、開発効率の向上が期待できます。</p>
       <ul>
       <li>必須項目のチェック</li>
       <li>文字数制限や数値範囲の検証</li>
       <li>メールアドレスや電話番号などの形式チェック</li>
       <li>カスタムバリデーションルールの追加</li>
       </ul>
+      <p>フロントエンド開発を目指す人は、これらのライブラリを積極的に利用して<a
+      href="lecture05.html#課題1">課題1</a>に取り組んでください。</p>
       <h1 data-number="7" id="既存todoの-完了未完了-の切り替え"><span
       class="header-section-number">7</span> 既存Todoの 完了/未完了
       の切り替え</h1>
       <p>既存の Todo について <code>isDone</code> の
       <code>true</code>/<code>false</code>
       を切り替える機能を実装します。ここでは、次のように
-      <strong>チェックボックス</strong> のUIを使用して
-      <code>isDone</code> の値 (つまり完了/未完了)
-      を切り替えるようにしていきます。</p>
+      <strong>チェックボックス</strong> と紐づけて <code>isDone</code>
+      の値 (つまり完了/未完了) を切り替えるようにしていきます。</p>
       <figure>
       <img src="figs/05/app_10.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <div class="note type-caution">
-      <p>ここからは、<strong>あえて</strong> <code>App.tsx</code>
-      <strong>と</strong> <code>TodoList.tsx</code> の
-      <strong>全体コードを提供しません</strong>。ここまでの内容を十分に理解したうえで、以降で提供されるコードの断片を「<strong>自分のコードのどこに配置すればよいか？</strong>」を考えて作業を進めてください。</p>
+      <p>ここからは<strong>意図的に</strong> <code>App.tsx</code>
+      <strong>と</strong> <code>TodoList.tsx</code>
+      <strong>の全体コードを提供しません</strong>。ここまでの内容を十分に理解し、以降で提供されるコードの断片を「<strong>自分のコードのどこに配置すればよいか？</strong>」を考えながら作業を進めてください。</p>
       </div>
       <p>まずは、<code>src/App.tsx</code> のなかに、次のような
       <code>updateIsDone</code> 関数を追加します。</p>
@@ -1258,14 +1335,14 @@ class="toc-section-number">12</span> 課題1</a></li>
       が変更されたことを <strong>React が確実に検知できるように</strong>
       <span
       class="masked">「<code>map</code>」と「スプレッド構文」を使ってイミュータブルな操作</span>
-      をするように実装する必要があります。</p>
+      で処理するように実装する必要があります。</p>
       <ul>
       <li><a
       href="lecture03.html#イミュータブルなオブジェクト更新">スプレッド構文によるイミュータブルなオブジェクト更新</a><span
       class="citation" data-cites="第03回講義">@第03回講義</span></li>
       </ul>
       <p>次の <code>updateIsDone</code> を <code>src/App.tsx</code>
-      のなかの適切な位置に追記してください。</p>
+      のなかの <strong>適切な位置</strong> に追記してください。</p>
       <div class="sourceCode" id="cb24"
       data-caption="src/App.tsx (抜粋・updateIsDone関数の追加) "><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">const</span> updateIsDone <span class="op">=</span> (id<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> value<span class="op">:</span> <span class="dt">boolean</span>) <span class="kw">=&gt;</span> {</span>
@@ -1279,13 +1356,14 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb24-9"><a href="#cb24-9"></a>  <span class="fu">setTodos</span>(updatedTodos)<span class="op">;</span></span>
 <span id="cb24-10"><a href="#cb24-10"></a>}<span class="op">;</span></span></code></pre></div>
       <p>次に <code>src/TodoList.tsx</code>
-      において、各Todoの情報を表示するUIに
+      において、各Todoの情報を表示している UI に
       <strong>チェックボックス</strong> を追加し、そこに
       <code>checked={todo.isDone}</code>
       の属性を設定して「<strong>完了/未完了の状態</strong>
       (<code>isDone</code>プロパティ)」と「<strong>チェックボックスのオンオフ</strong>」を連動させます。</p>
       <p>以下のコードを参考に、<code>src/TodoList.tsx</code>
-      のなかでTodoの情報を表示しているUIにチェックボックスを追加してください。</p>
+      のなかでTodoの情報を表示している UI
+      に「チェックボックス」を追加してください。</p>
       <div class="sourceCode" id="cb25"
       data-caption="src/TodoList.tsx (抜粋)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb25-1"><a href="#cb25-1"></a><span class="op">&lt;</span>div<span class="op">&gt;</span></span>
@@ -1299,12 +1377,13 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb25-9"><a href="#cb25-9"></a>    {<span class="co">/* 略 */</span>}</span>
 <span id="cb25-10"><a href="#cb25-10"></a>  )}</span>
 <span id="cb25-11"><a href="#cb25-11"></a><span class="op">&lt;/</span>div<span class="op">&gt;</span></span></code></pre></div>
-      <p>これを実装すると、次のようにTodoのUIに
+      <p>これを実装すると、次のように Todo の UI に
       <strong>チェックボックス</strong> がついて、<code>isDone</code>
       の値 (初期値) を反映した <strong>オン/オフ</strong>
       がつきます。ただし、現状では、まだ <span
       class="masked">チェックボックスをクリックしてもオンオフが変化</span>
-      しません。デベロッパーツールで確認すると、コンソール出力には「<strong>You
+      しません。</p>
+      <p>デベロッパーツールを確認すると、コンソール出力には「<strong>You
       provided a ‘checked’ prop to a form field without an ‘onChange’
       handler. This will render a read-only field. If the field should
       be mutable use ‘defaultChecked’. Otherwise, set either ‘onChange’
@@ -1316,8 +1395,8 @@ class="toc-section-number">12</span> 課題1</a></li>
       <p><strong>チェックボックスのクリックによって</strong>、当該Todoの
       <code>isDone</code>
       プロパティを変更して、UI表示も更新するためには、<span
-      class="masked">先に定義した <code>updateIsDone</code>
-      関数をコールする</span> 必要があります。</p>
+      class="masked">先に定義した「updateIsDone関数」をコールする</span>
+      必要があります。</p>
       <p>ただし、<code>updateIsDone</code> 関数は Appコンポーネント
       (<code>src/App.tsx</code>)
       の内部に定義しているため、<code>src/TodoList.tsx</code>
@@ -1344,7 +1423,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb26-4"><a href="#cb26-4"></a>}<span class="op">;</span></span></code></pre></div>
       <p>また、ユーザによってチェックボックスが操作されたタイミングで、Props
       経由で受け取った <code>updateIsDone</code>
-      が呼び出されるように、チェックボックスの「<strong>onChange属性</strong>」を次のように設定します。ここでは、先に紹介したように<a
+      をコールするように、チェックボックスの「<strong>onChange属性</strong>」を次のように設定します。ここでは、先に紹介したように<a
       href="lecture05.html#補足-onchange属性の設定">onChangeにアロー関数形式で直接的に処理を記述</a>しています。</p>
       <div class="sourceCode" id="cb27"
       data-caption="src/TodoList.tsx (抜粋)"><pre
@@ -1355,8 +1434,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb27-5"><a href="#cb27-5"></a>  className<span class="op">=</span><span class="st">&quot;mr-1.5 cursor-pointer&quot;</span></span>
 <span id="cb27-6"><a href="#cb27-6"></a><span class="op">/&gt;</span></span></code></pre></div>
       <p>最後に <code>src/App.tsx</code>
-      のなかで、TodoListコンポーネントに対して <code>updateIsDone</code>
-      関数を渡すように変更します。</p>
+      のなかで、TodoListコンポーネントに対して「updateIsDone関数」を渡すように変更します。</p>
       <div class="sourceCode" id="cb28"
       data-caption="src/App.tsx (抜粋・変更前)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="op">&lt;</span>TodoList todos<span class="op">=</span>{todos}<span class="op">/&gt;</span></span></code></pre></div>
@@ -1371,7 +1449,9 @@ class="toc-section-number">12</span> 課題1</a></li>
       class="header-section-number">7.1</span>
       NG実装：ミュータブルな操作でオブジェクト配列の要素を変更</h2>
       <p>上記の解説では <code>updateIsDone</code>
-      を次のようにイミュータブルな操作で処理するように実装しました。</p>
+      を次のようにスプレッド構文を使用して
+      <strong>イミュータブルな操作</strong>
+      で処理するように実装しました。</p>
       <div class="sourceCode" id="cb30"
       data-caption="(再掲) updateIsDone関数"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">const</span> updateIsDone <span class="op">=</span> (id<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> value<span class="op">:</span> <span class="dt">boolean</span>) <span class="kw">=&gt;</span> {</span>
@@ -1384,7 +1464,7 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb30-8"><a href="#cb30-8"></a>  })<span class="op">;</span></span>
 <span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">setTodos</span>(updatedTodos)<span class="op">;</span></span>
 <span id="cb30-10"><a href="#cb30-10"></a>}<span class="op">;</span></span></code></pre></div>
-      <p>これを次のようにミュータブルな操作で処理すると意図するように機能しなくなります。実際に書き換えて確かめてください。</p>
+      <p>これを次のように<strong>ミュータブルな操作</strong>で処理してしまうと意図するように機能しなくなります。実際に書き換えて確かめてください。</p>
       <div class="sourceCode" id="cb31"
       data-caption="(NGな実装) updateIsDone関数"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">const</span> updateIsDone <span class="op">=</span> (id<span class="op">:</span> <span class="dt">string</span><span class="op">,</span> value<span class="op">:</span> <span class="dt">boolean</span>) <span class="kw">=&gt;</span> {</span>
@@ -1395,15 +1475,16 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb31-6"><a href="#cb31-6"></a>  }</span>
 <span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">setTodos</span>(todos)<span class="op">;</span></span>
 <span id="cb31-8"><a href="#cb31-8"></a>}<span class="op">;</span></span></code></pre></div>
-      <p>これは繰返し説明しているように、Reactでは画面の再レンダリングが「<strong>参照の変更を検知すること</strong>」で実行されるためです。以下のような処理では
-      <code>setTodos()</code>
-      をコールしても、参照が同じ配列を指したままとなるため、Reactは変更を検知できず再レンダリングが発生しません。</p>
+      <p>これは繰返し説明しているように、Reactでは画面の再レンダリングが「<strong>参照の変更を検知すること</strong>」で実行されるためです。上記のような処理では
+      <code>setTodos(todos)</code> をコールしても、引数の
+      <code>todos</code>
+      参照が同じ配列を指したままとなるため、Reactは変更を検知せず再レンダリングは発生しません。</p>
       <h2 data-number="7.2"
       id="完了済みのタスクを削除するボタンの追加"><span
       class="header-section-number">7.2</span>
       完了済みのタスクを削除するボタンの追加</h2>
       <p>完了済みのタスクを一括削除する機能を実装します。<a
-      href="lecture03.html#オブジェクト型の配列に対するfilterの適用">第03回講義</a>で学んだ「filter」を利用しています。</p>
+      href="lecture03.html#オブジェクト型の配列に対するfilterの適用">第03回講義</a>で学んだ「<strong>filter</strong>」を利用しています。</p>
       <p><code>src/App.tsx</code> に次の
       <code>removeCompletedTodos</code> 関数を追加してください。</p>
       <div class="sourceCode" id="cb32"
@@ -1695,6 +1776,11 @@ class="toc-section-number">12</span> 課題1</a></li>
 <span id="cb40-40"><a href="#cb40-40"></a>  )<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
 <span id="cb40-41"><a href="#cb40-41"></a></span>
 <span id="cb40-42"><a href="#cb40-42"></a>  <span class="co">// ～ 以下、省略 ～</span></span></code></pre></div>
+      <p>ここでは <code>useEffect</code> が重要な役割を果たします。</p>
+      <p><code>useEffect</code> については <a
+      href="https://www.youtube.com/watch?v=4INjmxXaPxU">初心者向け！ReactのuseEffectが何してるのか20分で説明</a>@
+      Code Tips (動画) や、<a
+      href="https://www.google.com/search?q=react+useeffect+解説">ウェブ検索</a>を参照してください。</p>
       <h1 data-number="11"
       id="reactアプリを-github-pages-にデプロイする手順"><span
       class="header-section-number">11</span> Reactアプリを GitHub Pages
@@ -1892,8 +1978,18 @@ Published</code></pre>
       <img src="figs/05/deploy_06.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>なお、<a
+      href="https://www.google.com/search?q=react-router-domとは">react-router-dom</a>を使った
+      <strong>ルーティング</strong> を導入したReactアプリを GitHub Pages
+      でホストする場合は、さらにひと工夫が求められます。これについては個別に訊いてくれれば個別にレクチャします
+      (<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/05/main.tsx">main.tsx</a>,<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/05/Router.tsx">Router.tsx</a>)。</p>
       <h1 data-number="12" id="課題1"><span
       class="header-section-number">12</span> 課題1</h1>
+      <p>以上、Reactを利用した (フロントエンドで処理が完結する)
+      Todoアプリ
+      の「<strong>チュートリアル</strong>」については完了となります。</p>
       <p>Reactを利用した <strong>オリジナルTodoアプリ</strong>
       を開発して、GitHub Pages にデプロイし、その URL
       を提出してください。提出するURLは「リポジトリのURL
@@ -1917,22 +2013,22 @@ Published</code></pre>
       href="https://takeshiwada1980.github.io/react-todo-app-demo/2">Todoアプリのサンプル</a>
       …ここまでつくれたら素晴らしい！9点🎉</li>
       </ul></li>
+      <li><strong><em>取り組み時間の目安</em></strong> :
+      <strong>16時間以上</strong> ( <code>useEffect</code>
+      の理解などの基礎学習の時間を含む)。本科目は「学修単位科目」かつ「筆記試験がない科目」です。課題には十分な時間をかけて取り組んでください。</li>
       <li><strong><em>アドバイス</em></strong> :
       Todoアプリとしての「<span class="masked">機能</span>」や「<span
       class="masked">UI/UX</span>」を中心とした完成度の他、リポジトリの
       <code>README.md</code> の内容を評価します。<code>README.md</code>
-      に、以下の内容を含めると (就活のポートフォリオとして) 高評価です。
+      に、以下の内容を含めると高評価です。
       <ul>
-      <li>アプリの機能。これを書いておかないと
-      <strong>苦労して実装した機能に気付いてもらえないこと</strong>
-      があります。スクリーンショットがあると分かりやすいです。</li>
+      <li>アプリの機能。これを書いておかないと<strong>頑張って実装した機能に気付いてもらえないこと</strong>があります。スクリーンショットがあると分かりやすいです。</li>
       <li><strong>特に工夫や注力 (チャレンジ)
-      したところ、独自性に拘ったところ</strong>。それらの「着想」や「経緯」についても書かれていると高評価・好印象です👍</li>
+      したところ、オリジナリティを持たせているところ</strong>。それらの「着想」や「経緯」についても書かれていると
+      (就活のポートフォリオとして) 高評価・好印象です👍</li>
       <li>使用技術
       (技術スタック、主要ライブラリ)、開発に要した時間や期間など。</li>
       </ul></li>
-      <li><strong><em>取り組み時間の目安</em></strong> :
-      <strong>16時間以上</strong>。本科目は「学修単位科目」かつ「筆記試験がない科目」です。課題には十分な時間をかけて取り組んでください。</li>
       </ul>
       <p><br />
       </p>
