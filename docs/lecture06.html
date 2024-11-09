@@ -1561,12 +1561,13 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <img src="figs/06/app_10.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>Next.js (React) では、JSXにおいて
+      <p>Next.js (React) では、JSXで
       <code>&lt;div&gt;{post.content}&lt;/div&gt;</code>
-      のように記述すると、<strong>悪意あるスクリプトの実行を防ぐため</strong>、コンテンツは自動的にサニタイズ
-      (無害化・エスケープ処理) されます。</p>
-      <p>ただし、信頼できるコンテンツを HTML
-      として意図的に描画したい場合は、次のように
+      のように記述すると、<strong>悪意あるスクリプトの実行を防ぐため</strong>
+      コンテンツが自動的にサニタイズ (無害化・エスケープ処理)
+      されます。</p>
+      <p>ただし、<strong>信頼できるコンテンツを HTML
+      として意図的に描画したい場合</strong>は、次のように
       <code>dangerouslySetInnerHTML</code> 属性を使用します。</p>
       <div class="sourceCode" id="cb36"
       data-caption="HTMLをサニタイズせずに出力する例"><pre
@@ -1576,7 +1577,7 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       を書き換えて、<code>post.content</code> の
       <code>&lt;br/&gt;</code>
       が「改行」に置き換わることを確認してください。</p>
-      <p>なお、改行や太字/斜線/下線などの特定のタグのみを許可し、それ以外のタグ
+      <p>なお、改行や太字/斜線/下線などの<strong>特定のタグのみを許可</strong>し、それ以外のタグ
       (例えば <code>&lt;script&gt;</code> など)
       をコンテンツから削除するためには <code>dompurify</code>
       (Next.jsでバックエンドでも使用するのであれば
