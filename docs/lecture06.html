@@ -1359,76 +1359,10 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       フォルダを作成し、そこに <code>dummyPosts.ts</code>
       というファイルを作成してください。そして、投稿記事の一覧を格納する
       <code>dummyPosts</code> というオブジェクトを作成してください。</p>
-      <div class="sourceCode" id="cb33"
-      data-caption="src/app/_mocks/dummyPosts.ts"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">import</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="kw">const</span> dummyPosts<span class="op">:</span> Post[] <span class="op">=</span> [</span>
-<span id="cb33-4"><a href="#cb33-4"></a>  {</span>
-<span id="cb33-5"><a href="#cb33-5"></a>    id<span class="op">:</span> <span class="st">&quot;1d4cbd35-6ec2-4f34-b3e7-4a9b35a60d1a&quot;</span><span class="op">,</span></span>
-<span id="cb33-6"><a href="#cb33-6"></a>    createdAt<span class="op">:</span> <span class="st">&quot;2024-10-26T22:48:30.156Z&quot;</span><span class="op">,</span></span>
-<span id="cb33-7"><a href="#cb33-7"></a>    title<span class="op">:</span> <span class="st">&quot;投稿3&quot;</span><span class="op">,</span></span>
-<span id="cb33-8"><a href="#cb33-8"></a>    content<span class="op">:</span></span>
-<span id="cb33-9"><a href="#cb33-9"></a>      <span class="st">&quot;秋は夕暮れ。&lt;/br&gt;夕日のさして山の端いと近うなりたるに、烏の寝どころへ行くとて、三つ四つ、二つ三つなど、飛びいそぐさへあはれなり。まいて雁などのつらねたるが、いと小さく見ゆるはいとをかし。&lt;br/&gt;日入りはてて、風の音、虫の 音など、はたいふべきにあらず。&quot;</span><span class="op">,</span></span>
-<span id="cb33-10"><a href="#cb33-10"></a>    coverImage<span class="op">:</span> {</span>
-<span id="cb33-11"><a href="#cb33-11"></a>      url<span class="op">:</span> <span class="st">&quot;https://w1980.blob.core.windows.net/pg3/cover-img-red.jpg&quot;</span><span class="op">,</span></span>
-<span id="cb33-12"><a href="#cb33-12"></a>      height<span class="op">:</span> <span class="dv">768</span><span class="op">,</span></span>
-<span id="cb33-13"><a href="#cb33-13"></a>      width<span class="op">:</span> <span class="dv">1365</span><span class="op">,</span></span>
-<span id="cb33-14"><a href="#cb33-14"></a>    }<span class="op">,</span></span>
-<span id="cb33-15"><a href="#cb33-15"></a>    categories<span class="op">:</span> [</span>
-<span id="cb33-16"><a href="#cb33-16"></a>      {</span>
-<span id="cb33-17"><a href="#cb33-17"></a>        id<span class="op">:</span> <span class="st">&quot;587ac4ab-92de-450c-9423-5e091d16ecb5&quot;</span><span class="op">,</span></span>
-<span id="cb33-18"><a href="#cb33-18"></a>        name<span class="op">:</span> <span class="st">&quot;TypeScript&quot;</span><span class="op">,</span></span>
-<span id="cb33-19"><a href="#cb33-19"></a>      }<span class="op">,</span></span>
-<span id="cb33-20"><a href="#cb33-20"></a>      {</span>
-<span id="cb33-21"><a href="#cb33-21"></a>        id<span class="op">:</span> <span class="st">&quot;f8a4c465-2e7f-455d-aa1d-5098e9d0086d&quot;</span><span class="op">,</span></span>
-<span id="cb33-22"><a href="#cb33-22"></a>        name<span class="op">:</span> <span class="st">&quot;Next.js&quot;</span><span class="op">,</span></span>
-<span id="cb33-23"><a href="#cb33-23"></a>      }<span class="op">,</span></span>
-<span id="cb33-24"><a href="#cb33-24"></a>    ]<span class="op">,</span></span>
-<span id="cb33-25"><a href="#cb33-25"></a>  }<span class="op">,</span></span>
-<span id="cb33-26"><a href="#cb33-26"></a>  {</span>
-<span id="cb33-27"><a href="#cb33-27"></a>    id<span class="op">:</span> <span class="st">&quot;24f932b8-231b-429b-b9dc-569f07ba16a7&quot;</span><span class="op">,</span></span>
-<span id="cb33-28"><a href="#cb33-28"></a>    createdAt<span class="op">:</span> <span class="st">&quot;2024-10-24T22:37:17.367Z&quot;</span><span class="op">,</span></span>
-<span id="cb33-29"><a href="#cb33-29"></a>    title<span class="op">:</span> <span class="st">&quot;投稿2&quot;</span><span class="op">,</span></span>
-<span id="cb33-30"><a href="#cb33-30"></a>    content<span class="op">:</span></span>
-<span id="cb33-31"><a href="#cb33-31"></a>      <span class="st">&quot;夏は夜。&lt;br/&gt;月のころはさらなり。&lt;br/&gt;やみもなほ、蛍の多く飛びちがひたる。また、 ただ一つ二つなど、ほのかにうち光りて行くもをかし。雨など降るもをかし。&quot;</span><span class="op">,</span></span>
-<span id="cb33-32"><a href="#cb33-32"></a>    coverImage<span class="op">:</span> {</span>
-<span id="cb33-33"><a href="#cb33-33"></a>      url<span class="op">:</span> <span class="st">&quot;https://w1980.blob.core.windows.net/pg3/cover-img-green.jpg&quot;</span><span class="op">,</span></span>
-<span id="cb33-34"><a href="#cb33-34"></a>      height<span class="op">:</span> <span class="dv">768</span><span class="op">,</span></span>
-<span id="cb33-35"><a href="#cb33-35"></a>      width<span class="op">:</span> <span class="dv">1365</span><span class="op">,</span></span>
-<span id="cb33-36"><a href="#cb33-36"></a>    }<span class="op">,</span></span>
-<span id="cb33-37"><a href="#cb33-37"></a>    categories<span class="op">:</span> [</span>
-<span id="cb33-38"><a href="#cb33-38"></a>      {</span>
-<span id="cb33-39"><a href="#cb33-39"></a>        id<span class="op">:</span> <span class="st">&quot;587ac4ab-92de-450c-9423-5e091d16ecb5&quot;</span><span class="op">,</span></span>
-<span id="cb33-40"><a href="#cb33-40"></a>        name<span class="op">:</span> <span class="st">&quot;TypeScript&quot;</span><span class="op">,</span></span>
-<span id="cb33-41"><a href="#cb33-41"></a>      }<span class="op">,</span></span>
-<span id="cb33-42"><a href="#cb33-42"></a>    ]<span class="op">,</span></span>
-<span id="cb33-43"><a href="#cb33-43"></a>  }<span class="op">,</span></span>
-<span id="cb33-44"><a href="#cb33-44"></a>  {</span>
-<span id="cb33-45"><a href="#cb33-45"></a>    id<span class="op">:</span> <span class="st">&quot;36b7c693-4cce-4d73-afa3-acb54a404290&quot;</span><span class="op">,</span></span>
-<span id="cb33-46"><a href="#cb33-46"></a>    createdAt<span class="op">:</span> <span class="st">&quot;2024-10-22T11:22:34.684Z&quot;</span><span class="op">,</span></span>
-<span id="cb33-47"><a href="#cb33-47"></a>    title<span class="op">:</span> <span class="st">&quot;投稿1&quot;</span><span class="op">,</span></span>
-<span id="cb33-48"><a href="#cb33-48"></a>    content<span class="op">:</span></span>
-<span id="cb33-49"><a href="#cb33-49"></a>      <span class="st">&quot;春はあけぼの。&lt;br/&gt;やうやう白くなりゆく山ぎは、すこしあかりて、紫だちたる 雲のほそくたなびきたる。&quot;</span><span class="op">,</span></span>
-<span id="cb33-50"><a href="#cb33-50"></a>    coverImage<span class="op">:</span> {</span>
-<span id="cb33-51"><a href="#cb33-51"></a>      url<span class="op">:</span> <span class="st">&quot;https://w1980.blob.core.windows.net/pg3/cover-img-purple.jpg&quot;</span><span class="op">,</span></span>
-<span id="cb33-52"><a href="#cb33-52"></a>      height<span class="op">:</span> <span class="dv">768</span><span class="op">,</span></span>
-<span id="cb33-53"><a href="#cb33-53"></a>      width<span class="op">:</span> <span class="dv">1365</span><span class="op">,</span></span>
-<span id="cb33-54"><a href="#cb33-54"></a>    }<span class="op">,</span></span>
-<span id="cb33-55"><a href="#cb33-55"></a>    categories<span class="op">:</span> [</span>
-<span id="cb33-56"><a href="#cb33-56"></a>      {</span>
-<span id="cb33-57"><a href="#cb33-57"></a>        id<span class="op">:</span> <span class="st">&quot;587ac4ab-92de-450c-9423-5e091d16ecb5&quot;</span><span class="op">,</span></span>
-<span id="cb33-58"><a href="#cb33-58"></a>        name<span class="op">:</span> <span class="st">&quot;TypeScript&quot;</span><span class="op">,</span></span>
-<span id="cb33-59"><a href="#cb33-59"></a>      }<span class="op">,</span></span>
-<span id="cb33-60"><a href="#cb33-60"></a>      {</span>
-<span id="cb33-61"><a href="#cb33-61"></a>        id<span class="op">:</span> <span class="st">&quot;5cf22131-bac8-4bd0-be8e-757cec2bcc9a&quot;</span><span class="op">,</span></span>
-<span id="cb33-62"><a href="#cb33-62"></a>        name<span class="op">:</span> <span class="st">&quot;React&quot;</span><span class="op">,</span></span>
-<span id="cb33-63"><a href="#cb33-63"></a>      }<span class="op">,</span></span>
-<span id="cb33-64"><a href="#cb33-64"></a>    ]<span class="op">,</span></span>
-<span id="cb33-65"><a href="#cb33-65"></a>  }<span class="op">,</span></span>
-<span id="cb33-66"><a href="#cb33-66"></a>]<span class="op">;</span></span>
-<span id="cb33-67"><a href="#cb33-67"></a></span>
-<span id="cb33-68"><a href="#cb33-68"></a><span class="im">export</span> <span class="im">default</span> dummyPosts<span class="op">;</span></span></code></pre></div>
+      <ul>
+      <li><code>dummyPosts.ts</code> のコードは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/06/dummyPosts.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</li>
+      </ul>
       <p>最終的に、次のようなフォルダ構成になっていることを確認してください。</p>
       <figure>
       <img src="figs/06/vscode_07.png" alt="img" />
@@ -1446,83 +1380,83 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <code>PostSummary.tsx</code>
       を作成してください。PostSummaryコンポーネントは、<strong>投稿記事の概要を表示するためのコンポーネント</strong>
       になります。</p>
-      <div class="sourceCode" id="cb34"
+      <div class="sourceCode" id="cb33"
       data-caption="src/app/_components/PostSummary.tsx (投稿記事の概要を表示するコンポーネント)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="kw">type</span> Props <span class="op">=</span> {</span>
-<span id="cb34-5"><a href="#cb34-5"></a>  post<span class="op">:</span> Post<span class="op">;</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a>}<span class="op">;</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a></span>
-<span id="cb34-8"><a href="#cb34-8"></a><span class="kw">const</span> PostSummary<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span><span class="op">&lt;</span>Props<span class="op">&gt;</span> <span class="op">=</span> (props) <span class="kw">=&gt;</span> {</span>
-<span id="cb34-9"><a href="#cb34-9"></a>  <span class="kw">const</span> { post } <span class="op">=</span> props<span class="op">;</span></span>
-<span id="cb34-10"><a href="#cb34-10"></a>  <span class="cf">return</span> (</span>
-<span id="cb34-11"><a href="#cb34-11"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;border border-slate-400 p-3&quot;</span><span class="op">&gt;</span></span>
-<span id="cb34-12"><a href="#cb34-12"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span>{post<span class="op">.</span><span class="at">title</span>}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb34-13"><a href="#cb34-13"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span>{post<span class="op">.</span><span class="at">content</span>}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb34-14"><a href="#cb34-14"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb34-15"><a href="#cb34-15"></a>  )<span class="op">;</span></span>
-<span id="cb34-16"><a href="#cb34-16"></a>}<span class="op">;</span></span>
-<span id="cb34-17"><a href="#cb34-17"></a></span>
-<span id="cb34-18"><a href="#cb34-18"></a><span class="im">export</span> <span class="im">default</span> PostSummary<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="kw">type</span> Props <span class="op">=</span> {</span>
+<span id="cb33-5"><a href="#cb33-5"></a>  post<span class="op">:</span> Post<span class="op">;</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>}<span class="op">;</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a></span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="kw">const</span> PostSummary<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span><span class="op">&lt;</span>Props<span class="op">&gt;</span> <span class="op">=</span> (props) <span class="kw">=&gt;</span> {</span>
+<span id="cb33-9"><a href="#cb33-9"></a>  <span class="kw">const</span> { post } <span class="op">=</span> props<span class="op">;</span></span>
+<span id="cb33-10"><a href="#cb33-10"></a>  <span class="cf">return</span> (</span>
+<span id="cb33-11"><a href="#cb33-11"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;border border-slate-400 p-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb33-12"><a href="#cb33-12"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span>{post<span class="op">.</span><span class="at">title</span>}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb33-13"><a href="#cb33-13"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span>{post<span class="op">.</span><span class="at">content</span>}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb33-14"><a href="#cb33-14"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb33-15"><a href="#cb33-15"></a>  )<span class="op">;</span></span>
+<span id="cb33-16"><a href="#cb33-16"></a>}<span class="op">;</span></span>
+<span id="cb33-17"><a href="#cb33-17"></a></span>
+<span id="cb33-18"><a href="#cb33-18"></a><span class="im">export</span> <span class="im">default</span> PostSummary<span class="op">;</span></span></code></pre></div>
       <p>このPostSummaryコンポーネントは Propsとして、(単一の)
       投稿記事を受け取り、その <code>title</code> と
       <code>content</code> を表示するコンポーネントとなっています。</p>
       <p>次に、<code>src/app/pages.tsx</code> ( <code>/</code>
       にアクセスしたとき (トップページにアクセスしたとき)
       に読み込まれるファイル) を次のように編集してください。</p>
-      <div class="sourceCode" id="cb35"
+      <div class="sourceCode" id="cb34"
       data-caption="src/app/page.tsx"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb35-1"><a href="#cb35-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a><span class="im">import</span> PostSummary <span class="im">from</span> <span class="st">&quot;@/app/_components/PostSummary&quot;</span><span class="op">;</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a><span class="im">import</span> dummyPosts <span class="im">from</span> <span class="st">&quot;@/app/_mocks/dummyPosts&quot;</span><span class="op">;</span></span>
-<span id="cb35-6"><a href="#cb35-6"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
-<span id="cb35-7"><a href="#cb35-7"></a><span class="im">import</span> { faSpinner } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
-<span id="cb35-8"><a href="#cb35-8"></a></span>
-<span id="cb35-9"><a href="#cb35-9"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb35-10"><a href="#cb35-10"></a>  <span class="co">// 投稿データを「状態」として管理 (初期値はnull)</span></span>
-<span id="cb35-11"><a href="#cb35-11"></a>  <span class="kw">const</span> [posts<span class="op">,</span> setPosts] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post[] <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb35-12"><a href="#cb35-12"></a></span>
-<span id="cb35-13"><a href="#cb35-13"></a>  <span class="co">// コンポーネントが読み込まれたときに「1回だけ」実行する処理</span></span>
-<span id="cb35-14"><a href="#cb35-14"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb35-15"><a href="#cb35-15"></a>    <span class="co">// 本来はウェブAPIを叩いてデータを取得するが、まずはモックデータを使用</span></span>
-<span id="cb35-16"><a href="#cb35-16"></a>    <span class="co">// (ネットからのデータ取得をシミュレートして１秒後にデータをセットする)</span></span>
-<span id="cb35-17"><a href="#cb35-17"></a>    <span class="kw">const</span> timer <span class="op">=</span> <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb35-18"><a href="#cb35-18"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ウェブAPIからデータを取得しました (虚言)&quot;</span>)<span class="op">;</span></span>
-<span id="cb35-19"><a href="#cb35-19"></a>      <span class="fu">setPosts</span>(dummyPosts)<span class="op">;</span></span>
-<span id="cb35-20"><a href="#cb35-20"></a>    }<span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span> <span class="co">// 1000ミリ秒 = 1秒</span></span>
-<span id="cb35-21"><a href="#cb35-21"></a></span>
-<span id="cb35-22"><a href="#cb35-22"></a>    <span class="co">// データ取得の途中でページ遷移したときにタイマーを解除する処理</span></span>
-<span id="cb35-23"><a href="#cb35-23"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> <span class="pp">clearTimeout</span>(timer)<span class="op">;</span></span>
-<span id="cb35-24"><a href="#cb35-24"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
-<span id="cb35-25"><a href="#cb35-25"></a></span>
-<span id="cb35-26"><a href="#cb35-26"></a>  <span class="co">// 投稿データが取得できるまでは「Loading...」を表示</span></span>
-<span id="cb35-27"><a href="#cb35-27"></a>  <span class="cf">if</span> (<span class="op">!</span>posts) {</span>
-<span id="cb35-28"><a href="#cb35-28"></a>    <span class="cf">return</span> (</span>
-<span id="cb35-29"><a href="#cb35-29"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-gray-500&quot;</span><span class="op">&gt;</span></span>
-<span id="cb35-30"><a href="#cb35-30"></a>        <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faSpinner} className<span class="op">=</span><span class="st">&quot;mr-1 animate-spin&quot;</span> <span class="op">/&gt;</span></span>
-<span id="cb35-31"><a href="#cb35-31"></a>        Loading<span class="op">...</span></span>
-<span id="cb35-32"><a href="#cb35-32"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb35-33"><a href="#cb35-33"></a>    )<span class="op">;</span></span>
-<span id="cb35-34"><a href="#cb35-34"></a>  }</span>
-<span id="cb35-35"><a href="#cb35-35"></a></span>
-<span id="cb35-36"><a href="#cb35-36"></a>  <span class="co">// 投稿データが取得できたら「投稿記事の一覧」を出力</span></span>
-<span id="cb35-37"><a href="#cb35-37"></a>  <span class="cf">return</span> (</span>
-<span id="cb35-38"><a href="#cb35-38"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
-<span id="cb35-39"><a href="#cb35-39"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Main<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb35-40"><a href="#cb35-40"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
-<span id="cb35-41"><a href="#cb35-41"></a>        {posts<span class="op">.</span><span class="fu">map</span>((post) <span class="kw">=&gt;</span> (</span>
-<span id="cb35-42"><a href="#cb35-42"></a>          <span class="op">&lt;</span>PostSummary key<span class="op">=</span>{post<span class="op">.</span><span class="at">id</span>} post<span class="op">=</span>{post} <span class="op">/&gt;</span></span>
-<span id="cb35-43"><a href="#cb35-43"></a>        ))}</span>
-<span id="cb35-44"><a href="#cb35-44"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb35-45"><a href="#cb35-45"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
-<span id="cb35-46"><a href="#cb35-46"></a>  )<span class="op">;</span></span>
-<span id="cb35-47"><a href="#cb35-47"></a>}<span class="op">;</span></span>
-<span id="cb35-48"><a href="#cb35-48"></a></span>
-<span id="cb35-49"><a href="#cb35-49"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="im">import</span> PostSummary <span class="im">from</span> <span class="st">&quot;@/app/_components/PostSummary&quot;</span><span class="op">;</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="im">import</span> dummyPosts <span class="im">from</span> <span class="st">&quot;@/app/_mocks/dummyPosts&quot;</span><span class="op">;</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="im">import</span> { faSpinner } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a></span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb34-10"><a href="#cb34-10"></a>  <span class="co">// 投稿データを「状態」として管理 (初期値はnull)</span></span>
+<span id="cb34-11"><a href="#cb34-11"></a>  <span class="kw">const</span> [posts<span class="op">,</span> setPosts] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post[] <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb34-12"><a href="#cb34-12"></a></span>
+<span id="cb34-13"><a href="#cb34-13"></a>  <span class="co">// コンポーネントが読み込まれたときに「1回だけ」実行する処理</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb34-15"><a href="#cb34-15"></a>    <span class="co">// 本来はウェブAPIを叩いてデータを取得するが、まずはモックデータを使用</span></span>
+<span id="cb34-16"><a href="#cb34-16"></a>    <span class="co">// (ネットからのデータ取得をシミュレートして１秒後にデータをセットする)</span></span>
+<span id="cb34-17"><a href="#cb34-17"></a>    <span class="kw">const</span> timer <span class="op">=</span> <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb34-18"><a href="#cb34-18"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ウェブAPIからデータを取得しました (虚言)&quot;</span>)<span class="op">;</span></span>
+<span id="cb34-19"><a href="#cb34-19"></a>      <span class="fu">setPosts</span>(dummyPosts)<span class="op">;</span></span>
+<span id="cb34-20"><a href="#cb34-20"></a>    }<span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span> <span class="co">// 1000ミリ秒 = 1秒</span></span>
+<span id="cb34-21"><a href="#cb34-21"></a></span>
+<span id="cb34-22"><a href="#cb34-22"></a>    <span class="co">// データ取得の途中でページ遷移したときにタイマーを解除する処理</span></span>
+<span id="cb34-23"><a href="#cb34-23"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> <span class="pp">clearTimeout</span>(timer)<span class="op">;</span></span>
+<span id="cb34-24"><a href="#cb34-24"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb34-25"><a href="#cb34-25"></a></span>
+<span id="cb34-26"><a href="#cb34-26"></a>  <span class="co">// 投稿データが取得できるまでは「Loading...」を表示</span></span>
+<span id="cb34-27"><a href="#cb34-27"></a>  <span class="cf">if</span> (<span class="op">!</span>posts) {</span>
+<span id="cb34-28"><a href="#cb34-28"></a>    <span class="cf">return</span> (</span>
+<span id="cb34-29"><a href="#cb34-29"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-gray-500&quot;</span><span class="op">&gt;</span></span>
+<span id="cb34-30"><a href="#cb34-30"></a>        <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faSpinner} className<span class="op">=</span><span class="st">&quot;mr-1 animate-spin&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb34-31"><a href="#cb34-31"></a>        Loading<span class="op">...</span></span>
+<span id="cb34-32"><a href="#cb34-32"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb34-33"><a href="#cb34-33"></a>    )<span class="op">;</span></span>
+<span id="cb34-34"><a href="#cb34-34"></a>  }</span>
+<span id="cb34-35"><a href="#cb34-35"></a></span>
+<span id="cb34-36"><a href="#cb34-36"></a>  <span class="co">// 投稿データが取得できたら「投稿記事の一覧」を出力</span></span>
+<span id="cb34-37"><a href="#cb34-37"></a>  <span class="cf">return</span> (</span>
+<span id="cb34-38"><a href="#cb34-38"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb34-39"><a href="#cb34-39"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Main<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb34-40"><a href="#cb34-40"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb34-41"><a href="#cb34-41"></a>        {posts<span class="op">.</span><span class="fu">map</span>((post) <span class="kw">=&gt;</span> (</span>
+<span id="cb34-42"><a href="#cb34-42"></a>          <span class="op">&lt;</span>PostSummary key<span class="op">=</span>{post<span class="op">.</span><span class="at">id</span>} post<span class="op">=</span>{post} <span class="op">/&gt;</span></span>
+<span id="cb34-43"><a href="#cb34-43"></a>        ))}</span>
+<span id="cb34-44"><a href="#cb34-44"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb34-45"><a href="#cb34-45"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb34-46"><a href="#cb34-46"></a>  )<span class="op">;</span></span>
+<span id="cb34-47"><a href="#cb34-47"></a>}<span class="op">;</span></span>
+<span id="cb34-48"><a href="#cb34-48"></a></span>
+<span id="cb34-49"><a href="#cb34-49"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
       <p>ここでは <strong>第14行目</strong> の <code>useEffect</code>
       が処理において極めて重要な意味を持ちます。<code>useEffect</code>
       を使用することで、コンポーネントが読み込まれたときに
@@ -1569,10 +1503,10 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <p>ただし、<strong>信頼できるコンテンツを HTML
       として意図的に描画したい場合</strong>は、次のように
       <code>dangerouslySetInnerHTML</code> 属性を使用します。</p>
-      <div class="sourceCode" id="cb36"
+      <div class="sourceCode" id="cb35"
       data-caption="HTMLをサニタイズせずに出力する例"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">// &lt;div&gt;{post.content}&lt;/div&gt;</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="op">&lt;</span>div dangerouslySetInnerHTML<span class="op">=</span>{{ __html<span class="op">:</span> post<span class="op">.</span><span class="at">content</span> }} <span class="op">/&gt;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb35-1"><a href="#cb35-1"></a><span class="co">// &lt;div&gt;{post.content}&lt;/div&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="op">&lt;</span>div dangerouslySetInnerHTML<span class="op">=</span>{{ __html<span class="op">:</span> post<span class="op">.</span><span class="at">content</span> }} <span class="op">/&gt;</span></span></code></pre></div>
       <p>実際に、<code>src/app/_components/PostSummary.tsx</code>
       を書き換えて、<code>post.content</code> の
       <code>&lt;br/&gt;</code>

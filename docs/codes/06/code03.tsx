@@ -37,7 +37,7 @@ const PostSummary: React.FC<Props> = (props) => {
       <div
         className="line-clamp-3"
         dangerouslySetInnerHTML={{ __html: safeHTML }}
-      ></div>
+      />
     </div>
   );
 };
