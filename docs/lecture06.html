@@ -1214,7 +1214,7 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <code>http://localhost:3000/about</code>
       のURLで「About」のコンテンツにアクセスできることを確認してください。</p>
       <div class="sourceCode" id="cb27"
-      data-caption="src/app/about/pagse.tsx"><pre
+      data-caption="src/app/about/page.tsx"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="im">import</span> Image <span class="im">from</span> <span class="st">&quot;next/image&quot;</span><span class="op">;</span></span>
 <span id="cb27-3"><a href="#cb27-3"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
@@ -1330,7 +1330,7 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       class="masked">Imageという組み込みのコンポーネント</span>
       を使って画像を表示することが「<strong>推奨</strong>」されています。</p>
       <div class="sourceCode" id="cb29"
-      data-caption="src/app/about/pagse.tsx (抜粋・Imageコンポーネントによる画像表示)"
+      data-caption="src/app/about/page.tsx (抜粋・Imageコンポーネントによる画像表示)"
       data-startFrom="16"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 15;"><span id="cb29-16"><a href="#cb29-16"></a><span class="op">&lt;</span>Image</span>
 <span id="cb29-17"><a href="#cb29-17"></a>  src<span class="op">=</span><span class="st">&quot;/images/avatar.png&quot;</span></span>
@@ -1576,9 +1576,8 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <code>title</code> と <code>content</code>
       を表示するコンポーネントとなっています。</p>
       <p>次に、上記で作成した PostSummaryコンポーネント を呼び出すように
-      <code>src/app/pages.tsx</code> (= <code>/</code>
-      にアクセスしたとき (トップページにアクセスしたとき)
-      に読み込まれるファイル)
+      <code>src/app/page.tsx</code> (= <code>/</code> にアクセスしたとき
+      (トップページにアクセスしたとき) に読み込まれるファイル)
       を以下のように編集してください。<strong>第04行目</strong>
       で「PostSummaryコンポーネント」をインポートして、<strong>第41行目</strong>から<strong>第43行目</strong>
       で <span class="masked">mapメソッド</span>
