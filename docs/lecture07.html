@@ -61,21 +61,54 @@ class="toc-section-number">2.1</span> ハイパーリンクの追加</a></li>
 <li><a href="#記事詳細ページの作成" id="toc-記事詳細ページの作成"><span
 class="toc-section-number">2.2</span> 記事詳細ページの作成</a></li>
 </ul></li>
-<li><a href="#ウェブapiの利用" id="toc-ウェブapiの利用"><span
-class="toc-section-number">3</span> ウェブAPIの利用</a>
+<li><a href="#ウェブから記事データを取得"
+id="toc-ウェブから記事データを取得"><span
+class="toc-section-number">3</span> ウェブから記事データを取得</a>
 <ul>
 <li><a href="#ウェブapiとは" id="toc-ウェブapiとは"><span
 class="toc-section-number">3.1</span> ウェブAPIとは</a></li>
 <li><a href="#郵便番号検索apiの組込み"
 id="toc-郵便番号検索apiの組込み"><span
 class="toc-section-number">3.2</span> 郵便番号検索APIの組込み</a></li>
-<li><a href="#非同期処理" id="toc-非同期処理"><span
-class="toc-section-number">3.3</span> 非同期処理</a></li>
 </ul></li>
-<li><a href="#microcms" id="toc-microcms"><span
-class="toc-section-number">4</span> microCMS</a></li>
+<li><a href="#同期処理と非同期処理" id="toc-同期処理と非同期処理"><span
+class="toc-section-number">4</span> 同期処理と非同期処理</a>
+<ul>
+<li><a href="#同期処理の動作確認" id="toc-同期処理の動作確認"><span
+class="toc-section-number">4.1</span> 同期処理の動作確認</a></li>
+<li><a href="#処理時間を要するタスクを同期処理で扱うときの問題"
+id="toc-処理時間を要するタスクを同期処理で扱うときの問題"><span
+class="toc-section-number">4.2</span>
+処理時間を要するタスクを同期処理で扱うときの問題</a></li>
+<li><a href="#同期処理で問題が起こる原因"
+id="toc-同期処理で問題が起こる原因"><span
+class="toc-section-number">4.3</span>
+同期処理で問題が起こる原因</a></li>
+<li><a href="#非同期処理" id="toc-非同期処理"><span
+class="toc-section-number">4.4</span> 非同期処理</a></li>
+<li><a href="#awaitを用いた非同期処理の完了待機"
+id="toc-awaitを用いた非同期処理の完了待機"><span
+class="toc-section-number">4.5</span>
+awaitを用いた非同期処理の完了待機</a></li>
+<li><a href="#改めて郵便番号検索apiの利用処理を確認"
+id="toc-改めて郵便番号検索apiの利用処理を確認"><span
+class="toc-section-number">4.6</span>
+改めて郵便番号検索APIの利用処理を確認</a></li>
+</ul></li>
+<li><a href="#ブログ記事のデータをウェブから取得"
+id="toc-ブログ記事のデータをウェブから取得"><span
+class="toc-section-number">5</span>
+ブログ記事のデータをウェブから取得</a></li>
+<li><a href="#microcmsを利用したバックエンドの構築"
+id="toc-microcmsを利用したバックエンドの構築"><span
+class="toc-section-number">6</span>
+microCMSを利用したバックエンドの構築</a>
+<ul>
+<li><a href="#microcmsの利用準備" id="toc-microcmsの利用準備"><span
+class="toc-section-number">6.1</span> microCMSの利用準備</a></li>
+</ul></li>
 <li><a href="#ああああ" id="toc-ああああ"><span
-class="toc-section-number">5</span> ああああ</a></li>
+class="toc-section-number">7</span> ああああ</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -92,70 +125,75 @@ class="toc-section-number">5</span> ああああ</a></li>
       class="header-section-number">1</span> 連絡</h1>
       <h2 data-number="1.1" id="課題1について"><span
       class="header-section-number">1.1</span> 課題1について</h2>
-      <p><a
-      href="lecture05.html#課題1">課題1</a><font size=-1>(ぼくのかんがえたさいきょうのTodoアプリ)</font>
+      <p><a href="lecture05.html#課題1">課題1</a><font size=-1>～
+      ぼくのかんがえたさいきょうのTodoアプリ ～</font>
       の提出期限は「<strong>11月27日 (水)
       23時</strong>」です。GoogleClassroom の
-      <strong>提出ボタンの押下忘れ</strong>
+      <strong>「提出ボタン」の押下忘れ</strong>
       などが無いように注意してください
-      (提出遅れや不備は減点となります)。なお、<code>README.md</code>
-      の内容も評価対象に含まれるので忘れずに記載してください。</p>
+      (提出遅れや各種不備は減点となります)。なお、<span
+      class="masked">README.mdの内容も評価対象</span>
+      に含まれるので注意ください。</p>
       <ul>
       <li>課題1は、ポートフォリオ (自己紹介と作品集)
       として作成したページからも
       <strong>リンクを貼っておくように</strong> してください。</li>
       <li>その他、ポートフォリには
       <strong>今年度の文化祭展示の概要</strong>
-      (スクリーンショットや会場写真があると説得力が高くなります)
-      や、他科目で開発したソフトウエアや修得したスキルなども、(記憶が鮮明なうちに)
-      こまめに追記するようにしてください。<br />
+      (スクリーンショットや当日の風景写真があると説得力が高くなります)
+      や、他科目で作成したソフトや修得したスキルなども
+      (記憶が鮮明なうちに) こまめに記録するようにしてください。<br />
       </li>
       <li>特に、文化祭展示などは <span
       class="masked">チームプロジェクトでの開発の経験があること</span>
-      のアピールになってくるので必ず記載してください。</li>
+      のアピールになるので必ず記載してください。</li>
       </ul>
-      <p>作成済みTodoの編集機能、カテゴリ機能、カウントダウン機能、カレンダUI機能など、様々な工夫が考えられます。個性とユーモアが輝く作品を期待します。</p>
+      <p>Todoアプリには「作成済みTodoの編集機能」「カテゴリ機能」「期日のカウントダウン機能」「カレンダUIの導入」ど様々な工夫が考えられます。個性とユーモアが輝く作品を期待ています。</p>
       <h2 data-number="1.2" id="今後の授業の流れ"><span
       class="header-section-number">1.2</span> 今後の授業の流れ</h2>
-      <p>大まかな流れは、次のようになっています。</p>
+      <p>今後の授業の大まかな流れは、次のようになっています。</p>
       <ol type="1">
-      <li>Next.js 開発環境の構築</li>
+      <li>Next.js 開発環境の構築 <strong><em>済</em></strong></li>
       <li>ブログアプリの「<strong>フロントエンド開発</strong>」のチュートリアル
       <strong>← 今回の授業</strong>
       <ul>
-      <li><a href="https://microcms.io/">microCMS</a> の利用</li>
+      <li>ヘッドレスCMS (<a href="https://microcms.io/">microCMS</a>)
+      との連携</li>
       </ul></li>
       <li>ブログアプリの「<strong>バックエンド開発</strong>」のチュートリアル
-      <strong>← 次回の授業</strong>
+      <strong>← 次回 (中間試験明け) の授業</strong>
       <ul>
       <li><a href="https://supabase.com/">supabase</a> と <a
-      href="https://vercel.com/">varcel</a> の利用</li>
+      href="https://vercel.com/">vercel</a> の利用</li>
       </ul></li>
       <li>ブログアプリのカスタマイズとつくり込み →
       <strong><em>課題2</em></strong></li>
       <li>オリジナルのウェブアプリ → <strong><em>課題3</em></strong>
       (最終課題)</li>
       </ol>
+      <p>※ <strong>CMS</strong>: <span class="masked">Content Management
+      System</span>、コンテンツ管理システム。</p>
       <h1 data-number="2"
       id="投稿記事の詳細を表示するコンテンツの作成"><span
       class="header-section-number">2</span>
       投稿記事の「詳細」を表示するコンテンツの作成</h1>
-      <p>トップページに表示される記事一覧の各記事をクリックすると、次のように
-      <strong>詳細ページに遷移する機能</strong> や
-      <strong>外部サイトの画像を表示する機能</strong>
+      <p>トップページに表示される「記事一覧」のなかの各記事をクリックすると、<strong>記事詳細ページに遷移する機能</strong>
+      や <strong>外部サイトに配置した画像を表示する機能</strong>
       を実装していきます。</p>
       <figure>
       <img src="figs/07/app_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>ここでは <code>/posts/[id]</code> というパスで記事の詳細 (全文)
-      とカバーイメージ (画像) が表示されるようにしていきます。Next.js
-      において <code>[id]</code> のような表記は <span
+      <p>ここでは <code>/posts/[id]</code>
+      というパスにアクセスすると「記事の詳細 (全文)」と「カバーイメージ
+      (画像)」が表示されるようにしていきます。</p>
+      <p>ところで Next.js では、URLパスの <code>[id]</code>
+      のような表記は <span
       class="masked">パラメータプレースホルダ</span> とよばれ、そこには
-      <strong>動的に値が入ること</strong> を示します。</p>
-      <p>具体的には、次のように<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/06/dummyPosts.ts">記事のID</a>を表す文字列が
-      <code>[id]</code> の部分に埋め込まれるURLパターンを
+      <strong>動的に値が入ること</strong>
+      を示します。具体的には、次のように<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/06/dummyPosts.ts">投稿記事のID</a>を表す文字列が
+      <code>[id]</code> の部分に埋め込まれるようなURLパターンを
       <code>/posts/[id]</code> のように表記します。</p>
       <ul>
       <li>投稿1
@@ -167,11 +205,13 @@ class="toc-section-number">5</span> ああああ</a></li>
       </ul>
       <h2 data-number="2.1" id="ハイパーリンクの追加"><span
       class="header-section-number">2.1</span> ハイパーリンクの追加</h2>
-      <p>以上の機能を実装するために、まずは <code>PostSummary.tsx</code>
-      のJSX要素のなかに
+      <p>詳細記事へのリンクを実装するために、まずは
+      <code>PostSummary.tsx</code> (前回講義で作成済み) の JSX のなかに
       <code>&lt;Link href={`/posts/${post.id}`}&gt;...&lt;Link&gt;</code>
-      というハイパーリンクを追加してください。Linkコンポーネントは「文字列」だけではなく、次のように
-      <span class="masked">div要素</span> を囲むことができます。</p>
+      という <strong>ハイパーリンク設定</strong>
+      を追加してください。Linkコンポーネントは、その子要素として「文字列」だけではなく、次のように
+      <span class="masked">div要素</span> を持つことができます
+      (div要素の内部であれば、どの部分をクリックしてもリンクするように設定できます)。</p>
       <div class="sourceCode" id="cb1"
       data-caption="src/app/_components/PostSummary.tsx (抜粋・実装例)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>{<span class="co">/* ファイルの先頭で「Linkコンポーネント」のインポートが必要です */</span>}</span>
@@ -182,32 +222,39 @@ class="toc-section-number">5</span> ああああ</a></li>
 <span id="cb1-6"><a href="#cb1-6"></a>    dangerouslySetInnerHTML<span class="op">=</span>{{ __html<span class="op">:</span> safeHTML }}</span>
 <span id="cb1-7"><a href="#cb1-7"></a>  <span class="op">/&gt;</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="op">&lt;/</span>Link<span class="op">&gt;</span></span></code></pre></div>
-      <p><code>href={`/posts/${post.id}`}</code> によって
-      <strong>動的にハイパーリンク先が設定されていること</strong>
-      を確認してください。なお、Linkコンポーネントのインポートについては、既に実装済みの
-      <code>Header.tsx</code> などを参照してください。</p>
+      <p>上記 <strong>第02行目</strong> の
+      <code>href={`/posts/${post.id}`}</code> により
+      <code>post.id</code>
+      <strong>に応じて動的にハイパーリンク先を設定</strong>
+      していることを確認してください。なお、<strong>Linkコンポーネントのインポート</strong>
+      については、既に実装済みの <code>Header.tsx</code>
+      を参照してください。</p>
       <p>上記の変更ができたら、現時点でハイパーリンクが機能すること
-      (=<strong>記事概要をクリックするとブラウザのアドレバーのパスが変化すること</strong>)
-      を確認してください。また、リンク先のコンテンツが存在しない場合は、どのような画面表示になるかも実際に確認してください。</p>
+      (=<strong>記事概要をクリックするとブラウザのアドレバーの「URLパス」が変化すること</strong>)
+      を確認してください。また、リンク先のコンテンツが存在しないときに、どのようになるのかも実際に確認してください。</p>
       <p>開発では、<span class="masked">(いまさらですが)
-      こまめに部分的に動作確認を繰り返すこと</span>
-      が重要です。また、デベロッパーツールのコンソールタブで、エラーや警告が発生していないことも定期的に確認するように努めてください。</p>
+      こまめに部分的な動作確認を繰り返すこと</span>
+      が重要です。また、デベロッパーツールのコンソールタブから、<strong>エラーや警告が発生していないことを定期的に確認すること</strong>
+      も大切です。</p>
       <h2 data-number="2.2" id="記事詳細ページの作成"><span
       class="header-section-number">2.2</span> 記事詳細ページの作成</h2>
-      <p>つづいてリンク先のコンテンツ (=記事詳細ページ)
-      を作成していきます。まずは、次のような構成になるようにフォルダを追加してください。つまり、<code>/src/app</code>
-      のなかに <code>posts</code>
-      フォルダを作成して、そのフォルダのなかに <code>[id]</code>
+      <p>リンク先のコンテンツ (=
+      <strong>記事詳細ページのコンテンツ</strong>)
+      を作成していきます。</p>
+      <p>まずは、次のような構成になるようにプロジェクトにフォルダを追加してください。つまり、<code>/src/app</code>
+      のなかに <code>posts</code> フォルダを作成して、さらに、そのなかに
+      <code>[id]</code>
       フォルダを作成してください。前回講義でも解説したように Next.js
-      ではフォルダ構成が <span
-      class="masked">そのまま「URLパス」と対応する仕組み</span>
-      となっているため、フォルダの「<strong>名前設定</strong>」や「<strong>階層構造</strong>」には十分に注意を払ってください。</p>
+      では <span
+      class="masked">フォルダ構成が、そのまま「URLパス」と対応する仕組み</span>
+      となるため、フォルダの「<strong>名前設定</strong>」や「<strong>階層構造</strong>」には十分に注意を払ってください。</p>
       <figure>
       <img src="figs/07/vscode_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>次に <code>[id]</code> フォルダのなかに <code>page.tsx</code>
-      というファイルを作成して以下の内容を記述してください。</p>
+      というファイルを作成して、以下ようにパス <code>[id]</code>
+      に対応した記事詳細を表示するためのコードを記述してください。</p>
       <div class="sourceCode" id="cb2"
       data-caption="src/app/posts/[id]/page.tsx"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
@@ -227,7 +274,7 @@ class="toc-section-number">5</span> ああああ</a></li>
 <span id="cb2-15"><a href="#cb2-15"></a>  <span class="kw">const</span> [post<span class="op">,</span> setPost] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
 <span id="cb2-16"><a href="#cb2-16"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">false</span>)<span class="op">;</span></span>
 <span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="co">// 動的ルートパラメータから id を取得 （URL:/posts/[id]）</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="co">// 動的ルートパラメータから 記事id を取得 （URL:/posts/[id]）</span></span>
 <span id="cb2-19"><a href="#cb2-19"></a>  <span class="kw">const</span> { id } <span class="op">=</span> <span class="fu">useParams</span>() <span class="im">as</span> { id<span class="op">:</span> <span class="dt">string</span> }<span class="op">;</span></span>
 <span id="cb2-20"><a href="#cb2-20"></a></span>
 <span id="cb2-21"><a href="#cb2-21"></a>  <span class="co">// コンポーネントが読み込まれたときに「1回だけ」実行する処理</span></span>
@@ -287,114 +334,132 @@ class="toc-section-number">5</span> ああああ</a></li>
 <span id="cb2-75"><a href="#cb2-75"></a>}<span class="op">;</span></span>
 <span id="cb2-76"><a href="#cb2-76"></a></span>
 <span id="cb2-77"><a href="#cb2-77"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
-      <p>ここで注目すべき処理は、<strong>URLパス</strong>
+      <p>ここで注目すべき処理は、</p>
+      <ul>
+      <li><strong>第19行目</strong> の <strong>URLパス</strong>
       (動的ルートパラメータの <code>[id]</code> の部分) から
-      <code>id</code> の文字列を取得する処理と、その <code>id</code>
-      に一致するデータを <code>dummyPosts</code> から検索して状態
-      (state) にセットする処理になります。</p>
+      <code>id</code> の文字列を取得する処理</li>
+      <li>その <code>id</code> に一致するデータを
+      <code>dummyPosts</code> から探して <strong>第15行目</strong>
+      で宣言している状態 (state) にセットする処理</li>
+      </ul>
+      <p>になります。</p>
       <h3 data-number="2.2.1" id="パラメータプレースホルダの処理"><span
       class="header-section-number">2.2.1</span>
       パラメータプレースホルダの処理</h3>
       <p>パスから <code>id</code>
       を取得する処理は、<strong>第03行目</strong> でインポートしている
       <code>useParams</code> という Hook を利用して
-      <strong>第19行目</strong> で行っています。これは <span
-      class="masked">2個以上のパラメータプレースホルダ</span>
-      にも対応しており、例えば <code>/posts/[categoryId]/[postId]</code>
+      <strong>第19行目</strong> で行っています。<code>useParams</code>
+      は <span
+      class="masked">2個以上のパラメータプレースホルダを持つケース</span>
+      にも対応しています。例えば
+      <code>/posts/[categoryId]/[postId]</code>
       となっているときは、次のように値を取得することができます。</p>
       <div class="sourceCode" id="cb3"
-      data-caption="パラメータプレースホルダからの値の取得"><pre
+      data-caption="複数のパラメータプレースホルダから値の取得する例"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">// src/app/posts/[categoryId]/[postId]/page.tsx</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">const</span> { categoryId<span class="op">,</span> postId } <span class="op">=</span> <span class="fu">useParams</span>() <span class="im">as</span> { categoryId<span class="op">:</span> <span class="dt">string</span><span class="op">;</span> postId<span class="op">:</span> <span class="dt">string</span> }<span class="op">;</span></span></code></pre></div>
-      <p>なお、パラメータプレースホルダに与えられるものが「数値」であっても、まずは「<strong>文字列</strong>」として取り出してから
+      <p>なお、パラメータプレースホルダに与えられる値が「数値」であっても、まずは「<strong>文字列</strong>」として取得してから
       <span
-      class="masked"><code>parseInt()</code>などを使用して数値に変換する必要</span>
+      class="masked"><code>parseInt()</code>などを使って「数値」に変換する必要</span>
       があります。</p>
       <h3 data-number="2.2.2" id="findメソッドによる検索"><span
       class="header-section-number">2.2.2</span>
       findメソッドによる検索</h3>
       <p><code>id</code> と一致する記事の取得は
       <strong>第29行目</strong> で、配列操作メソッドの <code>find</code>
-      で行っています。<code>filter</code>
+      を使って行なっています。<code>filter</code>
       は条件を満たす要素の「<strong>配列</strong>」を戻り値としましたが、<code>find</code>
       は条件を満たす <span class="masked">単一の要素
-      (配列の先頭からチェックして一番初めに条件を満たした要素)</span>
-      を戻り値とします。なお、条件に一致する要素が存在しなかった場合は
-      <code>undefined</code> を返します。ここでは <code>undefined</code>
-      ではなく <code>null</code>
-      を使用したいので、次のようにしています。</p>
+      (配列の先頭からチェックして一番初めに条件を満たした単一の要素)</span>
+      を戻り値とします。なお、条件に一致する要素が存在しなかったときは
+      <code>undefined</code> を返します。</p>
+      <p>ここでは、idに該当する記事が存在しないことを
+      <code>undefined</code> ではなく <code>null</code>
+      を使って扱いたいので、次のようにしています。これにより
+      <code>dummyPosts.find((post) =&gt; post.id === id)</code> の結果が
+      <code>undefined</code> のとき、<code>setPost(null)</code>
+      となります。</p>
       <div class="sourceCode" id="cb4"
       data-caption="src/app/posts/[id]/page.tsx (抜粋)"
       data-startFrom="29"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 28;"><span id="cb4-29"><a href="#cb4-29"></a><span class="fu">setPost</span>(dummyPosts<span class="op">.</span><span class="fu">find</span>((post) <span class="kw">=&gt;</span> post<span class="op">.</span><span class="at">id</span> <span class="op">===</span> id) <span class="op">||</span> <span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
+      <p>上記処理を噛み砕いて書けば以下のようなコードになります。</p>
+      <div class="sourceCode" id="cb5" data-caption="等価な処理"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">const</span> foundPost <span class="op">=</span> dummyPosts<span class="op">.</span><span class="fu">find</span>((post) <span class="kw">=&gt;</span> post<span class="op">.</span><span class="at">id</span> <span class="op">===</span> id)<span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="cf">if</span> (foundPost <span class="op">!==</span> <span class="kw">undefined</span>) {</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">setPost</span>(foundPost)<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>} <span class="cf">else</span> {</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">setPost</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>}</span></code></pre></div>
       <div class="note type-tips">
       <p><strong>「null」と「undefined」の使い分けについて</strong></p>
       <p><code>null</code> と <code>undefined</code>
-      は、条件式の内部で単体で評価したとき、同じ結果（falsyな値）となるなど同じような挙動を示すことがありますが、実際には<strong>様々な差異</strong>があります。そして、慣れないうちは、実際問題として<strong>両者の使い分けが難しい</strong>ということが多々あります。</p>
+      は、条件式の内部で単体で評価すると同じ結果（falsyな値）になるなど同じような挙動を示すことがありますが、実際には
+      <strong>両者には様々な差異</strong>
+      があります。そして、慣れないうちは、実際問題として
+      <code>null</code> <strong>と</strong> <code>undefined</code>
+      <strong>の使い分けが難しい</strong> という場面が多々あります。</p>
       <p>例えば <strong>第15行目</strong> では
       <code>useState&lt;Post | null&gt;(null)</code>
       としていますが、これを
       <code>useState&lt;Post | undefined&gt;(undefined)</code>
       としていない理由を説明しようとすると
-      (理解するためには)、Typescript や Next.js、React
-      に関しての一定の知識と経験が必要となります。また、<code>undefined</code>
-      を利用しても、動作上、問題のないコードを書くことができます。</p>
-      <p>たた、大まかな方針としては次のように使い分けると良いと思います。</p>
+      (理解して納得するためには)、Typescript や Next.js、React
+      に関しての一定の知識と経験が必要となってきます。また、ここで
+      <code>undefined</code>
+      を使ったとしても、実質的に動作上の問題もありません。</p>
+      <p>ただ、大まかなには、次のように使い分けると良いと思います。</p>
       <ul>
-      <li><code>undefined</code>
-      は言語システムが自動的に設定する値として考える</li>
-      <li><code>null</code>
-      は開発者が意図的に「値が存在しない」ことを表現したい場合に使用する</li>
+      <li><code>undefined</code> は
+      <strong>言語システムが自動的に設定する値</strong>
+      として考える</li>
+      <li><code>null</code> は
+      <strong>開発者が意図的に「値が存在しない」ことを表現したい場合</strong>
+      に使用する</li>
       </ul>
       <p>両者の違いや、使い分けについては、時間があるときに生成AIを利用して
-      (学習の段階に応じて) 徐々に理解を深めてください。</p>
+      (学習の段階に応じて) 徐々に理解を深めていってください。</p>
       </div>
       <h3 data-number="2.2.3" id="不正なidを受け取ったときの処理"><span
       class="header-section-number">2.2.3</span>
       不正なidを受け取ったときの処理</h3>
-      <p>ウェブブラウザのアドレバーに直接URLを入力した場合などは、不正なidを受け取ることがあります。<strong>第48行目</strong>
-      から <strong>第50行目</strong>
-      では、そのような場合の画面出力について設定しています。</p>
-      <h3 data-number="2.2.4" id="動作確認と設定変更"><span
-      class="header-section-number">2.2.4</span> 動作確認と設定変更</h3>
+      <p>ウェブブラウザのアドレバーにURLが直接入力された場合などは、<strong>不正なid</strong>
+      を受け取ることがあります。<strong>第48行目</strong> から
+      <strong>第50行目</strong>
+      は、そのような場合に対処する実装となります。</p>
+      <figure>
+      <img src="figs/07/app_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="2.2.4"
+      id="動作確認と画像取得に関する設定変更"><span
+      class="header-section-number">2.2.4</span>
+      動作確認と画像取得に関する設定変更</h3>
       <p><code>src/app/posts/[id]/page.tsx</code>
-      を作成・保存したら開発モードで動作を確認してください。トップページの記事概要から詳細ページに移動すると、次のようなエラーが発生します。</p>
+      を作成、保存したら開発モードで動作を確認してください。トップページの記事概要から詳細ページに移動すると、次のようなエラーが発生します。</p>
       <figure>
       <img src="figs/07/app_02.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>これは、エラーメッセージから読み取れるように、(<code>public</code>フォルダなどのプロジェクト内部に配置した画像ではなく)
-      外部サイトから画像を取得して表示しようとしていることに起因します。Next.js
-      のデフォルト設定では (セキュティとパフォーマンス最適化の観点から)
-      <strong>外部からの画像の読込みが制限</strong>されています。</p>
+      <p>これは、エラーメッセージから読み取れるように
+      (<code>public</code>フォルダなどのプロジェクト内部に配置した画像ではなく)
+      <span
+      class="masked">外部サイトから画像を取得して表示しようとしていること</span>
+      に起因します。Next.js
+      のデフォルト設定では、「セキュティ」と「パフォーマンス最適化」の観点から
+      <strong>外部からの画像の読込みが制限</strong>
+      されるようになっています。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>Next.js
       のデフォルト設定では、外部からの画像の読込みが制限されています。この理由について教えてください。</p>
       </blockquote>
-      <p>外部からの画像の読込みを許可するためには
+      <p>外部からの画像の読込みを許可するためには、プロジェクトフォルダの直下に配置されている
       <code>next.config.mjs</code> を次のように変更します。</p>
-      <div class="sourceCode" id="cb5"
-      data-caption="next.config.mjs"><pre
-      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="dt">remotePatterns</span><span class="op">:</span> [</span>
-<span id="cb5-5"><a href="#cb5-5"></a>      {</span>
-<span id="cb5-6"><a href="#cb5-6"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;w1980.blob.core.windows.net&quot;</span><span class="op">,</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>      }<span class="op">,</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>    ]<span class="op">,</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>  }<span class="op">,</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>}<span class="op">;</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
-      <p>複数のサイトを設定したいときは、次のように追加します。<a
-      href="https://placehold.jp">placehold.jp</a>は、指定したサイズでダミー画像
-      (モックアップ用の画像)
-      を生成してくれるウェブサービスとなっています。ウェブアプリ開発で非常に役立つサービスなので覚えておいてください。</p>
       <div class="sourceCode" id="cb6"
-      data-caption="next.config.mjs"><pre
+      data-caption="next.config.mjs (特定の外部オリジンからの画像の読込みの許可)"><pre
       class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
@@ -403,14 +468,34 @@ class="toc-section-number">5</span> ああああ</a></li>
 <span id="cb6-6"><a href="#cb6-6"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
 <span id="cb6-7"><a href="#cb6-7"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;w1980.blob.core.windows.net&quot;</span><span class="op">,</span></span>
 <span id="cb6-8"><a href="#cb6-8"></a>      }<span class="op">,</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;placehold.jp&quot;</span> }<span class="op">,</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>    ]<span class="op">,</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>  }<span class="op">,</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>}<span class="op">;</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
+<span id="cb6-9"><a href="#cb6-9"></a>    ]<span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  }<span class="op">,</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>}<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
+      <p>複数のサイトを設定したいときは、次のように設定します。</p>
+      <p><a href="https://placehold.jp">placehold.jp</a>は、<span
+      class="masked">指定したサイズでダミー画像
+      (モックアップ用の画像)</span>
+      を生成してくれるウェブサービスとなっています。ウェブアプリ開発の初期段階で非常に役立つサービスなので覚えておいてください。</p>
+      <div class="sourceCode" id="cb7"
+      data-caption="next.config.mjs"><pre
+      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="dt">remotePatterns</span><span class="op">:</span> [</span>
+<span id="cb7-5"><a href="#cb7-5"></a>      {</span>
+<span id="cb7-6"><a href="#cb7-6"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;w1980.blob.core.windows.net&quot;</span><span class="op">,</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>      }<span class="op">,</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;placehold.jp&quot;</span> }<span class="op">,</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    ]<span class="op">,</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  }<span class="op">,</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>}<span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
       <p><code>next.config.mjs</code>
-      の変更後は、ホットリロードが効かないことがあるので、開発サーバを停止してから、再度、起動して動作を確認してください。次のように画像が表示されるはずです。</p>
+      の変更後は、<strong>ホットリロードが効かないこと</strong>があるので、開発サーバを停止してから、再度、起動して動作を確認してください。今度は、記事詳細ページのなかで次のように画像が表示されるはずです。</p>
       <figure>
       <img src="figs/07/app_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -418,26 +503,31 @@ class="toc-section-number">5</span> ああああ</a></li>
       <h3 data-number="2.2.5" id="演習-宿題-30分"><span
       class="header-section-number">2.2.5</span> 演習 (宿題:
       <i class="fa-solid fa-stopwatch"></i> 30分)</h3>
-      <p>記事詳細のページに「投稿日」と「カテゴリ」の情報が表示されるように実装を追加してください。またデザインなどをカスタマイズして、つくり込みをしてください。</p>
-      <h1 data-number="3" id="ウェブapiの利用"><span
-      class="header-section-number">3</span> ウェブAPIの利用</h1>
-      <p>ここまではモックからブロの記事のデータを取得しましたが、これを
-      <span
+      <p>記事詳細のページのなかに「<strong>投稿日</strong>」と「<strong>カテゴリ</strong>」の情報が表示されるように実装してください。またデザインなどをカスタマイズして、つくり込みをしてください。</p>
+      <h1 data-number="3" id="ウェブから記事データを取得"><span
+      class="header-section-number">3</span>
+      ウェブから記事データを取得</h1>
+      <p>ここまではモック (<code>src/app/_mocks/dummyPosts.ts</code>)
+      からブログ記事のデータを取得して利用してきましたが、これを <span
       class="masked">ウェブAPIを使ってバックエンドから取得できる</span>
-      ように改良していきます。</p>
+      ようにアップデートしていきます。</p>
       <h2 data-number="3.1" id="ウェブapiとは"><span
       class="header-section-number">3.1</span> ウェブAPIとは</h2>
-      <p>まずは、<a
+      <p>まずは <a
       href="https://zipcloud.ibsnet.co.jp">zipcloud</a>が提供している<a
       href="https://zipcloud.ibsnet.co.jp/doc/api">郵便番号検索API</a>(=<strong>郵便番号から住所の取得が可能なウェブAPI</strong>)
-      を対象に <strong>外部からデータを取得する処理</strong>
-      について練習していきます。</p>
-      <p>現在、ウェブAPIの多くは <strong>HTTP/HTTPS</strong> を使って
-      <span class="masked">JSONフォーマット</span>
-      でデータを取得することができるように設計・実装されています。<a
-      href="https://zipcloud.ibsnet.co.jp/doc/api">郵便番号検索API</a>についても、<strong>HTTPSでリクエスト</strong>を送って、<strong>JSONフォーマット</strong>で住所データが取得できるサービスになっています。また、この先で開発していくブログアプリのバックエンドについても、そのように設計・実装していきます。</p>
+      というウェブサービスを利用して、<strong>外部からデータを取得する処理</strong>
+      について学んでいきます。</p>
+      <p>現在、ウェブAPI (Web Application Programming Interface)
+      の多くは <strong>HTTP/HTTPS</strong> を使って <span
+      class="masked">JSONフォーマット</span>
+      でデータを取得できるように設計・実装がされています。ここで利用する<a
+      href="https://zipcloud.ibsnet.co.jp/doc/api">郵便番号検索API</a>についても、<strong>HTTPSでリクエスト</strong>を送って<strong>JSONフォーマット</strong>で住所データが取得できるサービスになっています。また、このあと利用する<a
+      href="https://microcms.io/">microCMS</a>も、Next.js
+      で実装するバックエンドについても、そのような設計・実装になっています。</p>
       <p><a
-      href="https://zipcloud.ibsnet.co.jp/doc/api">郵便番号検索API</a>は（認証などのヘッダ情報などが不要なので）ブラウザからでも利用することができます。実際にウェブブラウザのアドレスバーに次のURLを入力してみてください。以下のようにJSONフォーマットのレスポンスが得られます。</p>
+      href="https://zipcloud.ibsnet.co.jp/doc/api">郵便番号検索API</a>は、利用に際して
+      <strong>HTTPヘッダに認証情報等を付加する必要がないので</strong>、ブラウザから直接利用することができます。Chromeのアドレスバーに次のURLを入力すると、以下のようにJSONフォーマットのレスポンスを得ることができます。</p>
       <ul>
       <li><code>https://zipcloud.ibsnet.co.jp/api/search?zipcode=572-0832</code></li>
       </ul>
@@ -445,37 +535,37 @@ class="toc-section-number">5</span> ああああ</a></li>
       <img src="figs/07/api_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>また、次のように <strong>不正なリクエスト</strong>
-      を送信すると、どのようなレスポンスが返ってくるのかを把握しておいてください。</p>
+      <p>また、次のような <strong>不正なリクエスト</strong>
+      を送信すると、どのようなレスポンスが返ってくるかを把握してください。</p>
       <ul>
       <li><code>https://zipcloud.ibsnet.co.jp/api/search?zipcode=999-9999</code></li>
       <li><code>https://zipcloud.ibsnet.co.jp/api/search?zipcode=ABC</code></li>
       </ul>
-      <p>なお、URL (URI) のなかで <code>?</code> 以降の部分を <span
+      <p>URL (URI) のなかで <code>?</code> 以降の部分を <span
       class="masked">クエリパラメータ (Query Parameter)</span>
       や「<strong>クエリ文字列 (Query
       String)</strong>」と呼びます。クエリパラメータは、ウェブサーバーに対して追加のパラメータを送信するために使用され
-      <code>パラメータ名=値</code>
-      の形式で指定します。複数のパラメータを指定する場合は
+      <span class="masked"><code>パラメータ名=値</code></span>
+      の形式で指定します。</p>
+      <p><strong>2個以上のパラメータ</strong>を指定する場合は
       <code>&amp;</code> で区切ります。例えば、<code>limit=5</code>
       というパラメータを追加したい場合は <span
       class="masked"><code>?zipcode=999-9999&amp;limit=5</code></span>
       のようにクエリパラメータを与えます。</p>
       <div class="note type-tips">
       <p><strong>URLエンコード</strong></p>
-      <p>クエリパラメータに <strong>特殊文字</strong>
-      (スペース、日本語、記号など)
-      を使用したい場合があります。しかし、このような文字をそのままURLに使用すると問題が発生する可能性があるため、<span class="masked">URLエンコード
-      (パーセントエンコード)</sapn>
+      <p>クエリパラメータに、日本語やスペース、記号などの特殊文字を使用したい場合があります。しかし、このような文字をそのままURLに使用すると問題が発生する可能性があるため、<span
+      class="masked">URLエンコード (パーセントエンコード)</span>
       という処理で安全な文字列に変換する必要があります。</p>
       <p>例えば、半角スペースは <code>%20</code>、「大阪」という文字は
       <code>%E5%A4%A7%E9%98%AA</code>
       のようにURLエンコーディングすることができます。JavaScript
       では組込み関数の encodeURI() や encodeURIComponent()
       を使用してURLエンコーディングができます
-      (2つの関数の差異については生成AIで調べてください)。</p>
-      <p>以下のURLは、<code>tbm=isch</code> と <code>q=大阪</code>
-      というクエリパラメータを与えている例となります。</p>
+      (2つの関数の差異については生成AIを使って調べてください)。</p>
+      <p>以下のURLは <code>tbm=isch</code> と <code>q=大阪</code>
+      というクエリパラメータを与えている例となります
+      (「tbm=isch」は画像検索のためのパラメータになります)。</p>
       <ul>
       <li><code>https://www.google.com/search?tbm=isch&amp;q=%E5%A4%A7%E9%98%AA</code></li>
       </ul>
@@ -483,11 +573,11 @@ class="toc-section-number">5</span> ああああ</a></li>
       <h2 data-number="3.2" id="郵便番号検索apiの組込み"><span
       class="header-section-number">3.2</span>
       郵便番号検索APIの組込み</h2>
-      <p>以上のような処理を Next.js
-      のコンポーネントのなかで実行し、そこから得たデータに基づいてコンテンツを表示する仕組みを実装をしていきます。</p>
+      <p>Next.js のコンポーネントのなかで、<a
+      href="https://zipcloud.ibsnet.co.jp/doc/api">郵便番号検索API</a>にリクエストを送って、そのレスポンスとして得られるJSONデータに基づいてコンテンツを構築する仕組みを実装をしていきます。</p>
       <p>具体的には
       <code>http://localhost:3000/playground/zip-code/572-0832</code>
-      にアクセスしたとき、次のように画面が表示されるように設計・実装していきます。</p>
+      というパスにアクセスしたとき、次のような画面が表示されるように設計・実装していきます。</p>
       <figure>
       <img src="figs/07/app_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -502,100 +592,710 @@ class="toc-section-number">5</span> ああああ</a></li>
     └─ 📂 zip-code/
         └─ 📂 [code]/
             └─ page.tsx</code></pre>
-      <p><code>page.tsx</code> には、以下の内容を記述してください。</p>
-      <div class="sourceCode" id="cb8"
+      <p><code>page.tsx</code>
+      には、以下のコードを記述してください。</p>
+      <div class="sourceCode" id="cb9"
       data-caption="src/app/playground/zip-code/[code]/page.tsx"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb8-1"><a href="#cb8-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="im">import</span> { useParams } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="kw">const</span> endpoint <span class="op">=</span> <span class="st">&quot;https://zipcloud.ibsnet.co.jp/api/search&quot;</span><span class="op">;</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="kw">const</span> { code } <span class="op">=</span> <span class="fu">useParams</span>() <span class="im">as</span> { code<span class="op">:</span> <span class="dt">string</span> }<span class="op">;</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="kw">const</span> [response<span class="op">,</span> setResponse] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;</span>(<span class="st">&quot;APIからデータを取得中...&quot;</span>)<span class="op">;</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb8-11"><a href="#cb8-11"></a>    <span class="kw">const</span> fetchAddressFromZipCode  <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb8-12"><a href="#cb8-12"></a>      <span class="co">// ウェブAPIにGETリクエストを送信してレスポンスを取得</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>      <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>endpoint<span class="sc">}</span><span class="vs">?zipcode=</span><span class="sc">${</span>code<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> { <span class="co">// ◀◀ 注目</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>        method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a>        cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a>      })<span class="op">;</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ウェブAPIからデータを取得しました&quot;</span>)<span class="op">;</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a></span>
-<span id="cb8-20"><a href="#cb8-20"></a>      <span class="co">// レスポンスからJSON形式でデータ取得して整形して表示</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a>      <span class="kw">const</span> parsedData <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span> <span class="co">// ◀◀ 注目</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a>      <span class="fu">setResponse</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(parsedData<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a>    }<span class="op">;</span></span>
-<span id="cb8-24"><a href="#cb8-24"></a></span>
-<span id="cb8-25"><a href="#cb8-25"></a>    <span class="fu">fetchAddressFromZipCode</span> ()<span class="op">;</span> <span class="co">// 関数を実行</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a>  }<span class="op">,</span> [code])<span class="op">;</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a></span>
-<span id="cb8-28"><a href="#cb8-28"></a>  <span class="cf">return</span> (</span>
-<span id="cb8-29"><a href="#cb8-29"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
-<span id="cb8-30"><a href="#cb8-30"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-5 text-2xl font-bold&quot;</span><span class="op">&gt;</span>{<span class="vs">`郵便番号 </span><span class="sc">${</span>code<span class="sc">}</span><span class="vs"> の検索`</span>}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
-<span id="cb8-32"><a href="#cb8-32"></a>        <span class="op">&lt;</span>div<span class="op">&gt;</span>実行結果<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a>        <span class="op">&lt;</span>pre className<span class="op">=</span><span class="st">&quot;rounded-md bg-green-100 p-3 text-sm&quot;</span><span class="op">&gt;</span>{response}<span class="op">&lt;/</span>pre<span class="op">&gt;</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a>  )<span class="op">;</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a>}<span class="op">;</span></span>
-<span id="cb8-38"><a href="#cb8-38"></a></span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
-      <p>はじめに、開発モードで実行して動作を確認してください。</p>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="im">import</span> { useParams } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="kw">const</span> endpoint <span class="op">=</span> <span class="st">&quot;https://zipcloud.ibsnet.co.jp/api/search&quot;</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="kw">const</span> { code } <span class="op">=</span> <span class="fu">useParams</span>() <span class="im">as</span> { code<span class="op">:</span> <span class="dt">string</span> }<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="kw">const</span> [response<span class="op">,</span> setResponse] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;</span>(<span class="st">&quot;APIからデータを取得中...&quot;</span>)<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="kw">const</span> fetchAddressFromZipCode  <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-12"><a href="#cb9-12"></a>      <span class="co">// ウェブAPIにGETリクエストを送信してレスポンスを取得</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>      <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>endpoint<span class="sc">}</span><span class="vs">?zipcode=</span><span class="sc">${</span>code<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> { <span class="co">// ◀◀ 注目</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>        method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>        cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>      })<span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ウェブAPIからデータを取得しました&quot;</span>)<span class="op">;</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a></span>
+<span id="cb9-20"><a href="#cb9-20"></a>      <span class="co">// レスポンスからJSON形式でデータ取得して整形して表示</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>      <span class="kw">const</span> parsedData <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span> <span class="co">// ◀◀ 注目</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>      <span class="fu">setResponse</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(parsedData<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>    }<span class="op">;</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a></span>
+<span id="cb9-25"><a href="#cb9-25"></a>    <span class="fu">fetchAddressFromZipCode</span> ()<span class="op">;</span> <span class="co">// 関数を実行</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>  }<span class="op">,</span> [code])<span class="op">;</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a></span>
+<span id="cb9-28"><a href="#cb9-28"></a>  <span class="cf">return</span> (</span>
+<span id="cb9-29"><a href="#cb9-29"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-5 text-2xl font-bold&quot;</span><span class="op">&gt;</span>{<span class="vs">`郵便番号 </span><span class="sc">${</span>code<span class="sc">}</span><span class="vs"> の検索`</span>}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>        <span class="op">&lt;</span>div<span class="op">&gt;</span>実行結果<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a>        <span class="op">&lt;</span>pre className<span class="op">=</span><span class="st">&quot;rounded-md bg-green-100 p-3 text-sm&quot;</span><span class="op">&gt;</span>{response}<span class="op">&lt;/</span>pre<span class="op">&gt;</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a>  )<span class="op">;</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>}<span class="op">;</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>はじめに開発モードで起動して、意図するように機能することを確認してください。</p>
+      <figure>
+      <img src="figs/07/app_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <p>このコードのなかで注目すべき箇所は <strong>第10行目</strong>
       から <strong>第26行目</strong> にかけての <code>useEffect</code>
-      の処理になります。まず、処理は
+      の処理になります。</p>
+      <p>メインとなるデータ取得の処理は
       <code>useEffect(() =&gt; {...},[code])</code>
-      のようになっており、これによって内部の処理は、<strong>Pageコンポーネントが読み込まれたとき
+      のなかに記述されており、<strong>Pageコンポーネントが読み込まれたとき
       (マウントされたとき)</strong> と、<code>code</code>
-      が変更されたときだけ実行されるようになります
-      (無駄にAPIにアクセスすることが無いように対処されています)。</p>
-      <p><code>useEffect</code> の内部では、アロー関数形式で
-      <code>fetchAddressFromZipCode</code> が定義され、それが
-      <strong>第25行目</strong>
+      が変更されたとき
+      <strong>だけ</strong>、APIからのデータ取得が実行されるようになっています。</p>
+      <p><code>useEffect</code> の内部では、<strong>第11行目</strong>
+      から <strong>第23行目</strong> にかけて
+      <code>fetchAddressFromZipCode</code>
+      がアロー関数形式で定義され、それが <strong>第25行目</strong>
       で呼び出されています。<code>fetchAddressFromZipCode</code>
-      の定義では <code>async</code> と <code>await</code> という<span
-      class="masked">非同期処理</span>
-      を扱うためのキーワードが使用されています。非同期処理については、次のセクションで解説します。ウェブAPIからデータを取得するメイン処理は
+      の内部では <code>async</code> と <code>await</code> という<span
+      class="masked">「非同期処理」を取り扱うためのキーワード</span>
+      が使用されています
+      (非同期処理の詳細は次のセクションで解説します)。そして、ウェブAPIからデータを取得するメイン処理は
       <strong>第14行目</strong> の <code>fetch</code>
       という組み込み関数で行なわれています。</p>
-      <p>fetch はウェブアプリの文脈では <span
+      <p>「fetch」とは、ウェブアプリの文脈では <span
       class="masked">データを外部から取得する</span> や <span
       class="masked">リモートのリソースを読み込んでくる</span>
-      という意味になります。関数 <code>fetch</code>
-      の第1引数にはウェブAPI の URL (エンドポイントとも呼ばれます)
-      を与え、第2引数にはリクエストのオプション設定を与えます。</p>
+      という意味になります。関数 <code>fetch</code> の
+      <strong>第1引数</strong> にはウェブAPI の URL
+      (エンドポイントとも呼ばれます) を与え、<strong>第2引数</strong>
+      にはリクエストのオプション設定を与えます。</p>
       <hr />
       <p>なお、<strong>第33行目</strong> の
       <code>&lt;pre&gt;...&lt;/pre&gt;</code> は、<strong>Preformatted
       Text</strong> (整形済みテキスト)
       のためのタグで、タグに囲まれた子要素の内容を <span
-      class="masked">「スペース」や「改行」などを等幅フォントでそのまま</span>
-      で表示する機能を持ちます。</p>
+      class="masked">「スペース」や「改行」などをそのままに、等幅フォントで</span>
+      出力する機能を持ちます。</p>
       <h3 data-number="3.2.1" id="演習-5分"><span
       class="header-section-number">3.2.1</span> 演習
       (<i class="fa-solid fa-stopwatch"></i> 5分)</h3>
-      <p><strong>第33行目</strong> の
-      <code>&lt;pre&gt;...&lt;/pre&gt;</code>
-      を以下のように書き換えて、画面表示がどのように変化するか確認してください。</p>
-      <div class="sourceCode" id="cb9"
+      <p><strong>第33行目</strong> の <code>&lt;pre&gt;</code>
+      タグを以下のように <code>&lt;div&gt;</code>
+      タグに書き換えて、画面表示がどのように変化するか確認してください。</p>
+      <div class="sourceCode" id="cb10"
       data-caption="src/app/playground/zip-code/[code]/page.tsx (抜粋・変更前)"
       data-startFrom="32"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 31;"><span id="cb9-32"><a href="#cb9-32"></a><span class="op">&lt;</span>pre className<span class="op">=</span><span class="st">&quot;rounded-md bg-green-100 p-3 text-sm&quot;</span><span class="op">&gt;</span>{response}<span class="op">&lt;/</span>pre<span class="op">&gt;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb10"
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 31;"><span id="cb10-32"><a href="#cb10-32"></a><span class="op">&lt;</span>pre className<span class="op">=</span><span class="st">&quot;rounded-md bg-green-100 p-3 text-sm&quot;</span><span class="op">&gt;</span>{response}<span class="op">&lt;/</span>pre<span class="op">&gt;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb11"
       data-caption="src/app/playground/zip-code/[code]/page.tsx (抜粋・変更後)"
       data-startFrom="32"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 31;"><span id="cb10-32"><a href="#cb10-32"></a><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;rounded-md bg-green-100 p-3 text-sm&quot;</span><span class="op">&gt;</span>{response}<span class="op">&lt;/</span>ｄiv<span class="op">&gt;</span></span></code></pre></div>
-      <h2 data-number="3.3" id="非同期処理"><span
-      class="header-section-number">3.3</span> 非同期処理</h2>
-      <p>一般に我々が考えるプログラムは同期処理される。</p>
-      <p>ここでの同期処理とは、端的に言えば、次のように命令が並べられているとき、処理1の完了を待って、処理2が開始されるということです。極々あたりまえと感じる動作になります。</p>
-      <p>ここで、処理2が完了までに時間がかかる処理だったとします。</p>
-      <h1 data-number="4" id="microcms"><span
-      class="header-section-number">4</span> microCMS</h1>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 31;"><span id="cb11-32"><a href="#cb11-32"></a><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;rounded-md bg-green-100 p-3 text-sm&quot;</span><span class="op">&gt;</span>{response}<span class="op">&lt;/</span>ｄiv<span class="op">&gt;</span></span></code></pre></div>
+      <h1 data-number="4" id="同期処理と非同期処理"><span
+      class="header-section-number">4</span> 同期処理と非同期処理</h1>
+      <p>ここでは「<strong>同期処理</strong>」や「<strong>非同期処理</strong>」の概要について学んでいきます。</p>
+      <div class="note type-caution">
+      <p><strong>注意</strong>: ここでは
+      <strong>正確性・厳密性をある程度犠牲にして、分かりやすさを優先した解説</strong>になることを了承ください。詳しいことについては、ウェブや生成AIを利用して理解を深めてください。</p>
+      </div>
+      <p>アプリ開発の文脈において「<strong>同期処理</strong>」や「<strong>非同期処理</strong>」とは
+      <span class="masked">プログラム (タスク)
+      の実行順序についての制御方式</span>
+      を指す用語になります。ざっくりと言えば、同期処理は「<strong>順次実行</strong>」、非同期処理は
+      <span class="masked">「並列実行」</span>
+      を基本とした制御方式になります。</p>
+      <p>例えば、次のような順序でプログラムが書かれているとき：</p>
+      <pre><code>関数1();
+関数2();
+関数3();</code></pre>
+      <p><strong>同期処理</strong> (Synchronous Processing)
+      とは、<code>関数1()</code> から <code>関数3()</code> までを
+      <strong>ひとつずつ順番に実行する方式</strong> になります。つまり
+      <code>関数1()</code> の<strong>完了を待ってから</strong>
+      <code>関数2()</code> が実行されます。また、<code>関数2()</code>
+      の<strong>完了を待ってから</strong> <code>関数3()</code>
+      が実行されます。JavaScript や Python
+      など、ほとんどのプログラミング言語では
+      <strong>非同期処理のための特別なキーワード</strong>
+      (<code>async</code> など)
+      を使用しない限り、このような同期処理で実行されます。</p>
+      <p>一方で <strong>非同期処理</strong> (Asynchronous Processing)
+      とは、<code>関数1()</code> の<strong>完了を待たずに</strong> <span
+      class="masked"><code>関数2()</code> が実行され</span>、また
+      <code>関数2()</code> の<strong>完了を待たずに</strong>
+      <code>関数3()</code> が実行されるような制御方式となります。</p>
+      <h2 data-number="4.1" id="同期処理の動作確認"><span
+      class="header-section-number">4.1</span> 同期処理の動作確認</h2>
+      <p>はじめに <strong>同期処理</strong>
+      について、<strong>動作や挙動を確認するための実験</strong>をしていきます。ブログアプリのプロジェクトフォルダに、次のような実験のためのファイルを作成してください。</p>
+      <div class="sourceCode" id="cb13"
+      data-caption="src/app/playground/sync/page.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb13-1"><a href="#cb13-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="im">import</span> { faGear } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="kw">const</span> syncTask <span class="op">=</span> (name<span class="op">:</span> <span class="dt">string</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="co">// なんらかの処理が実行されると仮定</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`同期処理 </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs"> が完了しました`</span>)<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>}<span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-12"><a href="#cb13-12"></a>  <span class="kw">const</span> syncProcess <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-13"><a href="#cb13-13"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 syncProcess を開始&quot;</span>)<span class="op">;</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理1&quot;</span>)<span class="op">;</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理2&quot;</span>)<span class="op">;</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理3&quot;</span>)<span class="op">;</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 syncProcess の最後に到達&quot;</span>)<span class="op">;</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a>  }<span class="op">;</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a></span>
+<span id="cb13-20"><a href="#cb13-20"></a>  <span class="cf">return</span> (</span>
+<span id="cb13-21"><a href="#cb13-21"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-5 text-2xl font-bold&quot;</span><span class="op">&gt;</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>        同期処理を理解するための実験1</span>
+<span id="cb13-24"><a href="#cb13-24"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a>        <span class="op">&lt;</span>button</span>
+<span id="cb13-27"><a href="#cb13-27"></a>          <span class="kw">type</span><span class="op">=</span><span class="st">&quot;button&quot;</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a>          onClick<span class="op">=</span>{syncProcess}</span>
+<span id="cb13-29"><a href="#cb13-29"></a>          className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
+<span id="cb13-30"><a href="#cb13-30"></a>            <span class="st">&quot;rounded-md px-3 py-1&quot;</span><span class="op">,</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>            <span class="st">&quot;bg-indigo-500 font-bold text-white hover:bg-indigo-600&quot;</span></span>
+<span id="cb13-32"><a href="#cb13-32"></a>          )}</span>
+<span id="cb13-33"><a href="#cb13-33"></a>        <span class="op">&gt;</span></span>
+<span id="cb13-34"><a href="#cb13-34"></a>          同期処理の実行</span>
+<span id="cb13-35"><a href="#cb13-35"></a>        <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb13-36"><a href="#cb13-36"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex justify-items-start space-x-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb13-37"><a href="#cb13-37"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb13-38"><a href="#cb13-38"></a>            <span class="op">&lt;</span>FontAwesomeIcon</span>
+<span id="cb13-39"><a href="#cb13-39"></a>              icon<span class="op">=</span>{faGear}</span>
+<span id="cb13-40"><a href="#cb13-40"></a>              className<span class="op">=</span><span class="st">&quot;animate-spin text-2xl [animation-duration:2s]&quot;</span></span>
+<span id="cb13-41"><a href="#cb13-41"></a>            <span class="op">/&gt;</span></span>
+<span id="cb13-42"><a href="#cb13-42"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-43"><a href="#cb13-43"></a>          {[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span><span class="fu">map</span>((i) <span class="kw">=&gt;</span> (</span>
+<span id="cb13-44"><a href="#cb13-44"></a>            <span class="op">&lt;</span>div key<span class="op">=</span>{i}<span class="op">&gt;</span></span>
+<span id="cb13-45"><a href="#cb13-45"></a>              <span class="op">&lt;</span>input</span>
+<span id="cb13-46"><a href="#cb13-46"></a>                id<span class="op">=</span>{<span class="vs">`cb-</span><span class="sc">${</span>i<span class="sc">}</span><span class="vs">`</span>}</span>
+<span id="cb13-47"><a href="#cb13-47"></a>                <span class="kw">type</span><span class="op">=</span><span class="st">&quot;checkbox&quot;</span></span>
+<span id="cb13-48"><a href="#cb13-48"></a>                className<span class="op">=</span><span class="st">&quot;mr-1&quot;</span></span>
+<span id="cb13-49"><a href="#cb13-49"></a>                defaultChecked<span class="op">=</span>{i <span class="op">===</span> <span class="dv">1</span>}</span>
+<span id="cb13-50"><a href="#cb13-50"></a>              <span class="op">/&gt;</span></span>
+<span id="cb13-51"><a href="#cb13-51"></a>              <span class="op">&lt;</span>label htmlFor<span class="op">=</span>{<span class="vs">`cb-</span><span class="sc">${</span>i<span class="sc">}</span><span class="vs">`</span>} className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span></span>
+<span id="cb13-52"><a href="#cb13-52"></a>                項目{i}</span>
+<span id="cb13-53"><a href="#cb13-53"></a>              <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb13-54"><a href="#cb13-54"></a>            <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-55"><a href="#cb13-55"></a>          ))}</span>
+<span id="cb13-56"><a href="#cb13-56"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-57"><a href="#cb13-57"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-58"><a href="#cb13-58"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb13-59"><a href="#cb13-59"></a>  )<span class="op">;</span></span>
+<span id="cb13-60"><a href="#cb13-60"></a>}<span class="op">;</span></span>
+<span id="cb13-61"><a href="#cb13-61"></a></span>
+<span id="cb13-62"><a href="#cb13-62"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>上記のプログラムは <code>async</code> や <code>await</code>
+      などのキーワードを含まない、つまり
+      <strong>非同期処理を含まない純粋な「同期処理」のプログラム</strong>
+      となっています。まずは、開発モードでサーバを起動して
+      <code>/playground/sync</code>
+      にアクセスして、次のようなコンテンツが表示されることを確認してください。</p>
+      <p>そして、画面内の「<strong>同期処理の実行</strong>」を押下したとき
+      (つまり <strong>第28行目</strong> の設定によって、関数
+      <code>syncProcess</code>
+      がコールされたとき)、デベロッパーツールのコンソールに <span
+      class="masked">どのような順序で、どのようなログが出力されるか</span>
+      について少し考えてみてください。これは同期処理なので、難しく考えず普通に素直に考えてもらってOKです。</p>
+      <figure>
+      <img src="figs/07/sync_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>コンソール出力がどのようになるか、予測できたでしょうか。実際に「同期処理の実行」のボタンを押下して結果を確認してみてください。次のような結果となるはずです。</p>
+      <pre><code>関数 syncProcess を開始
+同期処理 処理1 が完了しました
+同期処理 処理2 が完了しました
+同期処理 処理3 が完了しました
+関数 syncProcess の最後に到達</code></pre>
+      <p>予測したように各処理は、プログラムの <strong>第13行目</strong>
+      から <strong>第17行目</strong>
+      にかけて記述した順番通りに実行され、ログが出力されています。つまり、<code>syncTask("処理1")</code>
+      の完了を待ってから <code>syncTask("処理2")</code>
+      が実行されていることが確認できました。同様に
+      <code>syncTask("処理2")</code> の完了を待ってから
+      <code>syncTask("処理3");</code>
+      されていることが確認できました。</p>
+      <p>ところで、これは視点を変えれば <code>syncTask("処理1")</code>
+      の実行中は、後続の処理である <code>syncTask("処理2")</code> の
+      <strong>実行が一時的に中断されている状態</strong>
+      とみることもできます。このような実行の中断状態のことを <span
+      class="masked">ブロッキング (blocking)</span>
+      と呼びます。このとき、<code>syncTask("処理1")</code>
+      は実行中のタスクとして、後続の <code>syncTask("処理2")</code>
+      の実行を「<strong>ブロック</strong>」していると表現します。</p>
+      <h2 data-number="4.2"
+      id="処理時間を要するタスクを同期処理で扱うときの問題"><span
+      class="header-section-number">4.2</span>
+      処理時間を要するタスクを同期処理で扱うときの問題</h2>
+      <p>次に <code>src/app/playground/sync/page.tsx</code>
+      を次のように書き換えてください。<strong>第11行目</strong> の
+      <code>heavySyncTask</code>
+      は、<strong>処理時間を要するタスク</strong>
+      (実行完了までに時間のかかるタスク)
+      を疑似的にシミュレートしている関数になります。</p>
+      <p>この「<strong>処理時間を要するタスク</strong>」とは、フロントエンド開発で言えば具体的には
+      <span class="masked">ウェブAPIからのデータの取得</span>
+      や、大量のデータを処理する計算、複雑なDOM操作などが相当します。</p>
+      <p><code>page.tsx</code>
+      を書き換えたら、先ほどと同様に「<strong>同期処理の実行</strong>」のボタンを押下したとき、どのようなコンソール出力が得られるかを考え、その後、実際に実行してみてください。</p>
+      <div class="sourceCode" id="cb15"
+      data-caption="src/app/playground/sync/page.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb15-1"><a href="#cb15-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="im">import</span> { faGear } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">const</span> syncTask <span class="op">=</span> (name<span class="op">:</span> <span class="dt">string</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="co">// なんらかの処理が実行されると仮定</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`同期処理 </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs"> が完了しました`</span>)<span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>}<span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="kw">const</span> heavySyncTask <span class="op">=</span> (workload<span class="op">:</span> <span class="dt">number</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-12"><a href="#cb15-12"></a>  <span class="co">// なんらかの重たい処理が実行されると仮定</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a>  <span class="kw">const</span> startTime <span class="op">=</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>  <span class="cf">while</span> (<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>() <span class="op">-</span> startTime <span class="op">&lt;</span> <span class="dv">1000</span>) { }</span>
+<span id="cb15-15"><a href="#cb15-15"></a>  <span class="kw">const</span> ret <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">*</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;同期処理 heavySyncTask が完了しました&quot;</span>)<span class="op">;</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>  <span class="cf">return</span> ret<span class="op">;</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>}<span class="op">;</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a></span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb15-21"><a href="#cb15-21"></a>  <span class="kw">const</span> syncProcess <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb15-22"><a href="#cb15-22"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 syncProcess を開始&quot;</span>)<span class="op">;</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理1&quot;</span>)<span class="op">;</span></span>
+<span id="cb15-24"><a href="#cb15-24"></a>    <span class="fu">heavySyncTask</span>(<span class="dv">2000</span>)<span class="op">;</span> <span class="co">// 実行完了に2000msかかる処理</span></span>
+<span id="cb15-25"><a href="#cb15-25"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理2&quot;</span>)<span class="op">;</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理3&quot;</span>)<span class="op">;</span></span>
+<span id="cb15-27"><a href="#cb15-27"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 syncProcess の最後に到達&quot;</span>)<span class="op">;</span></span>
+<span id="cb15-28"><a href="#cb15-28"></a>  }<span class="op">;</span></span>
+<span id="cb15-29"><a href="#cb15-29"></a></span>
+<span id="cb15-30"><a href="#cb15-30"></a><span class="co">// 以下、変更なし </span></span></code></pre></div>
+      <p>コンソール出力は (予測のとおりに)
+      次のようになったはずです。ただ、<strong>それとは別に画面内に変化があったこと</strong>に気づいたでしょうか。もし、気付かなかったときは、再度「同期処理の実行」のボタンを押下してください。</p>
+      <pre><code>関数 syncProcess を開始
+同期処理 処理1 が完了しました
+同期処理 heavySyncTask が完了しました
+同期処理 処理2 が完了しました
+同期処理 処理3 が完了しました
+関数 syncProcess の最後に到達</code></pre>
+      <p>処理時間を要するタスクを含む場合、ボタン押下後に <span
+      class="masked">歯車マークのCSSアニメーションが止まってしまうこと</span>
+      に気づけたでしょうか。そして、ややあって「<strong>関数 syncProcess
+      の最後に到達</strong>」というログが出力され、アニメーションの実行アニメーションが再開されることに気付いたでしょうか。つまり、<code>syncProcess</code>
+      <strong>の実行が完了するまではアニメーションが停止してしまうという問題</strong>が生じます。</p>
+      <p>そして、もうひとつ、<code>syncProcess</code> の
+      <strong>実行が完了するまで</strong> は <span
+      class="masked">チェックボックスをクリックしても応答しなくなってしまうこと</span>
+      も確認してください。このようにフリーズしたような状態というのは、ユーザ体験
+      (UX) を著しく悪化させることになります。</p>
+      <figure>
+      <img src="figs/07/sync_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.3" id="同期処理で問題が起こる原因"><span
+      class="header-section-number">4.3</span>
+      同期処理で問題が起こる原因</h2>
+      <p>なぜ「<strong>このようなことが起きるのか</strong>」について紐解いていきます。</p>
+      <p>ウェブブラウザで実行される JavaScript
+      では、開発者が記述したプログラムの処理 (例えば
+      <code>syncProcess</code> など)
+      に加えて、実は、次のような処理も担当しています。</p>
+      <ul>
+      <li><strong>DOMイベント</strong>
+      (クリックやスクロールなどのユーザー操作) への応答</li>
+      <li><strong>レンダリング処理</strong>
+      (CSSアニメーションの実行を含む)</li>
+      </ul>
+      <p>これらの処理は、特に非同期処理として明示されていない限り
+      <strong>メインスレッド</strong> (あるいはUIスレッド) とよばれる
+      <strong>単一のスレッド</strong>
+      において常に1つずつ順番に処理されることになります。そのため、<code>heavySyncTask</code>
+      のような実行時間の長いタスクを同期的に処理すると、先ほど確認したようにアニメーションやユーザ操作
+      (チェックボックスのクリックなど)
+      に対する応答がブロックされることになります。</p>
+      <p>このブロッキングは実際には常に発生していますが、ユーザ処理が軽い場合
+      (数ミリ秒程度で完了する場合)
+      は、その時間が短すぎて知覚することはありません。しかし、<strong>ウェブAPIからのデータの取得</strong>
+      のように時間のかかる処理を同期的に実行すると、UIの明らかな停止としてUXを損ねることになります。</p>
+      <p>このようなことから、JavaScript では
+      <strong>HTTPリクエストを実行する標準機能</strong> として
+      <code>fetch</code>
+      という非同期処理が提供されています。開発者が誤って同期的な実装をしないように、<code>fetch</code>
+      について同期バージョンは提供されていません。</p>
+      <h2 data-number="4.4" id="非同期処理"><span
+      class="header-section-number">4.4</span> 非同期処理</h2>
+      <p>以上に示したような同期処理の問題 (ブロッキング)
+      を回避するために、JavaScript には
+      <strong>非同期処理の仕組み</strong>
+      が用意されています。まずは、実際に実装して、その動作を確認してみます。新規に
+      <code>src/app/playground/async/page.tsx</code>
+      を作成して、以下のコードを記述してください。</p>
+      <p>全体構造は、先ほどの同期処理と同じですが、<strong>第11行目</strong>
+      の <code>heavyAsyncTask</code>
+      関数が大きく書き換わっています。<code>heavyAsyncTask</code> は
+      <code>async</code> キーワードが付けられた <span
+      class="masked">非同期処理を含んだ関数</span> となっています
+      (非同期処理の本体部分は <strong>第12行目</strong> です)。</p>
+      <div class="sourceCode" id="cb17"
+      data-caption="src/app/playground/async/page.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb17-1"><a href="#cb17-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="im">import</span> { faGear } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="kw">const</span> syncTask <span class="op">=</span> (name<span class="op">:</span> <span class="dt">string</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="co">// なんらかの処理が実行されると仮定</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`同期処理 </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs"> が完了しました`</span>)<span class="op">;</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>}<span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="kw">const</span> heavyAsyncTask <span class="op">=</span> <span class="kw">async</span> (workload<span class="op">:</span> <span class="dt">number</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-12"><a href="#cb17-12"></a>  <span class="cf">await</span> <span class="kw">new</span> <span class="bu">Promise</span>((resolve) <span class="kw">=&gt;</span> <span class="pp">setTimeout</span>(resolve<span class="op">,</span> workload))<span class="op">;</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>  <span class="kw">const</span> ret <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">*</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;非同期処理 heavyAsyncTask が完了しました&quot;</span>)<span class="op">;</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>  <span class="cf">return</span> ret<span class="op">;</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a>}<span class="op">;</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a></span>
+<span id="cb17-18"><a href="#cb17-18"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb17-19"><a href="#cb17-19"></a>  <span class="kw">const</span> asyncProcess <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb17-20"><a href="#cb17-20"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 asyncProcess を開始&quot;</span>)<span class="op">;</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理1&quot;</span>)<span class="op">;</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a>    <span class="fu">heavyAsyncTask</span>(<span class="dv">2000</span>)<span class="op">;</span> <span class="co">// 実行完了に2000msかかる非同期処理</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理2&quot;</span>)<span class="op">;</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理3&quot;</span>)<span class="op">;</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 asyncProcess の最後に到達&quot;</span>)<span class="op">;</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a>  }<span class="op">;</span></span>
+<span id="cb17-27"><a href="#cb17-27"></a></span>
+<span id="cb17-28"><a href="#cb17-28"></a>  <span class="cf">return</span> (</span>
+<span id="cb17-29"><a href="#cb17-29"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-5 text-2xl font-bold&quot;</span><span class="op">&gt;</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a>        非同期処理を理解するための実験1</span>
+<span id="cb17-32"><a href="#cb17-32"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb17-33"><a href="#cb17-33"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a>        <span class="op">&lt;</span>button</span>
+<span id="cb17-35"><a href="#cb17-35"></a>          <span class="kw">type</span><span class="op">=</span><span class="st">&quot;button&quot;</span></span>
+<span id="cb17-36"><a href="#cb17-36"></a>          onClick<span class="op">=</span>{asyncProcess}</span>
+<span id="cb17-37"><a href="#cb17-37"></a>          className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
+<span id="cb17-38"><a href="#cb17-38"></a>            <span class="st">&quot;rounded-md px-3 py-1&quot;</span><span class="op">,</span></span>
+<span id="cb17-39"><a href="#cb17-39"></a>            <span class="st">&quot;bg-indigo-500 font-bold text-white hover:bg-indigo-600&quot;</span></span>
+<span id="cb17-40"><a href="#cb17-40"></a>          )}</span>
+<span id="cb17-41"><a href="#cb17-41"></a>        <span class="op">&gt;</span></span>
+<span id="cb17-42"><a href="#cb17-42"></a>          非同期処理の実行</span>
+<span id="cb17-43"><a href="#cb17-43"></a>        <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb17-44"><a href="#cb17-44"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex justify-items-start space-x-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb17-45"><a href="#cb17-45"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb17-46"><a href="#cb17-46"></a>            <span class="op">&lt;</span>FontAwesomeIcon</span>
+<span id="cb17-47"><a href="#cb17-47"></a>              icon<span class="op">=</span>{faGear}</span>
+<span id="cb17-48"><a href="#cb17-48"></a>              className<span class="op">=</span><span class="st">&quot;animate-spin text-2xl [animation-duration:2s]&quot;</span></span>
+<span id="cb17-49"><a href="#cb17-49"></a>            <span class="op">/&gt;</span></span>
+<span id="cb17-50"><a href="#cb17-50"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb17-51"><a href="#cb17-51"></a>          {[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span><span class="fu">map</span>((i) <span class="kw">=&gt;</span> (</span>
+<span id="cb17-52"><a href="#cb17-52"></a>            <span class="op">&lt;</span>div key<span class="op">=</span>{i}<span class="op">&gt;</span></span>
+<span id="cb17-53"><a href="#cb17-53"></a>              <span class="op">&lt;</span>input</span>
+<span id="cb17-54"><a href="#cb17-54"></a>                id<span class="op">=</span>{<span class="vs">`cb-</span><span class="sc">${</span>i<span class="sc">}</span><span class="vs">`</span>}</span>
+<span id="cb17-55"><a href="#cb17-55"></a>                <span class="kw">type</span><span class="op">=</span><span class="st">&quot;checkbox&quot;</span></span>
+<span id="cb17-56"><a href="#cb17-56"></a>                className<span class="op">=</span><span class="st">&quot;mr-1&quot;</span></span>
+<span id="cb17-57"><a href="#cb17-57"></a>                defaultChecked<span class="op">=</span>{i <span class="op">===</span> <span class="dv">1</span>}</span>
+<span id="cb17-58"><a href="#cb17-58"></a>              <span class="op">/&gt;</span></span>
+<span id="cb17-59"><a href="#cb17-59"></a>              <span class="op">&lt;</span>label htmlFor<span class="op">=</span>{<span class="vs">`cb-</span><span class="sc">${</span>i<span class="sc">}</span><span class="vs">`</span>} className<span class="op">=</span><span class="st">&quot;font-bold&quot;</span><span class="op">&gt;</span></span>
+<span id="cb17-60"><a href="#cb17-60"></a>                項目{i}</span>
+<span id="cb17-61"><a href="#cb17-61"></a>              <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb17-62"><a href="#cb17-62"></a>            <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb17-63"><a href="#cb17-63"></a>          ))}</span>
+<span id="cb17-64"><a href="#cb17-64"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb17-65"><a href="#cb17-65"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb17-66"><a href="#cb17-66"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb17-67"><a href="#cb17-67"></a>  )<span class="op">;</span></span>
+<span id="cb17-68"><a href="#cb17-68"></a>}<span class="op">;</span></span>
+<span id="cb17-69"><a href="#cb17-69"></a></span>
+<span id="cb17-70"><a href="#cb17-70"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p><code>/playground/sync</code>
+      にアクセスして「<strong>非同期処理の実行</strong>」のボタンを押下してみてください。デベロッパーツールのコンソール出力は次のような結果となったはずです。</p>
+      <figure>
+      <img src="figs/07/async_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここで注目してほしいことは、非同期関数
+      <code>heavySyncTask(2000);</code>
+      の<strong>完了を待たず</strong>に
+      <code>syncTask("処理2")</code>、<code>syncTask("処理3")</code>
+      が実行されているということです。そして「非同期処理 heavyAsyncTask
+      が完了しました」は、<code>heavySyncTask(2000)</code>
+      をコールしている <code>asyncProcess</code>
+      の実行完了後に出力されています。また、同期処理のときとは違い、「アニメーション」や「チェックボックス操作」がブロックされないことも確認してください。</p>
+      <p>ところで、この場合 <code>heavySyncTask()</code>
+      の結果に基づいた後続処理をしたい (例えば、戻り値を
+      <code>syncTask("処理3")</code> に与えたい)
+      ときにどうすればよいか、という問題に気づいたでしょうか。現状のままでは、<code>heavySyncTask()</code>
+      の完了を待たず、<code>syncTask("処理3")</code>
+      は実行されてしまうため、そのような処理ができません。</p>
+      <h2 data-number="4.5" id="awaitを用いた非同期処理の完了待機"><span
+      class="header-section-number">4.5</span>
+      awaitを用いた非同期処理の完了待機</h2>
+      <p>非同期関数 <code>heavyAsyncTask</code>
+      の完了を待って、そのあとに <code>syncTask("処理3")</code>
+      を実行したいときは、次のように <code>async</code> と
+      <code>await</code> キーワードを使用して <code>asyncProcess</code>
+      を書き換えます。</p>
+      <div class="sourceCode" id="cb18"
+      data-caption="src/app/playground/async/page.tsx (抜粋)"
+      data-startFrom="19"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 18;"><span id="cb18-19"><a href="#cb18-19"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb18-20"><a href="#cb18-20"></a>  <span class="kw">const</span> asyncProcess <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> { <span class="co">// ◀ async キーワードの追加</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 asyncProcess を開始&quot;</span>)<span class="op">;</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理1&quot;</span>)<span class="op">;</span></span>
+<span id="cb18-23"><a href="#cb18-23"></a>    <span class="kw">const</span> asyncTask <span class="op">=</span> <span class="fu">heavyAsyncTask</span>(<span class="dv">2000</span>)<span class="op">;</span> <span class="co">// ◀ 変更</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理2&quot;</span>)<span class="op">;</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a>    <span class="kw">const</span> num <span class="op">=</span> <span class="cf">await</span> asyncTask<span class="op">;</span>  <span class="co">// ◀ 変更</span></span>
+<span id="cb18-26"><a href="#cb18-26"></a>    <span class="fu">syncTask</span>(<span class="vs">`処理3 num=</span><span class="sc">${</span>num<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span>  <span class="co">// ◀ 変更</span></span>
+<span id="cb18-27"><a href="#cb18-27"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 asyncProcess の最後に到達&quot;</span>)<span class="op">;</span></span>
+<span id="cb18-28"><a href="#cb18-28"></a>  }<span class="op">;</span></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="co">// 以下、変更なし </span></span></code></pre></div>
+      <p>まずは、実行結果を確認してください。コンソールのログからは、次のように「heavyAsyncTask
+      の完了を待って、処理3
+      が実行されていること」が確認できるはずです。また、<span
+      class="masked">アニメーションやUI応答がブロックされないこと</span>
+      もあわせて確認してください。</p>
+      <pre><code>関数 asyncProcess を開始
+同期処理 処理1 が完了しました
+同期処理 処理2 が完了しました
+非同期処理 heavyAsyncTask が完了しました
+同期処理 処理3 num=1 が完了しました
+関数 asyncProcess の最後に到達</code></pre>
+      <p>上記の結果から推測できるように、キーワード <code>await</code>
+      を使用すると <span class="masked">非同期処理の完了を待機</span>
+      できるようになります。この際、<strong>メインスレッドをブロッキングすることなく</strong>、非同期処理が完了するまで現在の関数
+      (ここで言えば <code>asyncProcess</code>)
+      の実行を一時停止することができます。</p>
+      <p>なお、<code>syncTask("処理2")</code>
+      も、<code>heavyAsyncTask</code>
+      の完了を待ってから実行したい場合、次のように記述することができます。</p>
+      <div class="sourceCode" id="cb20"
+      data-caption="src/app/playground/async/page.tsx (抜粋)"
+      data-startFrom="19"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 18;"><span id="cb20-19"><a href="#cb20-19"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb20-20"><a href="#cb20-20"></a>  <span class="kw">const</span> asyncProcess <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> { <span class="co">// ◀ async キーワードの追加</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 asyncProcess を開始&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a>    <span class="fu">syncTask</span>(<span class="st">&quot;処理1&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a>    <span class="kw">const</span> num <span class="op">=</span> <span class="cf">await</span> <span class="fu">heavyAsyncTask</span>(<span class="dv">2000</span>)<span class="op">;</span> <span class="co">// ◀ 変更</span></span>
+<span id="cb20-24"><a href="#cb20-24"></a>    <span class="fu">syncTask</span>(<span class="vs">`処理2 num=</span><span class="sc">${</span>num<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span>  <span class="co">// ◀ 変更</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a>    <span class="fu">syncTask</span>(<span class="vs">`処理3 num=</span><span class="sc">${</span>num<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span>  <span class="co">// ◀ 変更</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;関数 asyncProcess の最後に到達&quot;</span>)<span class="op">;</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a>  }<span class="op">;</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a><span class="co">// 以下、変更なし </span></span></code></pre></div>
+      <h3 data-number="4.5.1" id="演習-10分"><span
+      class="header-section-number">4.5.1</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i> 10分)</h3>
+      <p><code>await</code> は、<code>async</code>
+      キーワードをつけた関数のなかでのみ使用できます。<strong>20行目</strong>
+      の <code>async</code>
+      キーワードを削除すると、どのようなエラーが発生するか確認してください。</p>
+      <h2 data-number="4.6"
+      id="改めて郵便番号検索apiの利用処理を確認"><span
+      class="header-section-number">4.6</span>
+      改めて郵便番号検索APIの利用処理を確認</h2>
+      <p>非同期処理について概要が理解できたところで、<strong>郵便番号検索APIからデータを取得する処理</strong>
+      について改めてプログラムを確認していきます。</p>
+      <div class="sourceCode" id="cb21"
+      data-caption="src/app/playground/zip-code/[code]/page.tsx (再掲・抜粋)"
+      data-startFrom="10"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 9;"><span id="cb21-10"><a href="#cb21-10"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="kw">const</span> fetchAddressFromZipCode  <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb21-12"><a href="#cb21-12"></a>    <span class="co">// ウェブAPIにGETリクエストを送信してレスポンスを取得</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a>    <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>endpoint<span class="sc">}</span><span class="vs">?zipcode=</span><span class="sc">${</span>code<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a>    <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> { <span class="co">// ◀◀ 注目</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a>      method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>      cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a>    })<span class="op">;</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ウェブAPIからデータを取得しました&quot;</span>)<span class="op">;</span></span>
+<span id="cb21-19"><a href="#cb21-19"></a></span>
+<span id="cb21-20"><a href="#cb21-20"></a>    <span class="co">// レスポンスからJSON形式でデータ取得して整形して表示</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a>    <span class="kw">const</span> parsedData <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span> <span class="co">// ◀◀ 注目</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a>    <span class="fu">setResponse</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(parsedData<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a>  }<span class="op">;</span></span>
+<span id="cb21-24"><a href="#cb21-24"></a></span>
+<span id="cb21-25"><a href="#cb21-25"></a>  <span class="fu">fetchAddressFromZipCode</span> ()<span class="op">;</span> <span class="co">// 関数を実行</span></span>
+<span id="cb21-26"><a href="#cb21-26"></a>}<span class="op">,</span> [code])<span class="op">;</span></span></code></pre></div>
+      <ul>
+      <li><p><strong>第11行目</strong> で <code>async</code>
+      キーワードを付けているのは、その内部で <code>await</code>
+      を使用するためです。</p></li>
+      <li><p><strong>第14行目</strong> で <code>await fetch (...)</code>
+      としているのは <code>fetch</code>
+      が「<strong>非同期処理</strong>」であり、なおかつ、その完了を待ってから
+      <strong>第18行目</strong> を実行したいためです。</p></li>
+      <li><p><strong>第18行目</strong> で
+      <code>await response.json()</code>
+      としているのは、<code>json()</code>
+      メソッドが「<strong>非同期処理</strong>」で実装されており、<span
+      class="masked">その完了を待って (=その「戻り値」を使って)
+      後続の<code>setResponse</code>を実行したいため</span>
+      です。</p></li>
+      </ul>
+      <p>なお、<code>json()</code> メソッドは
+      HTTP/HTTPSレスポンスのボディ部が<strong>JSONフォーマットであることを前提に</strong>オブジェクトへの変換を行います。関数やメソッドが「<strong>非同期処理かどうか</strong>」は、VSCodeのエディタ上でカーソルをあわせて表示されるツールチップで、その関数/メソッドの「戻り値」が
+      <code>Promise&lt;...&gt;</code> であるかで判断できます。</p>
+      <figure>
+      <img src="figs/07/async_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>最後に、<strong>第11行目</strong> で
+      <code>fetchAddressFromZipCode</code>
+      をアロー関数形式で定義して、それを <strong>第25行目</strong>
+      でコールするという (面倒な) 手続きをしているのは、<span
+      class="masked">useEffect
+      のなかには、非同期処理を直接書くことができない</span>
+      という仕様のためです。</p>
+      <h3 data-number="4.6.1" id="演習-5分-1"><span
+      class="header-section-number">4.6.1</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i> 5分)</h3>
+      <p>次のように <code>useEffect</code>
+      の第1引数として、<code>async</code>
+      キーワードを使った非同期関数を与えると、どのような警告やエラーが発生するか確認してください。</p>
+      <div class="sourceCode" id="cb22"
+      data-caption="useEffectに非同期処理を直接記述できない"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">useEffect</span>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="co">// ウェブAPIにGETリクエストを送信してレスポンスを取得</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>endpoint<span class="sc">}</span><span class="vs">?zipcode=</span><span class="sc">${</span>code<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb22-5"><a href="#cb22-5"></a>    method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>    cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  })<span class="op">;</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="co">// レスポンスからJSON形式でデータ取得して整形して表示</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>  <span class="kw">const</span> parsedData <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>  <span class="fu">setResponse</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(parsedData<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a>}<span class="op">,</span> [code])<span class="op">;</span></span></code></pre></div>
+      <h1 data-number="5" id="ブログ記事のデータをウェブから取得"><span
+      class="header-section-number">5</span>
+      ブログ記事のデータをウェブから取得</h1>
+      <p>ウェブAPIからJSONフォーマットのデータを取得し、それをオブジェクトに変換する処理について学んだので、これをブログアプリに適用してみたいと思います。ブログ記事の一覧がJSONフォーマットで取得可能なエンドポイントとして、以下を用意したので、これを利用してきます。</p>
+      <ul>
+      <li><a
+      href="https://w1980.blob.core.windows.net/pg3/posts.json">https://w1980.blob.core.windows.net/pg3/posts.json</a></li>
+      </ul>
+      <p>まずは、ブラウザからアクセスしてJSON形式で記事データが取得可能なことを確認してください。こちらには「投稿4」が追加されています。</p>
+      <figure>
+      <img src="figs/07/app_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>トップページ (<code>src/app/page.tsx</code>)
+      の実装を次のように変更して、ウェブから記事が取得することができることを確認してください。基本的には、ここまでに学んできたことの組み合わせになります。</p>
+      <div class="sourceCode" id="cb23"
+      data-caption="src/app/page.tsx (ウェブから記事を取得)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="im">import</span> PostSummary <span class="im">from</span> <span class="st">&quot;@/app/_components/PostSummary&quot;</span><span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="im">import</span> { faSpinner } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-9"><a href="#cb23-9"></a>  <span class="kw">const</span> [posts<span class="op">,</span> setPosts] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post[] <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>  <span class="kw">const</span> [fetchError<span class="op">,</span> setFetchError] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a></span>
+<span id="cb23-12"><a href="#cb23-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb23-13"><a href="#cb23-13"></a>    <span class="kw">const</span> fetchPosts <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-14"><a href="#cb23-14"></a>      <span class="cf">try</span> {</span>
+<span id="cb23-15"><a href="#cb23-15"></a>        <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="st">&quot;https://w1980.blob.core.windows.net/pg3/posts.json&quot;</span><span class="op">;</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb23-17"><a href="#cb23-17"></a>          method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a>          cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a>        })<span class="op">;</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a>        <span class="cf">if</span> (<span class="op">!</span>response<span class="op">.</span><span class="at">ok</span>) {</span>
+<span id="cb23-21"><a href="#cb23-21"></a>          <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&quot;データの取得に失敗しました&quot;</span>)<span class="op">;</span></span>
+<span id="cb23-22"><a href="#cb23-22"></a>        }</span>
+<span id="cb23-23"><a href="#cb23-23"></a>        <span class="kw">const</span> data <span class="op">=</span> (<span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()) <span class="im">as</span> Post[]<span class="op">;</span></span>
+<span id="cb23-24"><a href="#cb23-24"></a>        <span class="fu">setPosts</span>(data)<span class="op">;</span></span>
+<span id="cb23-25"><a href="#cb23-25"></a>      } <span class="cf">catch</span> (e) {</span>
+<span id="cb23-26"><a href="#cb23-26"></a>        <span class="fu">setFetchError</span>(</span>
+<span id="cb23-27"><a href="#cb23-27"></a>          e <span class="kw">instanceof</span> <span class="bu">Error</span> <span class="op">?</span> e<span class="op">.</span><span class="at">message</span> <span class="op">:</span> <span class="st">&quot;予期せぬエラーが発生しました&quot;</span></span>
+<span id="cb23-28"><a href="#cb23-28"></a>        )<span class="op">;</span></span>
+<span id="cb23-29"><a href="#cb23-29"></a>      }</span>
+<span id="cb23-30"><a href="#cb23-30"></a>    }<span class="op">;</span></span>
+<span id="cb23-31"><a href="#cb23-31"></a>    <span class="fu">fetchPosts</span>()<span class="op">;</span></span>
+<span id="cb23-32"><a href="#cb23-32"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb23-33"><a href="#cb23-33"></a></span>
+<span id="cb23-34"><a href="#cb23-34"></a>  <span class="cf">if</span> (fetchError) {</span>
+<span id="cb23-35"><a href="#cb23-35"></a>    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>{fetchError}<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
+<span id="cb23-36"><a href="#cb23-36"></a>  }</span>
+<span id="cb23-37"><a href="#cb23-37"></a></span>
+<span id="cb23-38"><a href="#cb23-38"></a>  <span class="cf">if</span> (<span class="op">!</span>posts) {</span>
+<span id="cb23-39"><a href="#cb23-39"></a>    <span class="cf">return</span> (</span>
+<span id="cb23-40"><a href="#cb23-40"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-gray-500&quot;</span><span class="op">&gt;</span></span>
+<span id="cb23-41"><a href="#cb23-41"></a>        <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faSpinner} className<span class="op">=</span><span class="st">&quot;mr-1 animate-spin&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb23-42"><a href="#cb23-42"></a>        Loading<span class="op">...</span></span>
+<span id="cb23-43"><a href="#cb23-43"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb23-44"><a href="#cb23-44"></a>    )<span class="op">;</span></span>
+<span id="cb23-45"><a href="#cb23-45"></a>  }</span>
+<span id="cb23-46"><a href="#cb23-46"></a></span>
+<span id="cb23-47"><a href="#cb23-47"></a>  <span class="cf">return</span> (</span>
+<span id="cb23-48"><a href="#cb23-48"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb23-49"><a href="#cb23-49"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Main<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb23-50"><a href="#cb23-50"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb23-51"><a href="#cb23-51"></a>        {posts<span class="op">.</span><span class="fu">map</span>((post) <span class="kw">=&gt;</span> (</span>
+<span id="cb23-52"><a href="#cb23-52"></a>          <span class="op">&lt;</span>PostSummary key<span class="op">=</span>{post<span class="op">.</span><span class="at">id</span>} post<span class="op">=</span>{post} <span class="op">/&gt;</span></span>
+<span id="cb23-53"><a href="#cb23-53"></a>        ))}</span>
+<span id="cb23-54"><a href="#cb23-54"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb23-55"><a href="#cb23-55"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb23-56"><a href="#cb23-56"></a>  )<span class="op">;</span></span>
+<span id="cb23-57"><a href="#cb23-57"></a>}<span class="op">;</span></span>
+<span id="cb23-58"><a href="#cb23-58"></a></span>
+<span id="cb23-59"><a href="#cb23-59"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>実行すると次のような結果が得られると思います。</p>
+      <figure>
+      <img src="figs/07/app_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここまでの実装で、このブログアプリに「閲覧者」としてアクセスしたときのフロントエンド処理の実装の本質部分は
+      <strong>概ね完了</strong>となります
+      (ただし「<strong>投稿者</strong>」としてアクセスしたときのフロントエンド処理は、まだ実装できていません)。</p>
+      <h1 data-number="6"
+      id="microcmsを利用したバックエンドの構築"><span
+      class="header-section-number">6</span>
+      microCMSを利用したバックエンドの構築</h1>
+      <p>フロントエンド開発が一段落したので、次回の講義から Next.js
+      でバックエンド開発を進めていきます。しかし、それに先立ってバックエンドの役割や機能について理解するために、ヘッドレスCMS
+      である <a href="https://microcms.io/">microCMS</a>
+      を使って、このブログアプリのバックエンド部分を構築してみたいと思います。</p>
+      <p>CMS とは <span class="masked">Content Management System</span>
+      の頭文字をとったもので、ウェブを使ってコンテンツの作成・管理・公開ができるシステムを指します。用途によって、ウェブサイト構築用のCMS
+      (<a
+      href="https://www.google.com/search?q=wordpressとは">WordPress</a>が超有名!!)、教育用のCMS
+      (Moodle や GoogleClassroom) 、コンテンツ共有プラットフォーム (<a
+      href="https://note.com/">note</a>、<a
+      href="https://qiita.com/">Qiita</a>、各種Wiki、各種ブログ)
+      などに分類できます。いずれも
+      <strong>プログラミングの知識は不要</strong>で、また<strong>専用ソフトも不要</strong>でという特徴があります。</p>
+      <p>このなかで <strong>ヘッドレスCMS</strong> (Headless)
+      とは、コンテンツの「<strong>公開</strong>」に関する部分について<strong>ビューやUIなどのフロントエンド機能</strong>を提供しないタイプのCMS、つまり
+      <span class="masked">コンテンツの公開機能が「API」だけ</span>
+      で提供されるCMSと言えます。</p>
+      <p><a
+      href="https://microcms.io/">microCMS</a>は、このようなヘッドレスCMSに分類されるサービスになります。microCMS
+      を利用すると、次のように
+      <strong>投稿者としての投稿記事の作成や編集</strong> は
+      microCMSサイトで行なって、<strong>閲覧者としての投稿記事の取得</strong>
+      はウェブAPIで行なう (ビューやUIは React
+      などで自由にデザイン・実装する) という形になります。</p>
+      <figure>
+      <img src="figs/07/cms_00.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>皆さんには、後期中間試験後の授業でバックエンドについても
+      Next.js で実装してもらいますが、<a
+      href="https://microcms.io/">microCMS</a>などのヘッドレスCMSと組み合わせれば、現時点での実装でもブログアプリとして実用的な機能を持ってリリースすることができます。</p>
+      <h2 data-number="6.1" id="microcmsの利用準備"><span
+      class="header-section-number">6.1</span> microCMSの利用準備</h2>
+      <p><a
+      href="https://microcms.io/">microCMS</a>を利用するための準備を行なっていきます。まずは、<a
+      href="https://microcms.io/">microCMS</a>にアクセスしてユーザ登録をしてください。クレジットカードなど不要で無料で登録することができます。</p>
+      <p>登録完了後、ログインして<strong>サービス管理画面</strong> (<a
+      href="https://app.microcms.io/">https://app.microcms.io/</a>)
+      に移動してください。</p>
       <figure>
       <img src="figs/07/cms_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -696,77 +1396,94 @@ class="toc-section-number">5</span> ああああ</a></li>
       <img src="figs/07/cms_25.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <h1 data-number="5" id="ああああ"><span
-      class="header-section-number">5</span> ああああ</h1>
+      <h1 data-number="7" id="ああああ"><span
+      class="header-section-number">7</span> ああああ</h1>
       <figure>
       <img src="figs/07/cms_13.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <div class="sourceCode" id="cb11"
+      <div class="sourceCode" id="cb24"
       data-caption="src/app/page.tsx"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb11-1"><a href="#cb11-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="im">import</span> PostSummary <span class="im">from</span> <span class="st">&quot;@/app/_components/PostSummary&quot;</span><span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="im">import</span> { faSpinner } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb11-9"><a href="#cb11-9"></a>  <span class="kw">const</span> [posts<span class="op">,</span> setPosts] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post[] <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>  <span class="kw">const</span> [fetchError<span class="op">,</span> setFetchError] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a></span>
-<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb11-13"><a href="#cb11-13"></a>    <span class="kw">const</span> fetchPosts <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb11-14"><a href="#cb11-14"></a>      <span class="cf">try</span> {</span>
-<span id="cb11-15"><a href="#cb11-15"></a>        <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="st">&quot;https://jg9awXXXXX.microcms.io/api/v1/posts&quot;</span><span class="op">;</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
-<span id="cb11-17"><a href="#cb11-17"></a>          method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a>          cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a>          headers<span class="op">:</span> {</span>
-<span id="cb11-20"><a href="#cb11-20"></a>            <span class="st">&quot;X-MICROCMS-API-KEY&quot;</span><span class="op">:</span> <span class="st">&quot;rePnewuXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="op">,</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a>          }<span class="op">,</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a>        })<span class="op">;</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a>        <span class="cf">if</span> (<span class="op">!</span>response<span class="op">.</span><span class="at">ok</span>) {</span>
-<span id="cb11-24"><a href="#cb11-24"></a>          <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&quot;データの取得に失敗しました&quot;</span>)<span class="op">;</span></span>
-<span id="cb11-25"><a href="#cb11-25"></a>        }</span>
-<span id="cb11-26"><a href="#cb11-26"></a>        <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
-<span id="cb11-27"><a href="#cb11-27"></a>        <span class="co">// console.log(JSON.stringify(data, null, 2));</span></span>
-<span id="cb11-28"><a href="#cb11-28"></a>        <span class="fu">setPosts</span>(data<span class="op">.</span><span class="at">contents</span>)<span class="op">;</span></span>
-<span id="cb11-29"><a href="#cb11-29"></a>      } <span class="cf">catch</span> (e) {</span>
-<span id="cb11-30"><a href="#cb11-30"></a>        <span class="fu">setFetchError</span>(</span>
-<span id="cb11-31"><a href="#cb11-31"></a>          e <span class="kw">instanceof</span> <span class="bu">Error</span> <span class="op">?</span> e<span class="op">.</span><span class="at">message</span> <span class="op">:</span> <span class="st">&quot;予期せぬエラーが発生しました&quot;</span></span>
-<span id="cb11-32"><a href="#cb11-32"></a>        )<span class="op">;</span></span>
-<span id="cb11-33"><a href="#cb11-33"></a>      }</span>
-<span id="cb11-34"><a href="#cb11-34"></a>    }<span class="op">;</span></span>
-<span id="cb11-35"><a href="#cb11-35"></a>    <span class="fu">fetchPosts</span>()<span class="op">;</span></span>
-<span id="cb11-36"><a href="#cb11-36"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
-<span id="cb11-37"><a href="#cb11-37"></a></span>
-<span id="cb11-38"><a href="#cb11-38"></a>  <span class="cf">if</span> (fetchError) {</span>
-<span id="cb11-39"><a href="#cb11-39"></a>    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>{fetchError}<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
-<span id="cb11-40"><a href="#cb11-40"></a>  }</span>
-<span id="cb11-41"><a href="#cb11-41"></a></span>
-<span id="cb11-42"><a href="#cb11-42"></a>  <span class="cf">if</span> (<span class="op">!</span>posts) {</span>
-<span id="cb11-43"><a href="#cb11-43"></a>    <span class="cf">return</span> (</span>
-<span id="cb11-44"><a href="#cb11-44"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-gray-500&quot;</span><span class="op">&gt;</span></span>
-<span id="cb11-45"><a href="#cb11-45"></a>        <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faSpinner} className<span class="op">=</span><span class="st">&quot;mr-1 animate-spin&quot;</span> <span class="op">/&gt;</span></span>
-<span id="cb11-46"><a href="#cb11-46"></a>        Loading<span class="op">...</span></span>
-<span id="cb11-47"><a href="#cb11-47"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb11-48"><a href="#cb11-48"></a>    )<span class="op">;</span></span>
-<span id="cb11-49"><a href="#cb11-49"></a>  }</span>
-<span id="cb11-50"><a href="#cb11-50"></a></span>
-<span id="cb11-51"><a href="#cb11-51"></a>  <span class="cf">return</span> (</span>
-<span id="cb11-52"><a href="#cb11-52"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
-<span id="cb11-53"><a href="#cb11-53"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Main<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb11-54"><a href="#cb11-54"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
-<span id="cb11-55"><a href="#cb11-55"></a>        {posts<span class="op">.</span><span class="fu">map</span>((post) <span class="kw">=&gt;</span> (</span>
-<span id="cb11-56"><a href="#cb11-56"></a>          <span class="op">&lt;</span>PostSummary key<span class="op">=</span>{post<span class="op">.</span><span class="at">id</span>} post<span class="op">=</span>{post} <span class="op">/&gt;</span></span>
-<span id="cb11-57"><a href="#cb11-57"></a>        ))}</span>
-<span id="cb11-58"><a href="#cb11-58"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb11-59"><a href="#cb11-59"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
-<span id="cb11-60"><a href="#cb11-60"></a>  )<span class="op">;</span></span>
-<span id="cb11-61"><a href="#cb11-61"></a>}<span class="op">;</span></span>
-<span id="cb11-62"><a href="#cb11-62"></a></span>
-<span id="cb11-63"><a href="#cb11-63"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="im">import</span> PostSummary <span class="im">from</span> <span class="st">&quot;@/app/_components/PostSummary&quot;</span><span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="im">import</span> { faSpinner } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="kw">const</span> [posts<span class="op">,</span> setPosts] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post[] <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a>  <span class="kw">const</span> [fetchError<span class="op">,</span> setFetchError] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a></span>
+<span id="cb24-12"><a href="#cb24-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb24-13"><a href="#cb24-13"></a>    <span class="kw">const</span> fetchPosts <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb24-14"><a href="#cb24-14"></a>      <span class="cf">try</span> {</span>
+<span id="cb24-15"><a href="#cb24-15"></a>        <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="st">&quot;https://jg9awXXXXX.microcms.io/api/v1/posts&quot;</span><span class="op">;</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb24-17"><a href="#cb24-17"></a>          method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a>          cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
+<span id="cb24-19"><a href="#cb24-19"></a>          headers<span class="op">:</span> {</span>
+<span id="cb24-20"><a href="#cb24-20"></a>            <span class="st">&quot;X-MICROCMS-API-KEY&quot;</span><span class="op">:</span> <span class="st">&quot;rePnewuXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="op">,</span></span>
+<span id="cb24-21"><a href="#cb24-21"></a>          }<span class="op">,</span></span>
+<span id="cb24-22"><a href="#cb24-22"></a>        })<span class="op">;</span></span>
+<span id="cb24-23"><a href="#cb24-23"></a>        <span class="cf">if</span> (<span class="op">!</span>response<span class="op">.</span><span class="at">ok</span>) {</span>
+<span id="cb24-24"><a href="#cb24-24"></a>          <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&quot;データの取得に失敗しました&quot;</span>)<span class="op">;</span></span>
+<span id="cb24-25"><a href="#cb24-25"></a>        }</span>
+<span id="cb24-26"><a href="#cb24-26"></a>        <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb24-27"><a href="#cb24-27"></a>        <span class="co">// console.log(JSON.stringify(data, null, 2));</span></span>
+<span id="cb24-28"><a href="#cb24-28"></a>        <span class="fu">setPosts</span>(data<span class="op">.</span><span class="at">contents</span>)<span class="op">;</span></span>
+<span id="cb24-29"><a href="#cb24-29"></a>      } <span class="cf">catch</span> (e) {</span>
+<span id="cb24-30"><a href="#cb24-30"></a>        <span class="fu">setFetchError</span>(</span>
+<span id="cb24-31"><a href="#cb24-31"></a>          e <span class="kw">instanceof</span> <span class="bu">Error</span> <span class="op">?</span> e<span class="op">.</span><span class="at">message</span> <span class="op">:</span> <span class="st">&quot;予期せぬエラーが発生しました&quot;</span></span>
+<span id="cb24-32"><a href="#cb24-32"></a>        )<span class="op">;</span></span>
+<span id="cb24-33"><a href="#cb24-33"></a>      }</span>
+<span id="cb24-34"><a href="#cb24-34"></a>    }<span class="op">;</span></span>
+<span id="cb24-35"><a href="#cb24-35"></a>    <span class="fu">fetchPosts</span>()<span class="op">;</span></span>
+<span id="cb24-36"><a href="#cb24-36"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb24-37"><a href="#cb24-37"></a></span>
+<span id="cb24-38"><a href="#cb24-38"></a>  <span class="cf">if</span> (fetchError) {</span>
+<span id="cb24-39"><a href="#cb24-39"></a>    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>{fetchError}<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
+<span id="cb24-40"><a href="#cb24-40"></a>  }</span>
+<span id="cb24-41"><a href="#cb24-41"></a></span>
+<span id="cb24-42"><a href="#cb24-42"></a>  <span class="cf">if</span> (<span class="op">!</span>posts) {</span>
+<span id="cb24-43"><a href="#cb24-43"></a>    <span class="cf">return</span> (</span>
+<span id="cb24-44"><a href="#cb24-44"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-gray-500&quot;</span><span class="op">&gt;</span></span>
+<span id="cb24-45"><a href="#cb24-45"></a>        <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faSpinner} className<span class="op">=</span><span class="st">&quot;mr-1 animate-spin&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb24-46"><a href="#cb24-46"></a>        Loading<span class="op">...</span></span>
+<span id="cb24-47"><a href="#cb24-47"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb24-48"><a href="#cb24-48"></a>    )<span class="op">;</span></span>
+<span id="cb24-49"><a href="#cb24-49"></a>  }</span>
+<span id="cb24-50"><a href="#cb24-50"></a></span>
+<span id="cb24-51"><a href="#cb24-51"></a>  <span class="cf">return</span> (</span>
+<span id="cb24-52"><a href="#cb24-52"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb24-53"><a href="#cb24-53"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Main<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb24-54"><a href="#cb24-54"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb24-55"><a href="#cb24-55"></a>        {posts<span class="op">.</span><span class="fu">map</span>((post) <span class="kw">=&gt;</span> (</span>
+<span id="cb24-56"><a href="#cb24-56"></a>          <span class="op">&lt;</span>PostSummary key<span class="op">=</span>{post<span class="op">.</span><span class="at">id</span>} post<span class="op">=</span>{post} <span class="op">/&gt;</span></span>
+<span id="cb24-57"><a href="#cb24-57"></a>        ))}</span>
+<span id="cb24-58"><a href="#cb24-58"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb24-59"><a href="#cb24-59"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb24-60"><a href="#cb24-60"></a>  )<span class="op">;</span></span>
+<span id="cb24-61"><a href="#cb24-61"></a>}<span class="op">;</span></span>
+<span id="cb24-62"><a href="#cb24-62"></a></span>
+<span id="cb24-63"><a href="#cb24-63"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb25"
+      data-caption="next.config.mjs"><pre
+      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="dt">remotePatterns</span><span class="op">:</span> [</span>
+<span id="cb25-5"><a href="#cb25-5"></a>      {</span>
+<span id="cb25-6"><a href="#cb25-6"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;w1980.blob.core.windows.net&quot;</span><span class="op">,</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>      }<span class="op">,</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;placehold.jp&quot;</span> }<span class="op">,</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;images.microcms-assets.io&quot;</span> }<span class="op">,</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a>    ]<span class="op">,</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a>  }<span class="op">,</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>}<span class="op">;</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a></span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
