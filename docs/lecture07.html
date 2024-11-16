@@ -106,6 +106,14 @@ microCMSを利用したバックエンドの構築</a>
 <ul>
 <li><a href="#microcmsの利用準備" id="toc-microcmsの利用準備"><span
 class="toc-section-number">6.1</span> microCMSの利用準備</a></li>
+<li><a href="#microcmsにコンテンツを追加"
+id="toc-microcmsにコンテンツを追加"><span
+class="toc-section-number">6.2</span>
+microCMSにコンテンツを追加</a></li>
+<li><a href="#apiの利用テスト" id="toc-apiの利用テスト"><span
+class="toc-section-number">6.3</span> APIの利用テスト</a></li>
+<li><a href="#カテゴリの追加" id="toc-カテゴリの追加"><span
+class="toc-section-number">6.4</span> カテゴリの追加</a></li>
 </ul></li>
 <li><a href="#ああああ" id="toc-ああああ"><span
 class="toc-section-number">7</span> ああああ</a></li>
@@ -1258,96 +1266,228 @@ class="toc-section-number">7</span> ああああ</a></li>
       class="header-section-number">6</span>
       microCMSを利用したバックエンドの構築</h1>
       <p>フロントエンド開発が一段落したので、次回の講義から Next.js
-      でバックエンド開発を進めていきます。しかし、それに先立ってバックエンドの役割や機能について理解するために、ヘッドレスCMS
+      で「<strong>バックエンド開発</strong>」を進めていきます。しかし、それに先立ってバックエンドの「役割」や「機能」について理解するために、ヘッドレスCMS
       である <a href="https://microcms.io/">microCMS</a>
       を使って、このブログアプリのバックエンド部分を構築してみたいと思います。</p>
       <p>CMS とは <span class="masked">Content Management System</span>
-      の頭文字をとったもので、ウェブを使ってコンテンツの作成・管理・公開ができるシステムを指します。用途によって、ウェブサイト構築用のCMS
+      の頭文字をとったもので、ウェブを使ってコンテンツの作成・管理・公開ができるようなシステムを指します。用途によって、ウェブサイト構築用のCMS
       (<a
       href="https://www.google.com/search?q=wordpressとは">WordPress</a>が超有名!!)、教育用のCMS
       (Moodle や GoogleClassroom) 、コンテンツ共有プラットフォーム (<a
       href="https://note.com/">note</a>、<a
       href="https://qiita.com/">Qiita</a>、各種Wiki、各種ブログ)
-      などに分類できます。いずれも
-      <strong>プログラミングの知識は不要</strong>で、また<strong>専用ソフトも不要</strong>でという特徴があります。</p>
-      <p>このなかで <strong>ヘッドレスCMS</strong> (Headless)
-      とは、コンテンツの「<strong>公開</strong>」に関する部分について<strong>ビューやUIなどのフロントエンド機能</strong>を提供しないタイプのCMS、つまり
-      <span class="masked">コンテンツの公開機能が「API」だけ</span>
-      で提供されるCMSと言えます。</p>
+      などに分類できます。いずれも通常の利用範囲では<strong>プログラミングの知識は不要</strong>で、また<strong>専用ソフトも不要</strong>という特徴があります。</p>
+      <p>このなかで <strong>ヘッドレスCMS</strong> (Headless CMS)
+      とは、コンテンツの「<strong>公開</strong>」や「<strong>閲覧</strong>」に関する部分について<strong>ビューやUIなどのフロントエンド機能</strong>を提供しないタイプのCMS、つまり
+      <span
+      class="masked">コンテンツの閲覧・公開機能がAPIだけで提供</span>
+      されるCMSと言えます。</p>
       <p><a
       href="https://microcms.io/">microCMS</a>は、このようなヘッドレスCMSに分類されるサービスになります。microCMS
       を利用すると、次のように
-      <strong>投稿者としての投稿記事の作成や編集</strong> は
-      microCMSサイトで行なって、<strong>閲覧者としての投稿記事の取得</strong>
-      はウェブAPIで行なう (ビューやUIは React
-      などで自由にデザイン・実装する) という形になります。</p>
+      <strong>「ブログ投稿者」としての投稿記事の作成や編集</strong> は
+      microCMSのサイトで行なって、<strong>「閲覧者」としての投稿記事の取得</strong>
+      はウェブAPIで行ない ビュー や UI は React
+      を使って自分で自由にデザイン・実装するという使い方になります。</p>
       <figure>
       <img src="figs/07/cms_00.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>皆さんには、後期中間試験後の授業でバックエンドについても
-      Next.js で実装してもらいますが、<a
-      href="https://microcms.io/">microCMS</a>などのヘッドレスCMSと組み合わせれば、現時点での実装でもブログアプリとして実用的な機能を持ってリリースすることができます。</p>
+      <p>皆さんには、後期中間試験後にバックエンドについても Next.js
+      で実装してもらいますが、<a
+      href="https://microcms.io/">microCMS</a>などのヘッドレスCMSと連携すれば、現段階の実装でもブログアプリとして実用的な機能を持ってリリースすることができます。</p>
       <h2 data-number="6.1" id="microcmsの利用準備"><span
       class="header-section-number">6.1</span> microCMSの利用準備</h2>
       <p><a
-      href="https://microcms.io/">microCMS</a>を利用するための準備を行なっていきます。まずは、<a
-      href="https://microcms.io/">microCMS</a>にアクセスしてユーザ登録をしてください。クレジットカードなど不要で無料で登録することができます。</p>
+      href="https://microcms.io/">microCMS</a>を利用するための準備を行なっていきます。まずは<a
+      href="https://microcms.io/">microCMS</a>にアクセスしてユーザ登録をしてください。クレジットカードの登録などは不要で、無料で登録することができます。</p>
       <p>登録完了後、ログインして<strong>サービス管理画面</strong> (<a
       href="https://app.microcms.io/">https://app.microcms.io/</a>)
       に移動してください。</p>
+      <p>ブログ記事のコンテンツの作成・管理・公開のサービスを作成していきます。画面内の「<strong>＋追加</strong>」を押下してください。</p>
       <figure>
       <img src="figs/07/cms_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>「<strong>1から作成する</strong>」を選択してください。</p>
       <figure>
       <img src="figs/07/cms_02.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>サービス情報として「サービス名」と「サービスID」を設定します。サービスIDについては、他のユーザが既に使用しているIDは使用できません。サービスIDは、基本的には表側にはでてこない値になるので、デフォルト値をそのまま使用することを推奨します。</p>
       <figure>
       <img src="figs/07/cms_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>「<strong>サービスにアクセスする</strong>」のボタンを押下してください。</p>
       <figure>
       <img src="figs/07/cms_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>サービスのトップページ
+      (<code>https://(サービスID).microcms.io/</code>)
+      に移動したら、左パネルの「<strong>コンテンツ
+      (API)</strong>」の右隣の「<strong>＋</strong>」を押下してください。さらに「<strong>自分で決める</strong>」を選択してください。</p>
       <figure>
       <img src="figs/07/cms_05.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>API管理用の名前 (<strong>API名</strong>)
+      と、そのAPIを利用するための<strong>エンドポイント</strong> (URL)
+      を設定します。ここでは「<strong>ブログ記事の一覧を取得するためのAPI</strong>」を作成するので、エンドポイントは
+      <code>posts</code> に設定します。</p>
       <figure>
       <img src="figs/07/cms_06.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>記事の「<strong>一覧</strong>」を取得するためのAPIを作成するので「<strong>リスト形式</strong>」を選択します。</p>
       <figure>
       <img src="figs/07/cms_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>次のようにAPIのスキーマ (構造) を定義します。これは
+      <code>src/app/_types/Post.ts</code>
+      で定義した<strong>「Post型」に対応させるように設定</strong>していきます。なお、画面上で説明されているように
+      <code>id</code> や <code>createdAt</code>
+      は自動的に作成されるので、ここで項目をつくる必要はありません。</p>
+      <p>また、カテゴリ (<code>categories</code>)
+      については、あとから追加します。</p>
       <figure>
       <img src="figs/07/cms_08.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>以上のAPIのスキーマ (構造) の設定で、利用準備が整いました。</p>
+      <h2 data-number="6.2" id="microcmsにコンテンツを追加"><span
+      class="header-section-number">6.2</span>
+      microCMSにコンテンツを追加</h2>
+      <p>ここからは、microCMSに
+      <strong>コンテンツ</strong>、つまり、<strong>ブログの投稿記事</strong>
+      を追加していきます。次のように「<strong>ブログ記事</strong>」を選択して「<strong>＋追加</strong>」を押下してください。</p>
       <figure>
       <img src="figs/07/cms_09.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>APIのスキーマ (構造) で設定した項目
+      (=タイトル、本文、カバーイメージ)
+      の入力フォームが表示されるので、自由にコンテンツを作成してください
+      (見本のとおりに入力する必要はありません)。</p>
+      <p>画像も自由に設定してください
+      (画像のアスペクト比も特に気にする必要はありません)。適当な画像がなければ<a
+      href="https://w1980.blob.core.windows.net/pg3/cover-img-purple.jpg">こちら</a>を利用してください。</p>
+      <p>入力が完了したら右上の「<strong>公開</strong>」のボタンを押下してください。</p>
       <figure>
       <img src="figs/07/cms_10.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>ダイアログの「<strong>APIプレビューを開く</strong>」のボタンを押下してください。</p>
       <figure>
       <img src="figs/07/cms_11.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>APIプレビューの画面は、次の操作でも開くことができます。</p>
       <figure>
       <img src="figs/07/cms_12.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>APIプレビューでは、このブログ記事の一覧を取得するためのAPIのエンドポイント
+      (URL) と、認証のためにHTTPリクエストの <strong>Header</strong>
+      に付加しなければならない <code>X-MICROCMS-API-KEY</code>
+      の値が表示されます。基本的には <code>X-MICROCMS-API-KEY</code>
+      はオープンにすべき値ではないので注意してください
+      (とはいえ、フロントエンドからHTTPリクエストを送るので、ちょっと工夫すれば覗けてしまう値ですが…)。</p>
       <figure>
       <img src="figs/07/cms_13.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <h2 data-number="6.3" id="apiの利用テスト"><span
+      class="header-section-number">6.3</span> APIの利用テスト</h2>
+      <p>記事取得のためのAPIのテストをしてきます。</p>
+      <p>microCMS の API を利用するために、HTTPリクエストの
+      <strong>Header に</strong> <code>X-MICROCMS-API-KEY</code>
+      <strong>でAPIキーを設定する必要があるため</strong>、ブラウザのアドレバーにエンドポイントを入力してAPIの応答をテストすることはできません。</p>
+      <p>実際にエンドポイントを入力してみると、以下のような応答となってしまいます。</p>
+      <figure>
+      <img src="figs/07/vscode_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ウェブAPIのテストをするためのツールは<a
+      href="https://www.google.com/search?q=curl+api">curl</a>や<a
+      href="https://www.postman.com/">Postman</a>など様々なものがありますが、ここでは
+      VSCode の Thunder Client (識別子
+      <code>rangav.vscode-thunder-client</code> )
+      という拡張機能を利用していきます。</p>
+      <figure>
+      <img src="figs/07/vscode_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>上記の拡張機能をインストールしてください。インストールが完了するとVSCodeの左パネルに「⚡」のアイコンが表れるのでそれをクリックするか、<code>Ctrl+Shift+R</code>
+      を押下すると Thunder Client
+      のパネルが表示されるので、「<strong>New　Request</strong>」のボタンを押下してください。</p>
+      <figure>
+      <img src="figs/07/vscode_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>そして、次のようにエンドポイント
+      (<code>https://[ServiceID].microcms.io/api/v1/posts/</code>) と
+      Header に <code>X-MICROCMS-API-KEY</code>
+      を設定して「<strong>Send</strong>」を押下するとウェブAPIのテストができます。レスポンスの「ステータス」が
+      <strong>200番台</strong> となれば成功です。</p>
+      <figure>
+      <img src="figs/07/vscode_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>レスポンスは、次のようなJSONフォーマットのデータになっていることが確認できます。</p>
+      <div class="sourceCode" id="cb24"
+      data-caption="/api/v1/posts/ のレスポンス"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="dt">&quot;contents&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>    <span class="fu">{</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;3x24sup0aq26&quot;</span><span class="fu">,</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>      <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:34:17.968Z&quot;</span><span class="fu">,</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>      <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:43:00.987Z&quot;</span><span class="fu">,</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a>      <span class="dt">&quot;publishedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:34:17.968Z&quot;</span><span class="fu">,</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>      <span class="dt">&quot;revisedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:43:00.987Z&quot;</span><span class="fu">,</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a>      <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1&quot;</span><span class="fu">,</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a>      <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;&lt;p&gt;春はあけぼの。&lt;/p&gt;&lt;p&gt;やうやう白くなりゆく山ぎは、すこしあかりて、紫だちたる雲のほそくたなびきたる。&lt;/p&gt;&quot;</span><span class="fu">,</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>      <span class="dt">&quot;coverImage&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a>        <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://images.microcms-assets.io/assets/6bec8736dd5f4a2580016eeb10ad0d4a/fc53da3b80344c64b724ca00a70007c9/cover-img-purple.jpg&quot;</span><span class="fu">,</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a>        <span class="dt">&quot;height&quot;</span><span class="fu">:</span> <span class="dv">768</span><span class="fu">,</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a>        <span class="dt">&quot;width&quot;</span><span class="fu">:</span> <span class="dv">1365</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a>      <span class="fu">}</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a>    <span class="fu">}</span></span>
+<span id="cb24-17"><a href="#cb24-17"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a>  <span class="dt">&quot;totalCount&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb24-19"><a href="#cb24-19"></a>  <span class="dt">&quot;offset&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb24-20"><a href="#cb24-20"></a>  <span class="dt">&quot;limit&quot;</span><span class="fu">:</span> <span class="dv">10</span></span>
+<span id="cb24-21"><a href="#cb24-21"></a><span class="fu">}</span></span></code></pre></div>
+      <p>なお、この結果から、アップロードした画像は
+      <code>https://images.microcms-assets.io/assets/...</code>
+      に配置されることが分かります。この画像は、記事詳細のページから読み込む予定なので
+      <code>next.config.mjs</code> に、読込みを許可するサイトとして
+      <code>images.microcms-assets.io</code>
+      を追加しておいてください。</p>
+      <div class="sourceCode" id="cb25"
+      data-caption="next.config.mjs"><pre
+      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="dt">remotePatterns</span><span class="op">:</span> [</span>
+<span id="cb25-5"><a href="#cb25-5"></a>      {</span>
+<span id="cb25-6"><a href="#cb25-6"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;w1980.blob.core.windows.net&quot;</span><span class="op">,</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>      }<span class="op">,</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;placehold.jp&quot;</span> }<span class="op">,</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;images.microcms-assets.io&quot;</span> }<span class="op">,</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a>    ]<span class="op">,</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a>  }<span class="op">,</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>}<span class="op">;</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a></span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
+      <p>なお、<strong>Thunder Client</strong> で、エンドポイントを
+      <code>https://[ServiceID].microcms.io/api/v1/posts/[投稿記事のid]</code>
+      とすれば、記事単体のデータも取得することができます。実際に確認してみてください。</p>
+      <h2 data-number="6.4" id="カテゴリの追加"><span
+      class="header-section-number">6.4</span> カテゴリの追加</h2>
       <figure>
       <img src="figs/07/cms_14.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -1402,88 +1542,71 @@ class="toc-section-number">7</span> ああああ</a></li>
       <img src="figs/07/cms_13.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <div class="sourceCode" id="cb24"
+      <div class="sourceCode" id="cb26"
       data-caption="src/app/page.tsx"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="im">import</span> PostSummary <span class="im">from</span> <span class="st">&quot;@/app/_components/PostSummary&quot;</span><span class="op">;</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="im">import</span> { faSpinner } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a></span>
-<span id="cb24-8"><a href="#cb24-8"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb24-9"><a href="#cb24-9"></a>  <span class="kw">const</span> [posts<span class="op">,</span> setPosts] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post[] <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb24-10"><a href="#cb24-10"></a>  <span class="kw">const</span> [fetchError<span class="op">,</span> setFetchError] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb24-11"><a href="#cb24-11"></a></span>
-<span id="cb24-12"><a href="#cb24-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb24-13"><a href="#cb24-13"></a>    <span class="kw">const</span> fetchPosts <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb24-14"><a href="#cb24-14"></a>      <span class="cf">try</span> {</span>
-<span id="cb24-15"><a href="#cb24-15"></a>        <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="st">&quot;https://jg9awXXXXX.microcms.io/api/v1/posts&quot;</span><span class="op">;</span></span>
-<span id="cb24-16"><a href="#cb24-16"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
-<span id="cb24-17"><a href="#cb24-17"></a>          method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
-<span id="cb24-18"><a href="#cb24-18"></a>          cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
-<span id="cb24-19"><a href="#cb24-19"></a>          headers<span class="op">:</span> {</span>
-<span id="cb24-20"><a href="#cb24-20"></a>            <span class="st">&quot;X-MICROCMS-API-KEY&quot;</span><span class="op">:</span> <span class="st">&quot;rePnewuXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="op">,</span></span>
-<span id="cb24-21"><a href="#cb24-21"></a>          }<span class="op">,</span></span>
-<span id="cb24-22"><a href="#cb24-22"></a>        })<span class="op">;</span></span>
-<span id="cb24-23"><a href="#cb24-23"></a>        <span class="cf">if</span> (<span class="op">!</span>response<span class="op">.</span><span class="at">ok</span>) {</span>
-<span id="cb24-24"><a href="#cb24-24"></a>          <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&quot;データの取得に失敗しました&quot;</span>)<span class="op">;</span></span>
-<span id="cb24-25"><a href="#cb24-25"></a>        }</span>
-<span id="cb24-26"><a href="#cb24-26"></a>        <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
-<span id="cb24-27"><a href="#cb24-27"></a>        <span class="co">// console.log(JSON.stringify(data, null, 2));</span></span>
-<span id="cb24-28"><a href="#cb24-28"></a>        <span class="fu">setPosts</span>(data<span class="op">.</span><span class="at">contents</span>)<span class="op">;</span></span>
-<span id="cb24-29"><a href="#cb24-29"></a>      } <span class="cf">catch</span> (e) {</span>
-<span id="cb24-30"><a href="#cb24-30"></a>        <span class="fu">setFetchError</span>(</span>
-<span id="cb24-31"><a href="#cb24-31"></a>          e <span class="kw">instanceof</span> <span class="bu">Error</span> <span class="op">?</span> e<span class="op">.</span><span class="at">message</span> <span class="op">:</span> <span class="st">&quot;予期せぬエラーが発生しました&quot;</span></span>
-<span id="cb24-32"><a href="#cb24-32"></a>        )<span class="op">;</span></span>
-<span id="cb24-33"><a href="#cb24-33"></a>      }</span>
-<span id="cb24-34"><a href="#cb24-34"></a>    }<span class="op">;</span></span>
-<span id="cb24-35"><a href="#cb24-35"></a>    <span class="fu">fetchPosts</span>()<span class="op">;</span></span>
-<span id="cb24-36"><a href="#cb24-36"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
-<span id="cb24-37"><a href="#cb24-37"></a></span>
-<span id="cb24-38"><a href="#cb24-38"></a>  <span class="cf">if</span> (fetchError) {</span>
-<span id="cb24-39"><a href="#cb24-39"></a>    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>{fetchError}<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
-<span id="cb24-40"><a href="#cb24-40"></a>  }</span>
-<span id="cb24-41"><a href="#cb24-41"></a></span>
-<span id="cb24-42"><a href="#cb24-42"></a>  <span class="cf">if</span> (<span class="op">!</span>posts) {</span>
-<span id="cb24-43"><a href="#cb24-43"></a>    <span class="cf">return</span> (</span>
-<span id="cb24-44"><a href="#cb24-44"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-gray-500&quot;</span><span class="op">&gt;</span></span>
-<span id="cb24-45"><a href="#cb24-45"></a>        <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faSpinner} className<span class="op">=</span><span class="st">&quot;mr-1 animate-spin&quot;</span> <span class="op">/&gt;</span></span>
-<span id="cb24-46"><a href="#cb24-46"></a>        Loading<span class="op">...</span></span>
-<span id="cb24-47"><a href="#cb24-47"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb24-48"><a href="#cb24-48"></a>    )<span class="op">;</span></span>
-<span id="cb24-49"><a href="#cb24-49"></a>  }</span>
-<span id="cb24-50"><a href="#cb24-50"></a></span>
-<span id="cb24-51"><a href="#cb24-51"></a>  <span class="cf">return</span> (</span>
-<span id="cb24-52"><a href="#cb24-52"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
-<span id="cb24-53"><a href="#cb24-53"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Main<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb24-54"><a href="#cb24-54"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
-<span id="cb24-55"><a href="#cb24-55"></a>        {posts<span class="op">.</span><span class="fu">map</span>((post) <span class="kw">=&gt;</span> (</span>
-<span id="cb24-56"><a href="#cb24-56"></a>          <span class="op">&lt;</span>PostSummary key<span class="op">=</span>{post<span class="op">.</span><span class="at">id</span>} post<span class="op">=</span>{post} <span class="op">/&gt;</span></span>
-<span id="cb24-57"><a href="#cb24-57"></a>        ))}</span>
-<span id="cb24-58"><a href="#cb24-58"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb24-59"><a href="#cb24-59"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
-<span id="cb24-60"><a href="#cb24-60"></a>  )<span class="op">;</span></span>
-<span id="cb24-61"><a href="#cb24-61"></a>}<span class="op">;</span></span>
-<span id="cb24-62"><a href="#cb24-62"></a></span>
-<span id="cb24-63"><a href="#cb24-63"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb25"
-      data-caption="next.config.mjs"><pre
-      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
-<span id="cb25-4"><a href="#cb25-4"></a>    <span class="dt">remotePatterns</span><span class="op">:</span> [</span>
-<span id="cb25-5"><a href="#cb25-5"></a>      {</span>
-<span id="cb25-6"><a href="#cb25-6"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;w1980.blob.core.windows.net&quot;</span><span class="op">,</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a>      }<span class="op">,</span></span>
-<span id="cb25-9"><a href="#cb25-9"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;placehold.jp&quot;</span> }<span class="op">,</span></span>
-<span id="cb25-10"><a href="#cb25-10"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;images.microcms-assets.io&quot;</span> }<span class="op">,</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a>    ]<span class="op">,</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a>  }<span class="op">,</span></span>
-<span id="cb25-13"><a href="#cb25-13"></a>}<span class="op">;</span></span>
-<span id="cb25-14"><a href="#cb25-14"></a></span>
-<span id="cb25-15"><a href="#cb25-15"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/app/_types/Post&quot;</span><span class="op">;</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="im">import</span> PostSummary <span class="im">from</span> <span class="st">&quot;@/app/_components/PostSummary&quot;</span><span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="im">import</span> { faSpinner } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb26-9"><a href="#cb26-9"></a>  <span class="kw">const</span> [posts<span class="op">,</span> setPosts] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Post[] <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a>  <span class="kw">const</span> [fetchError<span class="op">,</span> setFetchError] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a></span>
+<span id="cb26-12"><a href="#cb26-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb26-13"><a href="#cb26-13"></a>    <span class="kw">const</span> fetchPosts <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb26-14"><a href="#cb26-14"></a>      <span class="cf">try</span> {</span>
+<span id="cb26-15"><a href="#cb26-15"></a>        <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="st">&quot;https://jg9awXXXXX.microcms.io/api/v1/posts&quot;</span><span class="op">;</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb26-17"><a href="#cb26-17"></a>          method<span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a>          cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span> <span class="co">// キャッシュを利用しない</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a>          headers<span class="op">:</span> {</span>
+<span id="cb26-20"><a href="#cb26-20"></a>            <span class="st">&quot;X-MICROCMS-API-KEY&quot;</span><span class="op">:</span> <span class="st">&quot;rePnewuXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="op">,</span></span>
+<span id="cb26-21"><a href="#cb26-21"></a>          }<span class="op">,</span></span>
+<span id="cb26-22"><a href="#cb26-22"></a>        })<span class="op">;</span></span>
+<span id="cb26-23"><a href="#cb26-23"></a>        <span class="cf">if</span> (<span class="op">!</span>response<span class="op">.</span><span class="at">ok</span>) {</span>
+<span id="cb26-24"><a href="#cb26-24"></a>          <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&quot;データの取得に失敗しました&quot;</span>)<span class="op">;</span></span>
+<span id="cb26-25"><a href="#cb26-25"></a>        }</span>
+<span id="cb26-26"><a href="#cb26-26"></a>        <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb26-27"><a href="#cb26-27"></a>        <span class="co">// console.log(JSON.stringify(data, null, 2));</span></span>
+<span id="cb26-28"><a href="#cb26-28"></a>        <span class="fu">setPosts</span>(data<span class="op">.</span><span class="at">contents</span>)<span class="op">;</span></span>
+<span id="cb26-29"><a href="#cb26-29"></a>      } <span class="cf">catch</span> (e) {</span>
+<span id="cb26-30"><a href="#cb26-30"></a>        <span class="fu">setFetchError</span>(</span>
+<span id="cb26-31"><a href="#cb26-31"></a>          e <span class="kw">instanceof</span> <span class="bu">Error</span> <span class="op">?</span> e<span class="op">.</span><span class="at">message</span> <span class="op">:</span> <span class="st">&quot;予期せぬエラーが発生しました&quot;</span></span>
+<span id="cb26-32"><a href="#cb26-32"></a>        )<span class="op">;</span></span>
+<span id="cb26-33"><a href="#cb26-33"></a>      }</span>
+<span id="cb26-34"><a href="#cb26-34"></a>    }<span class="op">;</span></span>
+<span id="cb26-35"><a href="#cb26-35"></a>    <span class="fu">fetchPosts</span>()<span class="op">;</span></span>
+<span id="cb26-36"><a href="#cb26-36"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb26-37"><a href="#cb26-37"></a></span>
+<span id="cb26-38"><a href="#cb26-38"></a>  <span class="cf">if</span> (fetchError) {</span>
+<span id="cb26-39"><a href="#cb26-39"></a>    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>{fetchError}<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
+<span id="cb26-40"><a href="#cb26-40"></a>  }</span>
+<span id="cb26-41"><a href="#cb26-41"></a></span>
+<span id="cb26-42"><a href="#cb26-42"></a>  <span class="cf">if</span> (<span class="op">!</span>posts) {</span>
+<span id="cb26-43"><a href="#cb26-43"></a>    <span class="cf">return</span> (</span>
+<span id="cb26-44"><a href="#cb26-44"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-gray-500&quot;</span><span class="op">&gt;</span></span>
+<span id="cb26-45"><a href="#cb26-45"></a>        <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faSpinner} className<span class="op">=</span><span class="st">&quot;mr-1 animate-spin&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb26-46"><a href="#cb26-46"></a>        Loading<span class="op">...</span></span>
+<span id="cb26-47"><a href="#cb26-47"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb26-48"><a href="#cb26-48"></a>    )<span class="op">;</span></span>
+<span id="cb26-49"><a href="#cb26-49"></a>  }</span>
+<span id="cb26-50"><a href="#cb26-50"></a></span>
+<span id="cb26-51"><a href="#cb26-51"></a>  <span class="cf">return</span> (</span>
+<span id="cb26-52"><a href="#cb26-52"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb26-53"><a href="#cb26-53"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Main<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb26-54"><a href="#cb26-54"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;space-y-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb26-55"><a href="#cb26-55"></a>        {posts<span class="op">.</span><span class="fu">map</span>((post) <span class="kw">=&gt;</span> (</span>
+<span id="cb26-56"><a href="#cb26-56"></a>          <span class="op">&lt;</span>PostSummary key<span class="op">=</span>{post<span class="op">.</span><span class="at">id</span>} post<span class="op">=</span>{post} <span class="op">/&gt;</span></span>
+<span id="cb26-57"><a href="#cb26-57"></a>        ))}</span>
+<span id="cb26-58"><a href="#cb26-58"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb26-59"><a href="#cb26-59"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb26-60"><a href="#cb26-60"></a>  )<span class="op">;</span></span>
+<span id="cb26-61"><a href="#cb26-61"></a>}<span class="op">;</span></span>
+<span id="cb26-62"><a href="#cb26-62"></a></span>
+<span id="cb26-63"><a href="#cb26-63"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
