@@ -43,10 +43,36 @@
       <div id="g-nav-list">
         <!-- ---------------------------------------- -->
          <ul>
-<li><a href="#連絡" id="toc-連絡"><span
-class="toc-section-number">1</span> 連絡</a></li>
-<li><a href="#rdb" id="toc-rdb"><span
-class="toc-section-number">2</span> RDB</a></li>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span>
+連絡・概要</a></li>
+<li><a href="#データの永続化" id="toc-データの永続化"><span class="toc-section-number">2</span>
+データの永続化</a></li>
+<li><a href="#データベースについて" id="toc-データベースについて"><span
+class="toc-section-number">3</span> データベースについて</a>
+<ul>
+<li><a href="#nosql" id="toc-nosql"><span class="toc-section-number">3.1</span> NoSQL</a></li>
+<li><a href="#rdb" id="toc-rdb"><span class="toc-section-number">3.2</span> RDB</a></li>
+<li><a href="#orm" id="toc-orm"><span class="toc-section-number">3.3</span> ORM</a></li>
+<li><a href="#prisma-のインストール" id="toc-prisma-のインストール"><span
+class="toc-section-number">3.4</span> Prisma のインストール</a></li>
+<li><a href="#prisma-の初期化処理-セットアップ処理"
+id="toc-prisma-の初期化処理-セットアップ処理"><span class="toc-section-number">3.5</span> Prisma
+の初期化処理 (セットアップ処理)</a></li>
+<li><a href="#env-の内容確認" id="toc-env-の内容確認"><span class="toc-section-number">3.6</span>
+.env の内容確認</a></li>
+<li><a href="#schema.prisma-の内容確認" id="toc-schema.prisma-の内容確認"><span
+class="toc-section-number">3.7</span> schema.prisma の内容確認</a></li>
+<li><a href="#schema.prisma-の編集" id="toc-schema.prisma-の編集"><span
+class="toc-section-number">3.8</span> schema.prisma の編集</a></li>
+<li><a href="#データベースの作成と確認" id="toc-データベースの作成と確認"><span
+class="toc-section-number">3.9</span> データベースの作成と確認</a></li>
+<li><a href="#dbの初期データの作成" id="toc-dbの初期データの作成"><span
+class="toc-section-number">3.10</span> DBの初期データの作成</a></li>
+<li><a href="#スキーマに変更を加えたときは" id="toc-スキーマに変更を加えたときは"><span
+class="toc-section-number">3.11</span> スキーマに変更を加えたときは…</a></li>
+</ul></li>
+<li><a href="#バックエンド-ウェブapi-の実装" id="toc-バックエンド-ウェブapi-の実装"><span
+class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -59,63 +85,234 @@ class="toc-section-number">2</span> RDB</a></li>
 
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
-      <h1 data-number="1" id="連絡"><span
-      class="header-section-number">1</span> 連絡</h1>
-      <h1 data-number="2" id="rdb"><span
-      class="header-section-number">2</span> RDB</h1>
-      <p>前回講義では、microCMSを使ってブログアプリの「<strong>バックエンド</strong>」を構築しました。今回の授業からは、これら「バックエンド」についても
-      Next.js で設計・実装を進めていきます。</p>
-      <p>具体的には、今後、ユーザ認証機能、記事やカテゴリのCRUD操作のためのフォーム機能、ウェブAPIの機能、データ永続化の機能などを実装していく必要があります。このうち、まずは、RDB
-      (リレーショナルデータベース)
-      を使った「<strong>データの永続化</strong>」から実装を進めていきます。</p>
-      <p>基本的にウェブアプリでは、データの永続化にはデータベースを利用します。データベースには
-      RDB と NoSQL の2つが存在しますが、ここではオーソドックスな RDB
-      を使用して開発してきます。</p>
-      <p>RDB
-      は、シンプルな2次元の表形式でデータを保持することが特徴となっています。表形式でデータを保持できることによるメリットは多数ありますが、入れ子の構造になったデータを直接的に扱えないというデメリットがあります。</p>
-      <p>例えば、JavaScriptで次のようなデータは、</p>
-      <div class="sourceCode" id="cb1" data-caption="JavaScript"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a>[</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  {</span>
-<span id="cb1-3"><a href="#cb1-3"></a>    id<span class="op">:</span> <span class="st">&quot;p-001&quot;</span><span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    title<span class="op">:</span> <span class="st">&quot;JavaScriptだと動いたのに…な毎日&quot;</span><span class="op">,</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>    content<span class="op">:</span> <span class="st">&quot;TypeScriptは...&quot;</span><span class="op">,</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>    createdAt<span class="op">:</span> <span class="st">&quot;2024-03-19&quot;</span><span class="op">,</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>    categories<span class="op">:</span> [</span>
-<span id="cb1-8"><a href="#cb1-8"></a>      { id<span class="op">:</span> <span class="st">&quot;c-001&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;プログラミング&quot;</span> }<span class="op">,</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>      { id<span class="op">:</span> <span class="st">&quot;c-002&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;TypeScript&quot;</span> }<span class="op">,</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>      { id<span class="op">:</span> <span class="st">&quot;c-004&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;JavaScript&quot;</span> }<span class="op">,</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>    ]<span class="op">,</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    coverImage<span class="op">:</span> {</span>
-<span id="cb1-13"><a href="#cb1-13"></a>      url<span class="op">:</span> <span class="st">&quot;https://example.com/18782.jpg&quot;</span><span class="op">,</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>      width<span class="op">:</span> <span class="dv">1200</span><span class="op">,</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>      height<span class="op">:</span> <span class="dv">630</span><span class="op">,</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    }<span class="op">,</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  }<span class="op">,</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  {</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    id<span class="op">:</span> <span class="st">&quot;p-002&quot;</span><span class="op">,</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>    title<span class="op">:</span> <span class="st">&quot;リストの[-1]ってマイナスなのになんで動くの?&quot;</span><span class="op">,</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>    content<span class="op">:</span> <span class="st">&quot;TypeScriptは...&quot;</span><span class="op">,</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>    createdAt<span class="op">:</span> <span class="st">&quot;2024-03-19&quot;</span><span class="op">,</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>    categories<span class="op">:</span> [</span>
-<span id="cb1-24"><a href="#cb1-24"></a>      { id<span class="op">:</span> <span class="st">&quot;c-001&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;プログラミング&quot;</span> }<span class="op">,</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>      { id<span class="op">:</span> <span class="st">&quot;c-003&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;Python&quot;</span> }<span class="op">,</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>    ]<span class="op">,</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>    coverImage<span class="op">:</span> {</span>
-<span id="cb1-28"><a href="#cb1-28"></a>      url<span class="op">:</span> <span class="st">&quot;https://example.com/4649.jpg&quot;</span><span class="op">,</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>      width<span class="op">:</span> <span class="dv">800</span><span class="op">,</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>      height<span class="op">:</span> <span class="dv">400</span><span class="op">,</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>    }<span class="op">,</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>  }<span class="op">,</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>]<span class="op">;</span></span></code></pre></div>
-      <p><strong>posts テーブル</strong></p>
+      <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <p>後期中間試験、お疲れ様でした。後期中間成績は <strong><em>小テスト➊～➌</em></strong>
+      を<strong>20%</strong>、<a href="lecture05.html#課題1">課題1</a>(Todoアプリ)を
+      <strong>80%</strong> の割合で総合して評価します。課題1は、README.md
+      を<strong>3点</strong>、アプリ本体を<strong>7点</strong>の合計「10点満点」で評価しています
+      (7.5点が標準評価になります)。</p>
+      <ul>
+      <li>皆さんの制作物 (課題1) の一覧は<a
+      href="https://classroom.google.com/c/NzA2ODk3OTU3MzYy/m/NzM1OTkzNTg4NzE5/details">こちら</a>です
+      (学内ONLY)</li>
+      </ul>
+      <p>さて、前回講義では<a
+      href="https://microcms.io/">microCMS</a>を使ってブログアプリの「<strong>バックエンド</strong>」を構築・構成しました。ここからの授業では、<strong><em>Next.js</em></strong>
+      を使って<strong>自前でバックエンドを実装</strong>していきます。</p>
+      <p>具体的には、<strong>データ永続化</strong>、ウェブAPI、ユーザ認証
+      (外部サービス利用)、投稿記事やカテゴリの<strong>CRUD操作機能
+      (フロントエンドによるフォームの実装も含む)</strong> などの実装を進めていきます。まずは、<span
+      class="masked">リレーショナルデータベース (RDB)</span>
+      を使ったバックエンドサイドの「<strong>データの永続化</strong>」からはじめていきます。</p>
+      <p>ここから、また一段と難易度が高くなりますが、頑張っていきましょう。</p>
+      <p>「バックエンド」や「データの永続化」という概念は既に解説済みですが、もし、理解に自信がない場合は生成AIを使って再確認しておいてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ウェブアプリ開発の文脈における「バックエンド」とは何ですか。</p>
+      </blockquote>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ウェブアプリ開発の文脈における「データの永続化」とは何ですか。</p>
+      </blockquote>
+      <div class="note type-tips">
+      <p>リレーショナルデータベース (RDB)
+      については、2年次の「情報2」の第13回と第14回でも取り上げています。講義資料と教科書
+      (キタミ式ITパスポート) の p.160 ～ p.191
+      もあわせて復習しておくことをお勧めします。理論を含めた専門的な内容については、4年生の後期開講の
+      <strong>データベース工学</strong> (学修単位・2単位) で学びます。</p>
+      </div>
+      <h1 data-number="2" id="データの永続化"><span class="header-section-number">2</span>
+      データの永続化</h1>
+      <p><a href="lecture04.html">第04回講義</a>と<a
+      href="lecture05.html">第05回講義</a>のなかで取り組んだ「Todoアプリの開発」では、ウェブブラウザの機能である<a
+      href="lecture05.html#localstorageを利用したデータの永続化">ローカルストレージ</a>(Window.localStorage
+      API)
+      を使用して「データの永続化」を実装しました。つまり、フロントエンドサイドでデータベースのデータの永続化を行なっていました。</p>
+      <p>しかし、ローカルストレージは <span
+      class="masked">ブラウザが管理する領域にデータを保存する方式</span>
+      であったため、それを利用したTodoアプリでは「<strong>PCから登録したタスクを、スマートフォンから確認する</strong>」といった使い方はできませんでした。</p>
+      <p>また、同じ PC
+      からアクセスした場合でも「Chromeを使ったとき」と「Edgeを使ったとき」でデータを共有することもできませんでした。本来「<strong>インターネットに接続可能な環境であればデバイスや場所を選ばずに利用できる</strong>」というのがウェブアプリのメリットなのですが、ローカルストレージを使ったデータの永続化では、残念ながらこのメリットを活かすことはできませんでした。</p>
+      <p>このようなことから、一般的なウェブアプリでは <span
+      class="masked">バックエンドに配置されるデータベースを使ったデータの永続化</span>
+      が採用されます。この方式であれば、先の問題の解決に加えて、新たに次のようなメリットが得られます。</p>
+      <p>第一に、<strong>複数のユーザでデータを共有できるようになります</strong>。例えば、チームでタスク
+      (Todo)
+      を管理する場合、メンバー全員が同じタスクリストを参照し、更新内容をリアルタイムで共有することができます。</p>
+      <p>第二に、<strong>大量のデータを安全に保管できるようになります</strong>。ローカルストレージでは、その仕様上、<strong>保存容量に制限</strong>
+      (=<span class="masked">文字列形式で約5MB</span>)
+      がありましたが、データベースを使えばテラバイト単位のデータも扱うことができ、なおかつ
+      <strong>バックアップ</strong>
+      などの堅牢な仕組みによってデータの消失を防ぐことも可能になります。</p>
+      <p>また、(リレーショナルデータベースとは別の仕組みになりますが)
+      オブジェクトストレージ関連のウェブサービス (<a
+      href="https://www.google.com/search?q=Amazon+S3とは">Amazon S3</a>や Azure Blob Storage、GCP
+      Cloud Storage)
+      を利用すれば画像、音声、動画など任意のバイナリデータを扱うことも可能になります。</p>
+      <p>ここからの「ブログアプリ開発」では、以上のメリットを活かすために、バックエンドにおいて<strong>リレーショナルデータベース
+      (RDB) をデータを永続化する機能</strong>を実装していきます。</p>
+      <h3 data-number="2.0.1" id="定着確認"><span class="header-section-number">2.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>Window.localStorage API
+      は「ウェブサーバ」と「ウェブブラウザ」のどちらで提供される機能であるか答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">ウェブブラウザ</span></li>
+      </ul></li>
+      <li>Window.localStorage API は HTTP/HTTPS 経由で利用する API
+      である。この説明は「適切」か「不適切」か答えよ。
+      <ul>
+      <li><strong>答え</strong>: <span class="masked">不適切</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="3" id="データベースについて"><span class="header-section-number">3</span>
+      データベースについて</h1>
+      <p>データベースの<strong>アーキテクチャ</strong> (内部の仕組み/データの整理方法)
+      は、大きく2つに分けると「<strong>RDB
+      (リレーショナルデータベース)</strong>」と「<strong>NoSQL</strong>」という分類になります。</p>
+      <p>ここでのブログアプリ開発には、<strong>リレーショナルデータベース</strong>
+      を利用していきます。</p>
+      <h2 data-number="3.1" id="nosql"><span class="header-section-number">3.1</span> NoSQL</h2>
+      <p><strong>NoSQL</strong> (ノーエスキューエル)
+      の代表的なものとして「<strong>ドキュメント指向DB</strong>
+      (ドキュメント型DB)」があります。<strong>ドキュメント指向DB</strong>
+      は、ウェブブラウザのローカルストレージと同じように
+      <strong>固定的なスキーマを必要とせず</strong> <span
+      class="masked">「JSON形式」や「XML形式」</span>
+      でデータを自由に格納できるという特徴を持っています。</p>
+      <p>ここで「<strong>固定的なスキーマを必要としない</strong>」とは <span
+      class="masked">データのスキーマ (構造・型) が統一されていなくても良い</span>
+      ということを意味します。例えば、ドキュメント指向DBには、以下のように
+      <strong>異なるスキーマを持った レコード (データ) を「同じ保存領域」に格納すること</strong>
+      ができます。</p>
+      <div class="sourceCode" id="cb1" data-caption="1件目のレコード"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;user1&quot;</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;寝屋川タヌキ&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">&quot;age&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="dt">&quot;hobbies&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;どんぐり収集&quot;</span><span class="ot">,</span> <span class="st">&quot;毛づくろい&quot;</span><span class="ot">]</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">}</span></span></code></pre></div>
+      <div class="sourceCode" id="cb2" data-caption="2件目のレコード"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;user2&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;萱島ウサギ&quot;</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;abbit@example.com&quot;</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">&quot;skills&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="dt">&quot;jump&quot;</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="dt">&quot;speed&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="dt">&quot;stealth&quot;</span><span class="fu">:</span> <span class="dv">4</span> </span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="fu">}</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="fu">}</span></span></code></pre></div>
+      <p>1件目のレコードは <code>age</code> と <code>hobbies</code>
+      という属性を持ち、2件目のレコードは、それとは異なる <code>email</code> と <code>skills</code>
+      という属性を持っています。このようにドキュメント指向DBでは <strong>レコード (データ)
+      ごとに異なる項目や構造を持たせること</strong> が可能となっています。また <span
+      class="masked">配列や階層構造 (ネスト構造) のデータ</span>
+      も柔軟に格納することも大きな特徴となっています。</p>
+      <p>さらに、ほとんどのドキュメント指向DBは <strong>JSON形式 (JavaScript Object Notation
+      形式)</strong> / BSON に対応しており、JavaScript / TypeScript
+      との親和性が高く、ウェブ開発においても採用されることが増えています。その場合、フロントエンドからバックエンドまで一貫してJSON形式でデータをやり取りできるため、<span
+      class="masked">データの変換作業が最小限で済む</span> というメリットがあります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ドキュメント指向DBの文脈において「BSON」について解説してください。</p>
+      </blockquote>
+      <p>一方で、後述の RDB では、<strong>同じテーブル (表) に格納する全てのレコードは共通のカラム
+      (列)</strong> を持つことが要求されます。さらに、そのテーブルのスキーマ
+      (カラムの名前、データ型、値の制約など) は <span
+      class="masked">レコードを登録する前に設計しておかなければならない</span>
+      という原則があります。</p>
+      <p>ドキュメント指向DBの代表的なプロダクトとしては<a
+      href="https://www.google.com/search?q=MongoDBとは">MongoDB</a>(モンゴディービー) や<a
+      href="https://www.google.com/search?q=CouchDBとは">CouchDB</a>(カウチディービー)
+      があります。また、ドキュメント指向DBの特性を活かした BaaS (= <span class="masked">Backend as a
+      Service</span>) として<a href="https://www.google.com/search?q=Firebaseとは">GCP
+      Firebase</a>や<a href="https://www.google.com/search?q=Amazon%20DynamoDBとは">Amazon
+      DynamoDB</a>、<a href="https://www.google.com/search?q=MongoDB%20Atlas">MongoDB
+      Atlas</a>などのクラウドサービスがあり、様々なモバイルアプリやウェブサービスにおいて利用されています。</p>
+      <p>この他、NoSQLとしては「キーバリュー型DB」や「グラフ型DB」などのデータベースも存在します。興味がある学生は、生成AIやウェブ検索を利用して概要を把握しておいてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ドキュメント指向DB、キーバリュー型DB、グラフ型DBの概要を説明してください。</p>
+      </blockquote>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ウェブアプリ開発の文脈で「BaaS」とは何ですか。専門用語でできるだけ避けて、初心者向けに機能や採用のメリットなどを解説してください。</p>
+      </blockquote>
+      <h3 data-number="3.1.1" id="定着確認-1"><span class="header-section-number">3.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>原則としてスキーマの事前定義が要求されるのは「RDB」と「ドキュメント指向DB」のどちらか答えよ。
+      <ul>
+      <li>答え: <span class="masked">ドキュメント指向DB</span></li>
+      </ul></li>
+      <li>RDBにおけるテーブルの「スキーマ」とは、どのようなものを指すか答えよ。
+      <ul>
+      <li>答え: <span class="masked">カラム (列) の名前、データ型、制約など</span></li>
+      </ul></li>
+      <li>オブジェクト指向プログラミングにおける「オブジェクト」は、その属性 (プロパティ)
+      として「配列」や「階層構造」を持つことがある。これらのオブジェクトをより直接的に扱えるのは「ドキュメント指向DB」と「RDB」のどちらか。</li>
+      <li>ドキュメント指向DBの代表的なプロダクト (≠クラウドサービス) を答えよ。
+      <ul>
+      <li>答え: <span class="masked">MongoDB、CouchDB</span></li>
+      </ul></li>
+      <li>一般的なドキュメント指向DBがサポートしている主要なドキュメント形式を2つ答えよ。
+      <ul>
+      <li>答え: <span class="masked">JSON、XML、YAML</span></li>
+      </ul></li>
+      <li>NoSQLデータベースにはいくつかの種類が存在する。そのなかでも代表的な3つの型を答えよ。
+      <ul>
+      <li>答え: <span class="masked">ドキュメント指向DB、キーバリュー型DB、グラフ型DB</span></li>
+      </ul></li>
+      <li>ウェブアプリ開発の文脈で「BaaS」とは何の略語か答えよ。
+      <ul>
+      <li>答え: <span class="masked">Backend as a Service</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.2" id="rdb"><span class="header-section-number">3.2</span> RDB</h2>
+      <p>RDB (Relational Database) は
+      <strong>シンプルな「2次元の表形式」でデータを保持することが特徴</strong> のDBです。近年では
+      NoSQL の普及も進んでいますが、単に「DB」と言えば RDB
+      を指すほど一般的であり、特に「銀行システム」や「ECサイト」などで広く採用されています。表形式によるデータ管理には多くのメリットがあるものの、<strong>可変長配列</strong>
+      や <strong>階層構造のデータ</strong> を <strong>直接的に扱えない</strong>
+      という欠点があります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>プログラム開発者の観点では、オブジェクトデータの永続化が直接的に可能なドキュメント指向DBのほうが、RDBと比較してストレージとしてのメリットが大きいように考えます。しかし、実際にはRDBが採用されることが多いのは、どのような理由か解説してください。</p>
+      </blockquote>
+      <p>例えば、JavaScript/TypeScriptで、次のようなオブジェクトデータを扱っているとします。このデータでは「カテゴリ」に関する情報が
+      <strong>階層的な構造を持ち、その要素数が可変</strong>
+      (2個のカテゴリをもつ場合もあれば、3個のカテゴリを持つ場合もある構造) となっています。</p>
+      <div class="sourceCode" id="cb3"
+      data-caption="階層構造および可変長配列を持つオブジェクトデータの例"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>[</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  {</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    id<span class="op">:</span> <span class="st">&quot;p-001&quot;</span><span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    title<span class="op">:</span> <span class="st">&quot;JavaScriptだと動いたのに…な毎日&quot;</span><span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    content<span class="op">:</span> <span class="st">&quot;TypeScriptに移行してから…&quot;</span><span class="op">,</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    createdAt<span class="op">:</span> <span class="st">&quot;2024-03-19&quot;</span><span class="op">,</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    categories<span class="op">:</span> [</span>
+<span id="cb3-8"><a href="#cb3-8"></a>      { id<span class="op">:</span> <span class="st">&quot;c-001&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;プログラミング&quot;</span> }<span class="op">,</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>      { id<span class="op">:</span> <span class="st">&quot;c-002&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;TypeScript&quot;</span> }<span class="op">,</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>      { id<span class="op">:</span> <span class="st">&quot;c-003&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;JavaScript&quot;</span> }<span class="op">,</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    ]<span class="op">,</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  }<span class="op">,</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  {</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    id<span class="op">:</span> <span class="st">&quot;p-002&quot;</span><span class="op">,</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>    title<span class="op">:</span> <span class="st">&quot;リストの[-1]ってマイナスなのになんで動くの?&quot;</span><span class="op">,</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    content<span class="op">:</span> <span class="st">&quot;Pythonのリストで…&quot;</span><span class="op">,</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    createdAt<span class="op">:</span> <span class="st">&quot;2024-03-24&quot;</span><span class="op">,</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    categories<span class="op">:</span> [</span>
+<span id="cb3-19"><a href="#cb3-19"></a>      { id<span class="op">:</span> <span class="st">&quot;c-001&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;プログラミング&quot;</span> }<span class="op">,</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>      { id<span class="op">:</span> <span class="st">&quot;c-004&quot;</span><span class="op">,</span> name<span class="op">:</span> <span class="st">&quot;Python&quot;</span> }<span class="op">,</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>    ]<span class="op">,</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>  }<span class="op">,</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>]<span class="op">;</span></span></code></pre></div>
+      <p>このようなオブジェクトデータを <strong>RDBを用いて永続化するためには</strong> <span
+      class="masked">正規化</span> という処理を施して、次のように <strong>複数のテーブル (表)
+      に分解して扱う必要</strong> があります。</p>
+      <p><strong>■ posts テーブル</strong></p>
       <table>
-      <colgroup>
-      <col style="width: 25%" />
-      <col style="width: 25%" />
-      <col style="width: 25%" />
-      <col style="width: 25%" />
-      </colgroup>
       <thead>
       <tr class="header">
       <th>id</th>
@@ -127,19 +324,19 @@ class="toc-section-number">2</span> RDB</a></li>
       <tbody>
       <tr class="odd">
       <td>p-001</td>
-      <td>JavaScriptだと動いたのに…な毎日</td>
-      <td>TypeScriptは…</td>
+      <td>JavaScriptだと…</td>
+      <td>TypeScriptに移行…</td>
       <td>2024-03-19</td>
       </tr>
       <tr class="even">
       <td>p-002</td>
-      <td>リストの[-1]ってマイナスなのになんで動くの?</td>
-      <td>TypeScriptは…</td>
-      <td>2024-03-19</td>
+      <td>リストの[-1]って…</td>
+      <td>Pythonのリストで…</td>
+      <td>2024-03-24</td>
       </tr>
       </tbody>
       </table>
-      <p><strong>categories テーブル</strong></p>
+      <p><strong>■ categories テーブル</strong></p>
       <table>
       <thead>
       <tr class="header">
@@ -158,15 +355,15 @@ class="toc-section-number">2</span> RDB</a></li>
       </tr>
       <tr class="odd">
       <td>c-003</td>
-      <td>Python</td>
+      <td>JavaScript</td>
       </tr>
       <tr class="even">
       <td>c-004</td>
-      <td>JavaScript</td>
+      <td>Python</td>
       </tr>
       </tbody>
       </table>
-      <p><strong>post_categories テーブル</strong></p>
+      <p><strong>■ posts_categories テーブル</strong></p>
       <table>
       <thead>
       <tr class="header">
@@ -185,7 +382,7 @@ class="toc-section-number">2</span> RDB</a></li>
       </tr>
       <tr class="odd">
       <td>p-001</td>
-      <td>c-004</td>
+      <td>c-003</td>
       </tr>
       <tr class="even">
       <td>p-002</td>
@@ -193,35 +390,517 @@ class="toc-section-number">2</span> RDB</a></li>
       </tr>
       <tr class="odd">
       <td>p-002</td>
-      <td>c-003</td>
+      <td>c-004</td>
       </tr>
       </tbody>
       </table>
-      <p><strong>cover_images テーブル</strong></p>
-      <table>
-      <thead>
-      <tr class="header">
-      <th>post_id</th>
-      <th>url</th>
-      <th>width</th>
-      <th>height</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="odd">
-      <td>p-001</td>
-      <td>https://example.com/18782.jpg</td>
-      <td>1200</td>
-      <td>630</td>
-      </tr>
-      <tr class="even">
-      <td>p-002</td>
-      <td>https://example.com/4649.jpg</td>
-      <td>800</td>
-      <td>400</td>
-      </tr>
-      </tbody>
-      </table>
+      <p>このテーブル設計において「<strong>posts_categoriesテーブル</strong>」は橋渡し的な役割を果たしています。このような<strong>複数のテーブルの紐付け</strong>をするためのテーブルを「中間テーブル」「Join
+      Table」「Junction
+      Table」と言います。<strong>1つの投稿記事が複数のカテゴリを持ち</strong>、なおかつ、<strong>1つのカテゴリが複数の投稿記事に属する</strong>
+      という <span class="masked">多対多 (N:N)</span>
+      の関係性をRDBの形式で実現しています。このような変換をRDBでは <strong>データの正規化
+      (Normalization)</strong> と呼びます。正規化によって <span class="masked">データの重複</span>
+      を排除し、<strong>一貫性を保ちながら効率的なデータ管理</strong> が可能になります。</p>
+      <div class="note type-senior">
+      <p>RDBにおける「中間テーブル」や「多対多 (N:N)」の概念については「<a
+      href="https://qiita.com/ramuneru/items/db43589551dd0c00fef9">やさしい図解で学ぶ 中間テーブル
+      多対多
+      概念編</a>」などを参照してください。詳しくは、4年生の「データベース工学」で学びます。</p>
+      </div>
+      <p>このように適切に正規化されたRDBでは、例えば <code>c-001</code>
+      の「<strong>プログラミング</strong>」という名前を「<strong>コーディング</strong>」に変更したいとき、<span
+      class="masked">categoriesテーブルのなかの1件のレコードを更新するだけ</span>
+      で操作を完了できるという大きなメリットがあります。</p>
+      <p>一方で、RDBを使用すると「プログラムからRDBにデータを保存するとき」と「RDBからプログラムにデータを読み込むとき」に複雑な変換処理が必要となります。具体的には、データを保存するときには
+      <span class="masked">オブジェクトの内容を、各テーブルに記録するようなクエリ (SQL文)
+      を作成して、RDBに向けて発行する必要</span>
+      があります。読み込む際には、<strong>各テーブルから必要なデータを抽出するためのクエリ (SQL文)
+      を作成してRDBに発行し、その実行結果 (平坦化されたレコードの配列)
+      を元の階層構造を持つオブジェクト形式に再構築</strong>する必要があります。</p>
+      <div class="note type-tips">
+      <p>SQL (エス・キュー・エル: Structured Query Language) は、RDB に対する
+      <strong>クエリ</strong> (検索、取得、挿入、更新、削除などの一操作指示)
+      を記述するための言語です。</p>
+      </div>
+      <p>このような「オブジェクトデータ」と「リレーショナルデータ」を接続する際の困難さを <span
+      class="masked">O/Rインピーダンス・ミスマッチ</span> と呼びます。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>O/Rインピーダンスミスマッチに関する質問です。現在、TypeScriptを使ってブログアプリ（ブログ記事とカテゴリがN:Nの関係）を開発しています。先生から、RDBから取得したデータは「平坦化されたレコードの配列」であるため、それを元の「階層構造を持つオブジェクト形式」に再構築する必要がある、と言われました。このことについて具体的なイメージがつかめないので解説してください。変換のプログラムを知りたいのではなく、それぞれのデータ構造と変換のイメージを把握したいです。</p>
+      </blockquote>
+      <h2 data-number="3.3" id="orm"><span class="header-section-number">3.3</span> ORM</h2>
+      <p>O/Rインピーダンス・ミスマッチを解決するための概念・技術に <strong>Object-Relational Mapping
+      (ORM)</strong>
+      というものがあります。これは、オブジェクト指向プログラミングにおける「オブジェクトモデル」と、RDBにおける「リレーショナルモデル」の間の
+      <strong>溝を埋めるための</strong> (<strong>違いを吸収するための</strong>)
+      設計パターンとなります。</p>
+      <p>この <strong>Object-Relational Mapping</strong> を実装したツール/ライブラリは
+      <strong>Object-Relational Mapper（ORM）</strong>
+      と呼ばれ、開発者がRDBを直接意識することなく（つまり、<strong>SQL文でクエリを記述することなく</strong>）、プログラミング言語の
+      <span class="masked">ネイティブなオブジェクトとしてデータを扱うことを可能</span>
+      にします。</p>
+      <p>TypeScript/JavaScript では Prisma (プリズマ) という ORM
+      があり、広く使われています。ここでのブログアプリ開発でも、この Prisma を最大限に利用して RDB
+      とのデータのやりとりを行ないます。</p>
+      <h2 data-number="3.4" id="prisma-のインストール"><span
+      class="header-section-number">3.4</span> Prisma のインストール</h2>
+      <p>プロジェクトに <a href="https://www.npmjs.com/package/prisma">Prisma</a>(O/R Mapper)
+      をインストールしていきます。VSCode でプロジェクト (<code>next-blog-app</code>)
+      をオープンして、<code>Ctrl+J</code>
+      でターミナルを開き、以下のコマンドを実行してください。後日、別途、</p>
+      <pre><code>npm i -D prisma</code></pre>
+      <p>また、データベースの「<strong>初期データ</strong> (Seed)」を作成する際に<a
+      href="https://www.google.com/search?q=ts-nodeとは">ts-node</a>を使用するので、こちらもプロジェクトのローカルにインストールしてください。<strong>ts-node</strong>
+      は<a
+      href="lecture01.html#開発を効率的に行なうためのパッケージの追加">第01回講義</a>でも解説したように
+      <span class="masked">TypeScriptを (JavaScriptに変換せずに) Node.js 上で 直接実行
+      するためのランタイム</span> です。</p>
+      <pre><code>npm i -D ts-node</code></pre>
+      <div class="note type-tips">
+      <p><strong>npmのアップデート</strong></p>
+      <p>npmコマンドを実行した際に、次のように <strong>npm のアップデートを促すメッセージ</strong>
+      が表示されたときは、適宜、指示に従ってアップデートをするようにしてください。</p>
+      <pre><code>npm notice New minor version of npm available! 10.8.3 -&gt; 10.9.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v10.9.1
+npm notice To update run: npm install -g npm@10.9.1</code></pre>
+      <p>具体的には、ターミナルから次のようなコマンドを実行してください。<code>@</code>
+      以降のバージョン番号は、適宜、読み替えてください。</p>
+      <pre><code>npm install -g npm@10.9.1</code></pre>
+      <p>なお、<code>-g</code> は、グローバル環境を対象にインストール (アップデート)
+      することを指示するオプションになります。<a
+      href="lecture01.html#npm-関連の初期設定">第01回講義</a>でも触れたように、npm
+      は、通常、プロジェクトのローカル環境ではなく、グローバル環境にインストールします。</p>
+      </div>
+      <div class="note type-caution">
+      <p><strong>セキュリティ脆弱性に対する緊急対応</strong></p>
+      <p>npmコマンドを実行した際に「<strong>XX high severity
+      vulnerability</strong>」のように表示されたときは <span
+      class="masked">XX件の深刻なセキュリティ脆弱性</span>
+      が検出されたことを意味します。インストール済みのパッケージのなかに緊急対応を要する脆弱性を持つものが存在し、それに対して対応を促すメッセージとなっています。</p>
+      <p>このメッセージがでたときは、まずは以下のコマンドで詳細を確認してください。</p>
+      <pre><code>npm audit</code></pre>
+      <p>つづいて、次のコマンドで、当該パッケージを修正バージョンにアップデートします。成功すると「<strong>found
+      0 vulnerabilities</strong>」というメッセージが出力されます。</p>
+      <pre><code>npm audit fix</code></pre>
+      <p>なお、依存関係の問題などで <code>npm audit fix</code> の実行では対応できない (解決できない)
+      場合があります。その場合は、個別に情報収集して対応したり、生成AIを使って解決してください。</p>
+      </div>
+      <h2 data-number="3.5" id="prisma-の初期化処理-セットアップ処理"><span
+      class="header-section-number">3.5</span> Prisma の初期化処理 (セットアップ処理)</h2>
+      <p>次に Prisma を <strong>使用するための準備</strong> を行なっていきます。
+      この初期化処理は、ローカル環境にPrismaをインストール後、基本的に <span
+      class="masked">初回のみに実行すればよい</span> ものとなります。</p>
+      <p>VSCodeのターミナルから次のコマンドを実行してください。<code>npm</code> ではなく
+      <code>npx</code> であることに注意してください。<code>--datasource-provider sqlite</code>
+      のオプションにより、DB として <strong>SQLite</strong> (エスキューライト、スクライト)
+      を使用する設定にするように指示しています。</p>
+      <p>なお、Prisma は「SQLite」の他に MySQL、PostgreSQL など様々な DB に対応しています。</p>
+      <pre><code>npx prisma init --datasource-provider sqlite</code></pre>
+      <p>このコマンドを実行すると、プロジェクトフォルダの直下に <code>prisma</code>
+      というフォルダが作成され、さらに、そのなかに <code>schema.prisma</code> という
+      <strong>設定ファイル</strong> が作成されます。また、プロジェクトフォルダの直下の
+      <code>.env</code> (<a href="lecture07.html#準備-環境変数の設定">前回講義</a>で <span
+      class="masked">環境変数の設定</span> を記述したファイル) に情報が追記がされます。</p>
+      <figure>
+      <img src="figs/08/vscode_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="3.6" id="env-の内容確認"><span class="header-section-number">3.6</span> .env
+      の内容確認</h2>
+      <p><code>.env</code>
+      を開いて、Prismaの初期化処理によって追記された内容を確認してください。<code>#</code>
+      から開始する行は <strong>コメント</strong> なので編集・削除しても問題ありません。</p>
+      <p>ファイルの最後のほうに <code>DATABASE_URL</code> という環境変数設定が追加され、そこに
+      <code>"file:./dev.db"</code> がセットされていることが確認できると思います。</p>
+      <div class="sourceCode" id="cb11" data-caption=".env"><pre
+      class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># microCMS</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="va">NEXT_PUBLIC_MICROCMS_BASE_EP</span><span class="op">=</span>https://XXXXX.microcms.io/api/v1</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="va">NEXT_PUBLIC_MICROCMS_API_KEY</span><span class="op">=</span>YYYYY</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># prisma ▼▼ 追加されていることを確認 ▼▼</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="va">DATABASE_URL</span><span class="op">=</span><span class="st">&quot;file:./dev.db&quot;</span></span></code></pre></div>
+      <p>これは <span class="masked">Prisma がデータベース接続に際して参照する環境変数</span>
+      で、この値によって、Prisma は <code>dev.db</code>
+      という「<strong>SQLiteのデータベースファイル</strong>
+      (現時点ではまだ作成されていません)」に接続するようになります。</p>
+      <h2 data-number="3.7" id="schema.prisma-の内容確認"><span
+      class="header-section-number">3.7</span> schema.prisma の内容確認</h2>
+      <p>prisma フォルダのなかの <code>schema.prisma</code>
+      を開いて内容を確認してください。<code>//</code> から開始する行は <strong>コメント</strong>
+      なので編集・削除して問題ありません。</p>
+      <div class="sourceCode" id="cb12" data-caption="prisma/schema.prisma"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb12-1"><a href="#cb12-1"></a>generator client {</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  provider = &quot;prisma-client-js&quot;</span>
+<span id="cb12-3"><a href="#cb12-3"></a>}</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>datasource db {</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  provider = &quot;sqlite&quot;</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  url      = env(&quot;DATABASE_URL&quot;)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>}</span></code></pre></div>
+      <p><strong>第02行目</strong> では、JavaScript (TypeScript) に対応した「Prisma
+      Client」を生成することを指定しています。Prisma Client クラスから生成されるインスタンスを通して
+      <span class="masked">(SQLを記述することなく) TypeScript プログラムからDBのCURD操作</span>
+      ができるようになります。</p>
+      <p><strong>第06行目</strong> では、使用するDB (Prismaが接続するDB)
+      が「SQLite」であることを指定しています。</p>
+      <p><strong>第07行目</strong> では <code>.env</code> ファイルの <code>DATABASE_URL</code> から
+      <strong>DB接続情報</strong>
+      を読み取ることを指定しています。現状では、<code>DATABASE_URL</code> に
+      <code>file:./dev.db</code> が設定されています。</p>
+      <p>また、<code>schema.prisma</code> は、<span class="masked">データベースのスキーマ定義
+      (テーブルやフィールドの構造定義)</span>
+      を記述するファイルとしての役割も持ちます。次のセクションでは
+      <strong>ブログアプリに必要となるスキーマを定義</strong>していきます。</p>
+      <h2 data-number="3.8" id="schema.prisma-の編集"><span class="header-section-number">3.8</span>
+      schema.prisma の編集</h2>
+      <p>ブログアプリに必要な各種データ (投稿記事、カテゴリ) のスキーマを <code>schema.prisma</code>
+      に記述していきます。まず、<code>schema.prisma</code>
+      を次のように書き換えて、保存してください。</p>
+      <div class="sourceCode" id="cb13" data-caption="prisma/schema.prisma"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb13-1"><a href="#cb13-1"></a>// このファイルを更新したら...</span>
+<span id="cb13-2"><a href="#cb13-2"></a>// 0. `npm run dev` や `npx prisma studio` を停止</span>
+<span id="cb13-3"><a href="#cb13-3"></a>// 1. dev.db を削除</span>
+<span id="cb13-4"><a href="#cb13-4"></a>// 2. npx prisma db push</span>
+<span id="cb13-5"><a href="#cb13-5"></a>// 3. npx prisma generate</span>
+<span id="cb13-6"><a href="#cb13-6"></a>// 4. npx prisma db seed</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>generator client {</span>
+<span id="cb13-9"><a href="#cb13-9"></a>  provider = &quot;prisma-client-js&quot;</span>
+<span id="cb13-10"><a href="#cb13-10"></a>}</span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a>datasource db {</span>
+<span id="cb13-13"><a href="#cb13-13"></a>  provider = &quot;sqlite&quot;</span>
+<span id="cb13-14"><a href="#cb13-14"></a>  url      = env(&quot;DATABASE_URL&quot;)</span>
+<span id="cb13-15"><a href="#cb13-15"></a>}</span>
+<span id="cb13-16"><a href="#cb13-16"></a></span>
+<span id="cb13-17"><a href="#cb13-17"></a>// 投稿記事テーブル</span>
+<span id="cb13-18"><a href="#cb13-18"></a>model Post {</span>
+<span id="cb13-19"><a href="#cb13-19"></a>  id             String @id @default(uuid())</span>
+<span id="cb13-20"><a href="#cb13-20"></a>  title          String</span>
+<span id="cb13-21"><a href="#cb13-21"></a>  content        String</span>
+<span id="cb13-22"><a href="#cb13-22"></a>  coverImageURL  String</span>
+<span id="cb13-23"><a href="#cb13-23"></a>  createdAt      DateTime @default(now())</span>
+<span id="cb13-24"><a href="#cb13-24"></a>  updatedAt      DateTime @updatedAt</span>
+<span id="cb13-25"><a href="#cb13-25"></a>  categories     PostCategory[]</span>
+<span id="cb13-26"><a href="#cb13-26"></a>}</span>
+<span id="cb13-27"><a href="#cb13-27"></a></span>
+<span id="cb13-28"><a href="#cb13-28"></a>// カテゴリテーブル</span>
+<span id="cb13-29"><a href="#cb13-29"></a>model Category {</span>
+<span id="cb13-30"><a href="#cb13-30"></a>  id         String @id @default(uuid())</span>
+<span id="cb13-31"><a href="#cb13-31"></a>  name       String @unique</span>
+<span id="cb13-32"><a href="#cb13-32"></a>  createdAt  DateTime @default(now())</span>
+<span id="cb13-33"><a href="#cb13-33"></a>  updatedAt  DateTime @updatedAt</span>
+<span id="cb13-34"><a href="#cb13-34"></a>  posts      PostCategory[]</span>
+<span id="cb13-35"><a href="#cb13-35"></a>}</span>
+<span id="cb13-36"><a href="#cb13-36"></a></span>
+<span id="cb13-37"><a href="#cb13-37"></a>// 投稿記事とカテゴリを紐づける中間テーブル</span>
+<span id="cb13-38"><a href="#cb13-38"></a>model PostCategory {</span>
+<span id="cb13-39"><a href="#cb13-39"></a>  id          String @id @default(uuid())</span>
+<span id="cb13-40"><a href="#cb13-40"></a>  postId      String</span>
+<span id="cb13-41"><a href="#cb13-41"></a>  categoryId  String</span>
+<span id="cb13-42"><a href="#cb13-42"></a>  createdAt   DateTime @default(now())</span>
+<span id="cb13-43"><a href="#cb13-43"></a>  updatedAt   DateTime @updatedAt</span>
+<span id="cb13-44"><a href="#cb13-44"></a>  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)</span>
+<span id="cb13-45"><a href="#cb13-45"></a>  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)</span>
+<span id="cb13-46"><a href="#cb13-46"></a>}</span></code></pre></div>
+      <p><strong>第17行目</strong> 以降で「投稿記事テーブル <code>Post</code>」「カテゴリテーブル
+      <code>Category</code>」「投稿記事とカテゴリを紐づける中間テーブル
+      <code>PostCategory</code>」の3つのテーブルのスキーマ (モデル)
+      を定義しています。この定義に基づき、Prisma によって DB にテーブルが作成され、また、<span
+      class="masked">それらのテーブルを操作するための「メソッド」</span> や
+      <strong>テーブルから取得される「データ型」</strong> が TypeScript
+      から利用できるようになります。</p>
+      <p><strong>投稿記事テーブル</strong> (<code>Post</code>) の定義の <strong>第22行目</strong>
+      では、今後の展開の都合で「<code>src/app/_types/CoverImage.ts</code> で定義したような
+      <code>url</code>、<code>height</code>、<code>width</code> という属性を持った
+      <code>coverImage</code>」ではなく、<code>coverImageURL</code>
+      に変更している点に注意してください。</p>
+      <p><code>schema.prisma</code> の詳細 (記述方法)
+      については、ウェブ記事や生成AIを利用して概要だけ把握しておいてください。特に
+      <strong>第44行目</strong> と <strong>第45行目</strong>
+      では重要な設定がされているので注意してください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>TypeScript で Prisma を使用するにあたって、次のような <code>schema.prisma</code>
+      を受け取りました。「投稿記事テーブル」のスキーマ定義について、丁寧に解説してください。特にカラムの「型」や「制約」について説明してください。</p>
+      <p>～ schema.prisma の内容を貼付け ～</p>
+      </blockquote>
+      <blockquote>
+      <p>つづいて「カテゴリテーブル」について同様に解説してください。</p>
+      </blockquote>
+      <blockquote>
+      <p>つづいて「中間テーブル」について同様に解説してください。</p>
+      </blockquote>
+      <h2 data-number="3.9" id="データベースの作成と確認"><span
+      class="header-section-number">3.9</span> データベースの作成と確認</h2>
+      <p><code>schema.prisma</code> を編集・保存したら、次のコマンドを実行してください。</p>
+      <pre><code>npx prisma db push</code></pre>
+      <p>このコマンドにより、<code>schema.prisma</code> に基づいて
+      <strong>実際にデータベースが新規作成され</strong> (現在の設定の場合は <code>dev.db</code>
+      というファイルが新規作成され)、そのなかに <strong>「3つのテーブル」が作成</strong>
+      されます。既にデータベースが存在する場合は
+      <code>The database is already in sync with the Prisma schema.</code> となります。</p>
+      <p>さらに、次のコマンドを実行してください。この操作により <code>schema.prisma</code>
+      に基づき、<strong>プロジェクトのなかで参照可能な型情報</strong>などが生成されます。</p>
+      <pre><code>npx prisma generate</code></pre>
+      <div class="note type-tips">
+      <p><strong>補足: 自動生成される「型」の参照</strong></p>
+      <p><code>npx prisma generate</code> を実行すると、プロジェクトのなかで
+      <code>schema.prisma</code> に記述したスキーマ (モデル)
+      に基づいて自動的に「型」が定義され、それを参照することができます。</p>
+      <p>例えば <code>import { Category } from "@prisma/client";</code>
+      とすれば、以下のようにカテゴリの型を参照できるようになります。</p>
+      <figure>
+      <img src="figs/08/vscode_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      </div>
+      <p>つづいて、VSCode から、次のように <code>dev.db</code>
+      が作成されていることを確認してください。</p>
+      <figure>
+      <img src="figs/08/vscode_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Prismaによって作成されたDBの内容は「<strong>Prisma
+      Studio</strong>」というツールを使って、ウェブブラウザから確認することができます。Prisma Studio
+      は、VSCodeのターミナルから、以下のコマンドで起動することができます
+      (デフォルトで5555番ポートで起動します)。</p>
+      <pre><code>npx prisma studio</code></pre>
+      <p>Prisma Studio のトップ画面では、<strong>テーブル一覧</strong> (<strong>モデル一覧</strong>)
+      が表示されます。いまは「投稿記事のテーブル」を確認したいので「<strong>Post</strong>」をクリックしてください。</p>
+      <figure>
+      <img src="figs/08/prisma_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のように「投稿記事テーブル (<code>Post</code>)」の「<strong>カラム (列)
+      の構成</strong>」を確認することができます。現時点では、まだ投稿記事のレコードが1件も存在しませんが、レコード追加後は、その内容について確認・編集することもできます。</p>
+      <figure>
+      <img src="figs/08/prisma_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ul>
+      <li>「<strong>Add
+      record</strong>」のボタンを押下すると、この画面からレコードを追加することもできます
+      (いまは追加しないでください)。</li>
+      <li>「<strong>＋</strong>」のボタンを押下すると他のテーブルについて内容を確認することができます。</li>
+      <li>レコードが存在するときは、その内容を編集することもできます。
+      <ul>
+      <li>Prisma Studio では <strong>スキーマの変更 (カラムの追加や削除、名前変更など)</strong>
+      はできません。スキーマを変更するためには <code>schema.prisma</code>
+      の編集が必要になります。</li>
+      </ul></li>
+      </ul>
+      <p>ターミナルで <code>Ctrl+C</code> を入力すると Prisma Studio
+      を終了することができます。一旦、Prisma Studio を終了しておいてください。</p>
+      <h2 data-number="3.10" id="dbの初期データの作成"><span
+      class="header-section-number">3.10</span> DBの初期データの作成</h2>
+      <p>Prisma Studio
+      の画面から1件ずつ手作業でレコードを追加することも可能ですが、ここでは<strong>プログラムを使って初期データを生成して、それを
+      DB
+      に挿入していきます</strong>。なお、データベースの初期データを作成して投入する作業を「<strong>シーディング
+      (seeding)</strong>」といい、その際に使用する初期データを「<strong>シードデータ (Seed
+      Data)</strong>」と呼びます。</p>
+      <p><code>prisma</code> フォルダのなかに <code>seed.ts</code>
+      というファイルを新規作成して・・・</p>
+      <figure>
+      <img src="figs/08/vscode_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以下のコード (シーディングのためのTypeScriptプログラム) を貼付け、保存してください。</p>
+      <div class="sourceCode" id="cb17" data-caption="prisma/seed.ts"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">import</span> { PrismaClient } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">const</span> prisma <span class="op">=</span> <span class="kw">new</span> <span class="fu">PrismaClient</span>()<span class="op">;</span> <span class="co">// PrismaClientのインスタンス生成</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">const</span> main <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="co">// 各テーブルから既存の全レコードを削除</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="cf">await</span> prisma<span class="op">.</span><span class="at">postCategory</span><span class="op">?.</span><span class="fu">deleteMany</span>()<span class="op">;</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>  <span class="cf">await</span> prisma<span class="op">.</span><span class="at">post</span><span class="op">?.</span><span class="fu">deleteMany</span>()<span class="op">;</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>  <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">?.</span><span class="fu">deleteMany</span>()<span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a></span>
+<span id="cb17-11"><a href="#cb17-11"></a>  <span class="co">// カテゴリデータの作成 (テーブルに対するレコードの挿入)</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>  <span class="kw">const</span> c1 <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">create</span>({ data<span class="op">:</span> { name<span class="op">:</span> <span class="st">&quot;カテゴリ1&quot;</span> } })<span class="op">;</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>  <span class="kw">const</span> c2 <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">create</span>({ data<span class="op">:</span> { name<span class="op">:</span> <span class="st">&quot;カテゴリ2&quot;</span> } })<span class="op">;</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a>  <span class="kw">const</span> c3 <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">create</span>({ data<span class="op">:</span> { name<span class="op">:</span> <span class="st">&quot;カテゴリ3&quot;</span> } })<span class="op">;</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a></span>
+<span id="cb17-16"><a href="#cb17-16"></a>  <span class="co">// 投稿記事データの作成  (テーブルに対するレコードの挿入)</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a>  <span class="kw">const</span> p1 <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">post</span><span class="op">.</span><span class="fu">create</span>({</span>
+<span id="cb17-18"><a href="#cb17-18"></a>    data<span class="op">:</span> {</span>
+<span id="cb17-19"><a href="#cb17-19"></a>      title<span class="op">:</span> <span class="st">&quot;投稿1&quot;</span><span class="op">,</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a>      content<span class="op">:</span> <span class="st">&quot;投稿1の本文。&lt;br/&gt;投稿1の本文。投稿1の本文。&quot;</span><span class="op">,</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a>      coverImageURL<span class="op">:</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a>        <span class="st">&quot;https://w1980.blob.core.windows.net/pg3/cover-img-red.jpg&quot;</span><span class="op">,</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a>      categories<span class="op">:</span> {</span>
+<span id="cb17-24"><a href="#cb17-24"></a>        create<span class="op">:</span> [{ categoryId<span class="op">:</span> c1<span class="op">.</span><span class="at">id</span> }<span class="op">,</span> { categoryId<span class="op">:</span> c2<span class="op">.</span><span class="at">id</span> }]<span class="op">,</span> <span class="co">// ◀◀ 注目</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a>      }<span class="op">,</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a>    }<span class="op">,</span></span>
+<span id="cb17-27"><a href="#cb17-27"></a>  })<span class="op">;</span></span>
+<span id="cb17-28"><a href="#cb17-28"></a></span>
+<span id="cb17-29"><a href="#cb17-29"></a>  <span class="kw">const</span> p2 <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">post</span><span class="op">.</span><span class="fu">create</span>({</span>
+<span id="cb17-30"><a href="#cb17-30"></a>    data<span class="op">:</span> {</span>
+<span id="cb17-31"><a href="#cb17-31"></a>      title<span class="op">:</span> <span class="st">&quot;投稿2&quot;</span><span class="op">,</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a>      content<span class="op">:</span> <span class="st">&quot;投稿2の本文。&lt;br/&gt;投稿2の本文。投稿2の本文。&quot;</span><span class="op">,</span></span>
+<span id="cb17-33"><a href="#cb17-33"></a>      coverImageURL<span class="op">:</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a>        <span class="st">&quot;https://w1980.blob.core.windows.net/pg3/cover-img-green.jpg&quot;</span><span class="op">,</span></span>
+<span id="cb17-35"><a href="#cb17-35"></a>      categories<span class="op">:</span> {</span>
+<span id="cb17-36"><a href="#cb17-36"></a>        create<span class="op">:</span> [{ categoryId<span class="op">:</span> c2<span class="op">.</span><span class="at">id</span> }<span class="op">,</span> { categoryId<span class="op">:</span> c3<span class="op">.</span><span class="at">id</span> }]<span class="op">,</span> <span class="co">// ◀◀ 注目</span></span>
+<span id="cb17-37"><a href="#cb17-37"></a>      }<span class="op">,</span></span>
+<span id="cb17-38"><a href="#cb17-38"></a>    }<span class="op">,</span></span>
+<span id="cb17-39"><a href="#cb17-39"></a>  })<span class="op">;</span></span>
+<span id="cb17-40"><a href="#cb17-40"></a></span>
+<span id="cb17-41"><a href="#cb17-41"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(p1<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb17-42"><a href="#cb17-42"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(p2<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb17-43"><a href="#cb17-43"></a>}<span class="op">;</span></span>
+<span id="cb17-44"><a href="#cb17-44"></a></span>
+<span id="cb17-45"><a href="#cb17-45"></a><span class="fu">main</span>()</span>
+<span id="cb17-46"><a href="#cb17-46"></a>  <span class="op">.</span><span class="fu">catch</span>((e) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-47"><a href="#cb17-47"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(e)<span class="op">;</span></span>
+<span id="cb17-48"><a href="#cb17-48"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb17-49"><a href="#cb17-49"></a>  })</span>
+<span id="cb17-50"><a href="#cb17-50"></a>  <span class="op">.</span><span class="fu">finally</span>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb17-51"><a href="#cb17-51"></a>    <span class="cf">await</span> prisma<span class="op">.</span><span class="fu">$disconnect</span>()<span class="op">;</span></span>
+<span id="cb17-52"><a href="#cb17-52"></a>  })<span class="op">;</span></span></code></pre></div>
+      <p>上記のプログラム (<code>prisma/seed.ts</code>) は、Next.js
+      からは切り離された<strong>独立したプログラム</strong>になります。</p>
+      <ul>
+      <li><strong>第12行目</strong> ～ <strong>第14行目</strong> : 「カテゴリテーブル」に <span
+      class="masked">3件分</span> のレコードを追加しています。
+      <ul>
+      <li><a href="lecture08.html#schema.prisma-の編集">先ほど編集</a>した
+      <code>schema.prisma</code> の <strong>第30行目</strong>～<strong>第34行目</strong>
+      で定義している <code>id</code> や
+      <code>createdAt</code>、<code>updatedAt</code>、<code>posts</code> については
+      <strong>明示的に値を与えていないこと</strong> に注意してください。</li>
+      <li>詳しいことは省略しますが、<code>id</code> には <code>@default(uuid())</code> 設定により
+      UUIDv4 が自動代入され、<code>createdAt</code> には <code>@default(now())</code>
+      設定により現在時刻が自動代入されます。</li>
+      </ul></li>
+      <li><strong>第17行目</strong> ～ <strong>第39行目</strong> : 「投稿記事テーブル」に <span
+      class="masked">2件分</span> のレコードを追加しています。
+      <ul>
+      <li>投稿記事のカテゴリの設定 (<strong>第24行目</strong>と<strong>第36行目</strong>)
+      では、<code>c1.id</code> や <code>c2.id</code>
+      のように、<strong>カテゴリテーブルにレコードを追加したときの戻り値</strong>
+      (<code>c1</code>、<code>c2</code>、<code>c3</code>)
+      からIDを参照して行なっている点に注意してください。</li>
+      </ul></li>
+      <li>中間テーブルに対しては <span class="masked">明示的にレコードを追加していないこと</span>
+      を確認してください。</li>
+      <li>DBに対する操作 (<code>deleteMany</code> や <code>create</code>) は、すべて PrismaClient
+      (＝<strong>第03行目</strong> で PrismaClientクラス から生成したインスタンス)
+      を通じて行なっていることを確認してください。
+      <ul>
+      <li>「クラス」や「インスタンス」については、昨年度の<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture23.html#オブジェクト指向プログラミング-超々入門">プログラミング1の講義資料</a>を参照してください。</li>
+      </ul></li>
+      </ul>
+      <h3 data-number="3.10.1" id="シーディングコマンドの設定"><span
+      class="header-section-number">3.10.1</span> シーディングコマンドの設定</h3>
+      <p>つづいて <code>package.json</code> を次のように編集してください
+      (<strong>第11行目</strong>から<strong>第13行目</strong>の設定を追加してください)。編集する際は、<strong>第10行目</strong>と<strong>第13行目</strong>の末尾のカンマを忘れないようにしてください。</p>
+      <div class="sourceCode" id="cb18" data-caption="package.json"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">{</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;next-blog-app&quot;</span><span class="fu">,</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1.0&quot;</span><span class="fu">,</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;next dev&quot;</span><span class="fu">,</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;next build&quot;</span><span class="fu">,</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;next start&quot;</span><span class="fu">,</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>    <span class="dt">&quot;lint&quot;</span><span class="fu">:</span> <span class="st">&quot;next lint&quot;</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>  <span class="fu">},</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a>  <span class="dt">&quot;prisma&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>    <span class="dt">&quot;seed&quot;</span><span class="fu">:</span> <span class="st">&quot;ts-node --compiler-options {</span><span class="ch">\&quot;</span><span class="st">module</span><span class="ch">\&quot;</span><span class="st">:</span><span class="ch">\&quot;</span><span class="st">CommonJS</span><span class="ch">\&quot;</span><span class="st">} prisma/seed.ts&quot;</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a>  <span class="fu">},</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a>  <span class="dt">&quot;dependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a>    <span class="dt">&quot;@fortawesome/fontawesome-svg-core&quot;</span><span class="fu">:</span> <span class="st">&quot;^6.6.0&quot;</span><span class="fu">,</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a></span>
+<span id="cb18-17"><a href="#cb18-17"></a>  <span class="er">～</span> <span class="er">以下、省略</span> <span class="er">～</span></span></code></pre></div>
+      <p>以上の設定により、<code>ts-node --compiler-options {"module":"CommonJS"} prisma/seed.ts</code>
+      というシーディングのための長いコマンドが、<code>npx prisma db seed</code>
+      というショートカットで実行できるようになります。</p>
+      <h3 data-number="3.10.2" id="シーディングの実行と結果の確認"><span
+      class="header-section-number">3.10.2</span> シーディングの実行と結果の確認</h3>
+      <p>VSCodeのターミナルから次のコマンドを打ち込んで、<strong>シーディング</strong>
+      (<strong>DBの初期データの生成</strong>) を実行してください。</p>
+      <pre><code>npx prisma db seed</code></pre>
+      <p>Prisma Studio を起動 (<code>npx prisma studio</code> コマンドを実行) して、DB
+      の各テーブルにレコードが追加されていることを確認してください。</p>
+      <figure>
+      <img src="figs/08/prisma_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Prisma Studio では、日時が <span class="masked">ISO8601形式</span>
+      で表示されることを確認してください。また、<a
+      href="lecture06.html#実装の方針">第06回講義</a>で解説したように、末尾の <code>Z</code> は
+      <strong>UTC（協定世界時）</strong> を表すことに注意してください。</p>
+      <figure>
+      <img src="figs/08/prisma_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>各テーブルのレコードは <code>id</code> カラムの値 (ランダムに設定されたUUIDv4の値)
+      で自動的にソートされることを確認してください。</p>
+      <figure>
+      <img src="figs/08/prisma_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><code>prisma/seed.ts</code> では、中間テーブル (<code>PostCategory</code>)
+      にレコードを追加する文を記述していませんが、実際には当該にテーブルに適切なレコードが追加されていることに注意してください。このような中間テーブルに対するレコードの挿入なども
+      Prisma が提供する ORM としての機能となります。</p>
+      <p>以上のように、Prisma Client を利用することで、<strong>SQL文を記述せずに、TypeScript
+      プログラムから DB に対してのCURD操作</strong> (Create、Update、Read、Delete など)
+      が可能になります。</p>
+      <h3 data-number="3.10.3" id="演習-15分"><span class="header-section-number">3.10.3</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i>15分)</h3>
+      <ul>
+      <li><p>初期データとして「<strong>カテゴリ4</strong>」を追加するように <code>seed.ts</code>
+      を編集し、その後、<code>npx prisma db seed</code> を実行してください。そして、Prisma Client
+      から「<strong>カテゴリ4</strong>」が追加されていることを確認してください。</p></li>
+      <li><p>初期データとして「<strong>投稿3</strong>」を追加するように <code>seed.ts</code>
+      を編集し、実行結果を確認してください。「<strong>投稿3</strong>」には「<strong>カテゴリ1</strong>」「<strong>カテゴリ3</strong>」「<strong>カテゴリ4</strong>」を設定してください。</p></li>
+      <li><p>初期データとして「<strong>投稿4</strong>」を追加するように <code>seed.ts</code>
+      を編集し、実行結果を確認してください。「<strong>投稿4</strong>」には、<strong>いずれのカテゴリも設定しない</strong>ようにしてください。</p></li>
+      </ul>
+      <p>どうしても実装できないときは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/08/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p>
+      <h2 data-number="3.11" id="スキーマに変更を加えたときは"><span
+      class="header-section-number">3.11</span> スキーマに変更を加えたときは…</h2>
+      <p>テーブルに新しくカラムを追加したり、カラムの名前を変更するなどの
+      <strong>スキーマの定義に関わる変更</strong> を <code>schema.prisma</code>
+      に行ったときは、以下の処理が必要になります。なお、実行すると、<strong>DBのすべてのレコードとテーブルと消える</strong>
+      ので注意してください。</p>
+      <ol type="1">
+      <li>ターミナルで <code>npm run dev</code> や
+      <code>npx prisma studio</code>を実行中しているときは停止する。</li>
+      <li><code>prisma</code> フォルダのなかの <code>dev.db</code> を削除する。</li>
+      <li>ターミナルから <code>npx prisma db push</code> を実行する。</li>
+      <li>ターミナルから <code>npx prisma generate</code> を実行する。
+      <ul>
+      <li>この処理によって「型」の情報が更新されるので、それが確実に反映されるように<a
+      href="lecture03.html#vscodeの再読み込み">VSCodeの再読み込み</a>を (念のために) 実行する。</li>
+      </ul></li>
+      <li>ターミナルから <code>npx prisma db seed</code> を実行する。</li>
+      </ol>
+      <p>なお、<code>prisma migrate</code> というコマンドを使用すれば <span
+      class="masked">既存のデータを保持したままスキーマの変更を適用することも可能</span>
+      ですが、開発の初期段階では上記の手順の方が確実です。</p>
+      <p><code>prisma migrate</code> の使い方については<a
+      href="https://www.prisma.io/docs/orm/prisma-migrate/getting-started">公式リファレンス</a>や生成AIなどで調べてください。</p>
+      <p>以上で、バックエンドで DB
+      を機能させるための準備が整いました。なお、ここでは、一時的に「SQLite」を使用しますが、最終的には
+      <a href="https://supabase.com/">Supabase</a>
+      というクラウドサービスの「PostgreSQL」に切り替えていきます。</p>
+      <h1 data-number="4" id="バックエンド-ウェブapi-の実装"><span
+      class="header-section-number">4</span> バックエンド (ウェブAPI) の実装</h1>
+      <p>ここからは、Next.js
+      を使って、ブログアプリ関連の「<strong>ウェブAPI</strong>」の機能を実装していきます。つまり、前回講義で取り上げた「<a
+      href="lecture07.html#郵便番号検索apiの組込み">郵便番号検索API</a>」や「<a
+      href="lecture07.html#apiの利用テスト">microCMS</a>」のように、特定のエンドポイント (URL)
+      にHTTPリクエストを送ると、<span class="masked">JSONフォーマットでデータが得られる</span>
+      ような機能を Next.js の枠組みで実装していきます。</p>
+      <p>例えば <code>http://localhost:3000/api/categories</code> というエンドポイントに
+      <strong>HTTPリクエスト (GET)</strong> を送ると、以下のような <strong>HTTP レスポンス</strong>
+      が返ってくるような機能を Next.js で実装していきます。</p>
       <!-- ---------------------------------------- -->
     </main>
 

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title></title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+        
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p></p>
+      <p></p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <p>/* ——- Programming1-2023 ——- */ html { font-family: “M PLUS Rounded 1c”, -apple-system,
+      BlinkMacSystemFont, “Segoe UI”, Helvetica, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI
+      Emoji”, “Segoe UI Symbol”;</p>
+      <p>–code-pg-foreground: #24292e; –code-pg-background: #ebebeb;</p>
+      <p>–code-ln-foreground: #a8a8a8;</p>
+      <p>–code-out-foreground: #ebebeb; –code-out-background: #012456;</p>
+      <p>–main-foreground: #24292e; –main-theme-color: #0366d6; –main-theme-lt-color: #47a4f5;</p>
+      <p>–main-background: #ebebeb;</p>
+      <p>–main-masked-foreground: #888888; –main-masked-background: #ebebeb;
+      –main-masked-bordercolor: #f7e994; }</p>
+      <p>/* ——- 共通 ——- */</p>
+      <p>.markdown-body { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color:
+      var(–main-foreground); line-height: 1.5; word-wrap: break-word; box-sizing: border-box;
+      min-width: 200px; max-width: 980px; margin: 0 auto; padding: 0px 45px; }</p>
+      <p>mjx-container { font-size: 100% !important; }</p>
+      <p><span class="citation" data-cites="media">@media</span> (max-width: 767px) { .markdown-body
+      { padding-left: 15px; padding-right: 15px; } mjx-container { font-size: 85% !important; }
+      }</p>
+      <p>main.markdown-body p { margin-block-start: 0.7em; margin-block-end: 0.7em; text-indent:
+      0.7em; }</p>
+      <p>/* ——- AweSome::本体 ——- */ .markdown-body i.fa-solid { text-indent: 0.15em; }</p>
+      <p>/* ——- ヘッダーとフッター ——- */ header.markdown-body { padding-top: 0px; padding-bottom:
+      0px; }</p>
+      <p>header.markdown-body p { text-align: right; line-height: 1; margin-block-start: 0.3em;
+      margin-block-end: 0.3em; }</p>
+      <p>footer.markdown-body { padding-top: 0px; padding-bottom: 0px; }</p>
+      <p>footer.markdown-body p { text-align: right; }</p>
+      <p>/* ——- 水平線 ——- */ .markdown-body hr { margin: 1.5em 0em; }</p>
+      <p>/* ——- 強調 ——- */</p>
+      <p>.markdown-body strong { color: var(–main-theme-color); }</p>
+      <p>.markdown-body em { font-style: normal; font-weight: normal; padding: 0 0.4em; color:
+      var(–main-background); border-radius: 5px; border-bottom: 0; background-color:
+      var(–main-theme-color); }</p>
+      <p>.markdown-body u { text-decoration: none; background: linear-gradient(transparent 72%,
+      #b8e3ff 28%); }</p>
+      <p>/* ——- 見出し ——- */</p>
+      <p>.markdown-body h1 { position: relative; padding: 0 0 0 1.6em; border-bottom: 2px solid;
+      color: var(–main-theme-color); }</p>
+      <p>.markdown-body h1::before { position: absolute; left: 0; font-family: “Font Awesome 5
+      Free”; content: “21”; color: var(–main-theme-color); }</p>
+      <p>.markdown-body h2 { border-bottom: 2px solid; }</p>
+      <p>.markdown-body h3 { border-bottom: 2px solid; padding-left: 0.25em; font-size: 1.3em; }</p>
+      <p>.markdown-body h3 span { display: none; }</p>
+      <p>h1 .header-section-number, h2 .header-section-number { padding-right: 0.5em; }</p>
+      <p>/* ——- 表 ——- */</p>
+      <p>.markdown-body table { border-collapse: collapse; border: 1.5px solid #312e81; margin:
+      0.7em 0.5em; }</p>
+      <p>.markdown-body table th, table td { border: 1px solid #312e81; padding: 0em 0.5em; }</p>
+      <p>.markdown-body table th { color: #1e40af; background-color: #eef2ff; border-bottom: 1.5px
+      solid #312e81; padding: 0.25em 0.5em; }</p>
+      <p>/* ——- 図 ——- */</p>
+      <p>.markdown-body figure { text-align: center; margin-inline-start: 0; margin-inline-end: 0;
+      }</p>
+      <p>.markdown-body figcaption { display: none; }</p>
+      <p>.markdown-body figure img { max-width: 100%; height: auto; cursor: pointer; pointer-events:
+      none; }</p>
+      <p>/* ——- リンク ——- */</p>
+      <p>.markdown-body a { font-weight: bold; text-decoration: none; color: var(–main-theme-color);
+      margin: 0 0.25em; cursor: pointer; border-bottom: 1.5px dashed; transition: background-color
+      0.5s; }</p>
+      <p>.markdown-body a:hover { color: var(–main-theme-lt-color); }</p>
+      <p>/* ——- 引用 ——- */</p>
+      <p>.markdown-body blockquote { margin-left: 1em; margin-right: 1em; padding: 0 0 0 1em; color:
+      #6a737d; border-left: 0.25em solid #dfe2e5; margin-block-start: 0.7em; margin-block-end:
+      0.7em; }</p>
+      <p>.markdown-body blockquote p { text-indent: 0; }</p>
+      <p>.markdown-body blockquote u { background: none; border-bottom: 2px solid; border-color:
+      #d9d9d9; }</p>
+      <p>.markdown-body blockquote &gt; :last-child { margin-bottom: 0; } .markdown-body blockquote
+      &gt; :first-child { margin-top: 0; }</p>
+      <p>/* ——- プログラムコード ——- */</p>
+      <p>div.sourceCode { overflow-x: auto; background-color: var(–code-pg-background);
+      border-radius: 10px; margin-block-start: 0.7em; margin-block-end: 0.7em; counter-reset:
+      pg-line; }</p>
+      <p>div.sourceCode[data-caption]::before { font-family: “SFMono-Regular”, Consolas, “Liberation
+      Mono”, Menlo, Courier, monospace; display: block; padding-left: 20px; background:
+      var(–code-pg-foreground); color: var(–code-pg-background); content: attr(data-caption); }</p>
+      <p>/* ——- プログラムコード::行番号 ——- */</p>
+      <p>.markdown-body code &gt; span &gt; a { margin-left: 0; margin-right: 5px; }</p>
+      <p>.numberLines code &gt; span &gt; a { color: var(–code-ln-foreground); margin-left: 0;
+      margin-right: 10px; font-weight: normal; border: none; cursor: auto; }</p>
+      <p>.numberLines code &gt; span &gt; a::before { counter-increment: pg-line; content:
+      counter(pg-line, decimal-leading-zero); }</p>
+      <p><span class="citation" data-cites="media">@media</span> (max-width: 767px) { .markdown-body
+      code &gt; span &gt; a { display: none; } }</p>
+      <p>/* ——- AweSome::本体 ——- <em>/ /</em> .markdown-body i.fa-solid { text-indent: 0.15em; }
+      */</p>
+      <p>/* ——- プログラムコード::本体 ——- */</p>
+      <p>.markdown-body pre { overflow-x: auto; background: var(–code-out-background); padding-top:
+      10px; padding-bottom: 10px; padding-left: 12px; padding-right: 16px; margin: 0; overflow:
+      auto; line-height: 1.2; word-wrap: normal; border-radius: 10px; }</p>
+      <p>.markdown-body pre.sourceCode { background-color: transparent; border-radius: 0; }</p>
+      <p>main.markdown-body &gt; pre { margin-block-start: 0.7em; margin-block-end: 0.7em; }</p>
+      <p>div.note &gt; pre { margin-block-start: 0.7em; margin-block-end: 0.7em; }</p>
+      <p>/* ——- プログラムコード::文字 ——- */</p>
+      <p>.markdown-body code { font-weight: normal; font-family: “SFMono-Regular”, Consolas,
+      “Liberation Mono”, Menlo, Courier, monospace; padding: 0.15em 0.4em; font-size: 100%;
+      word-break: normal; color: var(–code-pg-foreground); background-color:
+      var(–code-pg-background); border-radius: 5px; white-space: pre-wrap; overflow-wrap:
+      break-word; }</p>
+      <p>.markdown-body pre code { color: var(–code-pg-background); background: transparent;
+      padding: 0; border-radius: 0; }</p>
+      <p>.markdown-body pre.sourceCode code { color: var(–code-pg-foreground); }</p>
+      <p>/* ——- マスク ——- */</p>
+      <p>.markdown-body span.masked { font-weight: bold; color: transparent; background-color:
+      #fff57c; padding: 0.05em 0.5em 0.05em 0.3em; border-radius: 8px; border: solid 2px #fff57c;
+      cursor: pointer; }</p>
+      <p>.markdown-body span.masked::before { font-family: “Font Awesome 5 Free”; content: “8e”;
+      margin-right: 0.4em; color: var(–main-masked-foreground); }</p>
+      <p>.markdown-body span.masked.open { color: var(–main-theme-color); background-color:
+      transparent; border: solid 2px var(–main-masked-background); }</p>
+      <p>.markdown-body span.masked.open::before { color: #bbbbbb; background-color: transparent;
+      }</p>
+      <p>.markdown-body .masked code { color: transparent; background-color: transparent; padding:
+      0.05em 0.4em; }</p>
+      <p>.markdown-body .masked.open code { color: var(–code-pg-foreground); }</p>
+      <p>/* ——- 箇条書き ——- */</p>
+      <p>.markdown-body ul { list-style: none; padding: 0; margin-block-start: 0.7em;
+      margin-block-end: 0.7em; margin: 0 0 0.7em 0; }</p>
+      <p>.markdown-body li ul { margin: 0 0 0.7em -0.5em; padding: 0; }</p>
+      <p>.markdown-body ul p { margin-block-start: 0.2em; margin-block-end: 0.2em; }</p>
+      <p>.markdown-body ul li { position: relative; padding: 0.35em 0 0 1.4em; margin: 0;
+      text-indent: 0.5em; }</p>
+      <p>.markdown-body ul li::before { position: absolute; left: 0; font-family: “Font Awesome 5
+      Free”; font-weight: 900; content: “b0”; color: var(–main-theme-lt-color); }</p>
+      <p>.markdown-body ul li ul li::before { padding-top: 3px; font-size: 85%; }</p>
+      <p>/* ——- ノート共通 ——- */</p>
+      <p>.markdown-body div.note { border-radius: 10px; padding: 0 15px; margin: 0.9em 0; }</p>
+      <p>.note p:first-child::before { font-family: “Font Awesome 5 Free”; font-weight: 900;
+      margin-right: 0.5em; }</p>
+      <p>.note p:first-child { text-indent: 0; }</p>
+      <p>/* ——- ノート Type-（注意事項）——- */</p>
+      <p>.markdown-body div.type-caution { border: 2px solid #ff7783; background: #ffe5e5; }</p>
+      <p>.type-caution p:first-child::before { content: “71”; color: #ff3d57; }</p>
+      <p>.type-caution strong { color: #ff3d57; }</p>
+      <p>.type-caution code { background: #ffafb3; }</p>
+      <p>.type-tips ul li::before { color: #ff3d57; }</p>
+      <p>/* ——- ノート Type-senior（上級者）——- */</p>
+      <p>.markdown-body div.type-senior { border: 2px solid #b688da; /* 3 <em>/ background: #ffebff;
+      /</em> 1 */ }</p>
+      <p>.type-senior p:first-child::before { content: “e2”; color: #855aa8; /* 4 */ }</p>
+      <p>.type-senior strong { color: #855aa8; /* 4 */ }</p>
+      <p>.type-senior code { background: #e9b9ff; /* 2 */ }</p>
+      <p>.type-senior ul li::before { color: #855aa8; }</p>
+      <p>/* ——- ノート Type-tips——- */</p>
+      <p>.markdown-body div.type-tips { border: 2px solid #bd9f00; /* 3 <em>/ background: #ffffbc;
+      /</em> 1 */ }</p>
+      <p>.type-tips p:first-child::before { content: “ad”; color: #887100; /* 4 */ }</p>
+      <p>.type-tips strong { color: #887100; /* 4 */ }</p>
+      <p>.type-tips code { background: #f4d002; /* 2 */ }</p>
+      <p>.type-tips ul li::before { color: #887100; }</p>
+      <p>/* ——- プログラムコードの装飾 ——- */</p>
+      <p>/* 演算子 */ code span.op { font-weight: bold; }</p>
+      <p>/* インポート */ code span.im { color: #963fac; font-weight: bold; }</p>
+      <p>/* キーワード */ code span.kw { color: #316fa3; font-weight: bold; }</p>
+      <p>/* コメント */ code span.co { color: #098156; }</p>
+      <p>/* 文字列 */ code span.st { color: #a31515; }</p>
+      <p>/* 整数 */ code span.dv { color: #098156; }</p>
+      <p>/* 小数 */ code span.fl { color: #098156; }</p>
+      <p>/* None */ code span.va { color: #316fa3; }</p>
+      <p>/* 小数 */ code span.cf { color: #316fa3; font-weight: bold; }</p>
+      <p>/* MD: 見出し */ code span.fu { color: #316fa3; font-weight: bold; }</p>
+      <p>/* MD: 箇条書き */ code span.ss { color: #098156; font-weight: bold; }</p>
+      <p>/* MD: コード */ code span.in { color: #a31515; font-weight: bold; }</p>
+      <p>/* ——- ナビゲーション ——- */</p>
+      <p>#g-nav { position: fixed; z-index: 999; top: -480%; left: 0; width: 100%; height: 100vh;
+      background: rgba(0, 0, 0, 0.8); transition: all 0.4s; }</p>
+      <p>#g-nav.panelactive { top: 0; }</p>
+      <p>#g-nav.panelactive #g-nav-list { /* position: fixed; */ z-index: 999; width: 100%; height:
+      100vh; overflow: auto; -webkit-overflow-scrolling: touch; }</p>
+      <p>#g-nav li a { color: #cccccc; text-decoration: none; padding: 8px; font-weight: bold;
+      display: block; }</p>
+      <p>#g-nav li a:hover { color: white; text-decoration: underline; }</p>
+      <p>#g-nav ul { z-index: 999; margin-left: 0; padding-left: 0; }</p>
+      <p>#g-nav li { list-style: none; text-align: center; }</p>
+      <p>#g-nav ul &gt; li { font-size: 24px; }</p>
+      <p>#g-nav ul &gt; li &gt; ul &gt; li { font-size: 16px; }</p>
+      <p>#g-nav ul &gt; li &gt; ul &gt; li &gt; ul &gt; li { font-size: 16px; }</p>
+      <p>/* ——- ナビゲーションボタン ——- */</p>
+      <p>.openbtn-div { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color:
+      var(–main-foreground); line-height: 1.5; word-wrap: break-word; box-sizing: border-box;
+      min-width: 200px; max-width: 980px; margin: 0 auto; padding: 0px 45px; }</p>
+      <p>.openbtn { position: fixed; z-index: 9999; top: 10px; right: 10px; cursor: pointer; width:
+      50px; height: 50px; background: rgba(48, 104, 215, 0.8); border-radius: 5px; }</p>
+      <p>.openbtn span { display: inline-block; transition: all 0.4s; position: absolute; left:
+      14px; height: 2px; border-radius: 5px; background: white; width: 45%; }</p>
+      <p>.openbtn span:nth-of-type(1) { top: 13px; }</p>
+      <p>.openbtn span:nth-of-type(2) { top: 19px; }</p>
+      <p>.openbtn span:nth-of-type(3) { top: 25px; }</p>
+      <p>.openbtn span:nth-of-type(3)::after { content: “Index”; position: absolute; top: 5px; left:
+      -4px; color: #fff; font-size: 0.6rem; text-transform: uppercase; }</p>
+      <p>.openbtn.active span:nth-of-type(1) { top: 14px; left: 18px; transform: translateY(6px)
+      rotate(-45deg); width: 30%; }</p>
+      <p>.openbtn.active span:nth-of-type(2) { opacity: 0; }</p>
+      <p>.openbtn.active span:nth-of-type(3) { top: 26px; left: 18px; transform: translateY(-6px)
+      rotate(45deg); width: 30%; }</p>
+      <p>.openbtn.active span:nth-of-type(3)::after { content: “Close”; transform: translateY(0)
+      rotate(-45deg); top: 5px; left: 4px; }</p>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2024/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>

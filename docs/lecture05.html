@@ -1848,7 +1848,13 @@ class="toc-section-number">12</span> 課題1</a></li>
       </figure>
       <h2 data-number="11.2" id="初回設定"><span
       class="header-section-number">11.2</span> 初回設定</h2>
-      <p>初回のみ必要な処理となります。VSCodeのターミナルから順番に実行してください。</p>
+      <p>初回のみ必要な処理となります。</p>
+      <div class="note type-caution">
+      <p>注意: 必ず mainブランチの <strong>コミットとプッシュ (同期)
+      を完了させた状態</strong>
+      で、以下の処理を実行してください。mainブランチのなかに、未保存のファイルや、コミットしていないファイルが存在する状態で以下の処理を実行すると、予期せぬ問題が発生します。</p>
+      </div>
+      <p>VSCodeのターミナルから順番に実行してください。</p>
       <pre><code>git checkout --orphan gh-pages
 git rm -rf .
 git commit --allow-empty -m &quot;Initial gh-pages commit&quot;
@@ -1857,6 +1863,10 @@ git checkout main</code></pre>
       <p>以上は、<strong>GitHub Pages
       でウェブサイトをホストするための準備作業</strong>
       として一般的に使用される一連のコマンドです。詳細について知りたいときは、生成AIを利用してください。</p>
+      <p>なお、<code>git rm -rf .</code>
+      によって<strong>一時的に全ファイルが消去されますが</strong>、
+      <code>git checkout main</code> で
+      mainブランチに戻ると復活するので安心してください。</p>
       <h2 data-number="11.3" id="github-pages-の設定"><span
       class="header-section-number">11.3</span> GitHub Pages の設定</h2>
       <p>ウェブブラウザで「Todoアプリ」のリポジトリに移動して、<strong>以下のように設定されていることを確認</strong>してください。もし、自動的に設定されていない場合は、図のように設定してください。</p>
@@ -1981,7 +1991,11 @@ git checkout main</code></pre>
       <p>特にエラーがなければ、以下のコマンドを実行してください。</p>
       <pre><code>npm run deploy</code></pre>
       <p>以下のように「<strong>Published</strong>」と出力されたらデプロイが
-      <strong>成功</strong>🎉 (完了) です。</p>
+      <strong>成功</strong>🎉 (完了)
+      です。以降、ソースファイルのコミットとプッシュにあわせて、適宜、上記の
+      <code>npm run deploy</code> でデプロイを実行してください。
+      <strong>デプロイ操作をしない限り、ソースコードをコミット＆プッシュしても、GitHub
+      Pages にホストしているTodoアプリは更新されません</strong>。</p>
       <pre><code>PS C:\Users\xxxx\Documents\react-todo-app&gt; npm run deploy
 
 &gt; react-todo-app@0.0.0 predeploy
