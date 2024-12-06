@@ -43,8 +43,12 @@
       <div id="g-nav-list">
         <!-- ---------------------------------------- -->
          <ul>
-<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span>
-連絡・概要</a></li>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span> 連絡・概要</a>
+<ul>
+<li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1.1</span> 連絡</a></li>
+<li><a href="#今後の授業の流れ" id="toc-今後の授業の流れ"><span
+class="toc-section-number">1.2</span> 今後の授業の流れ</a></li>
+</ul></li>
 <li><a href="#データの永続化" id="toc-データの永続化"><span class="toc-section-number">2</span>
 データの永続化</a></li>
 <li><a href="#データベースについて" id="toc-データベースについて"><span
@@ -72,7 +76,24 @@ class="toc-section-number">3.10</span> DBの初期データの作成</a></li>
 class="toc-section-number">3.11</span> スキーマに変更を加えたときは…</a></li>
 </ul></li>
 <li><a href="#バックエンド-ウェブapi-の実装" id="toc-バックエンド-ウェブapi-の実装"><span
-class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装</a></li>
+class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装</a>
+<ul>
+<li><a href="#準備" id="toc-準備"><span class="toc-section-number">4.1</span> 準備</a></li>
+<li><a href="#カテゴリの一覧を取得するウェブapiの実装"
+id="toc-カテゴリの一覧を取得するウェブapiの実装"><span class="toc-section-number">4.2</span>
+カテゴリの一覧を取得するウェブAPIの実装</a></li>
+<li><a href="#thunder-client-を使ったapiのテスト" id="toc-thunder-client-を使ったapiのテスト"><span
+class="toc-section-number">4.3</span> Thunder Client を使ったAPIのテスト</a></li>
+<li><a href="#カテゴリを取得するウェブapiの実装" id="toc-カテゴリを取得するウェブapiの実装"><span
+class="toc-section-number">4.4</span> カテゴリを取得するウェブAPIの実装</a></li>
+<li><a href="#カテゴリを追加するウェブapiの実装-コードの解説"
+id="toc-カテゴリを追加するウェブapiの実装-コードの解説"><span class="toc-section-number">4.5</span>
+カテゴリを追加するウェブAPIの実装 (コードの解説)</a></li>
+<li><a href="#カテゴリを削除するウェブapiの実装" id="toc-カテゴリを削除するウェブapiの実装"><span
+class="toc-section-number">4.6</span> カテゴリを削除するウェブAPIの実装</a></li>
+<li><a href="#カテゴリを編集するウェブapiの実装" id="toc-カテゴリを編集するウェブapiの実装"><span
+class="toc-section-number">4.7</span> カテゴリを編集するウェブAPIの実装</a></li>
+</ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -86,6 +107,7 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
       <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <h2 data-number="1.1" id="連絡"><span class="header-section-number">1.1</span> 連絡</h2>
       <p>後期中間試験、お疲れ様でした。後期中間成績は <strong><em>小テスト➊～➌</em></strong>
       を<strong>20%</strong>、<a href="lecture05.html#課題1">課題1</a>(Todoアプリ)を
       <strong>80%</strong> の割合で総合して評価します。課題1は、README.md
@@ -96,7 +118,9 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       href="https://classroom.google.com/c/NzA2ODk3OTU3MzYy/m/NzM1OTkzNTg4NzE5/details">こちら</a>です
       (学内ONLY)</li>
       </ul>
-      <p>さて、前回講義では<a
+      <h2 data-number="1.2" id="今後の授業の流れ"><span class="header-section-number">1.2</span>
+      今後の授業の流れ</h2>
+      <p>前回講義では<a
       href="https://microcms.io/">microCMS</a>を使ってブログアプリの「<strong>バックエンド</strong>」を構築・構成しました。ここからの授業では、<strong><em>Next.js</em></strong>
       を使って<strong>自前でバックエンドを実装</strong>していきます。</p>
       <p>具体的には、<strong>データ永続化</strong>、ウェブAPI、ユーザ認証
@@ -104,7 +128,8 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       (フロントエンドによるフォームの実装も含む)</strong> などの実装を進めていきます。まずは、<span
       class="masked">リレーショナルデータベース (RDB)</span>
       を使ったバックエンドサイドの「<strong>データの永続化</strong>」からはじめていきます。</p>
-      <p>ここから、また一段と難易度が高くなりますが、頑張っていきましょう。</p>
+      <p>ここから、また一段と難易度が高くなりますが、頑張っていきましょう🔥なお、繰り返しになりますが、本科目は学修単位科目であり、<strong>1回の授業あたり「4時間相当の授業時間外学習」をすることを前提</strong>
+      としたボリュームと展開速度となっています。1週間の間隔をあけての90分の取り組みでは理解・習得できるものではないので、適宜、復習に努めてください。</p>
       <p>「バックエンド」や「データの永続化」という概念は既に解説済みですが、もし、理解に自信がない場合は生成AIを使って再確認しておいてください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
@@ -115,7 +140,7 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       <p>ウェブアプリ開発の文脈における「データの永続化」とは何ですか。</p>
       </blockquote>
       <div class="note type-tips">
-      <p>リレーショナルデータベース (RDB)
+      <p><strong>リレーショナルデータベース (RDB)</strong>
       については、2年次の「情報2」の第13回と第14回でも取り上げています。講義資料と教科書
       (キタミ式ITパスポート) の p.160 ～ p.191
       もあわせて復習しておくことをお勧めします。理論を含めた専門的な内容については、4年生の後期開講の
@@ -127,15 +152,15 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       href="lecture05.html">第05回講義</a>のなかで取り組んだ「Todoアプリの開発」では、ウェブブラウザの機能である<a
       href="lecture05.html#localstorageを利用したデータの永続化">ローカルストレージ</a>(Window.localStorage
       API)
-      を使用して「データの永続化」を実装しました。つまり、フロントエンドサイドでデータベースのデータの永続化を行なっていました。</p>
+      を使用して「データの永続化」を実装しました。つまり、フロントエンドでデータの永続化を行なっていました。</p>
       <p>しかし、ローカルストレージは <span
       class="masked">ブラウザが管理する領域にデータを保存する方式</span>
-      であったため、それを利用したTodoアプリでは「<strong>PCから登録したタスクを、スマートフォンから確認する</strong>」といった使い方はできませんでした。</p>
+      であるため、それを利用したTodoアプリでは「<strong>PCから登録したタスクを、スマートフォンから確認する</strong>」といった使い方はできませんでした😭</p>
       <p>また、同じ PC
-      からアクセスした場合でも「Chromeを使ったとき」と「Edgeを使ったとき」でデータを共有することもできませんでした。本来「<strong>インターネットに接続可能な環境であればデバイスや場所を選ばずに利用できる</strong>」というのがウェブアプリのメリットなのですが、ローカルストレージを使ったデータの永続化では、残念ながらこのメリットを活かすことはできませんでした。</p>
+      からアクセスしても「Chromeを使ったとき」と「Edgeを使ったとき」でデータを共有することができませんでした。本来「<strong>インターネットに接続可能な環境であればデバイスや場所を選ばずに利用できる</strong>」というのがウェブアプリのメリットなのですが、ローカルストレージを使ったデータの永続化では、残念ながらこのメリットを活かすことはできませんでした。</p>
       <p>このようなことから、一般的なウェブアプリでは <span
-      class="masked">バックエンドに配置されるデータベースを使ったデータの永続化</span>
-      が採用されます。この方式であれば、先の問題の解決に加えて、新たに次のようなメリットが得られます。</p>
+      class="masked">バックエンドに配置したデータベースなど使ってデータの永続化</span>
+      が行なわれます。この方式であれば、先の問題の解決に加えて、次のようなメリットが得られます。</p>
       <p>第一に、<strong>複数のユーザでデータを共有できるようになります</strong>。例えば、チームでタスク
       (Todo)
       を管理する場合、メンバー全員が同じタスクリストを参照し、更新内容をリアルタイムで共有することができます。</p>
@@ -145,17 +170,17 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       <strong>バックアップ</strong>
       などの堅牢な仕組みによってデータの消失を防ぐことも可能になります。</p>
       <p>また、(リレーショナルデータベースとは別の仕組みになりますが)
-      オブジェクトストレージ関連のウェブサービス (<a
+      <strong>オブジェクトストレージ関連のウェブサービス</strong> (<a
       href="https://www.google.com/search?q=Amazon+S3とは">Amazon S3</a>や Azure Blob Storage、GCP
       Cloud Storage)
       を利用すれば画像、音声、動画など任意のバイナリデータを扱うことも可能になります。</p>
-      <p>ここからの「ブログアプリ開発」では、以上のメリットを活かすために、バックエンドにおいて<strong>リレーショナルデータベース
+      <p>ここからの「ブログアプリ開発」では、以上のメリットを活かすために、バックエンドで<strong>リレーショナルデータベース
       (RDB) をデータを永続化する機能</strong>を実装していきます。</p>
       <h3 data-number="2.0.1" id="定着確認"><span class="header-section-number">2.0.1</span>
       定着確認</h3>
       <ul>
       <li>Window.localStorage API
-      は「ウェブサーバ」と「ウェブブラウザ」のどちらで提供される機能であるか答えよ。
+      は「ウェブサーバ」と「ウェブブラウザ」のどちらで提供される機能か答えよ。
       <ul>
       <li><strong>答え</strong>: <span class="masked">ウェブブラウザ</span></li>
       </ul></li>
@@ -168,9 +193,9 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       <h1 data-number="3" id="データベースについて"><span class="header-section-number">3</span>
       データベースについて</h1>
       <p>データベースの<strong>アーキテクチャ</strong> (内部の仕組み/データの整理方法)
-      は、大きく2つに分けると「<strong>RDB
-      (リレーショナルデータベース)</strong>」と「<strong>NoSQL</strong>」という分類になります。</p>
-      <p>ここでのブログアプリ開発には、<strong>リレーショナルデータベース</strong>
+      は、大きく分けると「<strong>RDB
+      (リレーショナルデータベース)</strong>」と「<strong>NoSQL</strong>」の2つに分類されます。</p>
+      <p>ここで取り組む「ブログアプリの開発」には、<strong>リレーショナルデータベース</strong>
       を利用していきます。</p>
       <h2 data-number="3.1" id="nosql"><span class="header-section-number">3.1</span> NoSQL</h2>
       <p><strong>NoSQL</strong> (ノーエスキューエル)
@@ -208,20 +233,19 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       という属性を持っています。このようにドキュメント指向DBでは <strong>レコード (データ)
       ごとに異なる項目や構造を持たせること</strong> が可能となっています。また <span
       class="masked">配列や階層構造 (ネスト構造) のデータ</span>
-      も柔軟に格納することも大きな特徴となっています。</p>
-      <p>さらに、ほとんどのドキュメント指向DBは <strong>JSON形式 (JavaScript Object Notation
+      が柔軟に格納できることも大きな特徴となっています。</p>
+      <p>さらに、ほとんどのドキュメント指向DBが <strong>JSON形式 (JavaScript Object Notation
       形式)</strong> / BSON に対応しており、JavaScript / TypeScript
-      との親和性が高く、ウェブ開発においても採用されることが増えています。その場合、フロントエンドからバックエンドまで一貫してJSON形式でデータをやり取りできるため、<span
+      との親和性が高く、ウェブアプリ開発で採用されることが増えています。その場合、<strong>フロントエンドからバックエンドまで一貫してJSON形式でデータをやり取りできる</strong>ため、<span
       class="masked">データの変換作業が最小限で済む</span> というメリットがあります。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
-      <p>ドキュメント指向DBの文脈において「BSON」について解説してください。</p>
+      <p>ドキュメント指向データベースの文脈において「BSON」について解説してください。</p>
       </blockquote>
-      <p>一方で、後述の RDB では、<strong>同じテーブル (表) に格納する全てのレコードは共通のカラム
-      (列)</strong> を持つことが要求されます。さらに、そのテーブルのスキーマ
+      <p>一方で、後述の RDB では、<strong>同じテーブル (表) に格納する全てのレコードは「共通のカラム
+      (列)」</strong> を持つことが要求されます。さらに、そのテーブルのスキーマ
       (カラムの名前、データ型、値の制約など) は <span
-      class="masked">レコードを登録する前に設計しておかなければならない</span>
-      という原則があります。</p>
+      class="masked">レコードを登録する前に設計しておく必要がある</span> という原則があります。</p>
       <p>ドキュメント指向DBの代表的なプロダクトとしては<a
       href="https://www.google.com/search?q=MongoDBとは">MongoDB</a>(モンゴディービー) や<a
       href="https://www.google.com/search?q=CouchDBとは">CouchDB</a>(カウチディービー)
@@ -230,10 +254,11 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       Firebase</a>や<a href="https://www.google.com/search?q=Amazon%20DynamoDBとは">Amazon
       DynamoDB</a>、<a href="https://www.google.com/search?q=MongoDB%20Atlas">MongoDB
       Atlas</a>などのクラウドサービスがあり、様々なモバイルアプリやウェブサービスにおいて利用されています。</p>
-      <p>この他、NoSQLとしては「キーバリュー型DB」や「グラフ型DB」などのデータベースも存在します。興味がある学生は、生成AIやウェブ検索を利用して概要を把握しておいてください。</p>
+      <p>この他、NoSQLとしては「<strong>キーバリューストア型DB</strong>」や「<strong>グラフ型DB
+      (ネットワーク型DB)</strong>」などのデータベースも存在します。興味がある学生は、生成AIやウェブ検索を利用して概要を把握しておいてください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
-      <p>ドキュメント指向DB、キーバリュー型DB、グラフ型DBの概要を説明してください。</p>
+      <p>ドキュメント指向DB、キーバリューストア型DB、グラフ型DBの概要を説明してください。</p>
       </blockquote>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
@@ -280,9 +305,10 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       <blockquote>
       <p>プログラム開発者の観点では、オブジェクトデータの永続化が直接的に可能なドキュメント指向DBのほうが、RDBと比較してストレージとしてのメリットが大きいように考えます。しかし、実際にはRDBが採用されることが多いのは、どのような理由か解説してください。</p>
       </blockquote>
-      <p>例えば、JavaScript/TypeScriptで、次のようなオブジェクトデータを扱っているとします。このデータでは「カテゴリ」に関する情報が
-      <strong>階層的な構造を持ち、その要素数が可変</strong>
-      (2個のカテゴリをもつ場合もあれば、3個のカテゴリを持つ場合もある構造) となっています。</p>
+      <p>例えば、JavaScript/TypeScriptで、次のようなオブジェクトデータを扱っているとします。このデータでは、<strong>第7行目</strong>～<strong>第11行目</strong>のように「カテゴリ」に関する情報が
+      <strong>階層的な構造を持ち、その要素数が可変</strong> (＝<span
+      class="masked">例えば、2個のカテゴリをもつ場合もあれば、3個のカテゴリを持つ場合もある構造</span>)
+      となっています。</p>
       <div class="sourceCode" id="cb3"
       data-caption="階層構造および可変長配列を持つオブジェクトデータの例"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>[</span>
@@ -394,7 +420,7 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       </tr>
       </tbody>
       </table>
-      <p>このテーブル設計において「<strong>posts_categoriesテーブル</strong>」は橋渡し的な役割を果たしています。このような<strong>複数のテーブルの紐付け</strong>をするためのテーブルを「中間テーブル」「Join
+      <p>このテーブル設計において「<strong>posts_categoriesテーブル</strong>」は橋渡し的な役割を果たしています。このような<strong>複数のテーブルの「紐付け」を行なうテーブル</strong>を「中間テーブル」「Join
       Table」「Junction
       Table」と言います。<strong>1つの投稿記事が複数のカテゴリを持ち</strong>、なおかつ、<strong>1つのカテゴリが複数の投稿記事に属する</strong>
       という <span class="masked">多対多 (N:N)</span>
@@ -405,17 +431,17 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       <p>RDBにおける「中間テーブル」や「多対多 (N:N)」の概念については「<a
       href="https://qiita.com/ramuneru/items/db43589551dd0c00fef9">やさしい図解で学ぶ 中間テーブル
       多対多
-      概念編</a>」などを参照してください。詳しくは、4年生の「データベース工学」で学びます。</p>
+      概念編</a>」などを参照してください。詳しくは、4年生後期開講の「<strong>データベース工学</strong>」で学びます。</p>
       </div>
-      <p>このように適切に正規化されたRDBでは、例えば <code>c-001</code>
+      <p>このように適切に正規化されたRDBでは、例えば、カテゴリ <code>c-001</code>
       の「<strong>プログラミング</strong>」という名前を「<strong>コーディング</strong>」に変更したいとき、<span
       class="masked">categoriesテーブルのなかの1件のレコードを更新するだけ</span>
-      で操作を完了できるという大きなメリットがあります。</p>
-      <p>一方で、RDBを使用すると「プログラムからRDBにデータを保存するとき」と「RDBからプログラムにデータを読み込むとき」に複雑な変換処理が必要となります。具体的には、データを保存するときには
+      で完了するという大きなメリットがあります。</p>
+      <p>一方で、RDBを使用すると「プログラムからRDBにデータを保存するとき」と「RDBからプログラムにデータを読み込むとき」に<strong>煩雑な変換処理</strong>が必要となります。具体的には、データを保存するときには
       <span class="masked">オブジェクトの内容を、各テーブルに記録するようなクエリ (SQL文)
-      を作成して、RDBに向けて発行する必要</span>
-      があります。読み込む際には、<strong>各テーブルから必要なデータを抽出するためのクエリ (SQL文)
-      を作成してRDBに発行し、その実行結果 (平坦化されたレコードの配列)
+      を作成して、それをRDBに発行する必要</span>
+      があります。逆に、読み込む際には、<strong>各テーブルから必要なデータを抽出するためのクエリ
+      (SQL文) を作成してRDBに発行し、その実行結果 (平坦化されたレコードの配列)
       を元の階層構造を持つオブジェクト形式に再構築</strong>する必要があります。</p>
       <div class="note type-tips">
       <p>SQL (エス・キュー・エル: Structured Query Language) は、RDB に対する
@@ -429,37 +455,35 @@ class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装<
       <p>O/Rインピーダンスミスマッチに関する質問です。現在、TypeScriptを使ってブログアプリ（ブログ記事とカテゴリがN:Nの関係）を開発しています。先生から、RDBから取得したデータは「平坦化されたレコードの配列」であるため、それを元の「階層構造を持つオブジェクト形式」に再構築する必要がある、と言われました。このことについて具体的なイメージがつかめないので解説してください。変換のプログラムを知りたいのではなく、それぞれのデータ構造と変換のイメージを把握したいです。</p>
       </blockquote>
       <h2 data-number="3.3" id="orm"><span class="header-section-number">3.3</span> ORM</h2>
-      <p>O/Rインピーダンス・ミスマッチを解決するための概念・技術に <strong>Object-Relational Mapping
-      (ORM)</strong>
-      というものがあります。これは、オブジェクト指向プログラミングにおける「オブジェクトモデル」と、RDBにおける「リレーショナルモデル」の間の
-      <strong>溝を埋めるための</strong> (<strong>違いを吸収するための</strong>)
-      設計パターンとなります。</p>
+      <p>O/Rインピーダンス・ミスマッチを解決するための概念・技術として <strong>Object-Relational
+      Mapping (ORM)</strong>
+      というものがあります。これは、オブジェクト指向プログラミングにおける「オブジェクトモデル」と、RDBにおける「リレーショナルモデル」の間の<strong>「溝」を埋めるための</strong>
+      (<strong>違いを吸収するための</strong>) 設計パターンとなります。</p>
       <p>この <strong>Object-Relational Mapping</strong> を実装したツール/ライブラリは
       <strong>Object-Relational Mapper（ORM）</strong>
       と呼ばれ、開発者がRDBを直接意識することなく（つまり、<strong>SQL文でクエリを記述することなく</strong>）、プログラミング言語の
       <span class="masked">ネイティブなオブジェクトとしてデータを扱うことを可能</span>
       にします。</p>
-      <p>TypeScript/JavaScript では Prisma (プリズマ) という ORM
-      があり、広く使われています。ここでのブログアプリ開発でも、この Prisma を最大限に利用して RDB
+      <p>TypeScript/JavaScript には <strong>Prisma (プリズマ)</strong> という ORM
+      があり、広く使われています。このブログアプリ開発でも、Prisma を最大限に利用して RDB
       とのデータのやりとりを行ないます。</p>
       <h2 data-number="3.4" id="prisma-のインストール"><span
       class="header-section-number">3.4</span> Prisma のインストール</h2>
       <p>プロジェクトに <a href="https://www.npmjs.com/package/prisma">Prisma</a>(O/R Mapper)
       をインストールしていきます。VSCode でプロジェクト (<code>next-blog-app</code>)
-      をオープンして、<code>Ctrl+J</code>
-      でターミナルを開き、以下のコマンドを実行してください。後日、別途、</p>
+      をオープンして、<code>Ctrl+J</code> でターミナルを開き、以下のコマンドを実行してください。</p>
       <pre><code>npm i -D prisma</code></pre>
       <p>また、データベースの「<strong>初期データ</strong> (Seed)」を作成する際に<a
-      href="https://www.google.com/search?q=ts-nodeとは">ts-node</a>を使用するので、こちらもプロジェクトのローカルにインストールしてください。<strong>ts-node</strong>
-      は<a
+      href="https://www.google.com/search?q=ts-nodeとは">ts-node</a>を使用するので、こちらもプロジェクトのローカルにインストールしてください。</p>
+      <pre><code>npm i -D ts-node</code></pre>
+      <p><strong>ts-node</strong> は<a
       href="lecture01.html#開発を効率的に行なうためのパッケージの追加">第01回講義</a>でも解説したように
       <span class="masked">TypeScriptを (JavaScriptに変換せずに) Node.js 上で 直接実行
-      するためのランタイム</span> です。</p>
-      <pre><code>npm i -D ts-node</code></pre>
+      するためのランタイム</span> になります。</p>
       <div class="note type-tips">
       <p><strong>npmのアップデート</strong></p>
       <p>npmコマンドを実行した際に、次のように <strong>npm のアップデートを促すメッセージ</strong>
-      が表示されたときは、適宜、指示に従ってアップデートをするようにしてください。</p>
+      が表示されたときは、適宜、指示に従ってアップデートしてください。</p>
       <pre><code>npm notice New minor version of npm available! 10.8.3 -&gt; 10.9.1
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v10.9.1
 npm notice To update run: npm install -g npm@10.9.1</code></pre>
@@ -477,18 +501,19 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       vulnerability</strong>」のように表示されたときは <span
       class="masked">XX件の深刻なセキュリティ脆弱性</span>
       が検出されたことを意味します。インストール済みのパッケージのなかに緊急対応を要する脆弱性を持つものが存在し、それに対して対応を促すメッセージとなっています。</p>
-      <p>このメッセージがでたときは、まずは以下のコマンドで詳細を確認してください。</p>
+      <p>「<strong>XX high severity
+      vulnerability</strong>」というメッセージが表示されたときは、まずは以下のコマンドで詳細を確認してください。</p>
       <pre><code>npm audit</code></pre>
-      <p>つづいて、次のコマンドで、当該パッケージを修正バージョンにアップデートします。成功すると「<strong>found
+      <p>つづいて、次のコマンドで、当該パッケージをセキュティ対応したバージョンにアップデートします。成功すると「<strong>found
       0 vulnerabilities</strong>」というメッセージが出力されます。</p>
       <pre><code>npm audit fix</code></pre>
-      <p>なお、依存関係の問題などで <code>npm audit fix</code> の実行では対応できない (解決できない)
-      場合があります。その場合は、個別に情報収集して対応したり、生成AIを使って解決してください。</p>
+      <p>なお、依存関係の問題などで <code>npm audit fix</code> では対応できない (解決できない)
+      こともあります。その場合は、個別に情報収集して対応したり、生成AIを使って解決してください。</p>
       </div>
       <h2 data-number="3.5" id="prisma-の初期化処理-セットアップ処理"><span
       class="header-section-number">3.5</span> Prisma の初期化処理 (セットアップ処理)</h2>
       <p>次に Prisma を <strong>使用するための準備</strong> を行なっていきます。
-      この初期化処理は、ローカル環境にPrismaをインストール後、基本的に <span
+      この初期化処理は、プロジェクトのローカル環境に Prisma をインストール後、基本的に <span
       class="masked">初回のみに実行すればよい</span> ものとなります。</p>
       <p>VSCodeのターミナルから次のコマンドを実行してください。<code>npm</code> ではなく
       <code>npx</code> であることに注意してください。<code>--datasource-provider sqlite</code>
@@ -511,7 +536,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       を開いて、Prismaの初期化処理によって追記された内容を確認してください。<code>#</code>
       から開始する行は <strong>コメント</strong> なので編集・削除しても問題ありません。</p>
       <p>ファイルの最後のほうに <code>DATABASE_URL</code> という環境変数設定が追加され、そこに
-      <code>"file:./dev.db"</code> がセットされていることが確認できると思います。</p>
+      <code>"file:./dev.db"</code> がセット (代入) されていることが確認できると思います。</p>
       <div class="sourceCode" id="cb11" data-caption=".env"><pre
       class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># microCMS</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="va">NEXT_PUBLIC_MICROCMS_BASE_EP</span><span class="op">=</span>https://XXXXX.microcms.io/api/v1</span>
@@ -525,7 +550,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       (現時点ではまだ作成されていません)」に接続するようになります。</p>
       <h2 data-number="3.7" id="schema.prisma-の内容確認"><span
       class="header-section-number">3.7</span> schema.prisma の内容確認</h2>
-      <p>prisma フォルダのなかの <code>schema.prisma</code>
+      <p><code>prisma</code> フォルダのなかの <code>schema.prisma</code>
       を開いて内容を確認してください。<code>//</code> から開始する行は <strong>コメント</strong>
       なので編集・削除して問題ありません。</p>
       <div class="sourceCode" id="cb12" data-caption="prisma/schema.prisma"><pre
@@ -539,22 +564,22 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb12-8"><a href="#cb12-8"></a>}</span></code></pre></div>
       <p><strong>第02行目</strong> では、JavaScript (TypeScript) に対応した「Prisma
       Client」を生成することを指定しています。Prisma Client クラスから生成されるインスタンスを通して
-      <span class="masked">(SQLを記述することなく) TypeScript プログラムからDBのCURD操作</span>
+      <span class="masked">(SQLを記述することなく) TypeScript プログラムから DB のCURD操作</span>
       ができるようになります。</p>
       <p><strong>第06行目</strong> では、使用するDB (Prismaが接続するDB)
-      が「SQLite」であることを指定しています。</p>
+      が「<strong>SQLite</strong>」であることを指定しています。</p>
       <p><strong>第07行目</strong> では <code>.env</code> ファイルの <code>DATABASE_URL</code> から
       <strong>DB接続情報</strong>
-      を読み取ることを指定しています。現状では、<code>DATABASE_URL</code> に
+      を読み取るように指示しています。現状では、<code>DATABASE_URL</code> に
       <code>file:./dev.db</code> が設定されています。</p>
       <p>また、<code>schema.prisma</code> は、<span class="masked">データベースのスキーマ定義
-      (テーブルやフィールドの構造定義)</span>
+      (＝テーブルやフィールドの構造定義)</span>
       を記述するファイルとしての役割も持ちます。次のセクションでは
-      <strong>ブログアプリに必要となるスキーマを定義</strong>していきます。</p>
+      <strong>ブログアプリに必要となる各テーブルのスキーマを定義</strong>していきます。</p>
       <h2 data-number="3.8" id="schema.prisma-の編集"><span class="header-section-number">3.8</span>
       schema.prisma の編集</h2>
-      <p>ブログアプリに必要な各種データ (投稿記事、カテゴリ) のスキーマを <code>schema.prisma</code>
-      に記述していきます。まず、<code>schema.prisma</code>
+      <p>ブログアプリに必要な各種データ (投稿記事、カテゴリ) を保存するためのスキーマを
+      <code>schema.prisma</code> に記述していきます。まず、<code>schema.prisma</code>
       を次のように書き換えて、保存してください。</p>
       <div class="sourceCode" id="cb13" data-caption="prisma/schema.prisma"><pre
       class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb13-1"><a href="#cb13-1"></a>// このファイルを更新したら...</span>
@@ -609,7 +634,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       を定義しています。この定義に基づき、Prisma によって DB にテーブルが作成され、また、<span
       class="masked">それらのテーブルを操作するための「メソッド」</span> や
       <strong>テーブルから取得される「データ型」</strong> が TypeScript
-      から利用できるようになります。</p>
+      で利用できるようになります。</p>
       <p><strong>投稿記事テーブル</strong> (<code>Post</code>) の定義の <strong>第22行目</strong>
       では、今後の展開の都合で「<code>src/app/_types/CoverImage.ts</code> で定義したような
       <code>url</code>、<code>height</code>、<code>width</code> という属性を持った
@@ -618,7 +643,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <p><code>schema.prisma</code> の詳細 (記述方法)
       については、ウェブ記事や生成AIを利用して概要だけ把握しておいてください。特に
       <strong>第44行目</strong> と <strong>第45行目</strong>
-      では重要な設定がされているので注意してください。</p>
+      では特徴的な設定がされているので注意してください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>TypeScript で Prisma を使用するにあたって、次のような <code>schema.prisma</code>
@@ -637,11 +662,11 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <pre><code>npx prisma db push</code></pre>
       <p>このコマンドにより、<code>schema.prisma</code> に基づいて
       <strong>実際にデータベースが新規作成され</strong> (現在の設定の場合は <code>dev.db</code>
-      というファイルが新規作成され)、そのなかに <strong>「3つのテーブル」が作成</strong>
+      というファイルが新規作成され)、その DB のなかに <strong>「3つのテーブル」が作成</strong>
       されます。既にデータベースが存在する場合は
       <code>The database is already in sync with the Prisma schema.</code> となります。</p>
       <p>さらに、次のコマンドを実行してください。この操作により <code>schema.prisma</code>
-      に基づき、<strong>プロジェクトのなかで参照可能な型情報</strong>などが生成されます。</p>
+      に基づき、<strong>プロジェクトのなかで参照可能なメソッドや型情報</strong>などが生成されます。</p>
       <pre><code>npx prisma generate</code></pre>
       <div class="note type-tips">
       <p><strong>補足: 自動生成される「型」の参照</strong></p>
@@ -664,7 +689,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <p>Prismaによって作成されたDBの内容は「<strong>Prisma
       Studio</strong>」というツールを使って、ウェブブラウザから確認することができます。Prisma Studio
       は、VSCodeのターミナルから、以下のコマンドで起動することができます
-      (デフォルトで5555番ポートで起動します)。</p>
+      (デフォルトでは5555番ポートで起動します)。</p>
       <pre><code>npx prisma studio</code></pre>
       <p>Prisma Studio のトップ画面では、<strong>テーブル一覧</strong> (<strong>モデル一覧</strong>)
       が表示されます。いまは「投稿記事のテーブル」を確認したいので「<strong>Post</strong>」をクリックしてください。</p>
@@ -672,7 +697,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <img src="figs/08/prisma_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>次のように「投稿記事テーブル (<code>Post</code>)」の「<strong>カラム (列)
+      <p>画面が切り替わり、下図のように「投稿記事テーブル (<code>Post</code>)」の「<strong>カラム
+      (列)
       の構成</strong>」を確認することができます。現時点では、まだ投稿記事のレコードが1件も存在しませんが、レコード追加後は、その内容について確認・編集することもできます。</p>
       <figure>
       <img src="figs/08/prisma_02.png" alt="img" />
@@ -824,7 +850,15 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <p>VSCodeのターミナルから次のコマンドを打ち込んで、<strong>シーディング</strong>
       (<strong>DBの初期データの生成</strong>) を実行してください。</p>
       <pre><code>npx prisma db seed</code></pre>
-      <p>Prisma Studio を起動 (<code>npx prisma studio</code> コマンドを実行) して、DB
+      <p>なお、<code>seed.ts</code> の <strong>第41行目</strong> と <strong>第42行目</strong>
+      では、生成した投稿記事の内容を <code>console.log()</code>
+      でログ出力していますが、このログは以下のように (ウェブブラウザの開発者ツールではなく)
+      <strong>VSCode のターミナルに出力</strong>されることに注意してください。</p>
+      <figure>
+      <img src="figs/08/vscode_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次に、Prisma Studio を起動 (<code>npx prisma studio</code> コマンドを実行) して、DB
       の各テーブルにレコードが追加されていることを確認してください。</p>
       <figure>
       <img src="figs/08/prisma_03.png" alt="img" />
@@ -848,7 +882,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       にレコードを追加する文を記述していませんが、実際には当該にテーブルに適切なレコードが追加されていることに注意してください。このような中間テーブルに対するレコードの挿入なども
       Prisma が提供する ORM としての機能となります。</p>
       <p>以上のように、Prisma Client を利用することで、<strong>SQL文を記述せずに、TypeScript
-      プログラムから DB に対してのCURD操作</strong> (Create、Update、Read、Delete など)
+      プログラムから DB に対しての CURD操作</strong> (Create、Update、Read、Delete)
       が可能になります。</p>
       <h3 data-number="3.10.3" id="演習-15分"><span class="header-section-number">3.10.3</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>15分)</h3>
@@ -867,7 +901,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       class="header-section-number">3.11</span> スキーマに変更を加えたときは…</h2>
       <p>テーブルに新しくカラムを追加したり、カラムの名前を変更するなどの
       <strong>スキーマの定義に関わる変更</strong> を <code>schema.prisma</code>
-      に行ったときは、以下の処理が必要になります。なお、実行すると、<strong>DBのすべてのレコードとテーブルと消える</strong>
+      に行ったときは、以下の手続きが必要になります。これらを実行すると、<strong>DBのすべてのレコードとテーブルと消える</strong>
       ので注意してください。</p>
       <ol type="1">
       <li>ターミナルで <code>npm run dev</code> や
@@ -883,24 +917,772 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       </ol>
       <p>なお、<code>prisma migrate</code> というコマンドを使用すれば <span
       class="masked">既存のデータを保持したままスキーマの変更を適用することも可能</span>
-      ですが、開発の初期段階では上記の手順の方が確実です。</p>
+      ですが、開発の初期段階 (消えて困るようなデータが DB に格納されていない状態)
+      では上記の手続きの方が確実です。</p>
       <p><code>prisma migrate</code> の使い方については<a
       href="https://www.prisma.io/docs/orm/prisma-migrate/getting-started">公式リファレンス</a>や生成AIなどで調べてください。</p>
       <p>以上で、バックエンドで DB
-      を機能させるための準備が整いました。なお、ここでは、一時的に「SQLite」を使用しますが、最終的には
+      を機能させるための準備が完了しました。なお、ここでは、一時的に「SQLite」を使用しますが、最終的には
       <a href="https://supabase.com/">Supabase</a>
-      というクラウドサービスの「PostgreSQL」に切り替えていきます。</p>
+      というクラウドサービスの「<strong>PostgreSQL</strong>」に切り替えていきます。</p>
       <h1 data-number="4" id="バックエンド-ウェブapi-の実装"><span
       class="header-section-number">4</span> バックエンド (ウェブAPI) の実装</h1>
       <p>ここからは、Next.js
       を使って、ブログアプリ関連の「<strong>ウェブAPI</strong>」の機能を実装していきます。つまり、前回講義で取り上げた「<a
       href="lecture07.html#郵便番号検索apiの組込み">郵便番号検索API</a>」や「<a
       href="lecture07.html#apiの利用テスト">microCMS</a>」のように、特定のエンドポイント (URL)
-      にHTTPリクエストを送ると、<span class="masked">JSONフォーマットでデータが得られる</span>
+      にHTTPリクエストを送ると、<span class="masked">JSONフォーマットでデータが取得できる</span>
       ような機能を Next.js の枠組みで実装していきます。</p>
       <p>例えば <code>http://localhost:3000/api/categories</code> というエンドポイントに
       <strong>HTTPリクエスト (GET)</strong> を送ると、以下のような <strong>HTTP レスポンス</strong>
-      が返ってくるような機能を Next.js で実装していきます。</p>
+      (主にJSONデータ) が取得できるような機能を Next.js で実装していきます。</p>
+      <figure>
+      <img src="figs/08/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.1" id="準備"><span class="header-section-number">4.1</span> 準備</h2>
+      <p>Prisma を利用して RDB とデータをやりとりするためには <code>seed.ts</code> の
+      <strong>第03行目</strong>
+      のように、PrismaClientクラスのインスタンスを作成する必要があります。そのため、ウェブAPIを実装するプログラムのなかでも
+      <code>const prisma = new PrismaClient();</code> のような処理が必要となります。</p>
+      <p><strong>しかし</strong>、Next.js を <strong>開発モード</strong> (<code>npm run dev</code>)
+      で動かすと、その <strong>ホットリロード機能</strong> (＝<span
+      class="masked">ファイルの変更を検知して自動的にアプリケーションを再起動する機能</span>)
+      との兼ね合いで、<strong>Prisma Client
+      インスタンスが重複して生成されるという問題</strong>生じます。このような形で
+      PrismaClientのインスタンス が重複生成されると<a
+      href="https://www.google.com/search?q=メモリリーク">メモリリーク</a>や「Too many
+      connections」(＝<span
+      class="masked">データベース接続数が上限を超えた場合に発生するエラー</span>)
+      が生じる可能性があります。ちなみに、開発モード以外では、ホットリロードが機能しないのでこの懸念はありません。</p>
+      <p>これを回避するための工夫をしていきます。まず <code>src/app/lib</code> に
+      <code>prisma.ts</code> というファイルを新規作成してください
+      (<code>lib</code>フォルダも存在しないので新規作成してください)。</p>
+      <figure>
+      <img src="figs/08/vscode_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>作成した <code>prisma.ts</code> に以下のプログラムを貼付けて保存してください。</p>
+      <div class="sourceCode" id="cb20" data-caption="src/lib/prisma.ts"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">import</span> { PrismaClient } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">// データベース接続用のインスタンスを作成する関数を定義</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">const</span> prismaClientSingleton <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="cf">return</span> <span class="kw">new</span> <span class="fu">PrismaClient</span>()<span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>}<span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">// グローバルスコープに prismaGlobal という変数が存在することをTypeScriptに伝える型定義</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="kw">declare</span> <span class="kw">const</span> globalThis<span class="op">:</span> {</span>
+<span id="cb20-10"><a href="#cb20-10"></a>  prismaGlobal<span class="op">:</span> <span class="bu">ReturnType</span><span class="op">&lt;</span><span class="kw">typeof</span> prismaClientSingleton<span class="op">&gt;;</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>} <span class="op">&amp;</span> <span class="kw">typeof</span> <span class="bu">global</span><span class="op">;</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="co">// 既存の prismaGlobal があればそれを使用し、なければ新しくインスタンスを作成</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="kw">const</span> prisma <span class="op">=</span> globalThis<span class="op">.</span><span class="at">prismaGlobal</span> <span class="op">??</span> <span class="fu">prismaClientSingleton</span>()<span class="op">;</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a></span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="co">// 作成した prisma インスタンスを他から利用できるようにエクスポート</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="im">export</span> <span class="im">default</span> prisma<span class="op">;</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a></span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="co">// 開発環境の場合のみ、作成したインスタンスをグローバルスコープに保存し、</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a><span class="co">// ホットリロード時の再利用を可能にする</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a><span class="cf">if</span> (<span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NODE_ENV</span> <span class="op">!==</span> <span class="st">&quot;production&quot;</span>) globalThis<span class="op">.</span><span class="at">prismaGlobal</span> <span class="op">=</span> prisma<span class="op">;</span></span></code></pre></div>
+      <p>このプログラムは、グローバル変数を使って
+      PrismaClientインスタンスを保持し、ホットリロードが起きたときも単一のインスタンスを再利用するように機能します
+      (やや難しい話になるので、現時点で理解できなくても問題ありません)。</p>
+      <p>詳細については、Next.js の公式リファレンスの<a
+      href="https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices">Best
+      practice for instantiating Prisma Client with
+      Next.js</a>を参照してください。また、参考図書の「<strong>これからはじめるReact実践入門</strong>」の
+      p.592 を参照してください。</p>
+      <h2 data-number="4.2" id="カテゴリの一覧を取得するウェブapiの実装"><span
+      class="header-section-number">4.2</span> カテゴリの一覧を取得するウェブAPIの実装</h2>
+      <p>Next.js (App Router) では <code>src/app/api</code> の配下に <code>route.ts</code>
+      (≠<code>page.tsx</code>)
+      という名前のファイルを配置することで、<strong>ウェブAPIのエンドポイントが作成</strong>
+      できます。</p>
+      <p>例えば、以下のように <code>src/app/api/categories/route.ts</code>
+      というファイルを作成して、そこに <code>GET</code> 関数を定義すると <span
+      class="masked">http://localhost:3000/api/categories</span>
+      というURLでアクセス可能なエンドポイントが作成できます（<strong>GET</strong>
+      メソッドのHTTPリクエストを受け付けることができるようになります）。</p>
+      <pre><code>📂 src/
+└─ 📂 app/
+    └─ 📂 api/
+        └─ 📂 categories/
+            └─ route.ts</code></pre>
+      <p>上記のようにフォルダとファイル (<code>route.ts</code>)
+      を作成して、以下の内容を貼付けて保存してください。</p>
+      <div class="sourceCode" id="cb22"
+      data-caption="src/app/api/categories/route.ts (カテゴリの一覧取得)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">// [GET] /api/categories カテゴリ一覧の取得</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="cf">try</span> {</span>
+<span id="cb22-7"><a href="#cb22-7"></a>    <span class="kw">const</span> categories <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb22-8"><a href="#cb22-8"></a>      orderBy<span class="op">:</span> {</span>
+<span id="cb22-9"><a href="#cb22-9"></a>        createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span> <span class="co">// 降順 (新しい順)</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>      }<span class="op">,</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>    })<span class="op">;</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories)<span class="op">;</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb22-14"><a href="#cb22-14"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb22-16"><a href="#cb22-16"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの取得に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a>      { status<span class="op">:</span> <span class="dv">500</span> } <span class="co">// 500: Internal Server Error</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a>    )<span class="op">;</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a>  }</span>
+<span id="cb22-20"><a href="#cb22-20"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>まずは、開発モードでアプリを立ち上げて <code>http://localhost:3000/api/categories</code>
+      にアクセスして、以下のように「カテゴリの一覧」が <strong>JSON形式で得られること</strong>
+      を確認してください。なお、Chromeでは、画面上部の「プリティ
+      プリント」のチェックボックスをONにしないと整形表示されません。</p>
+      <figure>
+      <img src="figs/08/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以下、<code>route.ts</code> のコードを解説していきます。</p>
+      <p>まず、<strong>第01行目</strong>では、前のセクションで <code>src/app/lib/prisma.ts</code>
+      で定義した PrismaClient (O/R Mapper) のインスタンスである <code>prisma</code>
+      をインポートしています。基本的は、この <code>prisma</code> を通じて DB
+      とデータのやりとりをするので、このファイルのなかで、<code>const prisma = new PrismaClient();</code>
+      のような処理は<strong>必要ありません</strong>。</p>
+      <p><strong>第07行目</strong> から <strong>第11行目</strong> で、DB
+      のカテゴリテーブルからレコード全件を取得して、定数 <code>categories</code>
+      に格納しています。ここでは、<strong>第01行目</strong> でインポートした <code>prisma</code> の
+      <code>findMany</code>
+      というメソッドを使っていますが、このメソッドは「<strong>非同期メソッド</strong>」なので、<span
+      class="masked"><code>await</code>が必要になること</span>
+      に注意してください。ここでは、<code>findMany</code> に引数の引数で、<code>createdAt</code>
+      属性で <strong>降順にソート</strong> するように指示もしています。戻り値を格納している
+      <code>categories</code>
+      ですが、下図のようにエディタ上でマウスカーソルを重ねると、<strong>オブジェクトの「配列」</strong>
+      になっていることが確認できます。</p>
+      <figure>
+      <img src="figs/08/vscode_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>このように <strong>第07行目</strong> の <code>categories</code> の型は、TypeScript
+      により「<strong>型推論</strong>」されますが、もし<strong>明示的に「型」を指定したい場合</strong>は、<code>import { Category } from "@prisma/client";</code>
+      をファイルの冒頭に追加したうえで <code>const categories: Category[] = ...</code>
+      のようにします (次の図を参照)。</p>
+      <figure>
+      <img src="figs/08/vscode_08.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>第05行目</strong>では、アロー関数形式で <code>GET</code>
+      という関数を定義して処理を記述していますが、ここでの <strong>名前の設定</strong>
+      は非常に重要です。この <code>GET</code> という変数名をつけることで「<strong>HTTP GET
+      リクエスト</strong>」を受付けるようになります。これを <code>Get</code> や <code>get</code>
+      に変更すると機能しなくことに注意してください。もし、GE T以外の HTTP Method (POST、PUT、DELETE)
+      を受け付けるウェブAPIを実装するときは、そのメソッドにあわせて名前を変更します。HTTP Method
+      の概要が分からないときは、生成AIを使って概要を把握してください。</p>
+      <p><code>route.ts</code> に記述する GET / POST / PUT / DELETE 関数は、基本的に
+      <code>NextRequest</code>
+      を引数にして「HTTPリクエスト」の情報を受け取り、<code>NextResponse</code>
+      で「HTTPレスポンス」を生成するように構成します。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Next.js (App Router) でウェブAPIを実装しようとしています。そのための前提知識として HTTP
+      Method について解説してください。</p>
+      </blockquote>
+      <h3 data-number="4.2.1" id="定着確認-2"><span class="header-section-number">4.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>CRUD操作に対応する4つの HTTP Method を答えよ。
+      <ul>
+      <li>答え: <span class="masked">POST、GET、PUT、DELETE</span></li>
+      </ul></li>
+      <li>新しいリソースを作成するために使用される HTTP Method を答えよ。
+      <ul>
+      <li>答え: <span class="masked">POST</span></li>
+      </ul></li>
+      <li>既存のリソースを更新するために使用される HTTP Method を答えよ。
+      <ul>
+      <li>答え: <span class="masked">PUT</span></li>
+      </ul></li>
+      <li>リソースを取得するため使用される HTTP Method を答えよ。
+      <ul>
+      <li>答え: <span class="masked">GET</span></li>
+      </ul></li>
+      <li>リソースを削除するために使用される HTTP Method を答えよ。
+      <ul>
+      <li>答え: <span class="masked">DELETE</span></li>
+      </ul></li>
+      </ul>
+      <p>HTTPに関する文脈において「<strong>リソース</strong>」とは <span
+      class="masked">URLでアクセス可能なデータや情報、ファイル</span> を指します。</p>
+      <h2 data-number="4.3" id="thunder-client-を使ったapiのテスト"><span
+      class="header-section-number">4.3</span> Thunder Client を使ったAPIのテスト</h2>
+      <p><a href="lecture07.html#apiの利用テスト">前回講義</a>に導入した <strong>Thunder
+      Client</strong> (VSCodeの拡張機能) を使って、前のセクションで実装した
+      <code>/api/categories</code>
+      のテストを行ないます。予め開発モードでアプリを起動しておいてください。</p>
+      <p>VSCodeの左パネルの「⚡」のアイコンをクリックするか、<code>Ctrl+Shift+R</code> を押下すると
+      Thunder Client のパネルが表示されるので、「<strong>New
+      Request</strong>」のボタンを押下してください。</p>
+      <figure>
+      <img src="figs/07/vscode_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次に、HTTP Method として「<strong>GET</strong>」を選択 (確認)
+      して、エンドポイントを設定してください。そして、「Send」ボタンを押下してレスポンスを確認してください。VSCodeのウィンドウ幅が大きいときは、右側にレスポンスが表示されることがあります。</p>
+      <figure>
+      <img src="figs/08/vscode_09.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>レスポンスでは、<strong>ステータスコード</strong> (上記の場合は❸の「<strong>200
+      OK</strong>」の箇所)
+      が重要となります。基本的には200番台が<strong>成功</strong>、その他、400番台、500番台が<strong>失敗</strong>を表します。知能情報実験実習2の後期のテーマ
+      (サーバ構築基礎実習) のなかでも習っていると思います。概要は把握しておいてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>HTTPレスポンスのステータスコードについて、主要なものを解説してください。</p>
+      </blockquote>
+      <h3 data-number="4.3.1" id="定着確認-3"><span class="header-section-number">4.3.1</span>
+      定着確認</h3>
+      <ul>
+      <li>HTTPレスポンスのステータス「OK」を表わす番号を答えよ。
+      <ul>
+      <li>答え: <span class="masked">200</span></li>
+      </ul></li>
+      <li>HTTPレスポンスのステータス「Unauthorized」を表わす番号を答えよ。
+      <ul>
+      <li>答え: <span class="masked">401</span></li>
+      </ul></li>
+      <li>HTTPレスポンスのステータス「Bad Request」を表わす番号を答えよ。
+      <ul>
+      <li>答え: <span class="masked">400</span></li>
+      </ul></li>
+      <li>HTTPレスポンスのステータス「Internal Server Error」を表わす番号を答えよ。
+      <ul>
+      <li>答え: <span class="masked">500</span></li>
+      </ul></li>
+      <li>HTTPレスポンスのステータス「Method Not Allowed」を表わす番号を答えよ。
+      <ul>
+      <li>答え: <span class="masked">405</span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="4.3.2" id="演習-5分"><span class="header-section-number">4.3.2</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i>5分)</h3>
+      <p>バックエンドで処理される <code>route.ts</code> のなかに <code>console.log()</code>
+      を記述すると、そのログは <strong>VSCodeのターミナル</strong>
+      に出力されることを確認してください。</p>
+      <div class="note type-tips">
+      <p>VSCode の補完機能により、意図せずに <code>import console from "inspector"</code>
+      などがファイルにされることがあります。それらがインポートされていると
+      <code>console.log()</code> を実行しても <strong>VSCodeのターミナルに出力されないこと</strong>
+      があるので注意してください。console に関して見慣れないインポートがあれば削除してください。</p>
+      </div>
+      <h3 data-number="4.3.3" id="演習-10分"><span class="header-section-number">4.3.3</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
+      <p>PrismaClient の各種メソッドのうち、<code>findMany</code>
+      のようにDBとデータのやりとりを行なうメソッドは基本的に「<strong>非同期</strong>」になっています。非同期メソッドは
+      <code>await</code> と組み合わせないと期待する動作をしません
+      (<code>await</code>の付け忘れは、初心者がハマるポイントです)。</p>
+      <ul>
+      <li><strong>同期処理</strong>と<strong>非同期処理</strong>
+      (<code>await</code>,<code>async</code>) については<a
+      href="lecture07.html#同期処理と非同期処理">前回講義</a>で学習済みです。理解に不安がある人は復習しておいてください。</li>
+      </ul>
+      <p>以下のコードのように <code>findMany</code> メソッドに <code>await</code>
+      を付け忘れると、どのようになるかを確認してください。</p>
+      <div class="sourceCode" id="cb23"
+      data-caption="api/categories/route.ts (awaitを付け忘れ)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="cf">try</span> {</span>
+<span id="cb23-6"><a href="#cb23-6"></a>    <span class="kw">const</span> categories <span class="op">=</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({ <span class="co">// ◀ await忘れ</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>      orderBy<span class="op">:</span> {</span>
+<span id="cb23-8"><a href="#cb23-8"></a>        createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span> </span>
+<span id="cb23-9"><a href="#cb23-9"></a>      }<span class="op">,</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>    })<span class="op">;</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories)<span class="op">;</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb23-13"><a href="#cb23-13"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb23-15"><a href="#cb23-15"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの取得に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a>      { status<span class="op">:</span> <span class="dv">500</span> } </span>
+<span id="cb23-17"><a href="#cb23-17"></a>    )<span class="op">;</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a>  }</span>
+<span id="cb23-19"><a href="#cb23-19"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>コンパイルエラーも、実行時エラーも発生せず、非常に解決しずらいバグになっていること (=<span
+      class="masked">何が問題でレスポンスが空になっているか分からない</span>)
+      に注意してください。</p>
+      <p>一方で、次のように <code>categories</code> に
+      <strong>明示的に型を与えると</strong>、<code>await</code>
+      を忘れたときにコンパイルエラーが発生すること (問題箇所が把握しやすいこと)
+      を確認してください。</p>
+      <div class="sourceCode" id="cb24"
+      data-caption="api/categories/route.ts (awaitを付け忘れ・型を明示)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span> <span class="co">// ◀ 型をインポート</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="cf">try</span> {</span>
+<span id="cb24-7"><a href="#cb24-7"></a>    <span class="co">// ▼ 型を明示している</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>    <span class="kw">const</span> categories<span class="op">:</span> Category[] <span class="op">=</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({ </span>
+<span id="cb24-9"><a href="#cb24-9"></a>      orderBy<span class="op">:</span> {</span>
+<span id="cb24-10"><a href="#cb24-10"></a>        createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>      }<span class="op">,</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a>    })<span class="op">;</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories)<span class="op">;</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb24-15"><a href="#cb24-15"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb24-17"><a href="#cb24-17"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの取得に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a>      { status<span class="op">:</span> <span class="dv">500</span> } </span>
+<span id="cb24-19"><a href="#cb24-19"></a>    )<span class="op">;</span></span>
+<span id="cb24-20"><a href="#cb24-20"></a>  }</span>
+<span id="cb24-21"><a href="#cb24-21"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>この例のように型を明示するような堅牢なコードを記述することで、結果的として効率的に開発を進めることできます。<strong>可読性を損なわない範囲で「型」を明示</strong>するようにしてください。</p>
+      <h3 data-number="4.3.4" id="演習-10分-1"><span class="header-section-number">4.3.4</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
+      <p>次のように意図的にエラーを発生させるコード (<strong>第12行目</strong>)
+      を追加してください。そのうえで、<strong>Thunder Client</strong> から HTTPリクエスト
+      を送信し、そのレスポンスがどのようになるか
+      (<strong>ステータスコード</strong>や<strong>レスポンスのボディ</strong>がどのようになるか)
+      を確認してください。</p>
+      <p>また、VSCodeのターミナルのログも確認してください。</p>
+      <div class="sourceCode" id="cb25"
+      data-caption="api/categories/route.ts (意図的にエラーを発生)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb25-1"><a href="#cb25-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="cf">try</span> {</span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="kw">const</span> categories<span class="op">:</span> Category[] <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb25-8"><a href="#cb25-8"></a>      orderBy<span class="op">:</span> {</span>
+<span id="cb25-9"><a href="#cb25-9"></a>        createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a>      }<span class="op">,</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a>    })<span class="op">;</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&quot;意図的にエラーを発生させる!!!&quot;</span>)<span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories)<span class="op">;</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb25-15"><a href="#cb25-15"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb25-17"><a href="#cb25-17"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの取得に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a>      { status<span class="op">:</span> <span class="dv">500</span> } <span class="co">// 500: Internal Server Error</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a>    )<span class="op">;</span></span>
+<span id="cb25-20"><a href="#cb25-20"></a>  }</span>
+<span id="cb25-21"><a href="#cb25-21"></a>}<span class="op">;</span></span></code></pre></div>
+      <ul>
+      <li>例外処理 <code>try ~ catch</code> の概念については<a
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture28.html#例外処理">プログラミング1</a>で学習済みです。理解に不安がある場合は、生成AIなどを概要を理解してください。</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>TypeScriptにおける例外処理について解説してください。特に
+      <code>try</code>、<code>catch</code>、<code>throw</code>
+      のキーワードと使い方について解説してください。</p>
+      </blockquote>
+      <h3 data-number="4.3.5" id="演習-15分-1"><span class="header-section-number">4.3.5</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i>15分)</h3>
+      <p><code>api/categories/route.ts</code>
+      について、正常に処理できた場合の「戻り値」を、それぞれ、次のように変更したとき、レスポンスの「ステータスコード」と「レスポンスのボディ」がどのように変化するか
+      (あるいは変化しないのか) を <strong>Thunder Client</strong> から確認してください。</p>
+      <div class="sourceCode" id="cb26" data-caption="変更前"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1"></a><span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories)<span class="op">;</span></span></code></pre></div>
+      <p>また、<strong>各変更にどのような意味があるか (あるいは意味がないか)</strong>
+      について、生成AIを利用して考えてみてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Next.js (App Router) の API Routes の戻り値として
+      <code>return NextResponse.json(categories);</code> を
+      <code>return NextResponse.json(categories, { status: 200 });</code>
+      に書き換えることには、どのような意味や意図があると考えられますか。</p>
+      </blockquote>
+      <hr />
+      <p><strong>変更1</strong> : <code>NextResponse</code> の <code>JSON</code>
+      メソッドの第2引数に<strong>ステータスコード「200」</strong>を明示的に与える。</p>
+      <div class="sourceCode" id="cb27" data-caption="変更1"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories<span class="op">,</span> { status<span class="op">:</span> <span class="dv">200</span> })<span class="op">;</span></span></code></pre></div>
+      <hr />
+      <p><strong>変更2</strong> : <code>NextResponse</code> の <code>JSON</code>
+      メソッドの第1引数を次のように変更する。</p>
+      <div class="sourceCode" id="cb28" data-caption="変更2a"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({ contents<span class="op">:</span> categories })<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb29" data-caption="変更2b"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb29-1"><a href="#cb29-1"></a><span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({</span>
+<span id="cb29-2"><a href="#cb29-2"></a>  isSuccess<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  contents<span class="op">:</span> categories<span class="op">,</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>})<span class="op">;</span></span></code></pre></div>
+      <h3 data-number="4.3.6" id="ex演習-宿題-20分"><span class="header-section-number">4.3.6</span>
+      EX演習 (宿題: <i class="fa-solid fa-stopwatch"></i>20分)</h3>
+      <p>次のように <code>findMany</code>
+      の引数を、次のように変更すると、取得されるデータがどのように変化するか確認してください。なお、ここでは
+      <code>categories: Category[] = ...</code>
+      のように型を指定するとコンパイルエラーになるので注意してください。</p>
+      <div class="sourceCode" id="cb30" data-caption="selectプロパティの追加1"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">const</span> categories <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb30-2"><a href="#cb30-2"></a>  select<span class="op">:</span> {</span>
+<span id="cb30-3"><a href="#cb30-3"></a>    id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>    name<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>  }<span class="op">,</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  orderBy<span class="op">:</span> {</span>
+<span id="cb30-7"><a href="#cb30-7"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  }<span class="op">,</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a>})<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb31" data-caption="selectプロパティの追加2"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">const</span> categories <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb31-2"><a href="#cb31-2"></a>  select<span class="op">:</span> {</span>
+<span id="cb31-3"><a href="#cb31-3"></a>    id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>    name<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>    posts<span class="op">:</span> {</span>
+<span id="cb31-6"><a href="#cb31-6"></a>      select<span class="op">:</span> {</span>
+<span id="cb31-7"><a href="#cb31-7"></a>        post<span class="op">:</span> {</span>
+<span id="cb31-8"><a href="#cb31-8"></a>          select<span class="op">:</span> {</span>
+<span id="cb31-9"><a href="#cb31-9"></a>            id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a>            title<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a>          }<span class="op">,</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a>        }<span class="op">,</span></span>
+<span id="cb31-13"><a href="#cb31-13"></a>      }<span class="op">,</span></span>
+<span id="cb31-14"><a href="#cb31-14"></a>    }<span class="op">,</span></span>
+<span id="cb31-15"><a href="#cb31-15"></a>  }<span class="op">,</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>  orderBy<span class="op">:</span> {</span>
+<span id="cb31-17"><a href="#cb31-17"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb31-18"><a href="#cb31-18"></a>  }<span class="op">,</span></span>
+<span id="cb31-19"><a href="#cb31-19"></a>})<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb32" data-caption="_countプロパティの追加"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">const</span> categories <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb32-2"><a href="#cb32-2"></a>  select<span class="op">:</span> {</span>
+<span id="cb32-3"><a href="#cb32-3"></a>    id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>    name<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>    _count<span class="op">:</span> {</span>
+<span id="cb32-6"><a href="#cb32-6"></a>      select<span class="op">:</span> {</span>
+<span id="cb32-7"><a href="#cb32-7"></a>        posts<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>      }<span class="op">,</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>    }<span class="op">,</span></span>
+<span id="cb32-10"><a href="#cb32-10"></a>  }<span class="op">,</span></span>
+<span id="cb32-11"><a href="#cb32-11"></a>  orderBy<span class="op">:</span> {</span>
+<span id="cb32-12"><a href="#cb32-12"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a>  }<span class="op">,</span></span>
+<span id="cb32-14"><a href="#cb32-14"></a>})<span class="op">;</span></span></code></pre></div>
+      <h2 data-number="4.4" id="カテゴリを取得するウェブapiの実装"><span
+      class="header-section-number">4.4</span> カテゴリを取得するウェブAPIの実装</h2>
+      <p><strong>カテゴリを追加するウェブAPI</strong>を実装します。</p>
+      <p>このAPIは、将来的に <span class="masked">管理者でログインしている場合のみ受理される</span>
+      ように拡張していくので、エンドポイントを <code>/api/admin/categories</code>
+      のように設定したいと思います。また、リソースの追加処理に相当するので HTTP Method の <span
+      class="masked">POST</span> に対応するように実装します。</p>
+      <p>次の位置に <code>route.ts</code> を新規作成してください。</p>
+      <pre><code>📂 src/
+└─ 📂 app/
+    └─ 📂 api/
+        ├─ 📂 categories/
+        │   └─ route.ts ( GET 作成済み )
+        └─ 📂 admin/
+            └─ 📂 categories/
+                └─ route.ts ◀◀◀ 新規作成</code></pre>
+      <p>次のプログラムを <code>route.ts</code>
+      に貼り付けてください。コードの解説は後回しにします。</p>
+      <div class="sourceCode" id="cb34"
+      data-caption="api/admin/categories/route.ts (カテゴリの追加)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="kw">type</span> RequestBody <span class="op">=</span> {</span>
+<span id="cb34-6"><a href="#cb34-6"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a>}<span class="op">;</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a></span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="im">export</span> <span class="kw">const</span> POST <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb34-10"><a href="#cb34-10"></a>  <span class="cf">try</span> {</span>
+<span id="cb34-11"><a href="#cb34-11"></a>    <span class="kw">const</span> { name }<span class="op">:</span> RequestBody <span class="op">=</span> <span class="cf">await</span> req<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb34-12"><a href="#cb34-12"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">create</span>({</span>
+<span id="cb34-13"><a href="#cb34-13"></a>      data<span class="op">:</span> {</span>
+<span id="cb34-14"><a href="#cb34-14"></a>        name<span class="op">,</span></span>
+<span id="cb34-15"><a href="#cb34-15"></a>      }<span class="op">,</span></span>
+<span id="cb34-16"><a href="#cb34-16"></a>    })<span class="op">;</span></span>
+<span id="cb34-17"><a href="#cb34-17"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(category)<span class="op">;</span></span>
+<span id="cb34-18"><a href="#cb34-18"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb34-19"><a href="#cb34-19"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb34-20"><a href="#cb34-20"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb34-21"><a href="#cb34-21"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの作成に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb34-22"><a href="#cb34-22"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
+<span id="cb34-23"><a href="#cb34-23"></a>    )<span class="op">;</span></span>
+<span id="cb34-24"><a href="#cb34-24"></a>  }</span>
+<span id="cb34-25"><a href="#cb34-25"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>開発モード (<code>npm run dev</code>) でアプリを起動して、以下のように <strong>Thunder
+      Client</strong> からテストを実行してください。この APIは、<strong>リソース (カテゴリ)
+      を追加をするもの</strong> なので、HTTP Method
+      を「<strong>POST</strong>」に切り替えていることに注意してください (エンドポイントのパスに
+      <code>admin</code> が含まれている点にも注意してください)。</p>
+      <p>また、新規作成するカテゴリの <strong>名前</strong> (<code>name</code>) をJSON形式で
+      <strong>HTTPリクエストのボディ (Body)</strong> に与えていることにも注意してください。</p>
+      <div class="sourceCode" id="cb35"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;カテゴリ5&quot;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+      <figure>
+      <img src="figs/08/vscode_10.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、既存のカテゴリの名前をボディに設定してリクエストを送信すると <span
+      class="masked">Unique constraint failed on the fields: (<code>name</code>)</span>
+      というエラーで失敗します
+      (つまり、<strong>同じリクエストを2回実行すると失敗します</strong>)。これは
+      <code>schema.prisma</code> の <strong>第31行目</strong> で <code>@unique</code> (ユニーク制約
+      (値の重複を許可しない制約)) を与えているためです。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Prisma の <code>schema.prisma</code> で <code>name String @unique</code>
+      のようにカラムを設定しています。このカラムに適用される制約について解説してください。</p>
+      </blockquote>
+      <p>つづいて、Prisma Studio を起動して (<code>npx prisma studio</code>を実行して)
+      <strong>カテゴリテーブルにレコードが追加されていること</strong>を確認してください。あるいは
+      <code>/api/categories</code> に <span class="masked">GETリクエスト</span>
+      を送って、そのレスポンスから「カテゴリが追加されていること」を確認してください。</p>
+      <figure>
+      <img src="figs/08/prisma_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>既に解説したように、Prisma Studio では、レコードは <code>id</code>
+      でソートされていることに注意してください。</p>
+      <h3 data-number="4.4.1" id="演習"><span class="header-section-number">4.4.1</span> 演習</h3>
+      <ul>
+      <li>HTTPリクエストのボディを以下のように設定して POST
+      したとき、レスポンスがどのようなになるかを Thunder Client を利用して確認してください。</li>
+      </ul>
+      <div class="sourceCode" id="cb36" data-caption="nameプロパティがない"><pre
+      class="sourceCode json"><code class="sourceCode json"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ9&quot;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+      <ul>
+      <li>HTTPリクエストのボディを以下のように設定して POST したとき、どのようなレスポンスになるかを
+      Thunder Client を利用して確認してください。</li>
+      </ul>
+      <div class="sourceCode" id="cb37" data-caption="想定外のプロパティを含む"><pre
+      class="sourceCode json"><code class="sourceCode json"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;age&quot;</span><span class="fu">:</span> <span class="dv">20</span><span class="fu">,</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ9&quot;</span><span class="fu">,</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+      <ul>
+      <li>HTTP Method を「<strong>GET</strong>」に切り替えて <code>/api/admin/categories</code>
+      にリクエストすると、どのようなレスポンスになるか (特にステータスコード) を Thunder Client
+      を利用して確認してください。</li>
+      </ul>
+      <h2 data-number="4.5" id="カテゴリを追加するウェブapiの実装-コードの解説"><span
+      class="header-section-number">4.5</span> カテゴリを追加するウェブAPIの実装 (コードの解説)</h2>
+      <p>コードを再掲します。</p>
+      <div class="sourceCode" id="cb38"
+      data-caption="api/admin/categories/route.ts (カテゴリの追加)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb38-1"><a href="#cb38-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a></span>
+<span id="cb38-5"><a href="#cb38-5"></a><span class="kw">type</span> RequestBody <span class="op">=</span> {</span>
+<span id="cb38-6"><a href="#cb38-6"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>}<span class="op">;</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a></span>
+<span id="cb38-9"><a href="#cb38-9"></a><span class="im">export</span> <span class="kw">const</span> POST <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb38-10"><a href="#cb38-10"></a>  <span class="cf">try</span> {</span>
+<span id="cb38-11"><a href="#cb38-11"></a>    <span class="kw">const</span> { name }<span class="op">:</span> RequestBody <span class="op">=</span> <span class="cf">await</span> req<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">create</span>({</span>
+<span id="cb38-13"><a href="#cb38-13"></a>      data<span class="op">:</span> {</span>
+<span id="cb38-14"><a href="#cb38-14"></a>        name<span class="op">,</span></span>
+<span id="cb38-15"><a href="#cb38-15"></a>      }<span class="op">,</span></span>
+<span id="cb38-16"><a href="#cb38-16"></a>    })<span class="op">;</span></span>
+<span id="cb38-17"><a href="#cb38-17"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(category)<span class="op">;</span></span>
+<span id="cb38-18"><a href="#cb38-18"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb38-19"><a href="#cb38-19"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb38-20"><a href="#cb38-20"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb38-21"><a href="#cb38-21"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの作成に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb38-22"><a href="#cb38-22"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
+<span id="cb38-23"><a href="#cb38-23"></a>    )<span class="op">;</span></span>
+<span id="cb38-24"><a href="#cb38-24"></a>  }</span>
+<span id="cb38-25"><a href="#cb38-25"></a>}<span class="op">;</span></span></code></pre></div>
+      <p><strong>第05行目</strong> から <strong>第07行目</strong> で、HTTPリクエストの
+      <strong>ボディ</strong> として受け取るオブジェクトの型を <code>RequestBody</code>
+      として定義しています。</p>
+      <p>そして、<strong>第11行目</strong> で、実際にリクエストのボディから <code>name</code>
+      の値を取得しています。この取得に際しては、TypeScript (JavaScript) の <strong>分割代入</strong>
+      というテクニックが使われています
+      (分割代入については生成AIを利用して理解しておいてください)。<strong>第11行目</strong>
+      の処理を分解して丁寧に書けば、以下のようになります。</p>
+      <div class="sourceCode" id="cb39" data-caption="api/admin/categories/route.ts (抜粋)"
+      data-startFrom="11"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 10;"><span id="cb39-11"><a href="#cb39-11"></a><span class="kw">const</span> requestBody <span class="op">:</span> RequestBody <span class="op">=</span> <span class="cf">await</span> req<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb39-12"><a href="#cb39-12"></a><span class="kw">const</span> name <span class="op">=</span> requestBody<span class="op">.</span><span class="at">name</span><span class="op">;</span></span></code></pre></div>
+      <p>なお、<code>json</code> メソッドも非同期なので <code>await</code>
+      を忘れないようにしてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>TypeScript (JavaScript) における <code>const { id, name } = user</code>
+      のような「分割代入」について解説してください。</p>
+      </blockquote>
+      <blockquote>
+      <p>TypeScript (JavaScript)
+      の「分割代入」には、どのようなメリットとデメリットがありますか。</p>
+      </blockquote>
+      <p><strong>第12行目</strong> から <strong>第15行目</strong> では、PrismaClient の
+      <code>create</code> というメソッドを使ってカテゴリの追加しています。<code>create</code>
+      メソッドを <code>await</code> すると、実際に追加されたレコード (単体のカテゴリ)
+      が戻り値となります。そして、その値をそのまま <strong>第17行目</strong>
+      でHTTPレスポンスのボディに設定しています。</p>
+      <h2 data-number="4.6" id="カテゴリを削除するウェブapiの実装"><span
+      class="header-section-number">4.6</span> カテゴリを削除するウェブAPIの実装</h2>
+      <p><code>api/admin/categories/[id]</code> のようなURLパスで与えられる <code>id</code>
+      に一致するカテゴリを削除するためのウェブAPIを実装します。このAPIも管理者だけが実行できるように拡張する予定なので、以下のように
+      <code>admin</code> を含むパスに配置します。</p>
+      <pre><code>📂 src/
+└─ 📂 app/
+    └─ 📂 api/
+        ├─ 📂 categories/
+        │   └─ route.ts ( GET 作成済み )
+        └─ 📂 admin/
+            └─ 📂 categories/
+                ├─ route.ts ( POST 作成済み )
+                └─ 📂 [id]/
+                    └─ route.ts ◀ 新規作成</code></pre>
+      <p>既に<a
+      href="lecture07.html#投稿記事の詳細を表示するコンテンツの作成">前回講義</a>で解説しているように、Next.js
+      において <code>[id]</code> のような表記は <strong>パラメータプレースホルダ</strong>
+      といい、そこには動的に値が入ること意味します。例えば、削除したいカテゴリの <code>id</code> が
+      <code>24f932b8-....-569f07ba16a7</code> の場合、エンドポイントは次のようになります。</p>
+      <ul>
+      <li><code>/api/admin/categories/24f932b8-...-569f07ba16a7</code></li>
+      </ul>
+      <p><code>route.ts</code> に次のプログラムを貼付けて保存してください。</p>
+      <div class="sourceCode" id="cb41"
+      data-caption="api/admin/categories/[id]/route.ts (カテゴリの削除)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb41-1"><a href="#cb41-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a></span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="kw">type</span> RouteParams <span class="op">=</span> {</span>
+<span id="cb41-6"><a href="#cb41-6"></a>  params<span class="op">:</span> {</span>
+<span id="cb41-7"><a href="#cb41-7"></a>    id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb41-8"><a href="#cb41-8"></a>  }<span class="op">;</span></span>
+<span id="cb41-9"><a href="#cb41-9"></a>}<span class="op">;</span></span>
+<span id="cb41-10"><a href="#cb41-10"></a></span>
+<span id="cb41-11"><a href="#cb41-11"></a><span class="im">export</span> <span class="kw">const</span> DELETE <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest<span class="op">,</span> routeParams<span class="op">:</span> RouteParams) <span class="kw">=&gt;</span> {</span>
+<span id="cb41-12"><a href="#cb41-12"></a>  <span class="cf">try</span> {</span>
+<span id="cb41-13"><a href="#cb41-13"></a>    <span class="kw">const</span> id <span class="op">=</span> routeParams<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
+<span id="cb41-14"><a href="#cb41-14"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span>
+<span id="cb41-15"><a href="#cb41-15"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({ msg<span class="op">:</span> <span class="vs">`「</span><span class="sc">${</span>category<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">」を削除しました。`</span> })<span class="op">;</span></span>
+<span id="cb41-16"><a href="#cb41-16"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb41-17"><a href="#cb41-17"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb41-18"><a href="#cb41-18"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb41-19"><a href="#cb41-19"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの削除に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb41-20"><a href="#cb41-20"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
+<span id="cb41-21"><a href="#cb41-21"></a>    )<span class="op">;</span></span>
+<span id="cb41-22"><a href="#cb41-22"></a>  }</span>
+<span id="cb41-23"><a href="#cb41-23"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>削除処理は <strong>第14行目</strong> にある <code>prisma.category.delete()</code>
+      メソッドにより実行されています。このメソッドは、<strong>指定された条件に一致する「単一のレコード」を削除する機能</strong>
+      を持っています。</p>
+      <div class="note type-tips">
+      <p><strong>deleteメソッドに対する条件の与え方</strong></p>
+      <p>deleteメソッドには、引数を使って「削除対象を指定する条件」を与えます。例えば、<code>"c-1234"</code>
+      という <code>id</code> のレコード (カテゴリ)
+      を削除したいときは、次のように引数を指定します。</p>
+      <div class="sourceCode" id="cb42" data-caption="deleteメソッドの引数の指定の説明1"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb42-1"><a href="#cb42-1"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id<span class="op">:</span> <span class="st">&quot;c-1234&quot;</span> } })<span class="op">;</span></span></code></pre></div>
+      <p>これは変数を使って次のようにも書けます。</p>
+      <div class="sourceCode" id="cb43" data-caption="deleteメソッドの引数の指定の説明2"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">const</span> id <span class="op">=</span> <span class="st">&quot;c-1234&quot;</span><span class="op">;</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id<span class="op">:</span> id } })<span class="op">;</span></span></code></pre></div>
+      <p>TypeScript (JavaScript)
+      では、オブジェクトの「<strong>プロパティ名</strong>」と「<strong>値の変数名</strong>」が同じ場合、省略記法を使うことができます。つまり、<code>id: id</code>
+      を、単に <code>id</code> と書くことができます
+      (省表記が利用できます)。これを適用すれば、先のコードは、次のように記述することができます。</p>
+      <div class="sourceCode" id="cb44" data-caption="deleteメソッドの引数の指定の説明3"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">const</span> id <span class="op">=</span> <span class="st">&quot;c-1234&quot;</span><span class="op">;</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span></code></pre></div>
+      <p>慣れるまでは非常に分かりづらいと思いますが、実務では頻繁に利用される記法なので覚えておいてください。<strong>第14行目</strong>
+      は、この略表記を使って記述されています。</p>
+      </div>
+      <p>なお、<code>delete</code>
+      メソッドは削除に成功したとき、当該のレコードを戻り値とします。<strong>第15行目</strong>
+      では、その戻り値を利用して、<code>「カテゴリ5」を削除しました。</code> のような HTTP
+      レスポンスを返すようにしています。</p>
+      <hr />
+      <p>ファイルの編集が完了したら開発モードでアプリを起動して、<strong>Thunder Client</strong>
+      からテストを実行してください。HTTP Method
+      を「<strong>DELETE</strong>」に切り替え、ボディは削除してください
+      (ボディを残していても支障はありません)。</p>
+      <p>エンドポイントの <code>[id]</code> の部分 (＝削除したいカテゴリのID) については、Prisma
+      Studio から調べて設定してください。</p>
+      <figure>
+      <img src="figs/08/vscode_11.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>存在しない <code>id</code>
+      をエンドポイントに指定した場合、どのようなレスポンスとなるか確認しておいてください。</p>
+      <h2 data-number="4.7" id="カテゴリを編集するウェブapiの実装"><span
+      class="header-section-number">4.7</span> カテゴリを編集するウェブAPIの実装</h2>
+      <p>カテゴリの <strong>名前を変更するためのウェブAPI</strong>
+      を実装します。具体的には、次のようなエンドポイントに対して、新しい名前の情報を持ったボディを「<strong>PUTリクエスト</strong>」で送信することで、これを実現します。</p>
+      <ul>
+      <li><code>/api/admin/categories/24f932b8-...-569f07ba16a7</code></li>
+      </ul>
+      <p>既に気づいたかもしれませんが、このエンドポイントは <span
+      class="masked">DELETEメソッドと共通</span> になります。<code>route.ts</code>
+      には複数のメソッドを含めることが可能なので <code>api/admin/categories/[id]/route.ts</code>
+      を次のように編集してください。</p>
+      <p>基本的には、<strong>第11行目</strong> から <strong>第31行目</strong>
+      の範囲を追記しています。<code>update</code> メソッドでは、引数に与えるオブジェクトの
+      <code>where</code>
+      プロパティで「<strong>更新対象のレコードを指定</strong>」し、<code>data</code>
+      プロパティで「<strong>更新する値 (上書きする値)</strong>」を指定しています。</p>
+      <p>ここでも、先と同じく <code>{id: id}</code> を <code>{ id }</code>
+      で略表記するテクニック、<code>{ name: name }</code> を <code>{ name }</code>
+      で略表記するテクニックが使用されています。</p>
+      <div class="sourceCode" id="cb45" data-caption="api/admin/categories/[id]/route.ts"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="kw">type</span> RouteParams <span class="op">=</span> {</span>
+<span id="cb45-6"><a href="#cb45-6"></a>  params<span class="op">:</span> {</span>
+<span id="cb45-7"><a href="#cb45-7"></a>    id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a>  }<span class="op">;</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a>}<span class="op">;</span></span>
+<span id="cb45-10"><a href="#cb45-10"></a></span>
+<span id="cb45-11"><a href="#cb45-11"></a><span class="kw">type</span> RequestBody <span class="op">=</span> {</span>
+<span id="cb45-12"><a href="#cb45-12"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb45-13"><a href="#cb45-13"></a>}<span class="op">;</span></span>
+<span id="cb45-14"><a href="#cb45-14"></a></span>
+<span id="cb45-15"><a href="#cb45-15"></a><span class="im">export</span> <span class="kw">const</span> PUT <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest<span class="op">,</span> routeParams<span class="op">:</span> RouteParams) <span class="kw">=&gt;</span> {</span>
+<span id="cb45-16"><a href="#cb45-16"></a>  <span class="cf">try</span> {</span>
+<span id="cb45-17"><a href="#cb45-17"></a>    <span class="kw">const</span> id <span class="op">=</span> routeParams<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
+<span id="cb45-18"><a href="#cb45-18"></a>    <span class="kw">const</span> { name }<span class="op">:</span> RequestBody <span class="op">=</span> <span class="cf">await</span> req<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb45-19"><a href="#cb45-19"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">update</span>({</span>
+<span id="cb45-20"><a href="#cb45-20"></a>      where<span class="op">:</span> { id }<span class="op">,</span></span>
+<span id="cb45-21"><a href="#cb45-21"></a>      data<span class="op">:</span> { name }<span class="op">,</span></span>
+<span id="cb45-22"><a href="#cb45-22"></a>    })<span class="op">;</span></span>
+<span id="cb45-23"><a href="#cb45-23"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(category)<span class="op">;</span></span>
+<span id="cb45-24"><a href="#cb45-24"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb45-25"><a href="#cb45-25"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb45-26"><a href="#cb45-26"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb45-27"><a href="#cb45-27"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの名前変更に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb45-28"><a href="#cb45-28"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
+<span id="cb45-29"><a href="#cb45-29"></a>    )<span class="op">;</span></span>
+<span id="cb45-30"><a href="#cb45-30"></a>  }</span>
+<span id="cb45-31"><a href="#cb45-31"></a>}<span class="op">;</span></span>
+<span id="cb45-32"><a href="#cb45-32"></a></span>
+<span id="cb45-33"><a href="#cb45-33"></a><span class="im">export</span> <span class="kw">const</span> DELETE <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest<span class="op">,</span> routeParams<span class="op">:</span> RouteParams) <span class="kw">=&gt;</span> {</span>
+<span id="cb45-34"><a href="#cb45-34"></a>  <span class="cf">try</span> {</span>
+<span id="cb45-35"><a href="#cb45-35"></a>    <span class="kw">const</span> id <span class="op">=</span> routeParams<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
+<span id="cb45-36"><a href="#cb45-36"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span>
+<span id="cb45-37"><a href="#cb45-37"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({ msg<span class="op">:</span> <span class="vs">`「</span><span class="sc">${</span>category<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">」を削除しました。`</span> })<span class="op">;</span></span>
+<span id="cb45-38"><a href="#cb45-38"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb45-39"><a href="#cb45-39"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb45-40"><a href="#cb45-40"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb45-41"><a href="#cb45-41"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの削除に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb45-42"><a href="#cb45-42"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
+<span id="cb45-43"><a href="#cb45-43"></a>    )<span class="op">;</span></span>
+<span id="cb45-44"><a href="#cb45-44"></a>  }</span>
+<span id="cb45-45"><a href="#cb45-45"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>ファイルの編集が完了したら開発モードでアプリを起動して、<strong>Thunder Client</strong>
+      でテストしてください。</p>
+      <figure>
+      <img src="figs/08/vscode_12.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <!-- ---------------------------------------- -->
     </main>
 
