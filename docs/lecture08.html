@@ -86,8 +86,8 @@ id="toc-カテゴリの一覧を取得するウェブapiの実装"><span class="
 カテゴリの一覧を取得するウェブAPIの実装</a></li>
 <li><a href="#thunder-client-を使ったapiのテスト" id="toc-thunder-client-を使ったapiのテスト"><span
 class="toc-section-number">4.4</span> Thunder Client を使ったAPIのテスト</a></li>
-<li><a href="#カテゴリを取得するウェブapiの実装" id="toc-カテゴリを取得するウェブapiの実装"><span
-class="toc-section-number">4.5</span> カテゴリを取得するウェブAPIの実装</a></li>
+<li><a href="#カテゴリを追加するウェブapiの実装" id="toc-カテゴリを追加するウェブapiの実装"><span
+class="toc-section-number">4.5</span> カテゴリを追加するウェブAPIの実装</a></li>
 <li><a href="#カテゴリを追加するウェブapiの実装-コードの解説"
 id="toc-カテゴリを追加するウェブapiの実装-コードの解説"><span class="toc-section-number">4.6</span>
 カテゴリを追加するウェブAPIの実装 (コードの解説)</a></li>
@@ -1274,9 +1274,9 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       (=<span class="masked">何が問題でレスポンスが空になっているか分からない</span>)
       に注意してください。</p>
       <p>一方で、次のように <code>categories</code> に
-      <strong>明示的に型を与えると</strong>、<code>await</code>
-      を忘れたときにコンパイルエラーが発生すること (問題箇所が把握しやすいこと)
-      を確認してください。</p>
+      <strong>明示的に型を与えると</strong>、<code>await</code> を忘れているときに
+      <strong>コンパイルエラーが発生して注意喚起してくれること</strong>
+      (問題箇所が把握しやすいこと、問題を早期発見できること) を確認してください。</p>
       <div class="sourceCode" id="cb24"
       data-caption="api/categories/route.ts (awaitを付け忘れ・型を明示)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
@@ -1300,7 +1300,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb24-19"><a href="#cb24-19"></a>    )<span class="op">;</span></span>
 <span id="cb24-20"><a href="#cb24-20"></a>  }</span>
 <span id="cb24-21"><a href="#cb24-21"></a>}<span class="op">;</span></span></code></pre></div>
-      <p>この例のように型を明示するような堅牢なコードを記述することで、結果的として効率的に開発を進めることできます。<strong>可読性を損なわない範囲で「型」を明示</strong>するようにしてください。</p>
+      <p>この例のように <span class="masked">「型」を明示するような堅牢なコード</span>
+      を記述することで、結果的として効率的に開発を進めることできます。<strong>可読性を損なわない範囲で「型」を明示</strong>するようにしてください。</p>
       <h3 data-number="4.4.4" id="演習-10分-1"><span class="header-section-number">4.4.4</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
       <p>次のように意図的にエラーを発生させるコード (<strong>第12行目</strong>)
@@ -1334,7 +1335,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb25-21"><a href="#cb25-21"></a>}<span class="op">;</span></span></code></pre></div>
       <ul>
       <li>例外処理 <code>try ~ catch</code> の概念については<a
-      href="https://takeshiwada1980.github.io/Programming1-2023/lecture28.html#例外処理">プログラミング1</a>で学習済みです。理解に不安がある場合は、生成AIなどを概要を理解してください。</li>
+      href="https://takeshiwada1980.github.io/Programming1-2023/lecture28.html#例外処理">プログラミング1</a>で学習済みです。理解に不安がある場合は、生成AIなどを利用して概要を理解してください。</li>
       </ul>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
@@ -1345,12 +1346,13 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <h3 data-number="4.4.5" id="演習-15分-1"><span class="header-section-number">4.4.5</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>15分)</h3>
       <p><code>api/categories/route.ts</code>
-      について、正常に処理できた場合の「戻り値」を、それぞれ、次のように変更したとき、レスポンスの「ステータスコード」と「レスポンスのボディ」がどのように変化するか
+      について、HTTPリクエストを正常に処理できた場合の「戻り値
+      (=<code>NextResponse</code>)」を、次のように変更したとき、レスポンスの「ステータスコード」と「レスポンスのボディ」がどのように変化するか
       (あるいは変化しないのか) を <strong>Thunder Client</strong> から確認してください。</p>
       <div class="sourceCode" id="cb26" data-caption="変更前"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1"></a><span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories)<span class="op">;</span></span></code></pre></div>
-      <p>また、<strong>各変更にどのような意味があるか (あるいは意味がないか)</strong>
-      について、生成AIを利用して考えてみてください。</p>
+      <p>また、<strong>各変更に「どのような意味があるか (あるいは意味がないか)」</strong>
+      についても、生成AIを利用して考察してみてください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>Next.js (App Router) の API Routes の戻り値として
@@ -1359,13 +1361,13 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       に書き換えることには、どのような意味や意図があると考えられますか。</p>
       </blockquote>
       <hr />
-      <p><strong>変更1</strong> : <code>NextResponse</code> の <code>JSON</code>
-      メソッドの第2引数に<strong>ステータスコード「200」</strong>を明示的に与える。</p>
+      <p><strong>変更1</strong> : <code>NextResponse.json</code>
+      メソッドの<strong>第2引数</strong>に「<strong>ステータスコード「200」</strong>」を明示的に与える。</p>
       <div class="sourceCode" id="cb27" data-caption="変更1"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(categories<span class="op">,</span> { status<span class="op">:</span> <span class="dv">200</span> })<span class="op">;</span></span></code></pre></div>
       <hr />
-      <p><strong>変更2</strong> : <code>NextResponse</code> の <code>JSON</code>
-      メソッドの第1引数を次のように変更する。</p>
+      <p><strong>変更2</strong> : <code>NextResponse.json</code> メソッドの <strong>第1引数</strong>
+      を次のように変更する。</p>
       <div class="sourceCode" id="cb28" data-caption="変更2a"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({ contents<span class="op">:</span> categories })<span class="op">;</span></span></code></pre></div>
       <div class="sourceCode" id="cb29" data-caption="変更2b"><pre
@@ -1375,9 +1377,11 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb29-4"><a href="#cb29-4"></a>})<span class="op">;</span></span></code></pre></div>
       <h3 data-number="4.4.6" id="ex演習-宿題-20分"><span class="header-section-number">4.4.6</span>
       EX演習 (宿題: <i class="fa-solid fa-stopwatch"></i>20分)</h3>
-      <p>次のように <code>findMany</code>
-      の引数を、次のように変更すると、取得されるデータがどのように変化するか確認してください。なお、ここでは
-      <code>categories: Category[] = ...</code>
+      <p><code>prisma.category.findMany</code> の <strong>第1引数</strong>
+      に与えるオブジェクトを次のように変更すると、<code>categories</code>
+      に格納されるデータがどのように変わるかを確認してください
+      (ThunderClientでレスポンスのボディを確認してください)。</p>
+      <p>なお、ここでは <code>categories: Category[] = ...</code>
       のように型を指定するとコンパイルエラーになるので注意してください。</p>
       <div class="sourceCode" id="cb30" data-caption="selectプロパティの追加1"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">const</span> categories <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({</span>
@@ -1424,13 +1428,14 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb32-12"><a href="#cb32-12"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
 <span id="cb32-13"><a href="#cb32-13"></a>  }<span class="op">,</span></span>
 <span id="cb32-14"><a href="#cb32-14"></a>})<span class="op">;</span></span></code></pre></div>
-      <h2 data-number="4.5" id="カテゴリを取得するウェブapiの実装"><span
-      class="header-section-number">4.5</span> カテゴリを取得するウェブAPIの実装</h2>
-      <p><strong>カテゴリを追加するウェブAPI</strong>を実装します。</p>
-      <p>このAPIは、将来的に <span class="masked">管理者でログインしている場合のみ受理される</span>
+      <h2 data-number="4.5" id="カテゴリを追加するウェブapiの実装"><span
+      class="header-section-number">4.5</span> カテゴリを追加するウェブAPIの実装</h2>
+      <p><strong>カテゴリを追加 (新規作成) するウェブAPI</strong>を実装します。</p>
+      <p>このAPIは、将来的に (次々回以降の講義で) <span
+      class="masked">管理者でログインしている場合のみ受理される</span>
       ように拡張していくので、エンドポイントを <code>/api/admin/categories</code>
-      のように設定したいと思います。また、リソースの追加処理に相当するので HTTP Method の <span
-      class="masked">POST</span> に対応するように実装します。</p>
+      のように設計したいと思います。また、リソースの追加処理に相当するので HTTP Method の <span
+      class="masked">POST</span> に対応させるように実装します。</p>
       <p>次の位置に <code>route.ts</code> を新規作成してください。</p>
       <pre><code>📂 src/
 └─ 📂 app/
