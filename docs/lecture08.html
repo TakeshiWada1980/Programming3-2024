@@ -79,20 +79,22 @@ class="toc-section-number">3.11</span> スキーマに変更を加えたとき�
 class="toc-section-number">4</span> バックエンド (ウェブAPI) の実装</a>
 <ul>
 <li><a href="#準備" id="toc-準備"><span class="toc-section-number">4.1</span> 準備</a></li>
+<li><a href="#apiの設計" id="toc-apiの設計"><span class="toc-section-number">4.2</span>
+APIの設計</a></li>
 <li><a href="#カテゴリの一覧を取得するウェブapiの実装"
-id="toc-カテゴリの一覧を取得するウェブapiの実装"><span class="toc-section-number">4.2</span>
+id="toc-カテゴリの一覧を取得するウェブapiの実装"><span class="toc-section-number">4.3</span>
 カテゴリの一覧を取得するウェブAPIの実装</a></li>
 <li><a href="#thunder-client-を使ったapiのテスト" id="toc-thunder-client-を使ったapiのテスト"><span
-class="toc-section-number">4.3</span> Thunder Client を使ったAPIのテスト</a></li>
+class="toc-section-number">4.4</span> Thunder Client を使ったAPIのテスト</a></li>
 <li><a href="#カテゴリを取得するウェブapiの実装" id="toc-カテゴリを取得するウェブapiの実装"><span
-class="toc-section-number">4.4</span> カテゴリを取得するウェブAPIの実装</a></li>
+class="toc-section-number">4.5</span> カテゴリを取得するウェブAPIの実装</a></li>
 <li><a href="#カテゴリを追加するウェブapiの実装-コードの解説"
-id="toc-カテゴリを追加するウェブapiの実装-コードの解説"><span class="toc-section-number">4.5</span>
+id="toc-カテゴリを追加するウェブapiの実装-コードの解説"><span class="toc-section-number">4.6</span>
 カテゴリを追加するウェブAPIの実装 (コードの解説)</a></li>
 <li><a href="#カテゴリを削除するウェブapiの実装" id="toc-カテゴリを削除するウェブapiの実装"><span
-class="toc-section-number">4.6</span> カテゴリを削除するウェブAPIの実装</a></li>
+class="toc-section-number">4.7</span> カテゴリを削除するウェブAPIの実装</a></li>
 <li><a href="#カテゴリを編集するウェブapiの実装" id="toc-カテゴリを編集するウェブapiの実装"><span
-class="toc-section-number">4.7</span> カテゴリを編集するウェブAPIの実装</a></li>
+class="toc-section-number">4.8</span> カテゴリを編集するウェブAPIの実装</a></li>
 </ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -952,13 +954,13 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       で動かすと、その <strong>ホットリロード機能</strong> (＝<span
       class="masked">ファイルの変更を検知して自動的にアプリケーションを再起動する機能</span>)
       との兼ね合いで、<strong>Prisma Client
-      インスタンスが重複して生成されるという問題</strong>生じます。このような形で
+      インスタンスが重複して生成されるという問題</strong>が生じます。このような形で
       PrismaClientのインスタンス が重複生成されると<a
       href="https://www.google.com/search?q=メモリリーク">メモリリーク</a>や「Too many
       connections」(＝<span
       class="masked">データベース接続数が上限を超えた場合に発生するエラー</span>)
-      が生じる可能性があります。ちなみに、開発モード以外では、ホットリロードが機能しないのでこの懸念はありません。</p>
-      <p>これを回避するための工夫をしていきます。まず <code>src/app/lib</code> に
+      が生じる可能性があります。ちなみに、開発モード以外では、ホットリロードは使われないのでこの懸念はありません。</p>
+      <p>この問題を回避するための対策をしていきます。まず <code>src/app/lib</code> に
       <code>prisma.ts</code> というファイルを新規作成してください
       (<code>lib</code>フォルダも存在しないので新規作成してください)。</p>
       <figure>
@@ -996,17 +998,67 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       practice for instantiating Prisma Client with
       Next.js</a>を参照してください。また、参考図書の「<strong>これからはじめるReact実践入門</strong>」の
       p.592 を参照してください。</p>
-      <h2 data-number="4.2" id="カテゴリの一覧を取得するウェブapiの実装"><span
-      class="header-section-number">4.2</span> カテゴリの一覧を取得するウェブAPIの実装</h2>
+      <h2 data-number="4.2" id="apiの設計"><span class="header-section-number">4.2</span>
+      APIの設計</h2>
+      <p>カテゴリに関して次のようにCRUD操作に対応する4個のウェブAPIを実装していきます。カテゴリの新規作成・変更・削除に関係するAPIについては
+      <span class="masked">管理者としてログインしているときだけ利用できる</span>
+      ようにしていきます。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP<br>Method</th>
+      <th>処理</th>
+      <th>管理者<br>権限</th>
+      <th>リクエスト<br>ボディ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得する</td>
+      <td></td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories</td>
+      <td>POST</td>
+      <td>カテゴリを追加する</td>
+      <td>必要</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/categories/[id]</td>
+      <td>PUT</td>
+      <td>カテゴリの名前を変更する</td>
+      <td>必要</td>
+      <td>必要</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories/[id]</td>
+      <td>DELETE</td>
+      <td>カテゴリを削除する</td>
+      <td>必要</td>
+      <td></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>管理者だけが利用できるように制限する処理は <strong>ログイン機能を実装してから追加</strong>
+      します。今回講義のなかでは、誰でも利用可能なAPIとして実装します。</p>
+      <p>なお、ここでは「カテゴリ」のCRUD操作について解説しますが、次回以降、(宿題で)
+      投稿記事に関するCRUD操作を各自で実装してもらうので、<strong>しっかりと理解しながら読み進めるようにしてください</strong>。</p>
+      <h2 data-number="4.3" id="カテゴリの一覧を取得するウェブapiの実装"><span
+      class="header-section-number">4.3</span> カテゴリの一覧を取得するウェブAPIの実装</h2>
       <p>Next.js (App Router) では <code>src/app/api</code> の配下に <code>route.ts</code>
       (≠<code>page.tsx</code>)
-      という名前のファイルを配置することで、<strong>ウェブAPIのエンドポイントが作成</strong>
-      できます。</p>
+      という名前のファイルを配置することで、<strong>ウェブAPIのエンドポイントを作成</strong>
+      することができます。</p>
       <p>例えば、以下のように <code>src/app/api/categories/route.ts</code>
       というファイルを作成して、そこに <code>GET</code> 関数を定義すると <span
       class="masked">http://localhost:3000/api/categories</span>
-      というURLでアクセス可能なエンドポイントが作成できます（<strong>GET</strong>
-      メソッドのHTTPリクエストを受け付けることができるようになります）。</p>
+      というURLで利用可能なエンドポイントが作成できます（<strong>GET Method</strong> の
+      HTTPリクエストを受付けて処理できるようになります）。</p>
       <pre><code>📂 src/
 └─ 📂 app/
     └─ 📂 api/
@@ -1089,7 +1141,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <p>Next.js (App Router) でウェブAPIを実装しようとしています。そのための前提知識として HTTP
       Method について解説してください。</p>
       </blockquote>
-      <h3 data-number="4.2.1" id="定着確認-2"><span class="header-section-number">4.2.1</span>
+      <h3 data-number="4.3.1" id="定着確認-2"><span class="header-section-number">4.3.1</span>
       定着確認</h3>
       <ul>
       <li>CRUD操作に対応する4つの HTTP Method を答えよ。
@@ -1115,8 +1167,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       </ul>
       <p>HTTPに関する文脈において「<strong>リソース</strong>」とは <span
       class="masked">URLでアクセス可能なデータや情報、ファイル</span> を指します。</p>
-      <h2 data-number="4.3" id="thunder-client-を使ったapiのテスト"><span
-      class="header-section-number">4.3</span> Thunder Client を使ったAPIのテスト</h2>
+      <h2 data-number="4.4" id="thunder-client-を使ったapiのテスト"><span
+      class="header-section-number">4.4</span> Thunder Client を使ったAPIのテスト</h2>
       <p><a href="lecture07.html#apiの利用テスト">前回講義</a>に導入した <strong>Thunder
       Client</strong> (VSCodeの拡張機能) を使って、前のセクションで実装した
       <code>/api/categories</code>
@@ -1142,7 +1194,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <blockquote>
       <p>HTTPレスポンスのステータスコードについて、主要なものを解説してください。</p>
       </blockquote>
-      <h3 data-number="4.3.1" id="定着確認-3"><span class="header-section-number">4.3.1</span>
+      <h3 data-number="4.4.1" id="定着確認-3"><span class="header-section-number">4.4.1</span>
       定着確認</h3>
       <ul>
       <li>HTTPレスポンスのステータス「OK」を表わす番号を答えよ。
@@ -1166,7 +1218,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <li>答え: <span class="masked">405</span></li>
       </ul></li>
       </ul>
-      <h3 data-number="4.3.2" id="演習-5分"><span class="header-section-number">4.3.2</span> 演習
+      <h3 data-number="4.4.2" id="演習-5分"><span class="header-section-number">4.4.2</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>5分)</h3>
       <p>バックエンドで処理される <code>route.ts</code> のなかに <code>console.log()</code>
       を記述すると、そのログは <strong>VSCodeのターミナル</strong>
@@ -1177,7 +1229,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <code>console.log()</code> を実行しても <strong>VSCodeのターミナルに出力されないこと</strong>
       があるので注意してください。console に関して見慣れないインポートがあれば削除してください。</p>
       </div>
-      <h3 data-number="4.3.3" id="演習-10分"><span class="header-section-number">4.3.3</span> 演習
+      <h3 data-number="4.4.3" id="演習-10分"><span class="header-section-number">4.4.3</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
       <p>PrismaClient の各種メソッドのうち、<code>findMany</code>
       のようにDBとデータのやりとりを行なうメソッドは基本的に「<strong>非同期</strong>」になっています。非同期メソッドは
@@ -1242,7 +1294,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb24-20"><a href="#cb24-20"></a>  }</span>
 <span id="cb24-21"><a href="#cb24-21"></a>}<span class="op">;</span></span></code></pre></div>
       <p>この例のように型を明示するような堅牢なコードを記述することで、結果的として効率的に開発を進めることできます。<strong>可読性を損なわない範囲で「型」を明示</strong>するようにしてください。</p>
-      <h3 data-number="4.3.4" id="演習-10分-1"><span class="header-section-number">4.3.4</span> 演習
+      <h3 data-number="4.4.4" id="演習-10分-1"><span class="header-section-number">4.4.4</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
       <p>次のように意図的にエラーを発生させるコード (<strong>第12行目</strong>)
       を追加してください。そのうえで、<strong>Thunder Client</strong> から HTTPリクエスト
@@ -1283,7 +1335,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <code>try</code>、<code>catch</code>、<code>throw</code>
       のキーワードと使い方について解説してください。</p>
       </blockquote>
-      <h3 data-number="4.3.5" id="演習-15分-1"><span class="header-section-number">4.3.5</span> 演習
+      <h3 data-number="4.4.5" id="演習-15分-1"><span class="header-section-number">4.4.5</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>15分)</h3>
       <p><code>api/categories/route.ts</code>
       について、正常に処理できた場合の「戻り値」を、それぞれ、次のように変更したとき、レスポンスの「ステータスコード」と「レスポンスのボディ」がどのように変化するか
@@ -1314,7 +1366,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb29-2"><a href="#cb29-2"></a>  isSuccess<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
 <span id="cb29-3"><a href="#cb29-3"></a>  contents<span class="op">:</span> categories<span class="op">,</span></span>
 <span id="cb29-4"><a href="#cb29-4"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 data-number="4.3.6" id="ex演習-宿題-20分"><span class="header-section-number">4.3.6</span>
+      <h3 data-number="4.4.6" id="ex演習-宿題-20分"><span class="header-section-number">4.4.6</span>
       EX演習 (宿題: <i class="fa-solid fa-stopwatch"></i>20分)</h3>
       <p>次のように <code>findMany</code>
       の引数を、次のように変更すると、取得されるデータがどのように変化するか確認してください。なお、ここでは
@@ -1365,8 +1417,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb32-12"><a href="#cb32-12"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
 <span id="cb32-13"><a href="#cb32-13"></a>  }<span class="op">,</span></span>
 <span id="cb32-14"><a href="#cb32-14"></a>})<span class="op">;</span></span></code></pre></div>
-      <h2 data-number="4.4" id="カテゴリを取得するウェブapiの実装"><span
-      class="header-section-number">4.4</span> カテゴリを取得するウェブAPIの実装</h2>
+      <h2 data-number="4.5" id="カテゴリを取得するウェブapiの実装"><span
+      class="header-section-number">4.5</span> カテゴリを取得するウェブAPIの実装</h2>
       <p><strong>カテゴリを追加するウェブAPI</strong>を実装します。</p>
       <p>このAPIは、将来的に <span class="masked">管理者でログインしている場合のみ受理される</span>
       ように拡張していくので、エンドポイントを <code>/api/admin/categories</code>
@@ -1445,7 +1497,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       </figure>
       <p>既に解説したように、Prisma Studio では、レコードは <code>id</code>
       でソートされていることに注意してください。</p>
-      <h3 data-number="4.4.1" id="演習"><span class="header-section-number">4.4.1</span> 演習</h3>
+      <h3 data-number="4.5.1" id="演習"><span class="header-section-number">4.5.1</span> 演習</h3>
       <ul>
       <li>HTTPリクエストのボディを以下のように設定して POST
       したとき、レスポンスがどのようなになるかを Thunder Client を利用して確認してください。</li>
@@ -1468,8 +1520,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       にリクエストすると、どのようなレスポンスになるか (特にステータスコード) を Thunder Client
       を利用して確認してください。</li>
       </ul>
-      <h2 data-number="4.5" id="カテゴリを追加するウェブapiの実装-コードの解説"><span
-      class="header-section-number">4.5</span> カテゴリを追加するウェブAPIの実装 (コードの解説)</h2>
+      <h2 data-number="4.6" id="カテゴリを追加するウェブapiの実装-コードの解説"><span
+      class="header-section-number">4.6</span> カテゴリを追加するウェブAPIの実装 (コードの解説)</h2>
       <p>コードを再掲します。</p>
       <div class="sourceCode" id="cb38"
       data-caption="api/admin/categories/route.ts (カテゴリの追加)"><pre
@@ -1525,8 +1577,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       メソッドを <code>await</code> すると、実際に追加されたレコード (単体のカテゴリ)
       が戻り値となります。そして、その値をそのまま <strong>第17行目</strong>
       でHTTPレスポンスのボディに設定しています。</p>
-      <h2 data-number="4.6" id="カテゴリを削除するウェブapiの実装"><span
-      class="header-section-number">4.6</span> カテゴリを削除するウェブAPIの実装</h2>
+      <h2 data-number="4.7" id="カテゴリを削除するウェブapiの実装"><span
+      class="header-section-number">4.7</span> カテゴリを削除するウェブAPIの実装</h2>
       <p><code>api/admin/categories/[id]</code> のようなURLパスで与えられる <code>id</code>
       に一致するカテゴリを削除するためのウェブAPIを実装します。このAPIも管理者だけが実行できるように拡張する予定なので、以下のように
       <code>admin</code> を含むパスに配置します。</p>
@@ -1615,8 +1667,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       </figure>
       <p>存在しない <code>id</code>
       をエンドポイントに指定した場合、どのようなレスポンスとなるか確認しておいてください。</p>
-      <h2 data-number="4.7" id="カテゴリを編集するウェブapiの実装"><span
-      class="header-section-number">4.7</span> カテゴリを編集するウェブAPIの実装</h2>
+      <h2 data-number="4.8" id="カテゴリを編集するウェブapiの実装"><span
+      class="header-section-number">4.8</span> カテゴリを編集するウェブAPIの実装</h2>
       <p>カテゴリの <strong>名前を変更するためのウェブAPI</strong>
       を実装します。具体的には、次のようなエンドポイントに対して、新しい名前の情報を持ったボディを「<strong>PUTリクエスト</strong>」で送信することで、これを実現します。</p>
       <ul>
