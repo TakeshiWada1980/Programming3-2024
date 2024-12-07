@@ -1067,7 +1067,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <p>上記のようにフォルダとファイル (<code>route.ts</code>)
       を作成して、以下の内容を貼付けて保存してください。</p>
       <div class="sourceCode" id="cb22"
-      data-caption="src/app/api/categories/route.ts (カテゴリの一覧取得)"><pre
+      data-caption="src/app/api/categories/route.ts (HTTP GET Request によるカテゴリの一覧取得)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
 <span id="cb22-3"><a href="#cb22-3"></a></span>
@@ -1089,53 +1089,56 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb22-19"><a href="#cb22-19"></a>  }</span>
 <span id="cb22-20"><a href="#cb22-20"></a>}<span class="op">;</span></span></code></pre></div>
       <p>まずは、開発モードでアプリを立ち上げて <code>http://localhost:3000/api/categories</code>
-      にアクセスして、以下のように「カテゴリの一覧」が <strong>JSON形式で得られること</strong>
-      を確認してください。なお、Chromeでは、画面上部の「プリティ
-      プリント」のチェックボックスをONにしないと整形表示されません。</p>
+      にアクセスして、以下のように <span class="masked">「カテゴリの一覧」が
+      JSON形式で得られること</span>
+      を確認してください。なお、Chromeでは、画面上部の「<strong>プリティ
+      プリント</strong>」にチェックを入れないと下図のように整形表示されないので注意してください。</p>
       <figure>
       <img src="figs/08/app_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>以下、<code>route.ts</code> のコードを解説していきます。</p>
-      <p>まず、<strong>第01行目</strong>では、前のセクションで <code>src/app/lib/prisma.ts</code>
-      で定義した PrismaClient (O/R Mapper) のインスタンスである <code>prisma</code>
-      をインポートしています。基本的は、この <code>prisma</code> を通じて DB
-      とデータのやりとりをするので、このファイルのなかで、<code>const prisma = new PrismaClient();</code>
+      <p>まず、<strong>第01行目</strong>では、前のセクションで作成した
+      <code>src/app/lib/prisma.ts</code> のなかで定義した <strong>PrismaClient</strong> (＝O/R
+      Mapper) のインスタンスである <code>prisma</code> をインポートしています。基本的は、この
+      <code>prisma</code> を通じて DB とデータのやりとりをするので、このファイルのなかで、あらためて
+      <code>const prisma = new PrismaClient();</code>
       のような処理は<strong>必要ありません</strong>。</p>
-      <p><strong>第07行目</strong> から <strong>第11行目</strong> で、DB
-      のカテゴリテーブルからレコード全件を取得して、定数 <code>categories</code>
-      に格納しています。ここでは、<strong>第01行目</strong> でインポートした <code>prisma</code> の
-      <code>findMany</code>
+      <p><strong>第07行目</strong> から <strong>第11行目</strong> では、DB のカテゴリテーブルから
+      <strong>レコード全件</strong> を取得して、定数 <code>categories</code>
+      に格納しています。ここでは、<strong>第01行目</strong> でインポートした <code>prisma</code>
+      が持つ <code>findMany</code>
       というメソッドを使っていますが、このメソッドは「<strong>非同期メソッド</strong>」なので、<span
       class="masked"><code>await</code>が必要になること</span>
-      に注意してください。ここでは、<code>findMany</code> に引数の引数で、<code>createdAt</code>
-      属性で <strong>降順にソート</strong> するように指示もしています。戻り値を格納している
-      <code>categories</code>
-      ですが、下図のようにエディタ上でマウスカーソルを重ねると、<strong>オブジェクトの「配列」</strong>
-      になっていることが確認できます。</p>
+      に注意してください。ここでは、<code>findMany</code> に対して引数で「<code>createdAt</code>
+      属性に基づいて<strong>降順にソート</strong>」するようにも指示しています。戻り値を代入している
+      <code>categories</code> ですが、下図のようにエディタ上でマウスカーソルを重ねると
+      <strong>オブジェクトの「配列」</strong> になっていることが確認できます。</p>
       <figure>
       <img src="figs/08/vscode_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>このように <strong>第07行目</strong> の <code>categories</code> の型は、TypeScript
-      により「<strong>型推論</strong>」されますが、もし<strong>明示的に「型」を指定したい場合</strong>は、<code>import { Category } from "@prisma/client";</code>
-      をファイルの冒頭に追加したうえで <code>const categories: Category[] = ...</code>
-      のようにします (次の図を参照)。</p>
+      <p>このように <strong>第07行目</strong> の <code>categories</code> の型は TypeScript
+      により「<strong>型推論</strong>」されますが、もし<strong>明示的に「型」を指定したい場合</strong>は、ファイルの冒頭に
+      <code>import { Category } from "@prisma/client";</code> を追加したうえで
+      <code>const categories: Category[] = ...</code> のようにします (次の図を参照)。</p>
       <figure>
       <img src="figs/08/vscode_08.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p><strong>第05行目</strong>では、アロー関数形式で <code>GET</code>
       という関数を定義して処理を記述していますが、ここでの <strong>名前の設定</strong>
-      は非常に重要です。この <code>GET</code> という変数名をつけることで「<strong>HTTP GET
-      リクエスト</strong>」を受付けるようになります。これを <code>Get</code> や <code>get</code>
-      に変更すると機能しなくことに注意してください。もし、GE T以外の HTTP Method (POST、PUT、DELETE)
-      を受け付けるウェブAPIを実装するときは、そのメソッドにあわせて名前を変更します。HTTP Method
-      の概要が分からないときは、生成AIを使って概要を把握してください。</p>
-      <p><code>route.ts</code> に記述する GET / POST / PUT / DELETE 関数は、基本的に
-      <code>NextRequest</code>
-      を引数にして「HTTPリクエスト」の情報を受け取り、<code>NextResponse</code>
-      で「HTTPレスポンス」を生成するように構成します。</p>
+      は非常に重要です。<code>GET</code> という関数名を付けることで「<strong>HTTP GET
+      リクエスト</strong>」を受付けるようになります。これを <code>Get</code> や
+      <code>get</code>、<code>GetCategories</code>
+      などに変更すると<strong>機能しなくなるので注意</strong>してください。</p>
+      <p>GET 以外の HTTP Method (POST、PUT、DELETE)
+      を受け付けるウェブAPIを実装するときは、そのメソッドにあわせて関数名を設定する必要があります。HTTP
+      Method の概要が分からないときは、生成AIを使って概要を把握しておいてください。</p>
+      <p><code>route.ts</code> のなかに記述する GET / POST / PUT / DELETE 関数は、基本的に
+      <code>NextRequest</code> を引数にして「<strong>HTTP
+      Request</strong>」の情報を読み取り、<code>NextResponse</code> で「<strong>HTTP
+      NextResponse</strong>」を生成するように構成します。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>Next.js (App Router) でウェブAPIを実装しようとしています。そのための前提知識として HTTP
@@ -1169,10 +1172,10 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       class="masked">URLでアクセス可能なデータや情報、ファイル</span> を指します。</p>
       <h2 data-number="4.4" id="thunder-client-を使ったapiのテスト"><span
       class="header-section-number">4.4</span> Thunder Client を使ったAPIのテスト</h2>
-      <p><a href="lecture07.html#apiの利用テスト">前回講義</a>に導入した <strong>Thunder
-      Client</strong> (VSCodeの拡張機能) を使って、前のセクションで実装した
-      <code>/api/categories</code>
-      のテストを行ないます。予め開発モードでアプリを起動しておいてください。</p>
+      <p><a href="lecture07.html#apiの利用テスト">前回講義</a>のなかで導入した <strong>Thunder
+      Client</strong> (VSCodeの拡張機能) を使って、前のセクションで実装した APIのエンドポイント
+      <code>/api/categories</code> のテスト (動作検証) を行ないます。予め開発モードでアプリを起動
+      (<code>npm run dev</code>) しておいてください。</p>
       <p>VSCodeの左パネルの「⚡」のアイコンをクリックするか、<code>Ctrl+Shift+R</code> を押下すると
       Thunder Client のパネルが表示されるので、「<strong>New
       Request</strong>」のボタンを押下してください。</p>
@@ -1180,16 +1183,18 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <img src="figs/07/vscode_05.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>次に、HTTP Method として「<strong>GET</strong>」を選択 (確認)
-      して、エンドポイントを設定してください。そして、「Send」ボタンを押下してレスポンスを確認してください。VSCodeのウィンドウ幅が大きいときは、右側にレスポンスが表示されることがあります。</p>
+      <p>次に、HTTP Method として「<strong>GET</strong>」を選択 (確認) して、エンドポイントに
+      <code>http://localhost:3000/api/categories</code>
+      を設定してください。そして、「Send」ボタンを押下してリクエストを送信して、そのレスポンスを確認してください。VSCodeのウィンドウ幅が大きいときは、右側にレスポンスが表示されることがあります。</p>
       <figure>
       <img src="figs/08/vscode_09.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>レスポンスでは、<strong>ステータスコード</strong> (上記の場合は❸の「<strong>200
       OK</strong>」の箇所)
-      が重要となります。基本的には200番台が<strong>成功</strong>、その他、400番台、500番台が<strong>失敗</strong>を表します。知能情報実験実習2の後期のテーマ
-      (サーバ構築基礎実習) のなかでも習っていると思います。概要は把握しておいてください。</p>
+      が重要となります。基本的には200番台が「<strong>成功</strong>」、その他、400番台、500番台が「<strong>失敗</strong>」を表します。知能情報実験実習2の後期のテーマ
+      (サーバ構築基礎実習)
+      のなかでもステータスコードについて習っていると思います。概要を把握しておいてください。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>HTTPレスポンスのステータスコードについて、主要なものを解説してください。</p>
@@ -1221,27 +1226,29 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <h3 data-number="4.4.2" id="演習-5分"><span class="header-section-number">4.4.2</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>5分)</h3>
       <p>バックエンドで処理される <code>route.ts</code> のなかに <code>console.log()</code>
-      を記述すると、そのログは <strong>VSCodeのターミナル</strong>
+      を記述すると、そのログが <strong>VSCodeのターミナル</strong>
       に出力されることを確認してください。</p>
       <div class="note type-tips">
       <p>VSCode の補完機能により、意図せずに <code>import console from "inspector"</code>
-      などがファイルにされることがあります。それらがインポートされていると
-      <code>console.log()</code> を実行しても <strong>VSCodeのターミナルに出力されないこと</strong>
+      などがファイルに追加されていることがあります。それらがインポートされていると
+      <code>console.log()</code> を実行しても
+      <strong>VSCodeのターミナルにログが出力されないこと</strong>
       があるので注意してください。console に関して見慣れないインポートがあれば削除してください。</p>
       </div>
       <h3 data-number="4.4.3" id="演習-10分"><span class="header-section-number">4.4.3</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
       <p>PrismaClient の各種メソッドのうち、<code>findMany</code>
-      のようにDBとデータのやりとりを行なうメソッドは基本的に「<strong>非同期</strong>」になっています。非同期メソッドは
+      のようにDBとデータのやりとりをするメソッドは基本的に「<strong>非同期処理</strong>」になっています。非同期メソッドは
       <code>await</code> と組み合わせないと期待する動作をしません
       (<code>await</code>の付け忘れは、初心者がハマるポイントです)。</p>
       <ul>
-      <li><strong>同期処理</strong>と<strong>非同期処理</strong>
-      (<code>await</code>,<code>async</code>) については<a
+      <li><strong>同期処理</strong>と<strong>非同期処理</strong> (＝ <code>await</code> と
+      <code>async</code> の基本的な使用法) については<a
       href="lecture07.html#同期処理と非同期処理">前回講義</a>で学習済みです。理解に不安がある人は復習しておいてください。</li>
       </ul>
       <p>以下のコードのように <code>findMany</code> メソッドに <code>await</code>
-      を付け忘れると、どのようになるかを確認してください。</p>
+      を付け忘れると、どのようになるか (＝コンパイルエラーになるのか、ランタイムエラー
+      (実行時エラー) になるのか、エラーが発生しないのか) を実際に確認してみてください。</p>
       <div class="sourceCode" id="cb23"
       data-caption="api/categories/route.ts (awaitを付け忘れ)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
@@ -1249,7 +1256,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb23-3"><a href="#cb23-3"></a></span>
 <span id="cb23-4"><a href="#cb23-4"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
 <span id="cb23-5"><a href="#cb23-5"></a>  <span class="cf">try</span> {</span>
-<span id="cb23-6"><a href="#cb23-6"></a>    <span class="kw">const</span> categories <span class="op">=</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({ <span class="co">// ◀ await忘れ</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>    <span class="kw">const</span> categories <span class="op">=</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({ <span class="co">// ◀ 意図的にawait忘れ</span></span>
 <span id="cb23-7"><a href="#cb23-7"></a>      orderBy<span class="op">:</span> {</span>
 <span id="cb23-8"><a href="#cb23-8"></a>        createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span> </span>
 <span id="cb23-9"><a href="#cb23-9"></a>      }<span class="op">,</span></span>
@@ -1263,8 +1270,8 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
 <span id="cb23-17"><a href="#cb23-17"></a>    )<span class="op">;</span></span>
 <span id="cb23-18"><a href="#cb23-18"></a>  }</span>
 <span id="cb23-19"><a href="#cb23-19"></a>}<span class="op">;</span></span></code></pre></div>
-      <p>コンパイルエラーも、実行時エラーも発生せず、非常に解決しずらいバグになっていること (=<span
-      class="masked">何が問題でレスポンスが空になっているか分からない</span>)
+      <p>コンパイルエラーも、実行時エラーも発生せず、<strong>非常に解決しずらいバグ</strong>🐛が誕生していること
+      (=<span class="masked">何が問題でレスポンスが空になっているか分からない</span>)
       に注意してください。</p>
       <p>一方で、次のように <code>categories</code> に
       <strong>明示的に型を与えると</strong>、<code>await</code>
