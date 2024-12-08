@@ -1599,6 +1599,14 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       (厳密には、<code>create</code> メソッドの戻り値を <code>await</code>
       した戻り値がレコードになります)。そして、その値をそのまま <strong>第17行目</strong>
       でHTTPレスポンスのボディに設定しています。</p>
+      <div class="note type-tips">
+      <p><strong>Thunder Client: リクエストには名前を付けておきましょう</strong></p>
+      <p>面倒かもしれませんが、各HTTPリクエストに適切に名前をつけておくと、結果的に、長期視点では開発の時短につながります。</p>
+      <figure>
+      <img src="figs/08/vscode_14.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      </div>
       <h2 data-number="4.7" id="カテゴリを削除するウェブapiの実装"><span
       class="header-section-number">4.7</span> カテゴリを削除するウェブAPIの実装</h2>
       <p><code>api/admin/categories/[id]</code>
