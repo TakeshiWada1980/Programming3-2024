@@ -1047,7 +1047,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <p>管理者だけが利用できるように制限する処理は <strong>ログイン機能を実装してから追加</strong>
       します。今回講義のなかでは、誰でも利用可能なAPIとして実装します。</p>
       <p>なお、ここでは「カテゴリ」のCRUD操作について解説しますが、次回以降、(宿題で)
-      投稿記事に関するCRUD操作を各自で実装してもらうので、<strong>しっかりと理解しながら読み進めるようにしてください</strong>。</p>
+      <strong>投稿記事に関するCRUD操作を各自で実装してもらう予定なので、</strong>しっかりと理解しながら読み進めるようにしてください。</p>
       <h2 data-number="4.3" id="カテゴリの一覧を取得するウェブapiの実装"><span
       class="header-section-number">4.3</span> カテゴリの一覧を取得するウェブAPIの実装</h2>
       <p>Next.js (App Router) では <code>src/app/api</code> の配下に <code>route.ts</code>
@@ -1543,9 +1543,9 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       </ul>
       <h2 data-number="4.6" id="カテゴリを追加するウェブapiの実装-コードの解説"><span
       class="header-section-number">4.6</span> カテゴリを追加するウェブAPIの実装 (コードの解説)</h2>
-      <p>開設のためにコードを再掲します。</p>
+      <p>解説のためにコードを再掲します。</p>
       <div class="sourceCode" id="cb37"
-      data-caption="api/admin/categories/route.ts (カテゴリの追加)"><pre
+      data-caption="api/admin/categories/route.ts (カテゴリの追加・再掲)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
 <span id="cb37-2"><a href="#cb37-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
 <span id="cb37-3"><a href="#cb37-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
@@ -1659,6 +1659,33 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       によって取得できます。例えば、<code>/api/admin/categories/aaa</code>
       というエンドポイントにリクエストがあれば、<strong>第13行目</strong> の <code>id</code> には
       <code>"aaa"</code> という文字列が代入されます。</p>
+      <div class="note type-senior">
+      <p><strong>発展: プレースホルダーパラメータ取得の定石</strong></p>
+      <p>ここでは、<code>RouteParams</code> という型を定義してプレースホルダーパラメータ
+      (<code>id</code>) を取得しましたが、以下のコードのように <strong>インライン型注釈</strong>
+      (Inline Type Annotation) と <strong>分割代入</strong> を利用して型を定義せず、直接的に
+      <code>id</code> を取得することも可能です。</p>
+      <div class="sourceCode" id="cb41"
+      data-caption="api/admin/categories/[id]/route.ts (インライン型注釈と分割代入の利用)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb41-1"><a href="#cb41-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a></span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="im">export</span> <span class="kw">const</span> DELETE <span class="op">=</span> <span class="kw">async</span> (</span>
+<span id="cb41-6"><a href="#cb41-6"></a>  req<span class="op">:</span> NextRequest<span class="op">,</span></span>
+<span id="cb41-7"><a href="#cb41-7"></a>  { params<span class="op">:</span> { id } }<span class="op">:</span> { params<span class="op">:</span> { id<span class="op">:</span> <span class="dt">string</span> } } <span class="co">// インライン型注釈・分割代入</span></span>
+<span id="cb41-8"><a href="#cb41-8"></a>) <span class="kw">=&gt;</span> {</span>
+<span id="cb41-9"><a href="#cb41-9"></a>  <span class="cf">try</span> {</span>
+<span id="cb41-10"><a href="#cb41-10"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span>
+<span id="cb41-11"><a href="#cb41-11"></a><span class="co">// 以下、省略</span></span></code></pre></div>
+      <p>一般には上記のような表記がよく使用されるので、最初は型定義を使う方法で理解を深め、慣れてきたらインライン型注釈と分割代入を利用する方法に移行することも検討してください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>TypeScript の インライン型注釈 (Inline Type Annotation) について、関数の引数
+      (オブジェクト型) に適用する例で解説してください。また、<code>type</code>
+      キーワードで「型」を定義せず、インライン型注釈を使うメリットとデメリットは何ですか？</p>
+      </blockquote>
+      </div>
       <p>削除処理は <strong>第14行目</strong> にある <code>prisma.category.delete()</code>
       メソッドにより実行されます。このメソッドは、<strong>指定された条件に一致する「単一のレコード」を削除する機能</strong>
       を持っています。</p>
@@ -1667,19 +1694,19 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       <p>deleteメソッドには、引数を使って「削除対象を指定する条件」を与えます。例えば、<code>"c-1234"</code>
       という <code>id</code> のレコード (カテゴリ)
       を削除したいときは、次のように引数を指定します。</p>
-      <div class="sourceCode" id="cb41" data-caption="deleteメソッドの引数の指定の説明1"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb41-1"><a href="#cb41-1"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id<span class="op">:</span> <span class="st">&quot;c-1234&quot;</span> } })<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb42" data-caption="deleteメソッドの引数の指定の説明1"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb42-1"><a href="#cb42-1"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id<span class="op">:</span> <span class="st">&quot;c-1234&quot;</span> } })<span class="op">;</span></span></code></pre></div>
       <p>この処理は、<code>id</code> という変数を使って次のようにも書けます。</p>
-      <div class="sourceCode" id="cb42" data-caption="deleteメソッドの引数の指定の説明2"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">const</span> id <span class="op">=</span> <span class="st">&quot;c-1234&quot;</span><span class="op">;</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id<span class="op">:</span> id } })<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb43" data-caption="deleteメソッドの引数の指定の説明2"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">const</span> id <span class="op">=</span> <span class="st">&quot;c-1234&quot;</span><span class="op">;</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id<span class="op">:</span> id } })<span class="op">;</span></span></code></pre></div>
       <p>TypeScript (JavaScript)
       では、オブジェクトの「<strong>プロパティ名</strong>」と「<strong>値の変数名</strong>」が同じ場合、省略記法を使うことができます。つまり、<code>id: id</code>
       を、単に <code>id</code> と書くことができます
       (省表記が利用できます)。これを適用すれば、先のコードは、次のように記述することができます。</p>
-      <div class="sourceCode" id="cb43" data-caption="deleteメソッドの引数の指定の説明3"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">const</span> id <span class="op">=</span> <span class="st">&quot;c-1234&quot;</span><span class="op">;</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb44" data-caption="deleteメソッドの引数の指定の説明3"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">const</span> id <span class="op">=</span> <span class="st">&quot;c-1234&quot;</span><span class="op">;</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span></code></pre></div>
       <p>慣れるまでは非常に分かりづらいと思いますが、実務では頻繁に利用される記法なので覚えておいてください。<strong>第14行目</strong>
       は、この略表記を使って記述されています。</p>
       </div>
@@ -1702,7 +1729,7 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       をエンドポイントに指定した場合、どのようなレスポンスとなるか確認しておいてください。</p>
       <h2 data-number="4.8" id="カテゴリを編集するウェブapiの実装"><span
       class="header-section-number">4.8</span> カテゴリを編集するウェブAPIの実装</h2>
-      <p>カテゴリの <strong>名前を変更するためのウェブAPI</strong>
+      <p>カテゴリの <strong>名前を変更 (更新) するためのウェブAPI</strong>
       を実装します。具体的には、次のようなエンドポイントに対して、新しい名前の情報を持ったボディを「<strong>PUTリクエスト</strong>」で送信することで、これを実現します。</p>
       <ul>
       <li><code>/api/admin/categories/24f932b8-...-569f07ba16a7</code></li>
@@ -1711,60 +1738,62 @@ npm notice To update run: npm install -g npm@10.9.1</code></pre>
       class="masked">DELETEメソッドと共通</span> になります。<code>route.ts</code>
       には複数のメソッドを含めることが可能なので <code>api/admin/categories/[id]/route.ts</code>
       を次のように編集してください。</p>
-      <p>基本的には、<strong>第11行目</strong> から <strong>第31行目</strong>
-      の範囲を追記しています。<code>update</code> メソッドでは、引数に与えるオブジェクトの
+      <div class="sourceCode" id="cb45"
+      data-caption="api/admin/categories/[id]/route.ts (PUT関数の追加)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="kw">type</span> RouteParams <span class="op">=</span> {</span>
+<span id="cb45-6"><a href="#cb45-6"></a>  params<span class="op">:</span> {</span>
+<span id="cb45-7"><a href="#cb45-7"></a>    id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a>  }<span class="op">;</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a>}<span class="op">;</span></span>
+<span id="cb45-10"><a href="#cb45-10"></a></span>
+<span id="cb45-11"><a href="#cb45-11"></a><span class="co">// ▼▼▼ 追加: ここから ▼▼▼</span></span>
+<span id="cb45-12"><a href="#cb45-12"></a><span class="kw">type</span> RequestBody <span class="op">=</span> {</span>
+<span id="cb45-13"><a href="#cb45-13"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb45-14"><a href="#cb45-14"></a>}<span class="op">;</span></span>
+<span id="cb45-15"><a href="#cb45-15"></a></span>
+<span id="cb45-16"><a href="#cb45-16"></a><span class="im">export</span> <span class="kw">const</span> PUT <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest<span class="op">,</span> routeParams<span class="op">:</span> RouteParams) <span class="kw">=&gt;</span> {</span>
+<span id="cb45-17"><a href="#cb45-17"></a>  <span class="cf">try</span> {</span>
+<span id="cb45-18"><a href="#cb45-18"></a>    <span class="kw">const</span> id <span class="op">=</span> routeParams<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
+<span id="cb45-19"><a href="#cb45-19"></a>    <span class="kw">const</span> { name }<span class="op">:</span> RequestBody <span class="op">=</span> <span class="cf">await</span> req<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb45-20"><a href="#cb45-20"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">update</span>({</span>
+<span id="cb45-21"><a href="#cb45-21"></a>      where<span class="op">:</span> { id }<span class="op">,</span></span>
+<span id="cb45-22"><a href="#cb45-22"></a>      data<span class="op">:</span> { name }<span class="op">,</span></span>
+<span id="cb45-23"><a href="#cb45-23"></a>    })<span class="op">;</span></span>
+<span id="cb45-24"><a href="#cb45-24"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(category)<span class="op">;</span></span>
+<span id="cb45-25"><a href="#cb45-25"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb45-26"><a href="#cb45-26"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb45-27"><a href="#cb45-27"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb45-28"><a href="#cb45-28"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの名前変更に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb45-29"><a href="#cb45-29"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
+<span id="cb45-30"><a href="#cb45-30"></a>    )<span class="op">;</span></span>
+<span id="cb45-31"><a href="#cb45-31"></a>  }</span>
+<span id="cb45-32"><a href="#cb45-32"></a>}<span class="op">;</span></span>
+<span id="cb45-33"><a href="#cb45-33"></a><span class="co">// ▲▲▲ 追加: ここまで ▲▲▲</span></span>
+<span id="cb45-34"><a href="#cb45-34"></a></span>
+<span id="cb45-35"><a href="#cb45-35"></a><span class="im">export</span> <span class="kw">const</span> DELETE <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest<span class="op">,</span> routeParams<span class="op">:</span> RouteParams) <span class="kw">=&gt;</span> {</span>
+<span id="cb45-36"><a href="#cb45-36"></a>  <span class="cf">try</span> {</span>
+<span id="cb45-37"><a href="#cb45-37"></a>    <span class="kw">const</span> id <span class="op">=</span> routeParams<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
+<span id="cb45-38"><a href="#cb45-38"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span>
+<span id="cb45-39"><a href="#cb45-39"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({ msg<span class="op">:</span> <span class="vs">`「</span><span class="sc">${</span>category<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">」を削除しました。`</span> })<span class="op">;</span></span>
+<span id="cb45-40"><a href="#cb45-40"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb45-41"><a href="#cb45-41"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb45-42"><a href="#cb45-42"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb45-43"><a href="#cb45-43"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの削除に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb45-44"><a href="#cb45-44"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
+<span id="cb45-45"><a href="#cb45-45"></a>    )<span class="op">;</span></span>
+<span id="cb45-46"><a href="#cb45-46"></a>  }</span>
+<span id="cb45-47"><a href="#cb45-47"></a>}<span class="op">;</span></span></code></pre></div>
+      <p><strong>第20行目</strong> の <code>update</code> メソッドでは、引数に与えるオブジェクトの
       <code>where</code>
       プロパティで「<strong>更新対象のレコードを指定</strong>」し、<code>data</code>
       プロパティで「<strong>更新する値 (上書きする値)</strong>」を指定しています。</p>
       <p>ここでも、先と同じく <code>{id: id}</code> を <code>{ id }</code>
-      で略表記するテクニック、<code>{ name: name }</code> を <code>{ name }</code>
-      で略表記するテクニックが使用されています。</p>
-      <div class="sourceCode" id="cb44" data-caption="api/admin/categories/[id]/route.ts"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
-<span id="cb44-3"><a href="#cb44-3"></a><span class="im">import</span> { Category } <span class="im">from</span> <span class="st">&quot;@prisma/client&quot;</span><span class="op">;</span></span>
-<span id="cb44-4"><a href="#cb44-4"></a></span>
-<span id="cb44-5"><a href="#cb44-5"></a><span class="kw">type</span> RouteParams <span class="op">=</span> {</span>
-<span id="cb44-6"><a href="#cb44-6"></a>  params<span class="op">:</span> {</span>
-<span id="cb44-7"><a href="#cb44-7"></a>    id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
-<span id="cb44-8"><a href="#cb44-8"></a>  }<span class="op">;</span></span>
-<span id="cb44-9"><a href="#cb44-9"></a>}<span class="op">;</span></span>
-<span id="cb44-10"><a href="#cb44-10"></a></span>
-<span id="cb44-11"><a href="#cb44-11"></a><span class="kw">type</span> RequestBody <span class="op">=</span> {</span>
-<span id="cb44-12"><a href="#cb44-12"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
-<span id="cb44-13"><a href="#cb44-13"></a>}<span class="op">;</span></span>
-<span id="cb44-14"><a href="#cb44-14"></a></span>
-<span id="cb44-15"><a href="#cb44-15"></a><span class="im">export</span> <span class="kw">const</span> PUT <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest<span class="op">,</span> routeParams<span class="op">:</span> RouteParams) <span class="kw">=&gt;</span> {</span>
-<span id="cb44-16"><a href="#cb44-16"></a>  <span class="cf">try</span> {</span>
-<span id="cb44-17"><a href="#cb44-17"></a>    <span class="kw">const</span> id <span class="op">=</span> routeParams<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
-<span id="cb44-18"><a href="#cb44-18"></a>    <span class="kw">const</span> { name }<span class="op">:</span> RequestBody <span class="op">=</span> <span class="cf">await</span> req<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
-<span id="cb44-19"><a href="#cb44-19"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">update</span>({</span>
-<span id="cb44-20"><a href="#cb44-20"></a>      where<span class="op">:</span> { id }<span class="op">,</span></span>
-<span id="cb44-21"><a href="#cb44-21"></a>      data<span class="op">:</span> { name }<span class="op">,</span></span>
-<span id="cb44-22"><a href="#cb44-22"></a>    })<span class="op">;</span></span>
-<span id="cb44-23"><a href="#cb44-23"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(category)<span class="op">;</span></span>
-<span id="cb44-24"><a href="#cb44-24"></a>  } <span class="cf">catch</span> (error) {</span>
-<span id="cb44-25"><a href="#cb44-25"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
-<span id="cb44-26"><a href="#cb44-26"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
-<span id="cb44-27"><a href="#cb44-27"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの名前変更に失敗しました&quot;</span> }<span class="op">,</span></span>
-<span id="cb44-28"><a href="#cb44-28"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
-<span id="cb44-29"><a href="#cb44-29"></a>    )<span class="op">;</span></span>
-<span id="cb44-30"><a href="#cb44-30"></a>  }</span>
-<span id="cb44-31"><a href="#cb44-31"></a>}<span class="op">;</span></span>
-<span id="cb44-32"><a href="#cb44-32"></a></span>
-<span id="cb44-33"><a href="#cb44-33"></a><span class="im">export</span> <span class="kw">const</span> DELETE <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest<span class="op">,</span> routeParams<span class="op">:</span> RouteParams) <span class="kw">=&gt;</span> {</span>
-<span id="cb44-34"><a href="#cb44-34"></a>  <span class="cf">try</span> {</span>
-<span id="cb44-35"><a href="#cb44-35"></a>    <span class="kw">const</span> id <span class="op">=</span> routeParams<span class="op">.</span><span class="at">params</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
-<span id="cb44-36"><a href="#cb44-36"></a>    <span class="kw">const</span> category<span class="op">:</span> Category <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">delete</span>({ where<span class="op">:</span> { id } })<span class="op">;</span></span>
-<span id="cb44-37"><a href="#cb44-37"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({ msg<span class="op">:</span> <span class="vs">`「</span><span class="sc">${</span>category<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">」を削除しました。`</span> })<span class="op">;</span></span>
-<span id="cb44-38"><a href="#cb44-38"></a>  } <span class="cf">catch</span> (error) {</span>
-<span id="cb44-39"><a href="#cb44-39"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
-<span id="cb44-40"><a href="#cb44-40"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
-<span id="cb44-41"><a href="#cb44-41"></a>      { error<span class="op">:</span> <span class="st">&quot;カテゴリの削除に失敗しました&quot;</span> }<span class="op">,</span></span>
-<span id="cb44-42"><a href="#cb44-42"></a>      { status<span class="op">:</span> <span class="dv">500</span> }</span>
-<span id="cb44-43"><a href="#cb44-43"></a>    )<span class="op">;</span></span>
-<span id="cb44-44"><a href="#cb44-44"></a>  }</span>
-<span id="cb44-45"><a href="#cb44-45"></a>}<span class="op">;</span></span></code></pre></div>
+      のように略表記するテクニック、<code>{ name: name }</code> を <code>{ name }</code>
+      のように略表記するテクニックが使用されています。</p>
       <p>ファイルの編集が完了したら開発モードでアプリを起動して、<strong>Thunder Client</strong>
       でテストしてください。</p>
       <figure>
