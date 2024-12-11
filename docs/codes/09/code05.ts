@@ -65,7 +65,7 @@ export const PUT = async (req: NextRequest, routeParams: RouteParams) => {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "投稿記事の作成に失敗しました" },
+      { error: "投稿記事の変更に失敗しました" },
       { status: 500 }
     );
   }
