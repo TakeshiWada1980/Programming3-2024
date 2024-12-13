@@ -69,6 +69,8 @@ id="toc-宿題-投稿記事を削除するウェブapiの実装"><span class="to
 id="toc-宿題-投稿記事の内容を変更-更新-するウェブapiの実装"><span
 class="toc-section-number">2.6</span> 宿題⛄: 投稿記事の内容を変更 (更新)
 するウェブAPIの実装</a></li>
+<li><a href="#情報の整理-サイトマップとapリスト" id="toc-情報の整理-サイトマップとapリスト"><span
+class="toc-section-number">2.7</span> 情報の整理: サイトマップとAPリスト</a></li>
 </ul></li>
 <li><a href="#カテゴリの新規作成ページの実装" id="toc-カテゴリの新規作成ページの実装"><span
 class="toc-section-number">3</span> カテゴリの新規作成ページの実装</a>
@@ -105,7 +107,7 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
       </ul>
       <h2 data-number="1.2" id="ここまでの授業の流れ"><span class="header-section-number">1.2</span>
       ここまでの授業の流れ</h2>
-      <p>前回講義では「ブログアプリ」のバックエンド開発として、<strong>カテゴリ</strong>に関するウェブAPIの設計と実装を行ないました。</p>
+      <p>前回講義では「ブログアプリ」のバックエンド開発として、「<strong>カテゴリ</strong>」のCRUDに関連するウェブAPIの設計と実装を行ないました。</p>
       <table>
       <thead>
       <tr class="header">
@@ -158,7 +160,7 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
       について解説していきます。</p>
       <h1 data-number="2" id="投稿記事に関連するウェブapiの実装"><span
       class="header-section-number">2</span> 投稿記事に関連するウェブAPIの実装</h1>
-      <p>「投稿記事」について、次のようなウェブAPIを実装していきます。</p>
+      <p>「<strong>投稿記事</strong>」に関連するCRUD操作のインターフェイスとして、次のようなウェブAPIを実装していきます。</p>
       <table>
       <thead>
       <tr class="header">
@@ -180,7 +182,7 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
       <tr class="even">
       <td>/api/posts/[id]</td>
       <td>GET</td>
-      <td>投稿記事 (単一) を取得する</td>
+      <td>投稿記事 (単体) を取得する</td>
       <td></td>
       <td></td>
       </tr>
@@ -207,10 +209,10 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
       </tr>
       </tbody>
       </table>
-      <p>投稿記事は「id」を指定して <span class="masked">単一の投稿記事を取得 (GET)</span>
-      するAPIも実装していきます。</p>
+      <p>投稿記事については、<code>id</code> を指定して <span class="masked">投稿記事 (単体)
+      を取得</span> するAPI (GET Method 対応) も実装していきます。</p>
       <h2 data-number="2.1" id="準備"><span class="header-section-number">2.1</span> 準備</h2>
-      <p>解説に示す実行結果と、皆さんの手元の実行結果を一致させるために、以下のコマンドを実行して
+      <p>解説に示す実行結果と、皆さんの手元での実行結果を一致させるために、以下のコマンドを実行して
       <strong>DBのレコードの初期化</strong>
       を実行しておいてください。なお、適切に実行結果の読み替えができる場合は初期化の必要はありません。</p>
       <pre><code>npx prisma db seed</code></pre>
@@ -823,6 +825,152 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </blockquote>
       <p>どうしても実装できないときは<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code05.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参考にしてください。</p>
+      <h2 data-number="2.7" id="情報の整理-サイトマップとapリスト"><span
+      class="header-section-number">2.7</span> 情報の整理: サイトマップとAPリスト</h2>
+      <p>ここまでの実装で、以下の9件が実装されているはずです。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP<br>Method</th>
+      <th>処理</th>
+      <th>管理者<br>権限</th>
+      <th>リクエスト<br>ボディ</th>
+      <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得する</td>
+      <td></td>
+      <td></td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories</td>
+      <td>POST</td>
+      <td>カテゴリを追加する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/categories/[id]</td>
+      <td>PUT</td>
+      <td>カテゴリの名前を変更する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories/[id]</td>
+      <td>DELETE</td>
+      <td>カテゴリを削除する</td>
+      <td>必要</td>
+      <td></td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/posts</td>
+      <td>GET</td>
+      <td>投稿記事の一覧を取得する</td>
+      <td></td>
+      <td></td>
+      <td>第09回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/posts/[id]</td>
+      <td>GET</td>
+      <td>投稿記事 (単一) を取得する</td>
+      <td></td>
+      <td></td>
+      <td>宿題⛄ (課題2)</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts</td>
+      <td>POST</td>
+      <td>投稿記事を追加する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td>第09回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/posts/[id]</td>
+      <td>PUT</td>
+      <td>投稿記事の内容を変更 (編集) する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td>宿題⛄ (課題2)</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts/[id]</td>
+      <td>DELETE</td>
+      <td>投稿記事を削除する</td>
+      <td>必要</td>
+      <td></td>
+      <td>宿題⛄ (課題2)</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>サイトマップ</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>URL</th>
+      <th>処理</th>
+      <th>管理者権限</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/</td>
+      <td>投稿記事の一覧</td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>/about</td>
+      <td>制作者プロフィール<br>このサイトについて</td>
+      <td></td>
+      </tr>
+      <tr class="odd">
+      <td>/posts/[id]</td>
+      <td>投稿記事の詳細</td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts</td>
+      <td>投稿記事の一覧<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/posts/new</td>
+      <td>投稿記事の新規作成</td>
+      <td>必要</td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts/[id]</td>
+      <td>投稿記事の編集 (削除を含む)</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/categories</td>
+      <td>カテゴリの一覧<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td>必要</td>
+      </tr>
+      <tr class="even">
+      <td>/admin/categories/new</td>
+      <td>カテゴリの新規作成</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/categories/[id]</td>
+      <td>カテゴリの編集 (削除を含む)</td>
+      <td>必要</td>
+      </tr>
+      </tbody>
+      </table>
       <h1 data-number="3" id="カテゴリの新規作成ページの実装"><span
       class="header-section-number">3</span> カテゴリの新規作成ページの実装</h1>
       <p>フロントエンド開発に戻って、ここまでに作成した各ウェブAPIを呼び出すためのページを実装します。まずは、<code>/admin/categories/new</code>
