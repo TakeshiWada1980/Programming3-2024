@@ -110,7 +110,7 @@ class="toc-section-number">5</span> 投稿記事の新規作成フォームの�
       <h2 data-number="1.1" id="連絡"><span class="header-section-number">1.1</span> 連絡</h2>
       <ul>
       <li>「<strong>小テスト</strong>」を実施します。</li>
-      <li>冬休みの宿題🥶 (＝<strong><em>課題2</em></strong> ) があります。</li>
+      <li>冬休みの宿題🥶 (＝<strong><em>課題2</em></strong> に関連) があります。</li>
       <li>本日は、スペシャルコンテンツとして OB講演 (＝<span
       class="masked">現役のフリーランスエンジニアとして活躍している本校OB</span>) があります。</li>
       </ul>
@@ -688,7 +688,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       href="lecture08.html#dbの初期データの作成">DBの初期データの作成</a>で示した
       <code>seed.ts</code> の <strong>第23行目</strong> から <strong>第25行目</strong> のように
       <span class="masked">Prismaのリレーションを使用した一括作成機能</span>
-      を利用することで、より効率的な実装ができます。</p>
+      を利用することで、実行効率の良い実装ができます。</p>
       <p>実装例は<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code02.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p>
       <p>また、このように実装すると「<strong>カテゴリが存在することを事前確認せずに処理すること</strong>」が可能になります。投稿記事を作成する際に、存在しないカテゴリIDが与えられると、<strong>データベースの外部キー制約</strong>によってエラーが発生し、それを適切にハンドリングすることでステータスコード「400」を返すことができるようになります。</p>
@@ -914,8 +914,9 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <p><code>/api/admin/posts/[id]</code> というエンドポイントに、<strong>投稿記事を変更 (更新)
       するウェブAPI</strong> (<strong>PUT Method</strong> に対応)
       を実装してください。このエンドポイントは <span
-      class="masked">先ほどの「投稿記事の削除」と同じ</span> となります。<code>DELETE</code>
-      関数を記述したファイルのなかに <code>PUT</code> 関数を実装してください。</p>
+      class="masked">先ほどの「投稿記事の削除」と同じエンドポイント</span>
+      となります。<code>DELETE</code> 関数を記述したファイルのなかに <code>PUT</code>
+      関数を実装してください。</p>
       <p>PUTリクエストのボディは、POSTメソッドと同じ形式のJSONデータを想定してください。</p>
       <div class="sourceCode" id="cb20"
       data-caption="PUT /api/admin/post/[id] へのリクエストのボディ(例)"><pre
@@ -978,8 +979,8 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code05.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参考にしてください。</p>
       <h2 data-number="2.7" id="情報の整理-apiリストとサイトマップ"><span
       class="header-section-number">2.7</span> 情報の整理: APIリストとサイトマップ</h2>
-      <p>ここまでを終えると、次の <strong>9件のウェブAPI</strong>
-      が実装された状態になっているはずです。</p>
+      <p>宿題を含めてここまでの実装を終えると、次のような <strong>9件のウェブAPI</strong>
+      が利用可能な状態になっているはずです。</p>
       <table>
       <thead>
       <tr class="header">
@@ -1071,7 +1072,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <p>ウェブAPIを利用する形で、次のようなフロントエンド開発
       (<strong>Reactによるウェブ画面の設計・構築</strong>)
       を進めていきます。なお、<strong>宿題</strong>⛄
-      の部分がまだ完了していなくても着手することができます。</p>
+      の部分が<strong>まだ完了していなくても着手することが可能</strong>です。</p>
       <table>
       <thead>
       <tr class="header">
@@ -1528,8 +1529,8 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </table>
       <p>以上について、次回授業日 1月9日 (木) までを目標に実装してください。</p>
       <p>1月15日 (水) を期限に <strong><em>課題2</em></strong>
-      として、上記の各ページの「<strong>スクリーンショット</strong>」と「<strong>コードリンク</strong>」を提出してもらうことを予定しています
-      (冬休みの宿題が完了していれば30分程度で完了する内容です)。</p>
+      として、上記の各ページの「<strong>スクリーンショット</strong>」と「<strong>各コードへのリンク</strong>」を提出してもらうことを予定しています
+      (冬休みの宿題⛄が完了していれば30分程度で完了する内容です)。</p>
       <p>詳細については、次回の授業 1月9日 (木) のなかで連絡します。</p>
       <!-- ---------------------------------------- -->
     </main>
