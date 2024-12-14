@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { twMerge } from "tailwind-merge";
@@ -15,13 +16,24 @@ type RawApiCategoryResponse = {
   updatedAt: string;
 };
 
-// カテゴリの新規作成 (追加) のページ
+// カテゴリの編集・削除のページ
 const Page: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fetchErrorMsg, setFetchErrorMsg] = useState<string | null>(null);
+
   const [newCategoryName, setNewCategoryName] = useState("");
   const [newCategoryNameError, setNewCategoryNameError] = useState("");
+
+  const [currentCategoryName, setCurrentNameCategory] = useState<
+    string | undefined
+  >(undefined);
+
+  // 動的ルートパラメータから id を取得 （URL:/admin/categories/[id]）
+  const { id } = useParams() as { id: string };
+
+  // ページの移動に使用するフック
+  const router = useRouter();
 
   // カテゴリ配列 (State)。取得中と取得失敗時は null、既存カテゴリが0個なら []
   const [categories, setCategories] = useState<Category[] | null>(null);
@@ -41,7 +53,9 @@ const Page: React.FC = () => {
       // レスポンスのステータスコードが200以外の場合 (カテゴリのフェッチに失敗した場合)
       if (!res.ok) {
         setCategories(null);
-        throw new Error(`${res.status}: ${res.statusText}`); // -> catch節に移動
+        throw new Error(
+          `カテゴリの一覧のフェッチに失敗しました: (${res.status}: ${res.statusText})`
+        ); // -> catch節に移動
       }
 
       // レスポンスのボディをJSONとして読み取りカテゴリ配列 (State) にセット
@@ -55,7 +69,7 @@ const Page: React.FC = () => {
     } catch (error) {
       const errorMsg =
         error instanceof Error
-          ? `カテゴリの一覧のフェッチに失敗しました: ${error.message}`
+          ? error.message
           : `予期せぬエラーが発生しました ${error}`;
       console.error(errorMsg);
       setFetchErrorMsg(errorMsg);
@@ -70,6 +84,15 @@ const Page: React.FC = () => {
     fetchCategories();
   }, []);
 
+  // categories または id が変更されたときにコールされる関数
+  useEffect(() => {
+    // id に対応するカテゴリ名を取得
+    const currentCategory = categories?.find((c) => c.id === id);
+    if (currentCategory !== undefined) {
+      setCurrentNameCategory(currentCategory.name);
+    }
+  }, [categories, id]);
+
   // カテゴリの名前のバリデーション
   const isValidCategoryName = (name: string): string => {
     if (name.length < 2 || name.length > 16) {
@@ -81,22 +104,21 @@ const Page: React.FC = () => {
     return "";
   };
 
-  // テキストボックスの値が変更されたときにコールされる関数
+  // カテゴリの名前を設定するテキストボックスの値が変更されたときにコールされる関数
   const updateNewCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewCategoryNameError(isValidCategoryName(e.target.value));
     setNewCategoryName(e.target.value);
   };
 
-  // フォームのボタン (type="submit") がクリックされたときにコールされる関数
+  // 「カテゴリの名前を変更」のボタンが押下されたときにコールされる関数
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // これを実行しないと意図せずページがリロードされるので注意
     setIsSubmitting(true);
 
-    // ▼▼ 追加 ウェブAPI (/api/admin/categories) にPOSTリクエストを送信する処理
     try {
-      const requestUrl = "/api/admin/categories";
+      const requestUrl = `/api/admin/categories/${id}`;
       const res = await fetch(requestUrl, {
-        method: "POST",
+        method: "PUT",
         cache: "no-store",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +127,7 @@ const Page: React.FC = () => {
       });
 
       if (!res.ok) {
-        throw new Error(`${res.status}: ${res.statusText}`); // -> catch節に移動
+        throw new Error(`${res.status}: ${res.statusText}`);
       }
 
       setNewCategoryName("");
@@ -113,7 +135,7 @@ const Page: React.FC = () => {
     } catch (error) {
       const errorMsg =
         error instanceof Error
-          ? `カテゴリのPOSTリクエストに失敗しました\n${error.message}`
+          ? `カテゴリのPUTリクエストに失敗しました\n${error.message}`
           : `予期せぬエラーが発生しました\n${error}`;
       console.error(errorMsg);
       window.alert(errorMsg);
@@ -122,7 +144,38 @@ const Page: React.FC = () => {
     }
   };
 
-  // カテゴリをウェブAPIから取得中の画面
+  // 「削除」のボタンが押下されたときにコールされる関数
+  const handleDelete = async () => {
+    // prettier-ignore
+    if (!window.confirm(`カテゴリ「${currentCategoryName}」を本当に削除しますか？`)) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const requestUrl = `/api/admin/categories/${id}`;
+      const res = await fetch(requestUrl, {
+        method: "DELETE",
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        throw new Error(`${res.status}: ${res.statusText}`);
+      }
+      // カテゴリの一覧ページに移動
+      router.replace("/admin/categories");
+    } catch (error) {
+      const errorMsg =
+        error instanceof Error
+          ? `カテゴリのDELETEリクエストに失敗しました\n${error.message}`
+          : `予期せぬエラーが発生しました\n${error}`;
+      console.error(errorMsg);
+      window.alert(errorMsg);
+      setIsSubmitting(false);
+    }
+  };
+
+  // カテゴリの一覧を取得中の画面
   if (isLoading) {
     return (
       <div className="text-gray-500">
@@ -132,15 +185,23 @@ const Page: React.FC = () => {
     );
   }
 
-  // カテゴリをウェブAPIから取得することに失敗したときの画面
+  // カテゴリの一覧を取得失敗したときの画面
   if (!categories) {
     return <div className="text-red-500">{fetchErrorMsg}</div>;
   }
 
-  // カテゴリ取得完了後の画面
+  // プレースホルダの id に一致するカテゴリが存在しないときの画面
+  if (currentCategoryName === undefined) {
+    return (
+      <div className="text-red-500">
+        指定された id のカテゴリは存在しません。
+      </div>
+    );
+  }
+
   return (
     <main>
-      <div className="mb-4 text-2xl font-bold">カテゴリの新規作成</div>
+      <div className="mb-4 text-2xl font-bold">カテゴリの編集・削除</div>
 
       {isSubmitting && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -158,52 +219,72 @@ const Page: React.FC = () => {
         onSubmit={handleSubmit}
         className={twMerge("mb-4 space-y-4", isSubmitting && "opacity-50")}
       >
-        <div className="space-y-1">
-          <label htmlFor="name" className="block font-bold">
-            名前
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="w-full rounded-md border-2 px-2 py-1"
-            placeholder="新しいカテゴリの名前を記入してください"
-            value={newCategoryName}
-            onChange={updateNewCategoryName}
-            autoComplete="off"
-            required
-          />
-          {newCategoryNameError && (
-            <div className="flex items-center space-x-1 text-sm font-bold text-red-500">
-              <FontAwesomeIcon
-                icon={faTriangleExclamation}
-                className="mr-0.5"
-              />
-              <div>{newCategoryNameError}</div>
-            </div>
-          )}
+        <div className="space-y-6">
+          <div className="space-y-1">
+            <div className="block font-bold">現在のカテゴリの名前</div>
+            <div className="text-gray-500">{currentCategoryName}</div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="name" className="block font-bold">
+              新しいカテゴリの名前
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="w-full rounded-md border-2 px-2 py-1"
+              placeholder="新しいカテゴリの名前を記入してください"
+              value={newCategoryName}
+              onChange={updateNewCategoryName}
+              autoComplete="off"
+              required
+            />
+            {newCategoryNameError && (
+              <div className="flex items-center space-x-1 text-sm font-bold text-red-500">
+                <FontAwesomeIcon
+                  icon={faTriangleExclamation}
+                  className="mr-0.5"
+                />
+                <div>{newCategoryNameError}</div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="flex justify-end">
-          <button
-            type="submit"
-            className={twMerge(
-              "rounded-md px-5 py-1 font-bold",
-              "bg-indigo-500 text-white hover:bg-indigo-600",
-              "disabled:cursor-not-allowed disabled:opacity-50"
-            )}
-            disabled={
-              isSubmitting ||
-              newCategoryNameError !== "" ||
-              newCategoryName === ""
-            }
-          >
-            カテゴリを作成
-          </button>
+          <div className="space-x-2">
+            <button
+              type="submit"
+              className={twMerge(
+                "rounded-md px-5 py-1 font-bold",
+                "bg-indigo-500 text-white hover:bg-indigo-600",
+                "disabled:cursor-not-allowed disabled:opacity-50"
+              )}
+              disabled={
+                isSubmitting ||
+                newCategoryNameError !== "" ||
+                newCategoryName === ""
+              }
+            >
+              カテゴリの名前を変更
+            </button>
+
+            <button
+              type="button"
+              className={twMerge(
+                "rounded-md px-5 py-1 font-bold",
+                "bg-red-500 text-white hover:bg-red-600"
+              )}
+              onClick={handleDelete}
+            >
+              削除
+            </button>
+          </div>
         </div>
       </form>
 
-      <div className="mb-2 text-2xl font-bold">作成されたカテゴリの一覧</div>
+      <div className="mb-2 text-2xl font-bold">既存のカテゴリの一覧</div>
       {categories.length === 0 ? (
         <div className="text-gray-500">
           （カテゴリは1個も作成されていません）
@@ -219,7 +300,8 @@ const Page: React.FC = () => {
                 key={category.id}
                 className={twMerge(
                   "rounded-md px-2 py-0.5",
-                  "border border-slate-400 text-slate-500"
+                  "border border-slate-400 text-slate-500",
+                  currentCategoryName === category.name && " bg-gray-100"
                 )}
               >
                 <Link href={`/admin/categories/${category.id}`}>

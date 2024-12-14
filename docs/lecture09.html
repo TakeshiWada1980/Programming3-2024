@@ -84,8 +84,15 @@ id="toc-カテゴリの追加フォームの実装-第1段階"><span class="toc-
 <li><a href="#カテゴリの追加フォームの実装-第2段階"
 id="toc-カテゴリの追加フォームの実装-第2段階"><span class="toc-section-number">3.3</span>
 カテゴリの追加フォームの実装 (第2段階)</a></li>
+<li><a href="#カテゴリの追加フォームの実装-第3段階"
+id="toc-カテゴリの追加フォームの実装-第3段階"><span class="toc-section-number">3.4</span>
+カテゴリの追加フォームの実装 (第3段階)</a></li>
+<li><a href="#カテゴリの変更削除フォームの実装" id="toc-カテゴリの変更削除フォームの実装"><span
+class="toc-section-number">3.5</span> カテゴリの変更・削除フォームの実装</a></li>
 </ul></li>
-<li><a href="#冬休みの宿題" id="toc-冬休みの宿題"><span class="toc-section-number">4</span>
+<li><a href="#投稿記事の新規作成フォームの実装" id="toc-投稿記事の新規作成フォームの実装"><span
+class="toc-section-number">4</span> 投稿記事の新規作成フォームの実装</a></li>
+<li><a href="#冬休みの宿題" id="toc-冬休みの宿題"><span class="toc-section-number">5</span>
 冬休みの宿題</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -937,7 +944,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <tbody>
       <tr class="odd">
       <td>/</td>
-      <td>投稿記事の一覧表示 <font size="-1">(<strong>実装済み</strong>)</font></td>
+      <td>投稿記事の一覧表示 <font size="-1">(<strong>実装済み・但し要修正</strong>)</font></td>
       <td></td>
       </tr>
       <tr class="even">
@@ -948,7 +955,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tr>
       <tr class="odd">
       <td>/posts/[id]</td>
-      <td>投稿記事の詳細表示 <font size="-1">(<strong>実装済み</strong>)</font></td>
+      <td>投稿記事の詳細表示 <font size="-1">(<strong>実装済み・但し要修正</strong>)</font></td>
       <td></td>
       </tr>
       <tr class="even">
@@ -1073,7 +1080,11 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       ではなく <code>page.tsx</code> とすることに注意してください。</li>
       <li><code>/admin/categories/new</code> にアクセスすると、内部的に
       <code>GET /api/admin/categories</code>
-      がコールされ、カテゴリの一覧が画面に表示されることを確認してください。</li>
+      がコールされ、カテゴリの一覧が画面に表示されることを確認してください。
+      <ul>
+      <li>各カテゴリをクリックすると <code>/admin/categories/[id]</code>
+      に遷移することを確認してください (遷移先のページは未実装なので 404 となります)。</li>
+      </ul></li>
       <li>テキストボックスに「名前」を入力してボタンを押下すると、開発ツール
       (<code>F12</code>で起動) のコンソールに <span
       class="masked"><code>POST /api/admin/categories =&gt; {"name":"カテゴリ5"}</code></span>
@@ -1091,7 +1102,11 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </ol>
       <p>以上のように、<strong>このコードには「POST処理」と「バリデーション処理」が実装されていません</strong>。そのことを踏まえて、まずはじっくりとコードの読解に努めてください。特にしっかりと理解して欲しい部分は以下のようになります。</p>
       <ul>
-      <li><strong>第28行目</strong>から<strong>第70行目</strong>の「カテゴリ一覧の取得する処理」</li>
+      <li><strong>第28行目</strong>から<strong>第70行目</strong>の「カテゴリ一覧の取得する処理」
+      <ul>
+      <li><a href="lecture07.html#ブログ記事一覧の表示">第07回講義</a>(microCMSからのデータフェッチ)
+      の復習となります。</li>
+      </ul></li>
       <li><strong>第77行目</strong>から<strong>第89行目</strong>の「ボタンを押下したときの処理」</li>
       <li><strong>第123行目</strong>から<strong>第154行目</strong>の「<code>&lt;form&gt;</code>要素を使った入力フォームの構成」</li>
       </ul>
@@ -1109,14 +1124,113 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <p>ある程度の理解ができたら、次のセクションに進んでください。</p>
       <h2 data-number="3.3" id="カテゴリの追加フォームの実装-第2段階"><span
       class="header-section-number">3.3</span> カテゴリの追加フォームの実装 (第2段階)</h2>
-      <p>テキストボックスにバリデーションを設定して、</p>
-      <p>テキストボックスやバリデーション関連の処理については<a
-      href="lecture07.html">第05回講義</a>(Todoアプリ開発)
-      のほぼ復習となります。また、カテゴリの一覧の取得処理
-      (<strong>第29行目</strong>から<strong>第69行目</strong>の内容) は、<a
-      href="lecture07.html#ブログ記事一覧の表示">第07回講義</a>(microCMSからのデータフェッチ)
-      の復習となります。</p>
-      <h1 data-number="4" id="冬休みの宿題"><span class="header-section-number">4</span>
+      <p>バリデーション (値の検証) を実装したコードを<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code07.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。開発モードで実行して動作を確認してください。<strong>文字数が規定範囲にない場合</strong>、<span
+      class="masked">既存のカテゴリと同じ名前を設定した場合</span>
+      にバリデーションエラーとなります。</p>
+      <figure>
+      <img src="figs/09/app_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>バリデーションをパスしない状態では <strong>ボタンが押下できないこと</strong>
+      を確認してください
+      (ボタンが薄色表示になり、マウスカーソルをあわせると<i class="fa-solid fa-ban"></i>マークになる)。
+      テキストボックスやボタンのバリデーションについては<a
+      href="lecture05.html#バリデーション">第05回講義</a>(Todoアプリ開発) のほぼ復習となります。</p>
+      <p>ある程度の理解ができたら、次のセクションに進んでください。</p>
+      <h2 data-number="3.4" id="カテゴリの追加フォームの実装-第3段階"><span
+      class="header-section-number">3.4</span> カテゴリの追加フォームの実装 (第3段階)</h2>
+      <p><code>/api/admin/categories</code> に対する <strong>POST処理</strong>
+      を追加実装したコードを<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code08.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。開発モードで実行して動作を確認してください。</p>
+      <figure>
+      <img src="figs/09/app_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、Prisma Studio を使って、実際に DB の
+      <strong>カテゴリテーブルにレコードが追加されていること</strong> を確認してください。</p>
+      <figure>
+      <img src="figs/09/app_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>第90行目</strong>から<strong>第133行目</strong>が主な追加実装となります。特に次の処理については、じっくりと読み解い理解に努めてください。<code>fetch</code>
+      関数の第2引数が、<code>GET</code> の場合とは、どのように違うかに注意してください。</p>
+      <div class="sourceCode" id="cb24"
+      data-caption="src/app/admin/categories/new/page.tsx (カテゴリの追加・抜粋)"
+      data-startFrom="95"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 94;"><span id="cb24-95"><a href="#cb24-95"></a><span class="co">// ▼▼ 追加 ウェブAPI (/api/admin/categories) にPOSTリクエストを送信する処理</span></span>
+<span id="cb24-96"><a href="#cb24-96"></a><span class="cf">try</span> {</span>
+<span id="cb24-97"><a href="#cb24-97"></a>  <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="st">&quot;/api/admin/categories&quot;</span><span class="op">;</span></span>
+<span id="cb24-98"><a href="#cb24-98"></a>  <span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb24-99"><a href="#cb24-99"></a>    method<span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></span>
+<span id="cb24-100"><a href="#cb24-100"></a>    cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span></span>
+<span id="cb24-101"><a href="#cb24-101"></a>    headers<span class="op">:</span> {</span>
+<span id="cb24-102"><a href="#cb24-102"></a>      <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></span>
+<span id="cb24-103"><a href="#cb24-103"></a>    }<span class="op">,</span></span>
+<span id="cb24-104"><a href="#cb24-104"></a>    body<span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({ name<span class="op">:</span> newCategoryName })<span class="op">,</span></span>
+<span id="cb24-105"><a href="#cb24-105"></a>  })<span class="op">;</span></span>
+<span id="cb24-106"><a href="#cb24-106"></a></span>
+<span id="cb24-107"><a href="#cb24-107"></a>  <span class="cf">if</span> (<span class="op">!</span>res<span class="op">.</span><span class="at">ok</span>) {</span>
+<span id="cb24-108"><a href="#cb24-108"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="vs">`</span><span class="sc">${</span>res<span class="op">.</span><span class="at">status</span><span class="sc">}</span><span class="vs">: </span><span class="sc">${</span>res<span class="op">.</span><span class="at">statusText</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span> <span class="co">// -&gt; catch節に移動</span></span>
+<span id="cb24-109"><a href="#cb24-109"></a>  }</span>
+<span id="cb24-110"><a href="#cb24-110"></a></span>
+<span id="cb24-111"><a href="#cb24-111"></a>  <span class="fu">setNewCategoryName</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb24-112"><a href="#cb24-112"></a>  <span class="cf">await</span> <span class="fu">fetchCategories</span>()<span class="op">;</span> <span class="co">// カテゴリの一覧を再取得</span></span>
+<span id="cb24-113"><a href="#cb24-113"></a>} <span class="cf">catch</span> (error) {</span>
+<span id="cb24-114"><a href="#cb24-114"></a>  <span class="kw">const</span> errorMsg <span class="op">=</span></span>
+<span id="cb24-115"><a href="#cb24-115"></a>    error <span class="kw">instanceof</span> <span class="bu">Error</span></span>
+<span id="cb24-116"><a href="#cb24-116"></a>      <span class="op">?</span> <span class="vs">`カテゴリのPOSTリクエストに失敗しました</span><span class="sc">\n${</span>error<span class="op">.</span><span class="at">message</span><span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb24-117"><a href="#cb24-117"></a>      <span class="op">:</span> <span class="vs">`予期せぬエラーが発生しました</span><span class="sc">\n${</span>error<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb24-118"><a href="#cb24-118"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(errorMsg)<span class="op">;</span></span>
+<span id="cb24-119"><a href="#cb24-119"></a>  <span class="bu">window</span><span class="op">.</span><span class="fu">alert</span>(errorMsg)<span class="op">;</span></span>
+<span id="cb24-120"><a href="#cb24-120"></a>} <span class="cf">finally</span> {</span>
+<span id="cb24-121"><a href="#cb24-121"></a>  <span class="fu">setIsSubmitting</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb24-122"><a href="#cb24-122"></a>}</span></code></pre></div>
+      <h2 data-number="3.5" id="カテゴリの変更削除フォームの実装"><span
+      class="header-section-number">3.5</span> カテゴリの変更・削除フォームの実装</h2>
+      <p><code>/admin/posts/new</code> に、次のような <strong>カテゴリの編集・削除フォーム</strong>
+      を実装していきます。</p>
+      <figure>
+      <img src="figs/09/app_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここでは、<strong>以下のウェブAPIが実装されていること</strong>を前提とします。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP Method</th>
+      <th>処理</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得する</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories/[id]</td>
+      <td>PUT</td>
+      <td>カテゴリの名前を変更する</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/categories/[id]</td>
+      <td>DELETE</td>
+      <td>カテゴリを削除する</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>実装例を<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code07.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。</p>
+      <h1 data-number="4" id="投稿記事の新規作成フォームの実装"><span
+      class="header-section-number">4</span> 投稿記事の新規作成フォームの実装</h1>
+      <p><code>/admin/posts/new</code> に、次のような <strong>投稿記事の新規作成フォーム</strong>
+      を実装していきます。基本的には、カテゴリの追加フォームの実装の拡張版になります。</p>
+      <figure>
+      <img src="figs/09/app_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="5" id="冬休みの宿題"><span class="header-section-number">5</span>
       冬休みの宿題</h1>
       <p>次回の授業は、年明けの <strong>1月9日(木)</strong> となります。</p>
       <!-- ---------------------------------------- -->
