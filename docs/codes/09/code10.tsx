@@ -197,6 +197,7 @@ const Page: React.FC = () => {
             id="title"
             name="title"
             className="w-full rounded-md border-2 px-2 py-1"
+            value={newTitle}
             onChange={updateNewTitle}
             placeholder="タイトルを記入してください"
             required
@@ -211,6 +212,7 @@ const Page: React.FC = () => {
             id="content"
             name="content"
             className="h-48 w-full rounded-md border-2 px-2 py-1"
+            value={newContent}
             onChange={updateNewContent}
             placeholder="本文を記入してください"
             required
@@ -226,6 +228,7 @@ const Page: React.FC = () => {
             id="coverImageURL"
             name="coverImageURL"
             className="w-full rounded-md border-2 px-2 py-1"
+            value={newCoverImageURL}
             onChange={updateNewCoverImageURL}
             placeholder="カバーイメージのURLを記入してください"
             required
