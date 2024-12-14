@@ -87,12 +87,12 @@ id="toc-カテゴリの追加フォームの実装-第2段階"><span class="toc-
 <li><a href="#カテゴリの追加フォームの実装-第3段階"
 id="toc-カテゴリの追加フォームの実装-第3段階"><span class="toc-section-number">3.4</span>
 カテゴリの追加フォームの実装 (第3段階)</a></li>
-<li><a href="#カテゴリの変更削除フォームの実装" id="toc-カテゴリの変更削除フォームの実装"><span
-class="toc-section-number">3.5</span> カテゴリの変更・削除フォームの実装</a></li>
 </ul></li>
+<li><a href="#カテゴリの変更削除フォームの実装" id="toc-カテゴリの変更削除フォームの実装"><span
+class="toc-section-number">4</span> カテゴリの変更・削除フォームの実装</a></li>
 <li><a href="#投稿記事の新規作成フォームの実装" id="toc-投稿記事の新規作成フォームの実装"><span
-class="toc-section-number">4</span> 投稿記事の新規作成フォームの実装</a></li>
-<li><a href="#冬休みの宿題" id="toc-冬休みの宿題"><span class="toc-section-number">5</span>
+class="toc-section-number">5</span> 投稿記事の新規作成フォームの実装</a></li>
+<li><a href="#冬休みの宿題" id="toc-冬休みの宿題"><span class="toc-section-number">6</span>
 冬休みの宿題</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -1185,12 +1185,19 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb24-120"><a href="#cb24-120"></a>} <span class="cf">finally</span> {</span>
 <span id="cb24-121"><a href="#cb24-121"></a>  <span class="fu">setIsSubmitting</span>(<span class="kw">false</span>)<span class="op">;</span></span>
 <span id="cb24-122"><a href="#cb24-122"></a>}</span></code></pre></div>
-      <h2 data-number="3.5" id="カテゴリの変更削除フォームの実装"><span
-      class="header-section-number">3.5</span> カテゴリの変更・削除フォームの実装</h2>
-      <p><code>/admin/posts/new</code> に、次のような <strong>カテゴリの編集・削除フォーム</strong>
-      を実装していきます。</p>
+      <h1 data-number="4" id="カテゴリの変更削除フォームの実装"><span
+      class="header-section-number">4</span> カテゴリの変更・削除フォームの実装</h1>
+      <p><code>/admin/categories/[id]</code> でアクセス可能な
+      <strong>カテゴリの編集・削除フォーム</strong> を
+      <code>src/app/admin/categories/[id]/page.tsx</code>
+      に実装していきます。この画面では、既存のカテゴリの「名前の変更」と「削除」の操作ができるようにフォームを構築していきます。</p>
       <figure>
       <img src="figs/09/app_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>不正な id が指定されたときの画面の例です。</p>
+      <figure>
+      <img src="figs/09/app_06.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>ここでは、<strong>以下のウェブAPIが実装されていること</strong>を前提とします。</p>
@@ -1221,16 +1228,18 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tbody>
       </table>
       <p>実装例を<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code07.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。</p>
-      <h1 data-number="4" id="投稿記事の新規作成フォームの実装"><span
-      class="header-section-number">4</span> 投稿記事の新規作成フォームの実装</h1>
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code09.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。そのプロセスのなかで「どうやって実装すればよいか分からない」ということが明確になるので、そのうえでコード例を見ると定着率が高くなります。</p>
+      <h1 data-number="5" id="投稿記事の新規作成フォームの実装"><span
+      class="header-section-number">5</span> 投稿記事の新規作成フォームの実装</h1>
       <p><code>/admin/posts/new</code> に、次のような <strong>投稿記事の新規作成フォーム</strong>
       を実装していきます。基本的には、カテゴリの追加フォームの実装の拡張版になります。</p>
       <figure>
-      <img src="figs/09/app_06.png" alt="img" />
+      <img src="figs/09/app_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <h1 data-number="5" id="冬休みの宿題"><span class="header-section-number">5</span>
+      <p>実装例を<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code10.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。</p>
+      <h1 data-number="6" id="冬休みの宿題"><span class="header-section-number">6</span>
       冬休みの宿題</h1>
       <p>次回の授業は、年明けの <strong>1月9日(木)</strong> となります。</p>
       <!-- ---------------------------------------- -->
