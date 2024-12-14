@@ -137,7 +137,6 @@ const Page: React.FC = () => {
             value={newCategoryName}
             onChange={updateNewCategoryName}
             autoComplete="off"
-            required
           />
         </div>
 

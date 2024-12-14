@@ -81,9 +81,9 @@ class="toc-section-number">3</span> カテゴリの新規作成フォームの�
 <li><a href="#カテゴリの追加フォームの実装-第1段階"
 id="toc-カテゴリの追加フォームの実装-第1段階"><span class="toc-section-number">3.2</span>
 カテゴリの追加フォームの実装 (第1段階)</a></li>
-<li><a href="#画面の実装-postリクエストの処理を除く"
-id="toc-画面の実装-postリクエストの処理を除く"><span class="toc-section-number">3.3</span>
-画面の実装 (POSTリクエストの処理を除く)</a></li>
+<li><a href="#カテゴリの追加フォームの実装-第2段階"
+id="toc-カテゴリの追加フォームの実装-第2段階"><span class="toc-section-number">3.3</span>
+カテゴリの追加フォームの実装 (第2段階)</a></li>
 </ul></li>
 <li><a href="#冬休みの宿題" id="toc-冬休みの宿題"><span class="toc-section-number">4</span>
 冬休みの宿題</a></li>
@@ -1068,7 +1068,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <img src="figs/09/app_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <ul>
+      <ol type="1">
       <li>ページ (＝Reactコンポーネント) の実装となるので、ファイル名を <code>router.ts</code>
       ではなく <code>page.tsx</code> とすることに注意してください。</li>
       <li><code>/admin/categories/new</code> にアクセスすると、内部的に
@@ -1088,13 +1088,28 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <li>テキストボックスが空欄でも「カテゴリを作成」のボタンが押下できてしまいます。</li>
       <li>既存のカテゴリと同じ名前でも「カテゴリを作成」のボタンが押下できてしまいます。</li>
       </ul></li>
-      </ul>
+      </ol>
       <p>以上のように、<strong>このコードには「POST処理」と「バリデーション処理」が実装されていません</strong>。そのことを踏まえて、まずはじっくりとコードの読解に努めてください。特にしっかりと理解して欲しい部分は以下のようになります。</p>
       <ul>
-      <li></li>
+      <li><strong>第28行目</strong>から<strong>第70行目</strong>の「カテゴリ一覧の取得する処理」</li>
+      <li><strong>第77行目</strong>から<strong>第89行目</strong>の「ボタンを押下したときの処理」</li>
+      <li><strong>第123行目</strong>から<strong>第154行目</strong>の「<code>&lt;form&gt;</code>要素を使った入力フォームの構成」</li>
       </ul>
-      <h2 data-number="3.3" id="画面の実装-postリクエストの処理を除く"><span
-      class="header-section-number">3.3</span> 画面の実装 (POSTリクエストの処理を除く)</h2>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Next.js (React)
+      を使用してブログアプリ開発をしています。そこで、<code>&lt;input type="text"&gt;</code> や
+      <code>&lt;button&gt;</code>
+      などの要素を使って、記事の投稿フォームを構成しています。これらの要素を
+      <code>&lt;form&gt;</code>
+      の子要素にすることの意味について教えてください。<code>&lt;button&gt;</code> に
+      <code>onClick</code> 属性を設定すれば送信処理を実装できるのに、わざわざ
+      <code>&lt;form&gt;</code> を使うことに理由があるのでしょうか</p>
+      </blockquote>
+      <p>ある程度の理解ができたら、次のセクションに進んでください。</p>
+      <h2 data-number="3.3" id="カテゴリの追加フォームの実装-第2段階"><span
+      class="header-section-number">3.3</span> カテゴリの追加フォームの実装 (第2段階)</h2>
+      <p>テキストボックスにバリデーションを設定して、</p>
       <p>テキストボックスやバリデーション関連の処理については<a
       href="lecture07.html">第05回講義</a>(Todoアプリ開発)
       のほぼ復習となります。また、カテゴリの一覧の取得処理
