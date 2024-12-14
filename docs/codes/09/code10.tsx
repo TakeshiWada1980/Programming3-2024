@@ -6,7 +6,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { twMerge } from "tailwind-merge";
 
 // カテゴリをフェッチしたときのレスポンスのデータ型
-type RawApiCategoryResponse = {
+type CategoryApiResponse = {
   id: string;
   name: string;
   createdAt: string;
@@ -58,7 +58,7 @@ const Page: React.FC = () => {
         }
 
         // レスポンスのボディをJSONとして読み取りカテゴリ配列 (State) にセット
-        const apiResBody = (await res.json()) as RawApiCategoryResponse[];
+        const apiResBody = (await res.json()) as CategoryApiResponse[];
         setCheckableCategories(
           apiResBody.map((body) => ({
             id: body.id,
