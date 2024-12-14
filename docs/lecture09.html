@@ -59,9 +59,9 @@ id="toc-投稿記事の一覧を取得するウェブapiの実装"><span class="
 <li><a href="#投稿記事を新規作成するウェブapiの実装"
 id="toc-投稿記事を新規作成するウェブapiの実装"><span class="toc-section-number">2.3</span>
 投稿記事を新規作成するウェブAPIの実装</a></li>
-<li><a href="#宿題-単一の投稿記事を取得するウェブapiの実装"
-id="toc-宿題-単一の投稿記事を取得するウェブapiの実装"><span class="toc-section-number">2.4</span>
-宿題⛄: 単一の投稿記事を取得するウェブAPIの実装</a></li>
+<li><a href="#宿題-投稿記事-単体-を取得するウェブapiの実装"
+id="toc-宿題-投稿記事-単体-を取得するウェブapiの実装"><span class="toc-section-number">2.4</span>
+宿題⛄: 投稿記事 (単体) を取得するウェブAPIの実装</a></li>
 <li><a href="#宿題-投稿記事を削除するウェブapiの実装"
 id="toc-宿題-投稿記事を削除するウェブapiの実装"><span class="toc-section-number">2.5</span> 宿題⛄:
 投稿記事を削除するウェブAPIの実装</a></li>
@@ -69,18 +69,20 @@ id="toc-宿題-投稿記事を削除するウェブapiの実装"><span class="to
 id="toc-宿題-投稿記事の内容を変更-更新-するウェブapiの実装"><span
 class="toc-section-number">2.6</span> 宿題⛄: 投稿記事の内容を変更 (更新)
 するウェブAPIの実装</a></li>
-<li><a href="#情報の整理-サイトマップとapリスト" id="toc-情報の整理-サイトマップとapリスト"><span
-class="toc-section-number">2.7</span> 情報の整理: サイトマップとAPリスト</a></li>
+<li><a href="#情報の整理-apiリストとサイトマップ" id="toc-情報の整理-apiリストとサイトマップ"><span
+class="toc-section-number">2.7</span> 情報の整理: APIリストとサイトマップ</a></li>
+<li><a href="#ふたたびフロンドエンド開発に" id="toc-ふたたびフロンドエンド開発に"><span
+class="toc-section-number">2.8</span> ふたたびフロンドエンド開発に…</a></li>
 </ul></li>
-<li><a href="#カテゴリの新規作成ページの実装" id="toc-カテゴリの新規作成ページの実装"><span
-class="toc-section-number">3</span> カテゴリの新規作成ページの実装</a>
+<li><a href="#カテゴリの新規作成フォームの実装" id="toc-カテゴリの新規作成フォームの実装"><span
+class="toc-section-number">3</span> カテゴリの新規作成フォームの実装</a>
 <ul>
 <li><a href="#準備-1" id="toc-準備-1"><span class="toc-section-number">3.1</span> 準備</a></li>
+<li><a href="#カテゴリの追加フォームの実装-第1段階"
+id="toc-カテゴリの追加フォームの実装-第1段階"><span class="toc-section-number">3.2</span>
+カテゴリの追加フォームの実装 (第1段階)</a></li>
 <li><a href="#画面の実装-postリクエストの処理を除く"
-id="toc-画面の実装-postリクエストの処理を除く"><span class="toc-section-number">3.2</span>
-画面の実装 (POSTリクエストの処理を除く)</a></li>
-<li><a href="#画面の実装-postリクエストの処理を除く-1"
-id="toc-画面の実装-postリクエストの処理を除く-1"><span class="toc-section-number">3.3</span>
+id="toc-画面の実装-postリクエストの処理を除く"><span class="toc-section-number">3.3</span>
 画面の実装 (POSTリクエストの処理を除く)</a></li>
 </ul></li>
 <li><a href="#冬休みの宿題" id="toc-冬休みの宿題"><span class="toc-section-number">4</span>
@@ -101,7 +103,7 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
       <h2 data-number="1.1" id="連絡"><span class="header-section-number">1.1</span> 連絡</h2>
       <ul>
       <li>「<strong>小テスト</strong>」を実施します。</li>
-      <li>冬休みの宿題🥶があります。</li>
+      <li>冬休みの宿題🥶 (＝<strong><em>課題2</em></strong> ) があります。</li>
       <li>本日は、スペシャルコンテンツとして OB講演 (＝<span
       class="masked">現役のフリーランスエンジニアとして活躍している本校OB</span>) があります。</li>
       </ul>
@@ -220,12 +222,12 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/08/code01.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のようになっている前提です。</p>
       <h2 data-number="2.2" id="投稿記事の一覧を取得するウェブapiの実装"><span
       class="header-section-number">2.2</span> 投稿記事の一覧を取得するウェブAPIの実装</h2>
-      <p>はじめに、<strong>GET</strong> メソッドに対応した
+      <p>はじめに、<strong>GET Method</strong> に対応した
       <strong>投稿記事の「一覧」を取得するためのエンドポイント</strong> (<code>/api/posts</code>)
       を実装していきます。基本的には前回講義で実装した<a
       href="lecture08.html#カテゴリの一覧を取得するウェブapiの実装">カテゴリの一覧の取得</a>と同じ構造となります。</p>
-      <p><code>src/app/api/posts/route.ts</code> を作成して、次のプログラムを貼付けてください
-      (プログラムを読み解いてください)。</p>
+      <p><code>src/app/api/posts/route.ts</code>
+      を作成して、次のプログラムを貼付けてください。また、プログラムを読み解いてください。</p>
       <div class="sourceCode" id="cb2"
       data-caption="api/posts/route.ts (投稿記事の「一覧」の取得)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
@@ -250,9 +252,9 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
 <span id="cb2-20"><a href="#cb2-20"></a>}<span class="op">;</span></span></code></pre></div>
       <p><strong>Thunder Clinet</strong> を使って <code>/api/posts</code>
       にGETリクエストを送って、次のような <span
-      class="masked">「id」「title」「content」「coverImageURL」「createdAt」「updatedAt」を属性に持つオブジェクトの配列</span>
-      がレスポンスとして得られることを確認してください。</p>
-      <div class="sourceCode" id="cb3" data-caption="/api/posts のレスポンス(例)"><pre
+      class="masked">「id」「title」「content」「coverImageURL」「createdAt」「updatedAt」を属性に持ったオブジェクトの配列
+      (JSON形式) </span> がレスポンスとして得られることを確認してください。</p>
+      <div class="sourceCode" id="cb3" data-caption="GET /api/posts のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">[</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">{</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d6993236-ac1c-40cf-a4af-7ff405b7e96f&quot;</span><span class="fu">,</span></span>
@@ -272,31 +274,29 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
 <span id="cb3-17"><a href="#cb3-17"></a>    <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.073Z&quot;</span></span>
 <span id="cb3-18"><a href="#cb3-18"></a>  <span class="fu">}</span></span>
 <span id="cb3-19"><a href="#cb3-19"></a><span class="ot">]</span></span></code></pre></div>
-      <p>ところで、このAPIを利用して以下のよいうな画面
-      (＝投稿記事の一覧表示の画面・アプリのトップページ) を構成しようとすると <span
-      class="masked">レスポンスのなかにカテゴリに関する情報が足りないこと</span>
-      に気づくでしょうか。また <code>coverImageURL</code> と <code>updatedAt</code>
-      が冗長な情報になることにも気づくでしょうか。</p>
+      <p>ところで、このレスポンスを利用して以下のような画面 (＝投稿記事の一覧表示の画面 /
+      トップページ) を構成しようとすると <span
+      class="masked">「カテゴリ」に関する情報が不足していること</span> に気づくでしょうか。また
+      <code>coverImageURL</code> と <code>updatedAt</code>
+      は冗長な情報になることに気づくでしょうか。</p>
       <figure>
       <img src="figs/06/app_09.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>RDB
-      の各テーブルには、情報が「<strong>正規化</strong>」されて格納されているため、投稿記事テーブル
+      <p>RDB には情報が「<strong>正規化</strong>」されて格納されているため、投稿記事テーブル
       (<code>Post</code>) <strong>だけ</strong>を参照しても <span
-      class="masked">記事に紐づく「カテゴリ」の情報</span>
-      を得ることは<strong>で・き・ま・せ・ん</strong>。このようなとき、RDB
-      では「(中間テーブルを使った)
-      <strong>テーブルの結合操作</strong>」が必要となってきます。SQL文では <code>JOIN</code>
-      というキーワードを使ってテーブルの結合る処理を行います（この結合は、慣れるまではかなり難しいです）。</p>
+      class="masked">記事に紐づく「カテゴリ」の情報</span> を得ることは
+      <strong>で・き・ま・せ・ん</strong>。このようなとき、RDB では (中間テーブルを介した使った)
+      <strong>テーブルの結合操作</strong> というものが必要となってきます。SQL文では
+      <code>JOIN</code> というキーワードでテーブルの結合処理をします。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>リレーショナルデータベースにおいてテーブルの結合 (JOIN)
-      は、どのようなときに必要となりますか。投稿記事とカテゴリが「多対多」の関係になっているブログデータを扱っている場合を例に考えてみてください。</p>
+      は、どのようなときに必要となりますか。投稿記事とカテゴリが「多対多」の関係になっているブログデータを扱う場合を例に考えてみてください。</p>
       </blockquote>
-      <p>しかし、ここでのブログアプリ開発では、ORM である Prisma
-      を利用しているため、(<code>JOIN</code> を使ったSQL文を記述することなく) 比較的簡単に
-      <strong>投稿記事に紐づくカテゴリ情報</strong> の取得が可能となります🙌。具体的には
+      <p>しかし、このブログアプリ開発では、ORM である Prisma を利用しているため、(<code>JOIN</code>
+      を使った SQL文 を記述することなく) 比較的簡単に
+      <strong>投稿記事に紐づくカテゴリ情報の取得が可能</strong> となります🙌。具体的には
       <code>route.ts</code> の <strong>第07行目</strong> <code>findMany</code>
       メソッドの第1引数に「<strong>selectオプション</strong>」を追加することによって可能になります。</p>
       <p>実際に、次のように <code>findMany</code>
@@ -327,22 +327,23 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
 <span id="cb4-25"><a href="#cb4-25"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
 <span id="cb4-26"><a href="#cb4-26"></a>  }<span class="op">,</span></span>
 <span id="cb4-27"><a href="#cb4-27"></a>})<span class="op">;</span></span></code></pre></div>
-      <p>なお、上記のように変更したときは、<code>findMany</code>メソッドの「戻り値」に <span
-      class="masked">カテゴリの情報が含まれるようになる</span> ため、<strong>第07行目</strong> の
-      <code>const posts: Post[] = ...</code> を <code>const posts = ...</code>
-      のように変更してください (つまり、型推論を利用して <code>posts</code>
-      の型を決定するようにしてください)。現在のままでは (<code>posts: Post[]</code>
-      のままでは)「型」の不一致によるエラーが発生してしまいます。</p>
+      <p>なお、上記のように第1引数を変更したときは、<code>findMany</code>メソッドの「戻り値」に
+      <span class="masked">カテゴリの情報が含まれるようになる</span> ため、<strong>第07行目</strong>
+      の <code>const posts: Post[] = ...</code> を <code>const posts = ...</code>
+      のように変更してください。つまり <span class="masked">型推論を利用して posts
+      の型を決定する</span> ようにしてください。<code>posts: Post[]</code>
+      のままでは「型」の不一致によるエラーが発生するので注意してください。</p>
       <div class="note type-senior">
-      <p><strong>応用: selectを指定したときの「型」を明示するためには</strong></p>
+      <p><strong>応用: selectを指定したときの「型」を明示するためには…</strong></p>
       <p><code>findMany</code> の引数に <code>select</code>
-      を含むオブジェクトを指定したとき、型推論を利用せずに <code>posts</code>
-      に対して明示的に「型」を指定したいときは<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code01.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のようにしてください。ただし、これは中級以上の内容になるので、無理に利用する必要はありません。</p>
+      を含むオブジェクトを指定するとき、型推論を使わずに <code>posts</code>
+      に対して明示的に型を指定したいときは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code01.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のようにしてください。ただし、これは中級以上の内容になってくるので、無理に利用する必要はありません。</p>
       </div>
-      <p>レスポンスのボディが次のようになっていること (＝<span
+      <p><strong>ThunderClinet</strong> を使って、<code>/api/posts</code>
+      のレスポンスのボディが次のようになっていること (＝<span
       class="masked">投稿記事に紐づくカテゴリの「 id」と「name」が取得できること</span>)
-      を、実際に確認してください。</p>
+      を確認してください。</p>
       <div class="sourceCode" id="cb5"
       data-caption="select を指定したときの /api/posts のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">{</span></span>
@@ -380,19 +381,20 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
       <h3 data-number="2.2.1" id="補足-selectプロパティに関する解説-1"><span
       class="header-section-number">2.2.1</span> 補足: selectプロパティに関する解説 1</h3>
       <p>PrismaClient の <strong>findManyメソッド</strong> や <strong>findUniqueメソッド</strong>
-      (＝単一データの取得に使用) の引数に設定可能な <code>select</code> プロパティは、SQL文の
-      <code>SELECT</code> に相当するもので、戻り値として得たい <span class="masked">カラム
-      (属性)</span> を明示的に指定するために使用します。</p>
-      <p>引数として与えるオブジェクトに <code>select</code> プロパティを特に含めなければ <span
-      class="masked">そのテーブルが持つすべてのカラム (列)</span> が戻り値となります。例えば
-      <code>prisma.post.findMany</code> メソッドは、<code>select</code>
+      (＝レコード単体の取得に使用) の引数に設定可能な <code>select</code> プロパティは、SQL文の
+      <code>SELECT</code> に相当するもので、戻り値に得たい <span class="masked">カラム (属性)</span>
+      を選択 (指定) するために使用します。</p>
+      <p><code>findMany</code>/<code>findUnique</code> の第1引数として与えるオブジェクトに
+      <code>select</code> プロパティを含めなければ <span
+      class="masked">そのテーブルが持っている全てのカラム (列)</span> が戻り値となります。例えば
+      <code>prisma.post.findMany</code> メソッドにおいて、<code>select</code>
       を指定しなければ「id」「title」「content」「coverImageURL」「createdAt」「updatedAt」の
-      <strong>6個のプロパティを持ったオブジェクト (単体/配列)</strong> が「戻り値」となります。</p>
-      <p>一方で、メソッドの引数を <code>select: { id: true, title: true, content: true }</code>
-      とすれば、「id」「title」「content」の <strong>3個だけのプロパティを持ったオブジェクト
+      <strong>6個のプロパティを持ったオブジェクトの配列</strong> が「戻り値」となります。</p>
+      <p>一方で、メソッドの引数に <code>select: { id: true, title: true, content: true }</code>
+      を与えれば、「id」「title」「content」の <strong>3つだけのプロパティを持ったオブジェクト
       (単体/配列)</strong> が「戻り値」となります。</p>
       <p>ここで <span class="masked">「そのテーブルが持つすべてのカラム (列)とは何か？」</span>
-      について正しく理解しておく必要があります。<a
+      ということについて正しく理解しておく必要があります。<a
       href="lecture08.html#schema.prisma-の編集">前回講義</a> では <code>prisma/schema.prisma</code>
       というファイルで、各テーブルのスキーマ (＝構造・型・制約) を次のように定義しました。</p>
       <div class="sourceCode" id="cb6" data-caption="prisma/schema.prisma (抜粋・再掲)"><pre
@@ -428,25 +430,25 @@ id="toc-画面の実装-postリクエストの処理を除く-1"><span class="to
 <span id="cb6-30"><a href="#cb6-30"></a>}</span></code></pre></div>
       <p>これらの定義を <strong>ER図 (風)</strong> に表現すると以下のようになります
       (<strong>ER図</strong>: Entity Relationship Diagram
-      については「データベース工学」で詳しく学びます。ここでは「RDBの設計図」と考えてください)。<code>schema.prisma</code>
-      の記述と 以下のER図の対応関係が (なんとなく) 分かるでしょうか。</p>
+      については「データベース工学」で詳しく学びます。ここでは「RDBの設計図」と考えてください)。上記の
+      <code>schema.prisma</code> の記述と、以下のER図の対応関係が (なんとなく)
+      分かるでしょうか🤔</p>
       <figure>
       <img src="figs/09/db_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>ここで、上記のER図のなかで <strong>赤色で prisma
-      と示したカラム</strong>、具体的に言えば、投稿記事テーブルの <code>categories</code>
-      カラム、中間テーブルの <code>category</code> と <code>post</code> カラム、カテゴリテーブルの
-      <code>posts</code> のカラムは扱いに注意が必要です。</p>
+      <p>ER図のなかで <strong>赤色で prisma と示したカラム</strong>、具体的には、投稿記事テーブルの
+      <code>categories</code> カラム、中間テーブルの <code>category</code> と <code>post</code>
+      カラム、カテゴリテーブルの <code>posts</code> のカラムは <strong>扱いに注意が必要</strong>
+      です。</p>
       <p>これらのカラムは、<strong>Prisma が O/R Mapper として内部的に使用する参照情報</strong>
-      (＝<span
-      class="masked">オブジェクト指向的なデータアクセスをユーザに提供するための設定情報</span>)
-      であり、<span class="masked">実際の RDB のテーブルのなかには存在しないカラム</span>
-      となっています。</p>
+      (＝ユーザにオブジェクト指向的なデータアクセスを提供するための設定情報) であり、<span
+      class="masked">実際の RDB のテーブルには存在しないカラム</span> となっています。</p>
       <p>実際に SQLite の<a
       href="https://www.sqlite.org/download.html">コマンドラインツール</a>である
       <code>sqlite3.exe</code> を使って <code>prisma/dev.db</code>
-      に接続して「投稿記事テーブル」のスキーマを確認するコマンドを実行してみると、次のように結果になります。</p>
+      に接続して「投稿記事テーブル」のスキーマを確認すると (<code>.schema Post</code>
+      コマンドを実行すると)、次のような結果になります。</p>
       <pre><code>sqlite&gt; .schema Post
 CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
     &quot;id&quot; TEXT NOT NULL PRIMARY KEY,
@@ -456,24 +458,26 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
     &quot;createdAt&quot; DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     &quot;updatedAt&quot; DATETIME NOT NULL
 );</code></pre>
-      <p><code>id</code> や <code>title</code> などのカラムは存在しますが、<code>categories</code>
-      というカラムは<strong>存在しない</strong>ことが確認できると思います。このように <strong>実際の
-      RDB のテーブルに存在しないカラムの値</strong> は、<code>select</code> オプション (あるいは
-      <code>include</code> オプション) を指定して取得する必要があります。</p>
-      <p>なお、<code>schema.prisma</code> のフィールドのうち、実際の DB にカラム (列)
-      が作成されないのは <code>categories PostCategory[]</code> や <code>posts PostCategory[]</code>
-      のように「配列型」になっているものと、<code>@relation(...)</code>
-      の属性がついたものとなります。</p>
+      <p><code>id</code> や <code>title</code> などのカラムは存在しますが、<span
+      class="masked"><code>categories</code> というカラムは 存・在・し・な・い・こ・と</span>
+      が確認できます。このように <strong>実際の RDB のテーブルに存在しないカラムの値</strong>
+      は、<code>select</code> オプション (あるいは <code>include</code> オプション)
+      を指定して取得する必要があります。</p>
+      <p>なお、<code>schema.prisma</code> のフィールドのうち、RDB にカラム (列) が作成されないのは
+      <code>categories PostCategory[]</code> や <code>posts PostCategory[]</code>
+      のように「<strong>配列型</strong>」になっているものと、<code>@relation(...)</code>
+      の属性がついたものとなります。つまり、<code>schema.prisma</code> の
+      <strong>９、18、28、29行目</strong> についてはカラムが作成されません。</p>
       <h3 data-number="2.2.2" id="補足-selectプロパティに関する解説-2"><span
       class="header-section-number">2.2.2</span> 補足: selectプロパティに関する解説 2</h3>
-      <p><code>prisma.post.findMany</code> を使って、「カテゴリテーブル」のなかの <code>id</code> と
-      <code>name</code> の情報も同時に取得するためには、以下の ➊ → ➋ → ➌
-      のように<strong>段階的にアプローチ</strong>していく必要がなります。</p>
+      <p><code>prisma.post.findMany</code> を使って、「Categoryテーブル」のなかの <code>id</code> と
+      <code>name</code> の情報同時に取得するためには、以下の ➊ → ➋ → ➌
+      のように<strong>段階的にアプローチ</strong>する必要があります。</p>
       <figure>
       <img src="figs/09/db_02.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>これが、さきほどの <code>select</code> の指定
+      <p>この の ➊ → ➋ → ➌ のアプローチが、さきほどの <code>select</code>
       (<strong>第13行目</strong>から<strong>第22行目</strong>) に対応しています。</p>
       <div class="sourceCode" id="cb8" data-startFrom="7"
       data-caption="api/posts/route.ts (findManyの引数を変更) 抜粋"><pre
@@ -504,19 +508,20 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <blockquote>
       <p>prisma の <code>findMany</code> の引数に設定可能な
       <code>select</code>、<code>inclue</code>、<code>_count</code>
-      について丁寧に解説してください。投稿記事とカテゴリが「多対多」の関係になっているブログデータを扱っている場合を例に解説してください。</p>
+      について丁寧に解説してください。投稿記事とカテゴリが「多対多」の関係になっているブログデータを扱う場合を例に解説してください。</p>
       </blockquote>
       <blockquote>
       <p>上記以外に <code>findMany</code> メソッドでは、どのようなオプションが利用できますか。</p>
       </blockquote>
       <h2 data-number="2.3" id="投稿記事を新規作成するウェブapiの実装"><span
       class="header-section-number">2.3</span> 投稿記事を新規作成するウェブAPIの実装</h2>
-      <p>投稿記事を新規作成 (POST メソッドで記事を<strong>新規投稿</strong>)
-      するためのウェブAPIを実装していきます。エンドポイントは <code>/api/admin/posts</code>
+      <p>投稿記事を<strong>新規作成</strong> (POST メソッドで記事を<strong>新規投稿</strong>)
+      するためのウェブAPIを実装していきます。</p>
+      <p>エンドポイントは <code>/api/admin/posts</code>
       として、以下のようなリクエストボディを受け付ける想定で設計します。投稿記事にカテゴリを1個も設定しないことも許可し、その場合は
       <code>"categoryIds": []</code> のように <strong>空配列</strong> を与えるものとします。</p>
       <div class="sourceCode" id="cb9"
-      data-caption="/api/admin/post に対するリクエストのボディ例"><pre
+      data-caption="/api/admin/post に対する POST リクエストのボディ例"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">{</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>  <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿X&quot;</span><span class="fu">,</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>  <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿Xの本文。&lt;br/&gt;投稿Xの本文。投稿Xの本文。&quot;</span><span class="fu">,</span></span>
@@ -526,25 +531,24 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb9-7"><a href="#cb9-7"></a>    <span class="st">&quot;5a8d8365-e435-4ed4-a05e-34237c1b2ff0&quot;</span></span>
 <span id="cb9-8"><a href="#cb9-8"></a>  <span class="ot">]</span></span>
 <span id="cb9-9"><a href="#cb9-9"></a><span class="fu">}</span></span></code></pre></div>
-      <p>投稿記事の追加は、次のような点を考慮する必要があるため、前回講義の<a
-      href="lecture08.html#カテゴリを追加するウェブapiの実装">カテゴリの追加</a>よりも複雑な処理になります。</p>
+      <p>投稿記事の追加では、次のような点を考慮する必要があるため、前回講義の<a
+      href="lecture08.html#カテゴリを追加するウェブapiの実装">カテゴリの追加</a>よりも複雑な処理となります。</p>
       <ol type="1">
       <li><strong>リクエストボディのバリエーション (データ検証) の処理</strong></li>
       <li><strong>categoryIdsの要素に一致するIDを持ったカテゴリが存在しない場合の処理</strong></li>
       <li><strong>中間テーブルにレコードを追加する処理</strong></li>
       </ol>
-      <p>まず、「<strong>1番目</strong>」の<strong>バリエーション</strong>ですが、これはカテゴリの追加においても<strong>本来は必要だった処理</strong>になります。具体的には、リクエストボディについて「<strong>必要なプロパティを持っているか</strong>」<span
+      <p>まず、「<strong>1番目</strong>」の<strong>バリエーション</strong>ですが、これはカテゴリの追加でも<strong>本来は必要だった処理</strong>になります。具体的には、リクエストボディについて「<strong>必要なプロパティを持っているか</strong>」<span
       class="masked">「プロパティが期待する型であるか」</span>「<strong>文字数制限
       (例えば2文字以上32文字以内) が守られているか</strong>」<span
-      class="masked">「URLとして適切な形式になっているか」</span>といったチェックをする処理になります。ここでは
-      <strong>紙面の都合で省略</strong>します
-      (余裕がある学生は実装して、バリエーションエラーがあれば <code>400 Bad Request</code>
-      をレスポンスするようにしてください)。</p>
-      <p>次に「<strong>2番目</strong>」ですが、これは「<strong>存在するカテゴリだけを投稿記事に紐づける</strong>」<span
-      class="masked">「「存在しないカテゴリがあれば、エラーとしてリクエストを拒否する」</span>
-      などが考えられますが、ここではリクエストを拒否する方針で設計します。</p>
+      class="masked">「URLとして適切な形式になっているか」</span>といったチェックをする処理になります。この処理は
+      <strong>紙面の都合で省略</strong>します (余裕がある学生はバリエーションを実装し、問題があれば
+      <code>400 Bad Request</code> をレスポンスするようにしてください)。</p>
+      <p>次に「<strong>2番目</strong>」ですが、これは「<strong>実在するカテゴリだけを投稿記事に紐づける</strong>」または<span
+      class="masked">「実在しないカテゴリがあれば、エラーとしてリクエストを拒否する」</span>
+      という対応が考えられますが、ここではリクエストを拒否する方針で設計します。</p>
       <p>「<strong>3番目</strong>」は必須の処理となります。</p>
-      <p>以上を踏まえて投稿記事の追加するウェブAPIは、以下のように実装することができます。</p>
+      <p>以上を踏まえて投稿記事の追加するAPIは、以下のように実装することができます。</p>
       <div class="sourceCode" id="cb10"
       data-caption="api/admin/posts/route.ts (投稿記事の追加)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
@@ -611,20 +615,18 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <p><strong>第05行目</strong> から <strong>第10行目</strong>
       では、POSTリクエストの「ボディ」として想定される <strong>JSONデータ</strong>
       に適合する「型」を定義しています
-      (他のAPIでも同じ型を使う場合は、別ファイルに定義してインポートするほうが望ましいです)。また、<strong>第14行目</strong>
-      では、リクエストのボディのボディ (＝<span
-      class="masked">あくまでJSONフォーマットに従って書かれた文字列</span>)
+      (他のAPIでも同じ型を使う場合は、別ファイルに型を定義してインポートするほうが望ましいです)。また、<strong>第14行目</strong>
+      では、リクエストのボディ (＝<span class="masked">JSON形式の文字列</span>)
       を、JavaScriptオブジェクトに変換して <code>requestBody</code> に代入しています。</p>
       <p><strong>第20行目</strong> から <strong>第32行目</strong> では「リクエストボディの
-      <code>categoryIds</code>
-      に含まれるIDのカテゴリがDBに存在するか」を確認し、存在しないカテゴリがあれば、ステータスコード<a
-      href="https://developer.mozilla.org/ja/docs/Web/HTTP/Status/400">400</a>を返して処理を中断するようにしています。ここでは
+      <code>categoryIds</code> に含まれるIDのカテゴリが DB
+      に存在するか」を確認し、存在しないカテゴリがひとつでもあれば、処理を中断してステータスコード「<a
+      href="https://developer.mozilla.org/ja/docs/Web/HTTP/Status/400">400</a>」をレスポンスするようにしています。ここでは
       <code>prisma.category.findMany</code> の引数を <code>where: {id: {in: categoryIds } }</code>
       とすることで「<strong>categoryIds
-      配列の各要素に対応するカテゴリIDを一括検索する処理</strong>」を実行しています (<code>in</code>
-      演算子によって、指定された複数の値に一致するレコードを効率的に取得しています)。これにより、<span
+      配列の各要素に対応するカテゴリIDを一括検索する処理</strong>」を実行しています。これにより、<span
       class="masked">forループなどの繰り返し処理を使用することなく</span>
-      配列の要素に対応するカテゴリを一度の操作で取得することが可能になります。取得したレコード数と
+      一度の操作で複数のレコードを効率的に取得することができます。そして、取得したレコード数と
       <code>categoryIds</code> の要素数を比較し、一致しない場合は <span
       class="masked">指定されたカテゴリIDの一部がDBに存在しない</span>
       と判断してステータスコード「400」を返しています。</p>
@@ -632,7 +634,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <p><strong>参考情報</strong></p>
       <p>次の <strong>PrismaClientの処理</strong> (TypeScriptプログラム) は、</p>
       <div class="sourceCode" id="cb11"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>( { where<span class="op">:</span> { id<span class="op">:</span> { <span class="kw">in</span><span class="op">:</span> [<span class="st">&quot;c-001&quot;</span><span class="op">,</span><span class="st">&quot;c-002&quot;</span><span class="op">,</span><span class="st">&quot;c-003&quot;</span>] }}} )<span class="op">;</span></span></code></pre></div>
-      <p>次の <strong>SQL</strong> と同等になります。</p>
+      <p>次のような <strong>SQL</strong> と同等になります。</p>
       <div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> <span class="kw">category</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="kw">IN</span> (<span class="st">&#39;c-001&#39;</span>, <span class="st">&#39;c-002&#39;</span>, <span class="st">&#39;c-003&#39;</span>);</span></code></pre></div>
       </div>
       <p><strong>第44行目</strong> から <strong>第51行目</strong> では、中間テーブル
@@ -640,7 +642,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       に、投稿記事とカテゴリを紐づけるためのレコードを挿入しています。</p>
       <p>各処理の概要が理解できたら、<strong>TunderClient</strong> と <strong>Prisma Studio</strong>
       を利用してエンドポイント <code>/api/admin/posts</code>
-      の動作確認を行ってください。この際、<strong>あえて誤ったボディ</strong>
+      の動作確認を行なってください。この際、あえて<strong>不適切なボディ</strong>
       (例えば、存在しないカテゴリIDを含むデータなど) を与え、そのレスポンスや <span
       class="masked">VSCodeのターミナルに出力されるエラーメッセージ</span>
       がどのようになるかを確認してください。</p>
@@ -650,7 +652,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </figure>
       <h3 data-number="2.3.1" id="演習-10分"><span class="header-section-number">2.3.1</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
-      <p>次のような「誤った書式のJSON文字列」をボディに与えてリクエストを送ったとき、VSCodeのターミナルにはどのようなエラーメッセージが出力されるか確認してください。</p>
+      <p>次のような「誤った書式のJSON文字列」をボディに与えてリクエストを送ったとき、VSCodeのターミナルにどのようなエラーメッセージが出力されるか確認してください。</p>
       <div class="sourceCode" id="cb13"
       data-caption="書式に誤りのあるJSON: プロパティ名をダブルクォーテーションで囲んでいない"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">{</span></span>
@@ -674,7 +676,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb14-8"><a href="#cb14-8"></a>  <span class="ot">]</span></span>
 <span id="cb14-9"><a href="#cb14-9"></a><span class="fu">}</span></span></code></pre></div>
       <div class="note type-senior">
-      <p><strong>EX: より高度でエレガント実装✨</strong></p>
+      <p><strong>EX: より高度でエレガントな実装✨</strong></p>
       <p>投稿記事とカテゴリを紐付ける「中間テーブルへのレコードの挿入」については、前回講義の<a
       href="lecture08.html#dbの初期データの作成">DBの初期データの作成</a>で示した
       <code>seed.ts</code> の <strong>第23行目</strong> から <strong>第25行目</strong> のように
@@ -682,15 +684,16 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       を利用することで、より効率的な実装ができます。</p>
       <p>実装例は<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code02.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p>
-      <p>また、さらに、この実装では「<strong>カテゴリが存在することを事前確認せずに処理すること</strong>」が可能になります。投稿記事を作成する際に、存在しないカテゴリIDが与えられると、<strong>データベースの外部キー制約</strong>によってエラーが発生し、それを適切にハンドリングすることでステータスコード「400」を返すことができるようになります。</p>
+      <p>また、このように実装すると「<strong>カテゴリが存在することを事前確認せずに処理すること</strong>」が可能になります。投稿記事を作成する際に、存在しないカテゴリIDが与えられると、<strong>データベースの外部キー制約</strong>によってエラーが発生し、それを適切にハンドリングすることでステータスコード「400」を返すことができるようになります。</p>
       </div>
-      <h2 data-number="2.4" id="宿題-単一の投稿記事を取得するウェブapiの実装"><span
-      class="header-section-number">2.4</span> 宿題⛄: 単一の投稿記事を取得するウェブAPIの実装</h2>
+      <h2 data-number="2.4" id="宿題-投稿記事-単体-を取得するウェブapiの実装"><span
+      class="header-section-number">2.4</span> 宿題⛄: 投稿記事 (単体)
+      を取得するウェブAPIの実装</h2>
       <p><code>/api/posts/[id]</code> というエンドポイントに、単一の投稿記事を取得するウェブAPI
       (<strong>GET Method</strong>に対応) を実装してください。</p>
-      <p>URLパスで与える <code>id</code> に一致する投稿記事が <strong>存在したとき</strong>
-      は、ステータスコード「<strong>200 OK</strong>」で以下のような JSON
-      が返ってくるようにしてください。</p>
+      <p>URLパスで与える <code>id</code>
+      に一致する投稿記事が存在するときは、ステータスコード「<strong>200 OK</strong>」で以下のような
+      JSON をレスポンスするようにしてください。</p>
       <div class="sourceCode" id="cb15"
       data-caption="GET /api/posts/[id] の 200 のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">{</span></span>
@@ -715,22 +718,23 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb15-20"><a href="#cb15-20"></a>    <span class="fu">}</span></span>
 <span id="cb15-21"><a href="#cb15-21"></a>  <span class="ot">]</span></span>
 <span id="cb15-22"><a href="#cb15-22"></a><span class="fu">}</span></span></code></pre></div>
-      <p>また、<code>id</code> に一致する <strong>投稿記事が存在しなかったとき</strong>
-      は、ステータスコード「<strong>404 Not Found</strong>」で以下のような JSON
-      が返ってくるようにしてください。</p>
+      <p>また、<code>id</code>
+      に一致する<strong>投稿記事が存在しなかったとき</strong>は、ステータスコード「<strong>404 Not
+      Found</strong>」で以下のような JSON をレスポンスするようにしてください。</p>
       <div class="sourceCode" id="cb16"
       data-caption="GET /api/posts/[id] の 404 のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">{</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a>  <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="st">&quot;id=&#39;0120-00-9696&#39;の投稿記事は見つかりませんでした&quot;</span></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="fu">}</span></span></code></pre></div>
       <ul>
-      <li>URLパスのパラメータプレースホルダ <code>[id]</code> の処理については、前回講義の<a
+      <li>URLパスの<strong>パラメータプレースホルダ</strong> <code>[id]</code>
+      の処理については、前回講義の<a
       href="lecture08.html#カテゴリを削除するウェブapiの実装">こちら</a>を参考にしてください。</li>
       <li>単一のレコードの取得には <code>findUnique</code> メソッドを使用してください。
       <ul>
-      <li><code>where</code> で指定する条件に一致するレコードが存在しない場合は <code>null</code>
-      が戻り値となります (厳密には <code>await</code> した Promise の結果として <code>null</code>
-      が返されます)。</li>
+      <li>条件に一致するレコードが見つからなかったとき、<code>findUnique</code> の戻り値は
+      <code>null</code> になります (厳密には <code>await</code> した Promise の結果として
+      <code>null</code> が返されます)。</li>
       </ul></li>
       </ul>
       <p>どうしても実装できないときは<a
@@ -742,7 +746,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       Method</strong> に対応) を実装してください。</p>
       <p>URLパスで与える <code>id</code>
       に一致する投稿記事が「<strong>削除できたとき</strong>」は、ステータスコード「<strong>200
-      OK</strong>」で以下のようなJSONデータが返ってくるようにしてください。</p>
+      OK</strong>」で以下のような JSON をレスポンスするようにしてください。</p>
       <div class="sourceCode" id="cb17"
       data-caption="DELETE /api/admin/posts/[id] の 200 のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">{</span></span>
@@ -750,7 +754,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb17-3"><a href="#cb17-3"></a><span class="fu">}</span></span></code></pre></div>
       <p>また、id
       に一致する投稿記事が存在しないなどの理由で「<strong>削除できなかったとき</strong>」は、ステータスコード「<strong>500
-      Internal Server Error</strong>」で以下のJSONデータが返ってくるようにしてください。</p>
+      Internal Server Error</strong>」で以下の JSON をレスポンスするようにしてください。</p>
       <div class="sourceCode" id="cb18"
       data-caption="DELETE /api/admin/posts/[id] の 500 のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">{</span></span>
@@ -764,9 +768,8 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <p><code>/api/admin/posts/[id]</code> というエンドポイントに、<strong>投稿記事を変更 (更新)
       するウェブAPI</strong> (<strong>PUT Method</strong> に対応)
       を実装してください。このエンドポイントは <span
-      class="masked">先ほどの「投稿記事の削除」と同じ</span> です。<code>DELETE</code>
-      関数を記述したファイルに<strong>追記するように</strong> <code>PUT</code>
-      関数を実装してください。</p>
+      class="masked">先ほどの「投稿記事の削除」と同じ</span> となります。<code>DELETE</code>
+      関数を記述したファイルのなかに <code>PUT</code> 関数を実装してください。</p>
       <p>PUTリクエストのボディは、POSTメソッドと同じ形式のJSONデータを想定してください。</p>
       <div class="sourceCode" id="cb19"
       data-caption="PUT /api/admin/post/[id] へのリクエストのボディ(例)"><pre
@@ -781,8 +784,8 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb19-9"><a href="#cb19-9"></a><span class="fu">}</span></span></code></pre></div>
       <p>データベースに <code>id</code>
       に一致する投稿記事が存在し「<strong>内容を変更できたとき</strong>」は、ステータスコード「<strong>200
-      OK</strong>」で以下のようなJSONデータ (更新された内容) が返ってくるようにしてください
-      (カテゴリの情報は不要です)。</p>
+      OK</strong>」で以下のようなJSONデータ (更新された内容)
+      をレスポンスするようにしてください。カテゴリの情報は不要です。</p>
       <div class="sourceCode" id="cb20"
       data-caption="PUT /api/admin/posts/[id] の 200 のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">{</span></span>
@@ -794,23 +797,25 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb20-7"><a href="#cb20-7"></a>  <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-11T05:33:45.884Z&quot;</span></span>
 <span id="cb20-8"><a href="#cb20-8"></a><span class="fu">}</span></span></code></pre></div>
       <p>「<strong>内容を変更できなかったとき</strong>」は、ステータスコード「<strong>500 Internal
-      Server Error</strong>」で以下のJSONデータが返ってくるようにしてください
-      (カテゴリの情報は不要です)。</p>
+      Server Error</strong>」で以下のJSONデータをレスポンスするようにしてください。</p>
       <div class="sourceCode" id="cb21"
       data-caption="PUT /api/admin/posts/[id] の 500 のレスポンス(例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">{</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>  <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿記事の変更に失敗しました&quot;</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="fu">}</span></span></code></pre></div>
-      <p>次のことに注意して実装してください。</p>
+      <p>実装に際しては次のことに注意してください。</p>
       <ul>
-      <li>投稿記事とカテゴリを紐付けする情報の更新は、まず、中間テーブルから現在の紐づけ情報を削除したあとに、中間テーブルに新しい紐付け情報を挿入という2段階で行なう必要があります。</li>
+      <li>投稿記事とカテゴリを紐付けする情報の更新は、まず <span
+      class="masked">中間テーブルから現在の紐づけ情報を削除</span>
+      してから、中間テーブルに新しい紐付け情報を挿入するという <strong>2段階</strong>
+      で行なってください。</li>
       <li>リクエストボディの <code>"categoryIds"</code>
       に不正な値が含まれているときに「<strong>タイトル、本文、カバーイメージURLは更新されたが、カテゴリ設定については失敗した</strong>」といった
       <strong>中途半端な状態 (データの整合性が保たれない状態) が生じないように実装</strong>
-      してください。<code>prisma.post.update</code> を実行するよりも <code>"categoryIds"</code>
+      してください。<code>prisma.post.update</code> の実行よりも先に <code>"categoryIds"</code>
       の検証をするようにしてください。
       <ul>
-      <li>あるいは [トランザクション] を利用して処理してください
+      <li>もしくは <strong>トランザクション</strong> を利用して処理してください
       (トランザクションの利用は必須ではありません)。</li>
       </ul></li>
       </ul>
@@ -825,9 +830,10 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </blockquote>
       <p>どうしても実装できないときは<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code05.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参考にしてください。</p>
-      <h2 data-number="2.7" id="情報の整理-サイトマップとapリスト"><span
-      class="header-section-number">2.7</span> 情報の整理: サイトマップとAPリスト</h2>
-      <p>ここまでの実装で、以下の9件が実装されているはずです。</p>
+      <h2 data-number="2.7" id="情報の整理-apiリストとサイトマップ"><span
+      class="header-section-number">2.7</span> 情報の整理: APIリストとサイトマップ</h2>
+      <p>ここまでを終えると、次の <strong>9件のウェブAPI</strong>
+      が実装された状態になっているはずです。</p>
       <table>
       <thead>
       <tr class="header">
@@ -883,10 +889,10 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <tr class="even">
       <td>/api/posts/[id]</td>
       <td>GET</td>
-      <td>投稿記事 (単一) を取得する</td>
+      <td>投稿記事 (単体) を取得する</td>
       <td></td>
       <td></td>
-      <td>宿題⛄ (課題2)</td>
+      <td><strong>宿題</strong>⛄ (課題2)</td>
       </tr>
       <tr class="odd">
       <td>/api/admin/posts</td>
@@ -902,7 +908,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <td>投稿記事の内容を変更 (編集) する</td>
       <td>必要</td>
       <td>必要</td>
-      <td>宿題⛄ (課題2)</td>
+      <td><strong>宿題</strong>⛄ (課題2)</td>
       </tr>
       <tr class="odd">
       <td>/api/admin/posts/[id]</td>
@@ -910,11 +916,16 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <td>投稿記事を削除する</td>
       <td>必要</td>
       <td></td>
-      <td>宿題⛄ (課題2)</td>
+      <td><strong>宿題</strong>⛄ (課題2)</td>
       </tr>
       </tbody>
       </table>
-      <p>サイトマップ</p>
+      <h2 data-number="2.8" id="ふたたびフロンドエンド開発に"><span
+      class="header-section-number">2.8</span> ふたたびフロンドエンド開発に…</h2>
+      <p>ウェブAPIを利用する形で、次のようなフロントエンド開発
+      (<strong>Reactによるウェブ画面の設計・構築</strong>)
+      を進めていきます。なお、<strong>宿題</strong>⛄
+      の部分がまだ完了していなくても着手することができます。</p>
       <table>
       <thead>
       <tr class="header">
@@ -926,22 +937,23 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <tbody>
       <tr class="odd">
       <td>/</td>
-      <td>投稿記事の一覧</td>
+      <td>投稿記事の一覧表示 <font size="-1">(<strong>実装済み</strong>)</font></td>
       <td></td>
       </tr>
       <tr class="even">
       <td>/about</td>
-      <td>制作者プロフィール<br>このサイトについて</td>
+      <td>制作者プロフィール<br>このサイトについて
+      <font size="-1">(<strong>実装済み</strong>)</font></td>
       <td></td>
       </tr>
       <tr class="odd">
       <td>/posts/[id]</td>
-      <td>投稿記事の詳細</td>
+      <td>投稿記事の詳細表示 <font size="-1">(<strong>実装済み</strong>)</font></td>
       <td></td>
       </tr>
       <tr class="even">
       <td>/admin/posts</td>
-      <td>投稿記事の一覧<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td>投稿記事の一覧表示<br>編集ページへのリンク、削除機能 (オプション)</td>
       <td>必要</td>
       </tr>
       <tr class="odd">
@@ -956,7 +968,7 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tr>
       <tr class="odd">
       <td>/admin/categories</td>
-      <td>カテゴリの一覧<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td>カテゴリの一覧表示<br>編集ページへのリンク、削除機能 (オプション)</td>
       <td>必要</td>
       </tr>
       <tr class="even">
@@ -971,17 +983,25 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tr>
       </tbody>
       </table>
-      <h1 data-number="3" id="カテゴリの新規作成ページの実装"><span
-      class="header-section-number">3</span> カテゴリの新規作成ページの実装</h1>
-      <p>フロントエンド開発に戻って、ここまでに作成した各ウェブAPIを呼び出すためのページを実装します。まずは、<code>/admin/categories/new</code>
-      に以下のような「<strong>カテゴリの新規作成</strong>」のページを実装していきます。</p>
+      <h1 data-number="3" id="カテゴリの新規作成フォームの実装"><span
+      class="header-section-number">3</span> カテゴリの新規作成フォームの実装</h1>
+      <p>フロントエンド開発に戻ります。<code>/admin/categories/new</code> に
+      <strong>カテゴリを新規作成 (追加) するためのフォーム</strong>
+      を配置したページを実装していきます。</p>
       <figure>
       <img src="figs/09/app_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>この画面では、実装済みの API を以下のように利用します。</p>
+      <ol type="1">
+      <li>既存の<strong>カテゴリ (一覧) の取得</strong>に <span class="masked">GET
+      /api/categories</span> を使用</li>
+      <li><strong>カテゴリの新規作成 (追加)</strong> に <span class="masked">POST
+      /api/admin/categories</span> を使用</li>
+      </ol>
       <h2 data-number="3.1" id="準備-1"><span class="header-section-number">3.1</span> 準備</h2>
       <p>ここでは、<strong>以下のウェブAPIが実装されていること</strong>を前提とします
-      (いずれも前回授業で実装済みです)。</p>
+      (いずれのAPIも前回授業のなかで実装済みです)。</p>
       <table>
       <thead>
       <tr class="header">
@@ -1003,11 +1023,11 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tr>
       </tbody>
       </table>
-      <p>カテゴリの一覧を <code>/api/categories</code>
-      のレスポンスは、次のようなJSON形式になっていることを <strong>ThunderClinet</strong> で
-      <strong>必ず確認</strong> しておいてください。問題があれば、前回の<a
-      href="lecture08.html#カテゴリの一覧を取得するウェブapiの実装">講義資料</a>を参照して修正してください。</p>
-      <div class="sourceCode" id="cb22" data-caption="GET /api/categories"><pre
+      <p>念のために <code>/api/categories</code>
+      のレスポンスが、次のような形式のJSONになっていることを <strong>ThunderClinet</strong>
+      から確認しておいてください。もし、形式が違っていれば、前回の<a
+      href="lecture08.html#カテゴリの一覧を取得するウェブapiの実装">講義資料</a>を参照して修正しておいてください。</p>
+      <div class="sourceCode" id="cb22" data-caption="GET /api/categories のレスポンス (例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb22-1"><a href="#cb22-1"></a><span class="ot">[</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">{</span></span>
 <span id="cb22-3"><a href="#cb22-3"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;db450dc7-a73b-4311-8b70-3af652efd144&quot;</span><span class="fu">,</span></span>
@@ -1023,29 +1043,64 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
 <span id="cb22-13"><a href="#cb22-13"></a>    <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-08T12:00:42.695Z&quot;</span></span>
 <span id="cb22-14"><a href="#cb22-14"></a>  <span class="fu">}</span></span>
 <span id="cb22-15"><a href="#cb22-15"></a><span class="ot">]</span></span></code></pre></div>
-      <p>また、カテゴリを追加 (新規作成) する <code>/api/categories</code>
-      は、次のようなJSON形式のリクエストボディを受付けることを <strong>ThunderClinet</strong> で
-      <strong>必ず確認</strong> 確認しておいてください。問題があれば、前回の<a
+      <p>また、カテゴリを新規作成 (追加) するための API (<code>/api/categories</code>)
+      は、次のようなリクエストボディを受付けることを確認しておいてください。問題があれば、前回の<a
       href="lecture08.html#カテゴリを追加するウェブapiの実装-コードの解説">講義資料</a>を参照して修正してください。</p>
       <div class="sourceCode" id="cb23"
-      data-caption="POST /api/admin/categories のリクエストボディ"><pre
+      data-caption="POST /api/admin/categories のリクエストボディ (例)"><pre
       class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">{</span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ5&quot;</span></span>
 <span id="cb23-3"><a href="#cb23-3"></a><span class="fu">}</span></span></code></pre></div>
-      <h2 data-number="3.2" id="画面の実装-postリクエストの処理を除く"><span
-      class="header-section-number">3.2</span> 画面の実装 (POSTリクエストの処理を除く)</h2>
-      <p><code>/api/admin/categories</code> に対する <strong>POSTリクエスト処理</strong> と
-      <strong>バリデーション処理</strong> を除いた実装例を<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code06.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。</p>
-      <p>比較的に長いコードになりますが、まずは動作確認してから、じっくりと読解に努めてください。</p>
+      <p><strong>ThunderClinet</strong> を使用したPOSTリクエストの確認方法は次のとおりです
+      (再掲)。なお、既に同じ名前のカテゴリが DB に存在する場合は失敗するので注意してください
+      (失敗するように設計しているので注意してください)。</p>
+      <figure>
+      <img src="figs/08/vscode_10.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以下、ステップバイステップで段階的にカテゴリの追加フォームを実装していきます。</p>
+      <h2 data-number="3.2" id="カテゴリの追加フォームの実装-第1段階"><span
+      class="header-section-number">3.2</span> カテゴリの追加フォームの実装 (第1段階)</h2>
+      <p>プロジェクトフォルダに <code>src/app/admin/categories/new/page.tsx</code> を作成して<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code06.tsx">こちらのコード<i class="fa-solid fa-person-chalkboard"></i></a>を貼付け、開発モードでアプリを起動し、<code>/admin/categories/new</code>
+      にアクセスして動作確認してください。</p>
+      <figure>
+      <img src="figs/09/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ul>
+      <li>ページ (＝Reactコンポーネント) の実装となるので、ファイル名を <code>router.ts</code>
+      ではなく <code>page.tsx</code> とすることに注意してください。</li>
+      <li><code>/admin/categories/new</code> にアクセスすると、内部的に
+      <code>GET /api/admin/categories</code>
+      がコールされ、カテゴリの一覧が画面に表示されることを確認してください。</li>
+      <li>テキストボックスに「名前」を入力してボタンを押下すると、開発ツール
+      (<code>F12</code>で起動) のコンソールに <span
+      class="masked"><code>POST /api/admin/categories =&gt; {"name":"カテゴリ5"}</code></span>
+      のようなログが出力されること確認してください。
+      <ul>
+      <li>ただし、現状の実装では <strong>実際の「POST処理」は実行されていないこと</strong>
+      に注意してください。</li>
+      </ul></li>
+      <li>新しいカテゴリの名前についての <strong>バリデーション (値の検証)</strong>
+      が実装されていないことを確認してください。
+      <ul>
+      <li>テキストボックスが空欄でも「カテゴリを作成」のボタンが押下できてしまいます。</li>
+      <li>既存のカテゴリと同じ名前でも「カテゴリを作成」のボタンが押下できてしまいます。</li>
+      </ul></li>
+      </ul>
+      <p>以上のように、<strong>このコードには「POST処理」と「バリデーション処理」が実装されていません</strong>。そのことを踏まえて、まずはじっくりとコードの読解に努めてください。特にしっかりと理解して欲しい部分は以下のようになります。</p>
+      <ul>
+      <li></li>
+      </ul>
+      <h2 data-number="3.3" id="画面の実装-postリクエストの処理を除く"><span
+      class="header-section-number">3.3</span> 画面の実装 (POSTリクエストの処理を除く)</h2>
       <p>テキストボックスやバリデーション関連の処理については<a
       href="lecture07.html">第05回講義</a>(Todoアプリ開発)
       のほぼ復習となります。また、カテゴリの一覧の取得処理
       (<strong>第29行目</strong>から<strong>第69行目</strong>の内容) は、<a
       href="lecture07.html#ブログ記事一覧の表示">第07回講義</a>(microCMSからのデータフェッチ)
       の復習となります。</p>
-      <h2 data-number="3.3" id="画面の実装-postリクエストの処理を除く-1"><span
-      class="header-section-number">3.3</span> 画面の実装 (POSTリクエストの処理を除く)</h2>
       <h1 data-number="4" id="冬休みの宿題"><span class="header-section-number">4</span>
       冬休みの宿題</h1>
       <p>次回の授業は、年明けの <strong>1月9日(木)</strong> となります。</p>
