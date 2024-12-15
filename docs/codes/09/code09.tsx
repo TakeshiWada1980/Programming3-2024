@@ -203,18 +203,6 @@ const Page: React.FC = () => {
     <main>
       <div className="mb-4 text-2xl font-bold">カテゴリの編集・削除</div>
 
-      {isSubmitting && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="flex items-center rounded-lg bg-white px-8 py-4 shadow-lg">
-            <FontAwesomeIcon
-              icon={faSpinner}
-              className="mr-2 animate-spin text-gray-500"
-            />
-            <div className="flex items-center text-gray-500">処理中...</div>
-          </div>
-        </div>
-      )}
-
       <form
         onSubmit={handleSubmit}
         className={twMerge("mb-4 space-y-4", isSubmitting && "opacity-50")}
@@ -252,35 +240,33 @@ const Page: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-end">
-          <div className="space-x-2">
-            <button
-              type="submit"
-              className={twMerge(
-                "rounded-md px-5 py-1 font-bold",
-                "bg-indigo-500 text-white hover:bg-indigo-600",
-                "disabled:cursor-not-allowed disabled:opacity-50"
-              )}
-              disabled={
-                isSubmitting ||
-                newCategoryNameError !== "" ||
-                newCategoryName === ""
-              }
-            >
-              カテゴリの名前を変更
-            </button>
+        <div className="flex justify-end space-x-2">
+          <button
+            type="submit"
+            className={twMerge(
+              "rounded-md px-5 py-1 font-bold",
+              "bg-indigo-500 text-white hover:bg-indigo-600",
+              "disabled:cursor-not-allowed disabled:opacity-50"
+            )}
+            disabled={
+              isSubmitting ||
+              newCategoryNameError !== "" ||
+              newCategoryName === ""
+            }
+          >
+            カテゴリの名前を変更
+          </button>
 
-            <button
-              type="button"
-              className={twMerge(
-                "rounded-md px-5 py-1 font-bold",
-                "bg-red-500 text-white hover:bg-red-600"
-              )}
-              onClick={handleDelete}
-            >
-              削除
-            </button>
-          </div>
+          <button
+            type="button"
+            className={twMerge(
+              "rounded-md px-5 py-1 font-bold",
+              "bg-red-500 text-white hover:bg-red-600"
+            )}
+            onClick={handleDelete}
+          >
+            削除
+          </button>
         </div>
       </form>
 
@@ -309,6 +295,18 @@ const Page: React.FC = () => {
                 </Link>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {isSubmitting && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="flex items-center rounded-lg bg-white px-8 py-4 shadow-lg">
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className="mr-2 animate-spin text-gray-500"
+            />
+            <div className="flex items-center text-gray-500">処理中...</div>
           </div>
         </div>
       )}

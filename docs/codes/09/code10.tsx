@@ -141,9 +141,9 @@ const Page: React.FC = () => {
         throw new Error(`${res.status}: ${res.statusText}`); // -> catch節に移動
       }
 
-      // トップページに遷移
+      const postResponse = await res.json();
       setIsSubmitting(false);
-      router.push("/");
+      router.push(`/posts/${postResponse.id}`); // 投稿記事の詳細ページに移動
     } catch (error) {
       const errorMsg =
         error instanceof Error

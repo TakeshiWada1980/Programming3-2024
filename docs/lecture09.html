@@ -1373,7 +1373,10 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tbody>
       </table>
       <p>実装例を<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code09.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。そのプロセスのなかで「どうやって実装すればよいか分からない」ということが明確になるので、そのうえでコード例を見ると定着率が高くなります。</p>
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code09.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。そのプロセスのなかで
+      <span class="masked">「どうやって実装すれば良いのか分からない」</span>
+      ということが明確になるので
+      (頭のなかで整理されるので)、それから実装例を見たほうが圧倒的に知識定着率が高くなります。</p>
       <h1 data-number="5" id="投稿記事の新規作成フォームの実装"><span
       class="header-section-number">5</span> 投稿記事の新規作成フォームの実装</h1>
       <p><code>/admin/posts/new</code> に、次のような <strong>投稿記事の新規作成フォーム</strong>
@@ -1382,6 +1385,12 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <img src="figs/09/app_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <ul>
+      <li><strong>画像をアップロードする機能</strong>については、次回以降の講義で解説します。現段階では「画像のURL」を与えるように実装してください。なお、ここで指定したURLの画像を、投稿記事の詳細画面
+      (<code>/posts/[id]</code>) で表示するためには <span
+      class="masked">「next.config.mjs」を適切に設定</span> する必要があります。詳しくは<a
+      href="lecture07.html#動作確認と画像取得に関する設定変更">第07回講義</a>の解説を参照してください。</li>
+      </ul>
       <p>実装例を<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code10.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。</p>
       <h1 data-number="6" id="冬休みの宿題"><span class="header-section-number">6</span>
@@ -1532,7 +1541,8 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tr>
       </tbody>
       </table>
-      <p>以上について、次回授業日 1月9日 (木) までを目標に実装してください。</p>
+      <p>以上について、次回授業日 1月9日 (木) を目標に実装にチャレンジしてください
+      (生成AIをフル活用してください)。</p>
       <p>1月15日 (水) を期限に <strong><em>課題2</em></strong>
       として、上記の各ページの「<strong>スクリーンショット</strong>」と「<strong>各コードへのリンク</strong>」を提出してもらうことを予定しています
       (冬休みの宿題⛄が完了していれば30分程度で完了する内容です)。</p>
