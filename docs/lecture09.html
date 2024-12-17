@@ -46,8 +46,10 @@
 <li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span> 連絡・概要</a>
 <ul>
 <li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1.1</span> 連絡</a></li>
+<li><a href="#協力依頼" id="toc-協力依頼"><span class="toc-section-number">1.2</span>
+協力依頼</a></li>
 <li><a href="#ここまでの授業の流れ" id="toc-ここまでの授業の流れ"><span
-class="toc-section-number">1.2</span> ここまでの授業の流れ</a></li>
+class="toc-section-number">1.3</span> ここまでの授業の流れ</a></li>
 </ul></li>
 <li><a href="#投稿記事に関連するウェブapiの実装" id="toc-投稿記事に関連するウェブapiの実装"><span
 class="toc-section-number">2</span> 投稿記事に関連するウェブAPIの実装</a>
@@ -119,7 +121,15 @@ class="toc-section-number">5</span> 投稿記事の新規作成フォームの�
       <li>次回の開催 12月23日(月) 0時 〜 12月29日(日) 20時 … お題「？？？？」</li>
       </ul></li>
       </ul>
-      <h2 data-number="1.2" id="ここまでの授業の流れ"><span class="header-section-number">1.2</span>
+      <h2 data-number="1.2" id="協力依頼"><span class="header-section-number">1.2</span>
+      協力依頼</h2>
+      <ul>
+      <li><a href="https://forms.gle/SPdu4JXsqjwEUNfc6">プログラミング学習に関する調査</a>
+      <ul>
+      <li>5年生から卒業研究に関連してのアンケート調査です。<strong>3分程度で完了する内容</strong>なので回答に協力お願いします🙇。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="1.3" id="ここまでの授業の流れ"><span class="header-section-number">1.3</span>
       ここまでの授業の流れ</h2>
       <p>前回講義では「ブログアプリ」のバックエンド開発として、「<strong>カテゴリ</strong>」のCRUDに関連するウェブAPIの設計と実装を行ないました。</p>
       <table>
@@ -1395,7 +1405,16 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/09/code10.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。</p>
       <h1 data-number="6" id="冬休みの宿題"><span class="header-section-number">6</span>
       冬休みの宿題</h1>
-      <p>まず、次のAPIを全て実装してください。<strong>★</strong>印のAPIは、ここまでの講義で実装済みです。実質3件が新規実装が必要なAPIになります。なお、レスポンスのボディについて仕様変更しても問題ありません。</p>
+      <div class="note type-caution">
+      <p><strong>これまでと比較して格段に「高難易度の課題」です。その分だけ、実装できたときには大きく成長していることは間違いないので頑張って取り組んでください。</strong></p>
+      </div>
+      <p>まず、次のAPIを全て実装してください。<strong>★</strong>印のAPIは
+      <strong>ここまでの講義で実装済み</strong> です。<span
+      class="masked">実質3件が新規実装が必要なAPI</span>
+      になります。なお、レスポンスのボディについては、<a
+      href="lecture08.html#ex演習-宿題-20分">こちら</a>のように<strong>自由に仕様変更しても問題ありません</strong>。ただし
+      <span class="masked">データベースのスキーマ (schema.prisma )</span>
+      については変更しないでください。</p>
       <table>
       <thead>
       <tr class="header">
@@ -1473,8 +1492,12 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </tbody>
       </table>
       <p>つづいて上記のAPIを利用する形で、次のウェブページ (Reactコンポーネント)
-      を全て実装してください。<strong>ページのデザインやレイアウトに制約・制限はありません</strong>。<strong>★</strong>印は実装済みのページ、<strong>☆</strong>印は
-      <strong>microCMS API からの切り替えが必要のページ</strong>になります。</p>
+      を全て実装してください。<strong>ページのデザインやレイアウトに制約・制限はありません</strong>
+      (自由にデザインしてください)。</p>
+      <p><strong>★</strong>印は既に実装済みのページ、<strong>☆</strong>印は <span
+      class="masked">microCMS API からの切り替えが必要のページ</span> になります
+      (<strong>microCMSのAPI</strong> と <strong>Next.jsで自作したAPI</strong>
+      ではレスポンスのボディのJSON形式が少し違っているので注意してください)。</p>
       <table>
       <thead>
       <tr class="header">
@@ -1543,10 +1566,22 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       </table>
       <p>以上について、次回授業日 1月9日 (木) を目標に実装にチャレンジしてください
       (生成AIをフル活用してください)。</p>
+      <p>デザインや機能によっては、<strong>これまでの授業で習っていない (紹介されていない)
+      ライブラリやテクニックが必要になります</strong>。そこは、生成AIのサポートを受けて乗り越えてください。</p>
       <p>1月15日 (水) を期限に <strong><em>課題2</em></strong>
       として、上記の各ページの「<strong>スクリーンショット</strong>」と「<strong>各コードへのリンク</strong>」を提出してもらうことを予定しています
       (冬休みの宿題⛄が完了していれば30分程度で完了する内容です)。</p>
-      <p>詳細については、次回の授業 1月9日 (木) のなかで連絡します。</p>
+      <p>課題2の提出方法の詳細は、次回の授業 1月9日 (木) のなかで案内します。</p>
+      <div class="note type-tips">
+      <p><strong>どうしても実装できないときは…</strong></p>
+      <p>こちらの<a
+      href="https://github.com/TakeshiWada1980/next-blog-app">リポジトリ</a>と、以下のリンクを参考にしてください。</p>
+      <ul>
+      <li>/admin/categories の<a href="figs/09/blog-app_02.png">デザイン例</a></li>
+      <li>/admin/posts の<a href="figs/09/blog-app_01.png">デザイン例</a></li>
+      <li>/admin/posts/[id] の<a href="figs/09/blog-app_03.png">デザイン例</a></li>
+      </ul>
+      </div>
       <!-- ---------------------------------------- -->
     </main>
 
