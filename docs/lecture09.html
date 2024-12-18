@@ -1582,6 +1582,26 @@ CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
       <li>/admin/posts/[id] の<a href="figs/09/blog-app_03.png">デザイン例</a></li>
       </ul>
       </div>
+      <div class="note type-senior">
+      <p><strong>さらなるスキル向上を目指すなら…</strong></p>
+      <ul>
+      <li>同じ型定義が複数箇所で必要になったときは <code>_types</code>
+      フォルダのなかに型定義専用のファイルを作成し、そこから型をインポートして使うようにしてみましょう。これにより、型の一貫性が保たれ、変更管理も容易になります
+      (つまり「保守性」と「再利用性」が向上します)。</li>
+      <li>複数のページで共通して使用するUIコンポーネント (例えばボタンやカテゴリタグなど) は
+      <code>_components</code>
+      フォルダに切り出して、再利用可能なモジュールとして管理するようにしてみましょう。</li>
+      <li>現在、記事の投稿フォームは <code>onChange</code> と <code>useState</code>
+      で値の管理やバリデーション (文字数のチェックなど)
+      をしています。これは基本形として大事ですが、多く現場では <a
+      href="https://www.google.com/search?q=zod+react+hook+form">react-hook-form と zod</a>
+      というライブラリが使用されています。定番のライブラリとなるので、ぜひ試してみてください。</li>
+      <li><code>fetch</code> 関数によるデータ取得 (HTTP GET) がマスターできたら、次は
+      <code>useSWR</code> という Hook
+      の利用にチャレンジしてみてください。「キャッシュ管理」や「自動再取得」などの便利な機能
+      (UXを向上につながる機能) が揃っており、実務でもよく利用されているライブラリになります。</li>
+      </ul>
+      </div>
       <!-- ---------------------------------------- -->
     </main>
 
