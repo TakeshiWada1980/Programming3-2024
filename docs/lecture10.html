@@ -89,7 +89,10 @@ class="toc-section-number">5.2</span> useAuth を利用したヘッダの表示�
 <li><a href="#演習" id="toc-演習"><span class="toc-section-number">5.3</span> 演習</a></li>
 </ul></li>
 <li><a href="#ルートガードの実装" id="toc-ルートガードの実装"><span
-class="toc-section-number">6</span> ルートガードの実装</a></li>
+class="toc-section-number">6</span> ルートガードの実装</a>
+<ul>
+<li><a href="#演習-1" id="toc-演習-1"><span class="toc-section-number">6.1</span> 演習</a></li>
+</ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -1031,7 +1034,20 @@ npx prisma db seed</code></pre>
 <span id="cb27-32"><a href="#cb27-32"></a>}<span class="op">;</span></span>
 <span id="cb27-33"><a href="#cb27-33"></a></span>
 <span id="cb27-34"><a href="#cb27-34"></a><span class="im">export</span> <span class="im">default</span> AdminLayout<span class="op">;</span></span></code></pre></div>
-      <p>開発者モードで起動して <code>/admin</code> や <code>/</code></p>
+      <p>開発者モードで起動して、未ログイン状態で <code>/admin</code> や
+      <code>/admin/posts</code>、<code>/admin/posts/new</code> にアクセスすると
+      (ウェブブラウザのアドレバーにパスを入力すると)、ログインページ (<code>/login</code>)
+      に移動するこちとを確認してください。</p>
+      <h2 data-number="6.1" id="演習-1"><span class="header-section-number">6.1</span> 演習</h2>
+      <p>再利用性と保守性を高めるために、ルートガードの処理を
+      <code>src/app/_hooks/useRouteGuard.ts</code> というカスタムフックに分離し、それを
+      <code>src/app/admin/layout.tsx</code> から呼び出すようにしてください。</p>
+      <ul>
+      <li><code>useRouteGuard.ts</code> の実装例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code02.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
+      <li><code>layout.tsx</code> の実装例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code03.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
+      </ul>
       <!-- ---------------------------------------- -->
     </main>
 
