@@ -74,8 +74,8 @@ id="toc-フロントエンドで使用するapiキーの取得"><span class="toc
 class="toc-section-number">4.8</span> SupabaseClient のインストール</a></li>
 <li><a href="#ログインページの実装" id="toc-ログインページの実装"><span
 class="toc-section-number">4.9</span> ログインページの実装</a></li>
-<li><a href="#ログイン処理" id="toc-ログイン処理"><span class="toc-section-number">4.10</span>
-ログイン処理</a></li>
+<li><a href="#ログイン処理の解説" id="toc-ログイン処理の解説"><span
+class="toc-section-number">4.10</span> ログイン処理の解説</a></li>
 </ul></li>
 <li><a href="#認証状態の取得確認" id="toc-認証状態の取得確認"><span
 class="toc-section-number">5</span> 認証状態の取得・確認</a>
@@ -110,18 +110,20 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       今後の流れ</h2>
       <p>ここからは、<a
       href="lecture09.html#冬休みの宿題">冬休みの宿題</a>が完了していることを前提に進めていきます。</p>
-      <p>ここまでの開発によって、ローカル環境に構築したブログアプリとしては
-      <strong>投稿記事とカテゴリのCRUDについて、フロントエンドとバックエンドの両方で機能の実装が概ね完了</strong>しました。</p>
+      <p>ここまでの開発によって、ローカル環境に構築した「ブログアプリ」としては
+      <strong>投稿記事とカテゴリの CRUD (Create / Read / Update / Delete 処理)
+      について、フロントエンドとバックエンドの両方で概ね実装が完了</strong>したことになります。</p>
       <p>次のステップとしては <span class="masked">ユーザ認証機能</span>
-      を実装していきます。これにより、<strong>管理者だけ (特定ユーザだけ)
-      が記事やカテゴリの新規作成・編集・削除を実行</strong> できるように制限していきます。</p>
+      を実装していきます。これにより、<strong>管理者だけが (特定ユーザだけが)
+      記事やカテゴリの新規作成・編集・削除を実行</strong> できるような仕組みをつくっていきます。</p>
       <p>また、次回講義では「<strong>画像のアップロード機能</strong>」を実装し、次々回の講義では
-      <span class="masked">クラウドプラットフォームにブログアプリをデプロイ (配置・公開)</span>
-      し、ローカル環境以外からでもアプリを利用できるようにしていきます。</p>
-      <p>以上のような認証機能の実装やアプリのデプロイについて様々な選択肢がありますが、この授業では<a
+      <span class="masked">クラウドプラットフォームに「ブログアプリ」をデプロイ (配置・公開)</span>
+      し、手持ちのスマートフォンなどから「ブログアプリ」にアクセスできるようにしていきます。</p>
+      <p>以上のような「認証機能の実装」や「アプリのデプロイ」については、様々な選択肢がありますが、この授業では<a
       href="https://supabase.com/">Supabase</a>と<a
-      href="https://vercel.com/">Vercel</a>という2つのウェブサービスを利用していきます。いずれのウェブサービスも、<strong>学習目的</strong>
-      (≠商用利用) であれば無料枠が存在し、一定の制限 (例えば、作成可能なプロジェクト数など)
+      href="https://vercel.com/">Vercel</a>という2つのウェブサービス (クラウドプラットフォーム)
+      を利用していきます。いずれのサービスも、<strong>学習目的</strong> (≠商用利用)
+      であれば無料枠が存在し、一定の制限 (例えば、作成可能なプロジェクト数の制限など)
       の範囲内であれば <span class="masked">クレジットカード登録不要</span> で使用できます。</p>
       <h1 data-number="2" id="準備"><span class="header-section-number">2</span> 準備</h1>
       <p>管理者用の各種画面にアクセスするために、プロジェクトに <code>src/app/admin/page.tsx</code>
@@ -171,7 +173,8 @@ class="toc-section-number">6</span> ルートガードの実装</a>
 <span id="cb1-41"><a href="#cb1-41"></a>}<span class="op">;</span></span>
 <span id="cb1-42"><a href="#cb1-42"></a></span>
 <span id="cb1-43"><a href="#cb1-43"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
-      <p>次のような画面になることを確認してください。</p>
+      <p>開発者モードでアプリを起動し、<code>/admin</code>
+      にアクセスすると次のような画面が表示されることを確認してください。</p>
       <figure>
       <img src="figs/10/app_01.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -182,7 +185,7 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       <span class="masked">約30～40</span>
       個のファイルを<strong>作成・追加</strong>してきたことになります。</p>
       <p>開発中は、主に <code>npm run dev</code>
-      で開発モードでアプリを起動し、エラーやワーニングが生じていないことを確認していると思います。しかし、ここから先の開発をはじめる前に、<strong>本番用</strong>
+      で「<strong>開発モード</strong>」でアプリを起動し、エラーやワーニングが生じていないことを確認していると思います。しかし、ここから先の開発をはじめる前に、<strong>本番用</strong>
       (<strong>プロダクション用</strong>)
       に「ビルド」を実行し、<strong>プロジェクトに問題がないことを改めて確認</strong>
       してください。</p>
@@ -202,26 +205,28 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       <p><strong>認証機能 (ログイン機能)</strong> を実装していきます。</p>
       <p>ここでは<a href="https://supabase.com/">Supabase</a>という BaaS (Backend as a Service)
       を利用して認証機能を実装します。Supabase
-      は、ウェブアプリ／ウェブサービスの開発で必要となってくる「<strong>リレーショナルデータベース</strong>」「<strong>ファイルストレージ</strong>」「<strong>認証機能</strong>」「<strong>サーバレスファンクション</strong>」などのバックエンド機能を包括的に提供してくれるサービスになっています。</p>
-      <p>このブログアプリ開発では、Supabaseの「<strong>認証機能</strong>」を投稿記事の新規作成・編集・削除の制限に利用する他に、「<strong>リレーショナルデータベース機能</strong>」を
+      は、ウェブアプリ／ウェブサービスの開発で一般に必要となる「<strong>リレーショナルデータベース</strong>」「<strong>ファイルストレージ</strong>」「<strong>認証機能</strong>」「<strong>サーバレスファンクション</strong>」などのバックエンド機能を包括的に提供してくれるサービスになっています。</p>
+      <p>このブログアプリ開発では、Supabaseの「<strong>認証機能</strong>」を投稿記事やカテゴリの新規作成・編集・削除の制限に利用する他に、「<strong>リレーショナルデータベース機能</strong>」を
       <span
       class="masked">投稿記事やカテゴリの管理</span>、「<strong>ファイルストレージ機能</strong>」を
       <span class="masked">記事に添付する画像 (CoverImg) の管理</span> に利用していきます。</p>
       <div class="note type-tips">
       <p><strong>データベースシステムの変更 ( SQLite→PostgreSQL) </strong></p>
-      <p>ここまでの開発には SQLite を使用してきました。しかし、SQLiteは
-      <strong>ファイルベースのデータベース</strong> であり、本番環境で使用するためには Node.js
-      から直接読み書き可能な永続的なディスク領域を持ったサーバ環境が必要になります。しかし、そのようなサーバ環境を
+      <p>ここまでの開発には、データベースとして「SQLite」を使用してきました。しかし、SQLiteは
+      <strong>ファイルベースのデータベース</strong> であり、本番環境で使用するためには <span
+      class="masked">Node.js から直接読み書き可能な永続的なディスク領域を持ったサーバ環境</span>
+      が必要になります。しかし、そのようなサーバ環境を
       <strong>無料提供するホスティングサービスは限られているため</strong>、以降は、Supabase
-      の無料枠のなかで利用可能な PostgreSQL という RDBMS (Relational DataBase Management System)
-      に移行します。</p>
+      の無料枠のなかで利用可能な <strong>PostgreSQL</strong> という RDBMS (Relational DataBase
+      Management System) に移行します。</p>
       <p>なお、PostgreSQL
-      は、エンタープライズレベルの本番環境で広く採用されている高機能なオープンソースデータベースシステムです。SQLiteが<strong>書き込み操作を1つのみに制限する</strong>のに対し、PostgreSQLはトランザクション制御により複数ユーザーからの同時アクセスを安全に管理することができます。</p>
+      は、エンタープライズレベルの本番環境で広く採用されている高機能なオープンソースデータベースシステムです。SQLite
+      が<strong>書き込み操作を1つのみに制限する</strong>のに対し、PostgreSQLはトランザクション制御により複数ユーザーからの同時アクセスを安全に処理することができます。</p>
       </div>
       <h2 data-number="4.1" id="supabase-登録とプロジェクト作成"><span
       class="header-section-number">4.1</span> Supabase 登録とプロジェクト作成</h2>
       <p>Supabase
-      を利用するためには、はじめに「<strong>ユーザ登録</strong>」が必要になります。<strong>Freeプラン</strong>であれば、クレジットカード不要で利用が可能です。以下、ユーザ登録と、組織・プロジェクトの作成と設定を行なってください。</p>
+      を利用するためには、はじめに「<strong>ユーザ登録</strong>」が必要になります。<strong>Freeプラン</strong>であれば、クレジットカード不要で利用が可能です。以下の手順で「ユーザ登録」と「組織・プロジェクトの作成と設定」を行なってください。</p>
       <p>Supabase の公式ホームページ (<a href="https://supabase.com/">https://supabase.com/</a>)
       にアクセスして「<strong>Start your project</strong>」のボタンを押下してください。</p>
       <figure>
@@ -238,16 +243,16 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       <p>ソーシャルログインにおける <strong>認可スコープ</strong> (＝<span class="masked">Supabase
       が利用する GitHubアカウントの情報と権限</span>)
       の確認画面に遷移するので、内容を確認のうえ「<strong>Authorize
-      supbase</strong>」ボタンを押下してください。なお、<strong>複数のGitHubアカウントを持っている場合</strong>は、下記の画面で、どのGitHubアカウントを使用するか確認してください。</p>
+      supbase</strong>」ボタンを押下してください。なお、<strong>複数のGitHubアカウントを持っている場合</strong>は、下記の画面で、どのGitHubアカウントで連携するのかを確認・選択してください。</p>
       <figure>
       <img src="figs/10/supabase_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>つづいて、以下のような <strong>組織</strong> (Organization) の新規作成を行なう画面 (Create
-      a new organization)
-      に移動します。Supabaseにおける「組織」とは「<strong>チームメンバーの管理や料金請求の単位</strong>」を指します。無料の「Freeプラン」では、1つの組織を作成して、そこに
+      <p>つづいて、以下のような <strong>組織</strong> (Organization)
+      の新規作成を行なう画面「<strong>Create a new organization</strong>」に移動します。</p>
+      <p>Supabaseにおける「組織」とは「<strong>チームメンバーの管理や料金請求の単位</strong>」を指します。無料の「Freeプラン」では、1つの組織を作成して、そこに
       <span class="masked">最大2つまでのプロジェクト (Project)</span>
-      が作成可能になっています。各プロジェクトのなかには <strong>1個のデータベース</strong>
+      が作成可能になっています。各プロジェクトでは <strong>1個のデータベース</strong>
       を持つことができます。</p>
       <p><strong>Plan</strong> の項目が「<strong>Free -
       $0/month</strong>」になっていることを確認して「<strong>Create
@@ -261,18 +266,18 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       を設定して、<strong>Rergion</strong> (地域) として<strong>必ず</strong> <span
       class="masked">Northeast Asia (Tokyo)</span> を選択してください。初期設定のままにすると
       <strong>シンガポールのデータセンタ</strong> にリソース (データベースなど)
-      が作成され、通信時間が非常に大きくなるので注意してください。</p>
+      が作成され、利用時の応答時間が非常に長くなるので注意してください。</p>
       <p>また「<strong>Generate a
-      password</strong>」のリンクを押下して、データベース用のパスワードを生成してください
-      (データベース接続文字列として、環境変数の設定ファイル <code>.env</code>
-      に記述するので、<strong>普段利用のパスワードを使用することはお勧めしません</strong>)。</p>
+      password</strong>」のリンクを押下して、データベース用のパスワードを生成してください。なお、このパスワードは「データベース接続文字列」として、環境変数の設定ファイル
+      <code>.env</code>
+      に記述するので、<strong>普段使いのパスワードを使用することはお勧めしません</strong>。</p>
       <figure>
       <img src="figs/10/supabase_05.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>パスワードの生成ができたら、以下のように「<strong>Copy</strong>」のボタンを押下して安全な場所
       (ローカルのテキストファイルなど) に貼り付けておいてください。後ほど使用します。</p>
-      <p>パスワードを保管できたら「<strong>Create new
+      <p>パスワードが保管できたら「<strong>Create new
       project</strong>」のボタンを押下してください。</p>
       <figure>
       <img src="figs/10/supabase_06.png" alt="img" />
@@ -285,16 +290,18 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       <img src="figs/10/supabase_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>「Setting up project」の表示が消えたら、Supabase の データベース機能 (PostgreSQL)
-      が実際に利用可能になります。</p>
+      <p>「Setting up project」の表示が消えたら、<strong>Supabase の データベース機能 (PostgreSQL)
+      が実際に利用可能</strong>になります🎉。</p>
       <h2 data-number="4.2" id="prismaのデータベース接続情報の更新"><span
       class="header-section-number">4.2</span> Prismaのデータベース接続情報の更新</h2>
-      <p>現在、ORM (O/R Mapper) である Prisma は、プロジェクトローカルに配置した
-      <code>prisma/dev.db</code> に接続するように設定されています。これを <span
-      class="masked">Supabase (クラウドプラットフォーム) に構築された PostgreSQL</span>
-      に切り替えるように設定 (接続情報) を変更していきます。</p>
-      <p>まずは Supabaseのウェブページから、<strong>Supabaseに構築されたPostgreSQLに接続 (アクセス)
-      するための情報</strong>を取得します。次のように画面上部の「<strong><i class="fa-solid fa-plug fa-rotate-90"></i>
+      <p>現在、プロジェクトにおいて <a href="lecture08.html#orm">ORM (O/R Mapper)</a> である Prisma
+      は、プロジェクトローカルに配置した <code>prisma/dev.db</code> (SQLiteデータベース)
+      と接続するように設定されています。これを <span class="masked">Supabase
+      (クラウドプラットフォーム) に構築された PostgreSQL</span> に切り替えるように設定 (接続情報)
+      を変更していきます。</p>
+      <p>まずは Supabase のウェブページから、<strong>Supabase に構築された「PostgreSQLに接続
+      (アクセス)
+      するための情報」</strong>を取得します。次のように画面上部の「<strong><i class="fa-solid fa-plug fa-rotate-90"></i>
       Connect</strong>」のボタンを押下してください。</p>
       <figure>
       <img src="figs/10/supabase_08.png" alt="img" />
@@ -306,7 +313,8 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>次のように Tool
-      が「<strong>Prisma</strong>」になっていることを確認して、「<strong>.env.local</strong>」タブを選択し、「<strong>Copy</strong>」ボタンを押下して環境変数の設定をコピーしてください。</p>
+      が「<strong>Prisma</strong>」になっていることを確認して、「<strong>.env.local</strong>」タブを選択し、「<strong>Copy</strong>」ボタンを押下して
+      <strong>環境変数の設定</strong> をコピーしてください。</p>
       <figure>
       <img src="figs/10/supabase_10.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -314,14 +322,14 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       <p>VSCodeを起動し、プロジェクトフォルダ直下に配置されている <code>.env</code>
       (環境変数の設定ファイル) を開いてください。</p>
       <p>コメント部分を除けば、<code>.env</code>
-      は以下のような内容になっているはずです。今後、microCMS
+      は以下のような内容になっているはずです。今後、microCMS API
       は使用しないので、それに関連する設定は「削除」または「コメントアウト」しておいてください。</p>
       <div class="sourceCode" id="cb4" data-caption=".env (変更前)"><pre
       class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="va">NEXT_PUBLIC_MICROCMS_API_KEY</span><span class="op">=</span>xxxxxxxxxxxxxx</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="va">NEXT_PUBLIC_MICROCMS_BASE_EP</span><span class="op">=</span>https://xxxxxxxx.microcms.io/api/v1</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="va">DATABASE_URL</span><span class="op">=</span><span class="st">&quot;file:./dev.db&quot;</span></span></code></pre></div>
       <p>これを以下のように変更してください。先ほど Supabase
-      のサイトで「コピー」したテキストを貼り付け、それを<strong>加筆修正</strong>してください。ここの設定を誤ると、<strong>DB接続に失敗するので慎重に細心の注意を払って設定</strong>してください。</p>
+      のサイトで「コピー」したテキストを貼り付け、それを<strong>加筆修正</strong>してください。この設定を間違うと、<strong>DB接続に失敗するので慎重に細心の注意を払って設定</strong>してください。</p>
       <div class="sourceCode" id="cb5" data-caption=".env (変更後)"><pre
       class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Connect to Supabase via connection pooling with Supavisor.</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="va">DATABASE_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXX:YYY@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true&amp;connection_limit=1&quot;</span></span>
@@ -329,7 +337,7 @@ class="toc-section-number">6</span> ルートガードの実装</a>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Direct connection to the database. Used for migrations.</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="va">DIRECT_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXX:YYY@aws-0-ap-northeast-1.pooler.supabase.com:5432/postgres&quot;</span></span></code></pre></div>
       <ul>
-      <li><code>XXX</code> の部分はデータベースを指定する文字列になります。</li>
+      <li><code>XXX</code> の部分は「データベースを指定する文字列」になります。</li>
       <li><code>YYY</code> の部分は<a href="figs/10/supabase_06.png">「Create a new
       project」の画面</a>で生成した <span class="masked">パスワード</span>
       に置き換えてください。</li>
@@ -373,17 +381,17 @@ class="toc-section-number">6</span> ルートガードの実装</a>
       <p>以上で設定ファイルの更新は完了です。</p>
       <h2 data-number="4.3" id="データベース接続とテーブル作成-初期化"><span
       class="header-section-number">4.3</span> データベース接続とテーブル作成 (初期化)</h2>
-      <p>更新された設定に基づき、Supabase に構築された PostgreSQL
-      に各種テーブルを作成していきます。</p>
+      <p>更新された設定に基づき、Supabase に構築された PostgreSQL に
+      <strong>各種テーブルを作成</strong> していきます。</p>
       <p>基本的に SQLite の場合と同様に <strong>Primsa 経由でテーブルの作成と初期化</strong>
-      を実行します。VSCodeのターミナルから次のコマンドを実行してください。</p>
+      をします。VSCodeのターミナルから次のコマンドを実行してください。</p>
       <pre><code>npx prisma db push</code></pre>
       <p>次のような応答 (<code>Your database is now in sync with your Prisma schema</code>)
-      が返ってくれば、Supabaseに構築したDBに接続して初期化 (つまり
-      <code>Post</code>、<code>Category</code>、<code>PostCategory</code> の3つのテーブルの作成)
-      が成功したことになります。</p>
+      が返ってくれば、Supabaseに構築したDBの初期化処理 (つまり
+      <code>Post</code>、<code>Category</code>、<code>PostCategory</code> の
+      <strong>3つのテーブルの作成</strong>) が成功したことになります。</p>
       <p>エラーとなったときは <code>.env</code> と <code>prisma/schema.prisma</code>
-      を再確認してください (ファイルの保存忘れなどに注意してください)。</p>
+      の内容を再確認してください (ファイルの <strong>保存忘れ</strong> などに注意してください)。</p>
       <pre><code>Environment variables loaded from .env
 Prisma schema loaded from prisma\schema.prisma
 Datasource &quot;db&quot;: PostgreSQL database &quot;postgres&quot;, schema &quot;public&quot; at &quot;aws-0-ap-northeast-1.pooler.supabase.com:5432&quot;
@@ -391,27 +399,27 @@ Datasource &quot;db&quot;: PostgreSQL database &quot;postgres&quot;, schema &quo
 Your database is now in sync with your Prisma schema. Done in 1.09s
 
 ✔ Generated Prisma Client (v6.0.1) to .\node_modules\@prisma\client in 12</code></pre>
-      <p>各テーブルが作成されたことを Supbase
-      で確認してみます。以下のようにテーブルが作成されていることを確認してください。</p>
+      <p>各テーブルが作成されたことを Supbase で確認してみます。以下の手順で「Table
+      Editor」にアクセスしてテーブルが作成されていることを確認してください。</p>
       <figure>
       <img src="figs/10/supabase_12.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>ブログアプリからも <strong>レコードが追加できることを確認</strong>
-      してみます。アプリを開発モードで起動して
+      <p>ブログアプリからも、 <strong>Supabase のテーブルにレコードが追加できること</strong>
+      を確認してみます。アプリを開発モードで起動して
       (<code>npm run dev</code>)、実際に記事を投稿してみてください。</p>
       <figure>
       <img src="figs/10/supabase_13.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>Supbase から <code>Post</code>
-      テーブルを確認してください。次のようにレコードが追加されていれば成功です
+      テーブルを確認してください。次のようにレコードが追加されていれば成功🎉です
       (反映されていないときは画面をリロードしてください)。</p>
       <figure>
       <img src="figs/10/supabase_14.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>以上が確認できれば、SQLite から PostgreSQL への切り替えは完了です。</p>
+      <p>以上が確認できれば、SQLite から PostgreSQL への切り替えは無事完了です。</p>
       <div class="note type-tips">
       <p><strong>Supabaseの「Schema Visualizer」機能について</strong></p>
       <p>Supabase の「<strong>Schema
@@ -441,11 +449,11 @@ Your database is now in sync with your Prisma schema. Done in 1.09s
       (本番運用の開始後は <code>npx prisma migrate</code>
       という「既存レコードを残したままスキーマを変更するコマンド」を使用してください)。</p>
       <p><code>npx prisma db push</code> を再実行する際には、<span
-      class="masked">既存テーブルを事前に削除</span> しておく必要があります。<strong>SQLite
-      を使用していていたときは</strong> <code>dev.db</code>
+      class="masked">事前に既存テーブルを削除</span> しておく必要があります。<strong>SQLite
+      を使用していたときは</strong> <code>dev.db</code>
       <strong>を削除することでテーブルを削除することができました</strong>。一方、Supabase の
       PostgreSQL では、<strong>次のような SQL文を実行してテーブルを削除する必要</strong>があります
-      (GUIを使って消すことも可能です)。</p>
+      (GUIを使ってテーブルを削除することも可能です)。</p>
       <div class="sourceCode" id="cb10" data-caption="テーブルを削除するためのSQL文"><pre
       class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="kw">public</span>.<span class="ot">&quot;Post&quot;</span>,</span>
@@ -468,38 +476,39 @@ Your database is now in sync with your Prisma schema. Done in 1.09s
       <img src="figs/10/supabase_16.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>「Table
-      Editor」の画面に移動し、次のようにテーブルが削除できていることを確認してください。</p>
+      <p>「Table Editor」の画面に移動し、次のように <strong>テーブルが削除できていること</strong>
+      を確認してください。</p>
       <figure>
       <img src="figs/10/supabase_17.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <h2 data-number="4.5" id="テーブル作成とrls設定"><span
       class="header-section-number">4.5</span> テーブル作成とRLS設定</h2>
-      <p>削除したテーブルを再作成します。また<a
+      <p>削除したテーブルを再作成します。さらに、<a
       href="lecture08.html#dbの初期データの作成">第08回講義</a>で実行したように<code>prisma/seed.ts</code>
-      を使って初期データを投入します。</p>
+      を使って <strong>初期データを投入</strong> します。</p>
       <p>VSCodeに戻って、ターミナルから以下のコマンドを実行してください。</p>
       <pre><code>npx prisma db push
 npx prisma generate
 npx prisma db seed</code></pre>
       <p>Supabase の「Table
-      Editor」で、次のように初期データの投入まで問題なくできていることを確認してください。</p>
+      Editor」で、次のように初期データの投入を含めて問題なく実行できていることを確認してください。</p>
       <figure>
       <img src="figs/10/supabase_21.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>また、この画面で、以下のように、テーブルの右の鍵マークが「<strong>開</strong>」、テーブルのステータスが「<strong>RLS
+      <p>また、この画面において以下の図のように、テーブルの右の鍵マークが「<strong>開</strong>」、テーブルのステータスが「<strong>RLS
       disabled</strong>」になっていることを確認してください。ここで <strong>RLS</strong> とは <span
-      class="masked">Row Level Security</span> の頭文字をもったもので、テーブの行単位 (レコード単位)
-      の権限制限をするものになります。</p>
+      class="masked">Row Level Security</span> の頭文字をとったもので <span
+      class="masked">テーブルの行単位 (レコード単位) での読み書きを制限する仕組み・機能</span>
+      になります。</p>
       <p>この RLS を無効 (<code>disabled</code>) のまま放置すると、<code>ANON_KEY</code> を設定した
-      <strong>Supabase Client</strong>
+      <strong>SupabaseClient</strong>
       (<code>@supabase/supabase-js</code>で導入してフロントエンドで動作するもの) を通じて <span
       class="masked">テーブルレコードの読み取り、編集、削除などが制限なく可能</span>
-      になってしまうという問題が発生します。<code>ANON_KEY</code>
-      は、フロントエンドのコードから読み取り可能な状態にある関係で、少しの知識があれば、それを読み取って悪用可能であり、非常に大きなセキュリティリスク
-      (脆弱性) となってしまいます。</p>
+      になってしまうという問題があります。<code>ANON_KEY</code>
+      は、フロントエンドプログラムから読み取り可能であるため、少しの知識があれば、それを読み取って<strong>悪用可能</strong>であり、<strong>非常に大きなセキュリティリスク
+      (脆弱性)</strong> となってしまいます。</p>
       <figure>
       <img src="figs/10/supabase_22.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -525,8 +534,8 @@ npx prisma db seed</code></pre>
       class="header-section-number">4.6</span> ログイン可能なユーザの追加</h2>
       <p>Supabase の認証機能を使って <strong>メールアドレス (ログインID)</strong> と
       <strong>パスワード</strong>
-      を使って認証可能なユーザを作成していきます。これは、ウェブアプリ上に「<strong>サインアップ
-      (ユーザ登録)</strong>」のページを実装して、そこから行なうことができます。しかし、このブログアプリでは
+      を使って認証可能なユーザを作成していきます。この処理はウェブアプリ上に「<strong>サインアップ
+      (ユーザ登録)</strong>」のページを実装して、そこから行なうこともできます。しかし、このブログアプリでは
       <span class="masked">管理者1名だけの認証ができれば問題ない</span> ので、Supabase
       のサイトから手動でユーザを登録していきます。</p>
       <p>次のように「<strong>Add user</strong>」のボタンを押下し、「<strong>Create new
@@ -554,8 +563,8 @@ npx prisma db seed</code></pre>
       <p>ブログアプリの<strong>フロントエンド</strong>プログラムにおいて、<strong>SupabaseClient</strong>
       (<code>@supabase/supabase-js</code>) を使って Supabase
       の「認証機能」や「PostgreSQL」にアクセスするための <strong>APIキー</strong>
-      を取得します。なお、バックエンドでは <span class="masked">基本的に Prisma 経由</span> で
-      PostgreSQL にアクセスします。</p>
+      を取得します。なお、バックエンドプログラムでは <span class="masked">基本的に Prisma
+      経由</span> で PostgreSQL にアクセスします。</p>
       <p>以下の2つのキーを取得してください。</p>
       <figure>
       <img src="figs/10/supabase_20.png" alt="img" />
@@ -564,7 +573,7 @@ npx prisma db seed</code></pre>
       <div class="note type-tips">
       <p><strong>注意</strong></p>
       <p>ここで取得する <strong>APIキー</strong> <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>
-      は、ウェブブラウザ上のフロントエンドのプログラから参照する値であり、その性質上、利用者に読み取られる可能性があります。そのため、以下のような注意が書かれています。</p>
+      は、ウェブブラウザで動作する「フロントエンドプログラム」から参照する値であり、その性質上、<strong>利用者に読み取られる可能性</strong>があります。そのため、以下のような注意が書かれています。</p>
       <blockquote>
       <p>This key is safe to use in a browser if you have enabled Row Level Security for your tables
       and configured policies.</p>
@@ -592,7 +601,7 @@ npx prisma db seed</code></pre>
 <span id="cb14-8"><a href="#cb14-8"></a><span class="va">NEXT_PUBLIC_SUPABASE_ANON_KEY</span><span class="op">=</span>YYYYYYYYYYYYYY</span></code></pre></div>
       <p>なお、環境変数のうち <code>NEXT_PUBLIC_</code> から始まる値は <span
       class="masked">フロントエンドで参照可能な値</span>
-      になります。利用者に読み取られていも問題の値だけ、<code>NEXT_PUBLIC_</code>
+      になります。利用者に読み取られても問題のない値だけ、<code>NEXT_PUBLIC_</code>
       を付けるようにしてください。バックエンドでは全ての値を参照可能です。</p>
       <h2 data-number="4.8" id="supabaseclient-のインストール"><span
       class="header-section-number">4.8</span> SupabaseClient のインストール</h2>
@@ -600,8 +609,9 @@ npx prisma db seed</code></pre>
       を使用するために必要なライブラリをインストールしてください。</p>
       <pre><code>npm i @supabase/supabase-js</code></pre>
       <p>また、プロジェクトに <code>src/app/utils/supabase.ts</code>
-      を新規作成して、以下の内容を記述してください。環境変数を読み取って、<strong>SupabaseClient</strong>
-      (＝<span class="masked">データベース操作用のAPI操作ツール</span>)
+      を新規作成して、以下の内容を記述してください。これは、環境変数を読み取って
+      <strong>SupabaseClient</strong> (＝<span
+      class="masked">データベース操作用のAPI操作ツール</span>)
       のインスタンスを生成、初期化するプログラムになります。</p>
       <div class="sourceCode" id="cb16" data-caption="src/app/utils/supabase.ts"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> { createClient } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
@@ -611,22 +621,24 @@ npx prisma db seed</code></pre>
 <span id="cb16-5"><a href="#cb16-5"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_ANON_KEY</span><span class="op">!</span></span>
 <span id="cb16-6"><a href="#cb16-6"></a>)<span class="op">;</span></span></code></pre></div>
       <p>以降、<code>import { supabase } from "@/utils/supabase"</code>
-      のようにインポートすれば、SupabaseClient である <code>supabase</code> を通じて、Supabase
-      の各種機能 (認証機能やデータベース) を利用することができます。</p>
+      のようにインポートすれば、SupabaseClient である <code>supabase</code> を通じて <span
+      class="masked">Supabase の各種機能 (認証機能やデータベース) を利用すること</span>
+      ができます。</p>
       <h2 data-number="4.9" id="ログインページの実装"><span class="header-section-number">4.9</span>
       ログインページの実装</h2>
       <p>ブログアプリに、IDとパスワードを使った「<strong>ログインページ</strong>」を実装していきます。</p>
       <p>プロジェクトに <code>src/app/login/page.tsx</code> を新規作成して<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のプログラムを貼り付けて、保存してください。開発モードでアプリを起動して
-      <code>/login</code> にアクセスすると、次のような画面になります。</p>
+      <code>/login</code> にアクセスすると、次のような画面が表示されることを確認してください。</p>
       <figure>
       <img src="figs/10/app_02.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>故意に誤ったメールアドレスとパスワードを入力して「<strong>ログイン</strong>」を押下すると、次のようになることを確認してください。また、ブラウザのデベロッパーツールのコンソールタブの出力も確認してください。SupabaseClient
-      が SupabaseAPI にリクエストを送って <span class="masked">400 Bad Request</span>
-      がレスポンスされていることが確認できます。また、認証に失敗時に SupabaseClient から得られる
-      <code>error</code> オブジェクトの内容を確認することができます。</p>
+      <p>この画面で、誤ったメールアドレスとパスワードを入力して「<strong>ログイン</strong>」を押下すると、次のようになることを確認してください。また、その際、<strong>ブラウザのデベロッパーツールのコンソールタブの出力も確認</strong>
+      してください。SupabaseClient が (バックグラウンドで) SupabaseAPI にリクエストを送って <span
+      class="masked">400 Bad Request</span>
+      がレスポンスされていることが確認できます。また、認証に失敗時には SupabaseClient
+      から返されるエラーオブジェクトの内容を確認することができます。</p>
       <figure>
       <img src="figs/10/app_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -635,10 +647,10 @@ npx prisma db seed</code></pre>
       href="lecture10.html#ログイン可能なユーザの追加">ユーザ管理画面</a>で設定したメールアドレスとパスワードを入力して「ログイン」のボタンを押下すると
       <span class="masked">/admin に「リダイレクト (＝ページ移動)」</span>
       することを確認してください。</p>
-      <h2 data-number="4.10" id="ログイン処理"><span class="header-section-number">4.10</span>
-      ログイン処理</h2>
+      <h2 data-number="4.10" id="ログイン処理の解説"><span class="header-section-number">4.10</span>
+      ログイン処理の解説</h2>
       <p><code>src/app/login/page.tsx</code>
-      の内容に解説していきます。やや長めのプログラムですが、ログイン処理に関する本質的な部分は、次の箇所になります。</p>
+      の内容について解説していきます。やや長めのプログラムですが、ログイン処理に関する本質的な部分は、次の箇所になります。</p>
       <p>まず、<strong>第07行目</strong>で <code>src/app/utils/supabase.ts</code> から
       SupabaseClient をインポートしています。</p>
       <div class="sourceCode" id="cb17"
@@ -672,7 +684,7 @@ npx prisma db seed</code></pre>
       <p>メールアドレスとパスワードを使ったログイン (サインイン) を試みているのが
       <strong>第36行目</strong> の <code>supabase.auth.signInWithPassword</code>
       メソッドになります。ログインに成功すると <code>error</code> には <code>null</code>
-      が格納され、失敗すると以下のような <span class="masked">エラー情報に関するオブジェクト</span>
+      が格納され、失敗すると以下のような <span class="masked">エラーオブジェクト</span>
       が格納されます (以下には <code>error</code>
       オブジェクトをJSONに変換したものを掲載しています)。</p>
       <div class="sourceCode" id="cb19"
@@ -686,12 +698,13 @@ npx prisma db seed</code></pre>
       <p>error が <code>null</code> ではないとき (＝つまり<strong>認証に失敗</strong>したとき) は
       <strong>第40行目</strong> の if 文が実行され、<strong>第45行目</strong> の <code>return</code>
       により <code>handleSubmit</code>
-      関数を抜けています。一方で、<strong>認証に成功</strong>したときは、<strong>第48目</strong>
+      関数を抜けています。一方で、<strong>認証に成功</strong>したときは、<strong>第48行目</strong>
       の処理によって <code>/admin</code> のページに <span class="masked">リダイレクト
       (＝ページ移動)</span> するようになっています。</p>
       <p>この <code>router.replace(...)</code> は、以下のように <strong>第08行目</strong>
-      でインポートして、<strong>第17行目</strong>
-      で取得しているuseRouterフックのメソッドになります。useRouterは、ページ遷移を操作するための機能セットを提供するものになります。</p>
+      でインポートして、<strong>第17行目</strong> で取得している <strong>useRouterフック</strong>
+      のメソッドになります。useRouter は <span
+      class="masked">ページ遷移を操作するための機能セット</span> を提供するものになります。</p>
       <div class="sourceCode" id="cb20"
       data-caption="src/app/login/page.tsx (SupabaseClient のインポート)" data-startFrom="8"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 7;"><span id="cb20-8"><a href="#cb20-8"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span></code></pre></div>
@@ -703,7 +716,7 @@ npx prisma db seed</code></pre>
       によるログインに成功すると、ウェブブラウザの<strong>ローカルストレージ</strong>に
       <code>sb-XXXX-auth-token</code> というキーで <span class="masked">認証情報</span>
       が保存されます (<code>XXXX</code>には Supabase の ProjectID
-      が入ります)。また、後述のログアウト処理を実行すると、この認証情報はローカルストレージから削除されます。</p>
+      が入ります)。また、後述の「ログアウト処理」を実行すると、この認証情報はローカルストレージから削除されます。</p>
       <p>ローカルストレージに保存された認証情報は、<strong>デベロッパーツール</strong>
       (<code>F12</code>で起動) を使って、以下のように確認できます。</p>
       <figure>
@@ -715,9 +728,9 @@ npx prisma db seed</code></pre>
       <p>前のセクションでは、SupabaseClient の <code>auth.ignInWithPassword()</code> メソッドに ID
       と パスワード を与え、ユーザの<strong>認証</strong> (<strong>Authentication</strong>)
       ができることを確認しました。また、このメソッドは、認証に成功するとブラウザのローカルストレージに認証情報を格納し、失敗するとエラー情報を格納したオブジェクトを戻り値として返すことを確認しました。</p>
-      <p>しかし、現状では、ブラウザのアドレスバーに <code>/admin</code> を打ち込めば、認証
+      <p>しかし、現状では、ブラウザのアドレスバーに <code>/admin</code> を打ち込めば <strong>認証
       (Authentication)
-      の有無に関わらず「管理者用ページ」が表示できてしまいます。ここでは、認証されたユーザだけが「管理者用ページ」を表示できるようにすための
+      の有無に関わらず「管理者用ページ」が表示できてしまいます</strong>。ここでは、認証されたユーザだけが「管理者用ページ」を表示できるようにするための
       <span class="masked">認可 (Authorization)</span> という処理について学んでいきます。</p>
       <div class="note type-tips">
       <p><strong>認証 (Authentication) と認可 (Authorization)</strong></p>
@@ -1037,11 +1050,12 @@ npx prisma db seed</code></pre>
       <p>開発者モードで起動して、未ログイン状態で <code>/admin</code> や
       <code>/admin/posts</code>、<code>/admin/posts/new</code> にアクセスすると
       (ウェブブラウザのアドレバーにパスを入力すると)、ログインページ (<code>/login</code>)
-      に移動するこちとを確認してください。</p>
+      に移動すること、つまり、ルートガードが機能することを確認してください。</p>
       <h2 data-number="6.1" id="演習-1"><span class="header-section-number">6.1</span> 演習</h2>
       <p>再利用性と保守性を高めるために、ルートガードの処理を
-      <code>src/app/_hooks/useRouteGuard.ts</code> というカスタムフックに分離し、それを
-      <code>src/app/admin/layout.tsx</code> から呼び出すようにしてください。</p>
+      <code>src/app/_hooks/useRouteGuard.ts</code> という<strong>カスタムフック</strong>
+      として分離し、それを <code>src/app/admin/layout.tsx</code>
+      から呼び出すようにしてください。</p>
       <ul>
       <li><code>useRouteGuard.ts</code> の実装例は<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code02.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
