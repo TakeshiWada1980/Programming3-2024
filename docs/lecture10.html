@@ -76,6 +76,7 @@ class="toc-section-number">4.8</span> SupabaseClient のインストール</a></
 class="toc-section-number">4.9</span> ログインページの実装</a></li>
 <li><a href="#ログイン処理の解説" id="toc-ログイン処理の解説"><span
 class="toc-section-number">4.10</span> ログイン処理の解説</a></li>
+<li><a href="#演習" id="toc-演習"><span class="toc-section-number">4.11</span> 演習</a></li>
 </ul></li>
 <li><a href="#認証状態の取得確認" id="toc-認証状態の取得確認"><span
 class="toc-section-number">5</span> 認証状態の取得・確認</a>
@@ -86,13 +87,14 @@ id="toc-フロントエンドの認可カスタムフックの定義"><span clas
 <li><a href="#useauth-を利用したヘッダの表示パターンの切り替え"
 id="toc-useauth-を利用したヘッダの表示パターンの切り替え"><span
 class="toc-section-number">5.2</span> useAuth を利用したヘッダの表示パターンの切り替え</a></li>
-<li><a href="#演習" id="toc-演習"><span class="toc-section-number">5.3</span> 演習</a></li>
+<li><a href="#演習-1" id="toc-演習-1"><span class="toc-section-number">5.3</span> 演習</a></li>
 </ul></li>
 <li><a href="#ルートガードの実装" id="toc-ルートガードの実装"><span
 class="toc-section-number">6</span> ルートガードの実装</a>
 <ul>
-<li><a href="#演習-1" id="toc-演習-1"><span class="toc-section-number">6.1</span> 演習</a></li>
+<li><a href="#演習-2" id="toc-演習-2"><span class="toc-section-number">6.1</span> 演習</a></li>
 </ul></li>
+<li><a href="#課題2" id="toc-課題2"><span class="toc-section-number">7</span> 課題2</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -379,6 +381,29 @@ class="toc-section-number">6</span> ルートガードの実装</a>
 <span id="cb7-8"><a href="#cb7-8"></a>  directUrl <span class="op">=</span> <span class="fu">env</span>(<span class="st">&quot;DIRECT_URL&quot;</span>)</span>
 <span id="cb7-9"><a href="#cb7-9"></a>}</span></code></pre></div>
       <p>以上で設定ファイルの更新は完了です。</p>
+      <div class="note type-caution">
+      <p><strong>注意</strong></p>
+      <p>Freeプランで作成した Supabase
+      のプロジェクトは、7日間、<strong>非アクティブ状態が継続すると</strong>
+      (＝データベースや認証機能などに対するアクセスがないと)「<strong>paused</strong>」という状態になってしまいます。この状態では、<strong>Supabase
+      の API を叩いても機能しないので注意</strong> してください。</p>
+      <p>プロジェクトが「<strong>paused</strong>」になってしまった場合は、ブラウザから Supabase
+      にアクセスして解除することができます
+      (解除には数分かかることがあります)。アプリ開発中は7日間放置することはないと思いますが、完成後は、この状態になることがあるので十分に注意してください。特に、ポートフォリオとして開発したウェブアプリのURLを提出する際には、注意してください。</p>
+      <p>「<strong>paused</strong>」に切り替わったときは、以下のようなメールが届きます
+      (メールのなかのリンクからアクセスしたページで「アクティブ状態」に戻すことができます)。</p>
+      <blockquote>
+      <p>Hi there,</p>
+      <p>To save on cloud resources we’re currently pausing free-tier projects that are inactive for
+      more than 7 days.</p>
+      <p><strong>Your project XXXXXX has been paused</strong>.</p>
+      <p><strong>You can unpause it from the dashboard within the next 90 days</strong>. Beyond that
+      point, you won’t be able to unpause your project, but you’ll be able to download your data.
+      For more information read the docs.</p>
+      <p>If you want, you can upgrade your organization to Pro to avoid future pausings, and this
+      can be done from the billing settings.</p>
+      </blockquote>
+      </div>
       <h2 data-number="4.3" id="データベース接続とテーブル作成-初期化"><span
       class="header-section-number">4.3</span> データベース接続とテーブル作成 (初期化)</h2>
       <p>更新された設定に基づき、Supabase に構築された PostgreSQL に
@@ -712,17 +737,30 @@ npx prisma db seed</code></pre>
       data-caption="src/app/login/page.tsx (リダイレクトに使用する useRouter フック)"
       data-startFrom="17"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 16;"><span id="cb21-17"><a href="#cb21-17"></a><span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span></code></pre></div>
       <hr />
-      <p>なお、<code>supabase.auth.signInWithPassword()</code>
-      によるログインに成功すると、ウェブブラウザの<strong>ローカルストレージ</strong>に
-      <code>sb-XXXX-auth-token</code> というキーで <span class="masked">認証情報</span>
-      が保存されます (<code>XXXX</code>には Supabase の ProjectID
-      が入ります)。また、後述の「ログアウト処理」を実行すると、この認証情報はローカルストレージから削除されます。</p>
-      <p>ローカルストレージに保存された認証情報は、<strong>デベロッパーツール</strong>
-      (<code>F12</code>で起動) を使って、以下のように確認できます。</p>
+      <p><code>supabase.auth.signInWithPassword()</code> によるログインに成功すると、Supabaseからは
+      <span class="masked">アクセストークン (Access Token)</span> と呼ばれる <strong>JWT
+      (JsonWebToken) 形式の文字列</strong> が発行され、その他の情報と共にウェブブラウザの
+      <strong>ローカルストレージ</strong> に <code>sb-XXXX-auth-token</code> というキーで <span
+      class="masked">認証情報</span> が保存されます (<code>XXXX</code> の部分には Supabase の
+      ProjectID が入ります)。このアクセストークン (以下、トークン) とは、認証の結果、つまり、<span
+      class="masked">認証済みであることの証明書</span>
+      としての役割を持ちます。また、次回講義でバックエンドにおけるユーザ認証の手順を解説しますが、そこで利用するものになります。</p>
+      <p>ローカルストレージに保存された情報 (トークンを含む) は、<strong>デベロッパーツール</strong>
+      (<code>F12</code>で起動) を使って、以下のように確認できます。<code>access_token</code> が
+      JWT形式のトークンになります。なお、後述の「ログアウト処理」を実行すると、この認証情報はローカルストレージから削除されます。</p>
       <figure>
       <img src="figs/10/app_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>一見すると、トークン (JWT) はランダムな文字列のように見えますが、実体としては JSON を
+      BASE64URLエンコードした文字列と、それに対して秘密鍵（JWT Secret）を用いて生成された署名
+      (ハッシュ) を組み合わせた文字列で構成されています。</p>
+      <h2 data-number="4.11" id="演習"><span class="header-section-number">4.11</span> 演習</h2>
+      <p>トークン (JWT) は、BASE64URLエンコードによってつくられているので、デコードすれば、元々の
+      JSON がどのようなものであるか確認することができます。<a
+      href="https://jwt.io/">JWTの公式ページ</a>では、その処理がブラウザ上で実行できるので、以下の手順で実行してください。</p>
+      <p>まず、デベロッパーツールから <code>access_token</code> を取得して
+      (項目を選んで右クリックから「値をコピー」して)、その内容を以下のサイトに貼り付けてください。</p>
       <h1 data-number="5" id="認証状態の取得確認"><span class="header-section-number">5</span>
       認証状態の取得・確認</h1>
       <p>前のセクションでは、SupabaseClient の <code>auth.ignInWithPassword()</code> メソッドに ID
@@ -971,7 +1009,7 @@ npx prisma db seed</code></pre>
       で定義している「<strong>ログアウト処理</strong>」をコールする「Logout」を表示するようにしています。また、認証状態の確認中は、いずれも表示しない用にしています。</p>
       <p><strong>第14行目</strong>
       では、ログアウト処理を定義しています。また、ログアウト後はトップページにリダイレクトするようにしています。</p>
-      <h2 data-number="5.3" id="演習"><span class="header-section-number">5.3</span> 演習</h2>
+      <h2 data-number="5.3" id="演習-1"><span class="header-section-number">5.3</span> 演習</h2>
       <p>開発者モードでアプリを起動し、ヘッダ部が期待するような動作をすることを確認してください。</p>
       <ul>
       <li>ログインしていない状態では、ヘッダ部に「Login」が表示され、クリックすると
@@ -1051,7 +1089,7 @@ npx prisma db seed</code></pre>
       <code>/admin/posts</code>、<code>/admin/posts/new</code> にアクセスすると
       (ウェブブラウザのアドレバーにパスを入力すると)、ログインページ (<code>/login</code>)
       に移動すること、つまり、ルートガードが機能することを確認してください。</p>
-      <h2 data-number="6.1" id="演習-1"><span class="header-section-number">6.1</span> 演習</h2>
+      <h2 data-number="6.1" id="演習-2"><span class="header-section-number">6.1</span> 演習</h2>
       <p>再利用性と保守性を高めるために、ルートガードの処理を
       <code>src/app/_hooks/useRouteGuard.ts</code> という<strong>カスタムフック</strong>
       として分離し、それを <code>src/app/admin/layout.tsx</code>
@@ -1061,6 +1099,59 @@ npx prisma db seed</code></pre>
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code02.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
       <li><code>layout.tsx</code> の実装例は<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code03.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
+      </ul>
+      <h1 data-number="7" id="課題2"><span class="header-section-number">7</span> 課題2</h1>
+      <p>Classroom で配付しているワードファイル <code>NN-課題2-氏名.docx</code>
+      を雛形として使用し、リポジトリURLの他、以下の各ページのスクリーンショットと説明文 (特筆事項)
+      を記載して提出してください。</p>
+      <ul>
+      <li>スクリーンショットは、<strong>PC版</strong> と <strong>スマートフォン版</strong>
+      (CSSピクセル430×932) の「両方」をつけてください。</li>
+      </ul>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>URL</th>
+      <th>処理</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/admin/posts</td>
+      <td>投稿記事の一覧表示、編集ページへのリンク、削除機能 (オプション)</td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts/[id]</td>
+      <td>投稿記事の編集 (削除を含む)</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/categories</td>
+      <td>カテゴリの一覧表示、編集ページへのリンク、削除機能 (オプション)</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li><strong><em>提出期限</em></strong> : <strong>01月15日 (水) 23時</strong></li>
+      <li><strong><em>提出先</em></strong> : <a
+      href="https://classroom.google.com/c/NzA2ODk3OTU3MzYy/">Google Classroom</a></li>
+      <li><strong><em>形式</em></strong> :
+      PDF変換せずに<strong>ワードファイルのまま提出</strong>してください
+      (<code>.docx</code>形式)。ファイル名は <code>NN-課題2-氏名.docx</code>
+      としてください。<code>NN</code> は <strong>ゼロ埋め2桁の出席番号
+      (本年度のもの)</strong>、氏名はフルネームとして、ハイフンや数字は全て半角文字としてください。姓と名の間には
+      <strong>スペースを入れない</strong> でください。不備は一律で「2点減😭」とします。
+      <ul>
+      <li>例: <code>03-課題2-高専太郎.docx</code></li>
+      <li>例: <code>16-課題2-寝屋川次郎.docx</code><br />
+      </li>
+      </ul></li>
+      <li><strong><em>採点</em></strong> :
+      「7点」を標準として「10点満点」で評価します。学年末の成績評価の際には「重み」が付けられます。
+      <ul>
+      <li>画面表示やバリデーションなどの UI/UX の工夫、機能の追加、<a
+      href="https://www.google.com/search?q=zod+react+hook+form">react-hook-form &amp; zod</a>
+      を利用などがあれば、特筆事項として、ワードファイル内に記載してください。</li>
+      </ul></li>
       </ul>
       <!-- ---------------------------------------- -->
     </main>
