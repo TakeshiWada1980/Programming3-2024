@@ -94,7 +94,11 @@ class="toc-section-number">6</span> ルートガードの実装</a>
 <ul>
 <li><a href="#演習-2" id="toc-演習-2"><span class="toc-section-number">6.1</span> 演習</a></li>
 </ul></li>
-<li><a href="#課題2" id="toc-課題2"><span class="toc-section-number">7</span> 課題2</a></li>
+<li><a href="#課題2" id="toc-課題2"><span class="toc-section-number">7</span> 課題2</a>
+<ul>
+<li><a href="#スマホ版のスクショの撮影方法" id="toc-スマホ版のスクショの撮影方法"><span
+class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法</a></li>
+</ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -739,28 +743,53 @@ npx prisma db seed</code></pre>
       <hr />
       <p><code>supabase.auth.signInWithPassword()</code> によるログインに成功すると、Supabaseからは
       <span class="masked">アクセストークン (Access Token)</span> と呼ばれる <strong>JWT
-      (JsonWebToken) 形式の文字列</strong> が発行され、その他の情報と共にウェブブラウザの
-      <strong>ローカルストレージ</strong> に <code>sb-XXXX-auth-token</code> というキーで <span
-      class="masked">認証情報</span> が保存されます (<code>XXXX</code> の部分には Supabase の
-      ProjectID が入ります)。このアクセストークン (以下、トークン) とは、認証の結果、つまり、<span
-      class="masked">認証済みであることの証明書</span>
-      としての役割を持ちます。また、次回講義でバックエンドにおけるユーザ認証の手順を解説しますが、そこで利用するものになります。</p>
+      (JsonWebToken) 形式の文字列</strong> が発行され、その他の情報と共に、
+      <strong>ウェブブラウザのローカルストレージ</strong> に <code>sb-XXXX-auth-token</code>
+      というキーで <span class="masked">認証情報</span> が保存されます (<code>XXXX</code> の部分には
+      Supabase の ProjectID が入ります)。このアクセストークン (以下、トークン)
+      とは、認証の結果、つまり、<span class="masked">認証済みであることの証明書</span>
+      としての役割を持ちます。次回講義では「バックエンドにおけるユーザ認証の手順」を解説しますが、そこでトークンを利用することになります。</p>
       <p>ローカルストレージに保存された情報 (トークンを含む) は、<strong>デベロッパーツール</strong>
       (<code>F12</code>で起動) を使って、以下のように確認できます。<code>access_token</code> が
-      JWT形式のトークンになります。なお、後述の「ログアウト処理」を実行すると、この認証情報はローカルストレージから削除されます。</p>
+      <strong>トークン (JWT)</strong>
+      になります。なお、後述の「ログアウト処理」を実行すると、この認証情報はローカルストレージから削除されます。</p>
       <figure>
       <img src="figs/10/app_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>一見すると、トークン (JWT) はランダムな文字列のように見えますが、実体としては JSON を
-      BASE64URLエンコードした文字列と、それに対して秘密鍵（JWT Secret）を用いて生成された署名
-      (ハッシュ) を組み合わせた文字列で構成されています。</p>
+      <p>一見すると、トークン (JWT) はランダムな文字列のように見えますが、実体としては <span
+      class="masked">JSON を BASE64URLエンコードした文字列</span> と、その文字列に対して秘密鍵（JWT
+      Secret）を用いて生成された <strong>署名 (ハッシュ)</strong>
+      を結合した文字列として構成されています。</p>
+      <ul>
+      <li>署名 (ハッシュ) については、情報2 の <strong>第09回講義の講義資料</strong>
+      を参照してください。</li>
+      </ul>
       <h2 data-number="4.11" id="演習"><span class="header-section-number">4.11</span> 演習</h2>
-      <p>トークン (JWT) は、BASE64URLエンコードによってつくられているので、デコードすれば、元々の
-      JSON がどのようなものであるか確認することができます。<a
-      href="https://jwt.io/">JWTの公式ページ</a>では、その処理がブラウザ上で実行できるので、以下の手順で実行してください。</p>
-      <p>まず、デベロッパーツールから <code>access_token</code> を取得して
-      (項目を選んで右クリックから「値をコピー」して)、その内容を以下のサイトに貼り付けてください。</p>
+      <p>トークン (JWT)
+      は、JSON文字列をBASE64URLエンコードしてつくられているので、デコードすれば元のJSON
+      が復元可能です。<a
+      href="https://jwt.io/">JWTの公式ページ</a>では、そのデコード処理がブラウザ上で実行できるので、以下の手順で試してください。</p>
+      <ol type="1">
+      <li><p>デベロッパーツールから <code>access_token</code> を取得して
+      (項目を選んで右クリックから「値をコピー」して)、その内容を以下のサイトに貼り付けてください。ログインしていない状態では
+      <code>access_token</code> が存在しないので注意してください。</p></li>
+      <li><p>JWTの公式ページ (<a href="https://jwt.io/">https://jwt.io/</a>) にアクセスして、Encoded
+      に値を貼り付けてください。</p></li>
+      <li><p>Decoded の PAYLOAD から、復元された JSON の内容を確認してください。</p></li>
+      </ol>
+      <figure>
+      <img src="figs/10/jwt_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>JWTの「構成」や「署名の検証方法」などの仕組み
+      (なぜ、これで安全な認証ができるのか、改竄が不可能なのか)
+      について興味がある学生は、以下のウェブ記事や、生成AIなどを利用して学んでください。</p>
+      <ul>
+      <li><a href="https://qiita.com/asagohan2301/items/cef8bcb969fef9064a5c">初学者向け:
+      JWT認証の流れを理解する</a>@ Qiita</li>
+      <li><a href="https://qiita.com/knaot0/items/8427918564400968bd2b">【JWT】入門</a>@ Qiita</li>
+      </ul>
       <h1 data-number="5" id="認証状態の取得確認"><span class="header-section-number">5</span>
       認証状態の取得・確認</h1>
       <p>前のセクションでは、SupabaseClient の <code>auth.ignInWithPassword()</code> メソッドに ID
@@ -1102,11 +1131,11 @@ npx prisma db seed</code></pre>
       </ul>
       <h1 data-number="7" id="課題2"><span class="header-section-number">7</span> 課題2</h1>
       <p>Classroom で配付しているワードファイル <code>NN-課題2-氏名.docx</code>
-      を雛形として使用し、リポジトリURLの他、以下の各ページのスクリーンショットと説明文 (特筆事項)
-      を記載して提出してください。</p>
+      を雛形に、「リポジトリのURL」の他、以下の各ページの「<strong>スクリーンショット</strong>」と「<strong>説明文
+      (特筆事項)</strong>」を記載して提出してください。</p>
       <ul>
       <li>スクリーンショットは、<strong>PC版</strong> と <strong>スマートフォン版</strong>
-      (CSSピクセル430×932) の「両方」をつけてください。</li>
+      (次のサブセクションで指定する方法で取得) の「両方」をつけてください。</li>
       </ul>
       <table>
       <thead>
@@ -1153,6 +1182,35 @@ npx prisma db seed</code></pre>
       を利用などがあれば、特筆事項として、ワードファイル内に記載してください。</li>
       </ul></li>
       </ul>
+      <h2 data-number="7.1" id="スマホ版のスクショの撮影方法"><span
+      class="header-section-number">7.1</span> スマホ版のスクショの撮影方法</h2>
+      <p>課題に添付するスマートフォン表示のスクリーンショット (iPhone 16 Plus を想定)
+      は、必ず以下の手順で取得してください。</p>
+      <figure>
+      <img src="figs/10/chrome_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <figure>
+      <img src="figs/10/chrome_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>名前を「<strong>iPhone 16
+      Plus</strong>」、画面サイズを「<strong>430x932</strong>」に設定したエミュレートデバイスを追加してください。</p>
+      <figure>
+      <img src="figs/10/chrome_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>デバイスから「<strong>iPhone 16 Plus</strong>」を選択して、「<strong>Capture full size
+      screenshot</strong>
+      (<strong>フルサイズのスクリーンショットをキャプチャ</strong>)」を使って画面全体のスクリーンショットを取得してください。</p>
+      <ul>
+      <li>Zoom (ズーム) の値 (以下では<code>125%</code> になっている部分)
+      は、スクショサイズには影響しません。</li>
+      </ul>
+      <figure>
+      <img src="figs/10/chrome_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <!-- ---------------------------------------- -->
     </main>
 
