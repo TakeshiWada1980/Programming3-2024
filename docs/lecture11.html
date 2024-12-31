@@ -192,11 +192,16 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
       </figure>
       <h2 data-number="2.3" id="フロントエンドプログラムの変更"><span
       class="header-section-number">2.3</span> フロントエンドプログラムの変更</h2>
-      <p>つづいて、APIリクエストの <span class="masked">Authorizationフィールド</span>
-      にトークンを付加するように、フロントエンドプログラムを変更していきます。<code>src/app/admin/new/page.tsx</code>
-      の変更例 (抜粋) を以下に示します。全体コードについては<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/11/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p>
-      <div class="sourceCode" id="cb2" data-caption="src/app/admin/posts/new/page.tsx (抜粋)"><pre
+      <p>つづいて、ウェブAPIに対するHTTPリクエストのヘッダの <span
+      class="masked">Authorizationフィールド</span>
+      に「<strong>トークン</strong>」を付加するようにフロントエンドプログラムに手を加えていきます。記事の新規作成ページ
+      (<code>src/app/admin/new/page.tsx</code>) に対する変更例 (抜粋) を以下に示します。</p>
+      <ul>
+      <li>全体コードについては<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/11/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</li>
+      </ul>
+      <div class="sourceCode" id="cb2"
+      data-caption="src/app/admin/posts/new/page.tsx (抜粋・Authorizationフィールドの追加)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// 省略</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co">// 省略</span></span>
@@ -236,10 +241,10 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
       <p><strong>第02行目</strong>では、<a
       href="lecture10.html#フロントエンドの認可カスタムフックの定義">前回講義</a>で作成したカスタムフック
       <strong>useAuth</strong> をインポートしています。<strong>第07行目</strong>では useAuth から
-      <code>token</code> を取得しています。もし、useAuth で何からの問題があれば <code>token</code>
-      には <code>null</code> が格納されるので、フォームの送信処理時に、<strong>第14行目</strong> の
-      if文でアラートが表示されます。</p>
-      <p><strong>第24行目</strong>でHTTPリクエストのヘッダに <code>Authorization</code>
+      <code>token</code> を取得しています。もし、useAuth で何らかの問題があれば <code>token</code>
+      には <code>null</code> が格納されるので、フォームの送信処理時に、<strong>第14行目</strong>
+      のif文によってアラートが表示されます。</p>
+      <p><strong>第24行目</strong>では、HTTPリクエストのヘッダに <code>Authorization</code>
       を追加しています。これより、HTTPリクエストのヘッダは次のようになります。</p>
       <pre><code>Authorization: eyJhbGciOiJIUzI1....
 Content-Type: application/json</code></pre>
@@ -247,48 +252,52 @@ Content-Type: application/json</code></pre>
       <p><strong>Authorization ヘッダについて</strong></p>
       <p>一般的な JWT の送信 (<a
       href="https://openid-foundation-japan.github.io/rfc6750.ja.html">RFC
-      6750</a>で定義された標準的な方式) では、次のように <strong>Authorizationフィールド</strong>
-      には <code>Bearer</code> というプレフィックス (接頭辞) をつけます (ここでは
-      <code>Bearer</code> の付加を省略しています)。また、バックエンドでは <code>Bearer</code>
-      の部分を取り除いてトークンのみを取得する処理が必要です。</p>
+      6750</a>で定義された標準的な方式) では、次のように <strong>Authorizationフィールド</strong> に
+      <code>Bearer</code> というプレフィックス (接頭辞)
+      をつけます。また、それにあわせてバックエンドでは <code>Bearer</code>
+      という文字列を取り除いたうえでトークンのみを取得する文字列処理が必要になります。</p>
       <pre><code>Authorization: Bearer eyJhbGciOiJIUzI1....</code></pre>
-      <p>ここでは、プレフィックスの処理が煩雑になるので省略しています。</p>
+      <p>しかし、この授業では、プレフィックス (<code>Bearer</code>)
+      関連の処理が煩雑になるので省略しています
+      (作法に従っていないというだけで動作や機能上の問題はありません)。</p>
       <p>なお、Basic認証では <code>Basic</code>、Digest認証では <code>Digest</code>
-      をプレフィックスにつけます。</p>
+      というプレフィックスにつけます。</p>
       </div>
       <h3 data-number="2.3.1" id="演習-15分"><span class="header-section-number">2.3.1</span> 演習
       (<i class="fa-solid fa-stopwatch"></i> 15分)</h3>
-      <p>認証済みのユーザだけに<strong>記事の新規作成を許可</strong>するようにバックエンドとフロントエンドのプログラムを変更してください。</p>
+      <p>認証済みのユーザだけに記事の新規作成を「<strong>許可</strong>」するようにバックエンドとフロントエンドのプログラム
+      (以下の2つ) を変更してください。</p>
       <ul>
       <li><code>src/app/api/admin/posts/new/route.ts</code></li>
       <li><code>src/app/admin/posts/new/page.tsx</code></li>
       </ul>
-      <p>また、実際にアプリを実行して <strong>意図したように動作すること</strong>
-      を確認してください。また、次のようにフロントエンドにおいて
-      <strong>不正なトークンを与えたリクエストした場合</strong>
+      <p>また、実際にアプリを実行して「<strong>意図したように動作すること</strong>」を確認してください。さらに、次のようにフロントエンドから
+      <strong>不正なトークンを与えたリクエストを送信した場合</strong>
       には、処理が拒否されることも確認してください。</p>
-      <div class="sourceCode" id="cb5" data-caption="src/app/admin/posts/new/page.tsx (抜粋)"><pre
+      <div class="sourceCode" id="cb5"
+      data-caption="src/app/admin/posts/new/page.tsx (抜粋・不正なトークンでリクエストを送信)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
 <span id="cb5-2"><a href="#cb5-2"></a>  method<span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>  cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a>  headers<span class="op">:</span> {</span>
 <span id="cb5-5"><a href="#cb5-5"></a>    <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    Authorization<span class="op">:</span> token <span class="op">+</span> <span class="st">&quot;a&quot;</span><span class="op">,</span> <span class="co">// 無効なトークン </span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    Authorization<span class="op">:</span> token <span class="op">+</span> <span class="st">&quot;a&quot;</span><span class="op">,</span> <span class="co">// 不正なトークン </span></span>
 <span id="cb5-7"><a href="#cb5-7"></a>  }<span class="op">,</span></span>
 <span id="cb5-8"><a href="#cb5-8"></a>  body<span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(requestBody)<span class="op">,</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a>})<span class="op">;</span></span></code></pre></div>
       <h3 data-number="2.3.2" id="演習-宿題-70分"><span class="header-section-number">2.3.2</span>
       演習 (宿題: <i class="fa-solid fa-stopwatch"></i> 70分)</h3>
-      <p>記事の新規作成と同様に、以下のAPIについて管理者のみが実行できるようにプログラムを変更してください。また、それらのAPIを呼び出しているフロントエンドプログラムでも、リクエストヘッダに
-      <code>Authorization</code>
-      フィールドを追加するようにしてください。さらに、実際に、それらの処理が機能することを確認してください。</p>
+      <p>記事の「新規作成」と同様に、以下の API
+      についても<strong>管理者のみが実行できるようにプログラムを変更</strong>してください。また、それらの
+      API を呼び出すフロントエンドプログラムで、HTTPリクエストのヘッダに <code>Authorization</code>
+      フィールドを追加するようにしてください。さらに、それらの処理が機能することを実際に確認してください。</p>
       <ul>
-      <li>POST /api/admin/categories <strong>【済】</strong></li>
-      <li>PUT /api/admin/categories/[id]</li>
-      <li>DELETE /api/admin/categories/[id]</li>
       <li>POST /api/admin/posts</li>
       <li>PUT /api/admin/posts/[id]</li>
       <li>DELETE /api/admin/posts/[id]</li>
+      <li>POST /api/admin/categories</li>
+      <li>PUT /api/admin/categories/[id]</li>
+      <li>DELETE /api/admin/categories/[id]</li>
       </ul>
       <h1 data-number="3" id="画像アップロード機能の実装"><span
       class="header-section-number">3</span> 画像アップロード機能の実装</h1>
