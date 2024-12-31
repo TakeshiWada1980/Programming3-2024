@@ -67,9 +67,8 @@ class="toc-section-number">3.3</span> 準備 (フロントエンド開発)</a></
 <li><a href="#画像アップロードのプロトタイプの実装"
 id="toc-画像アップロードのプロトタイプの実装"><span class="toc-section-number">3.4</span>
 画像アップロードのプロトタイプの実装</a></li>
-<li><a href="#画像アップロードのプロトタイプの解説"
-id="toc-画像アップロードのプロトタイプの解説"><span class="toc-section-number">3.5</span>
-画像アップロードのプロトタイプの解説</a></li>
+<li><a href="#プログラムの解説" id="toc-プログラムの解説"><span
+class="toc-section-number">3.5</span> プログラムの解説</a></li>
 <li><a href="#画像アップロードのプロトタイプの改良1"
 id="toc-画像アップロードのプロトタイプの改良1"><span class="toc-section-number">3.6</span>
 画像アップロードのプロトタイプの改良1</a></li>
@@ -598,16 +597,16 @@ npm i -D @types/crypto-js</code></pre>
       という意味になります。</li>
       </ul></li>
       </ul>
-      <h2 data-number="3.5" id="画像アップロードのプロトタイプの解説"><span
-      class="header-section-number">3.5</span> 画像アップロードのプロトタイプの解説</h2>
-      <p>ファイルアップロードは、SupabaseClient (<strong>第04行目</strong>でインポート済み) を使って
+      <h2 data-number="3.5" id="プログラムの解説"><span class="header-section-number">3.5</span>
+      プログラムの解説</h2>
+      <p>ファイルアップロードは、<strong>第04行目</strong> でインポートした SupabaseClient を使って
       <strong>第24行目</strong> で実行しています。</p>
       <div class="sourceCode" id="cb10" data-caption="src/app/playground/upload-img/page.tsx (抜粋)"
       data-startFrom="24"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 23;"><span id="cb10-24"><a href="#cb10-24"></a><span class="kw">const</span> { data<span class="op">,</span> error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">storage</span></span>
 <span id="cb10-25"><a href="#cb10-25"></a>  <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
 <span id="cb10-26"><a href="#cb10-26"></a>  <span class="op">.</span><span class="fu">upload</span>(path<span class="op">,</span> file<span class="op">,</span> { upsert<span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span></code></pre></div>
-      <p><code>from</code> の引数には「バケットの名前 (実体は <strong>第07行目</strong> で
-      <code>cover_image</code> を設定)」を与え、<code>upload</code>
+      <p><code>from</code> の引数には「<strong>バケットの名前</strong> (実体は
+      <strong>第07行目</strong> で <code>"cover_image"</code> を設定)」を与え、<code>upload</code>
       の各引数には、次の値を与えます。</p>
       <ul>
       <li><strong>第1引数</strong>: バケット内のパスを与えます。先に設定した INSERT に関する
@@ -645,33 +644,35 @@ npm i -D @types/crypto-js</code></pre>
 <span id="cb11-37"><a href="#cb11-37"></a><span class="co">// 画像のURLを取得</span></span>
 <span id="cb11-38"><a href="#cb11-38"></a><span class="fu">setCoverImageUrl</span>(publicUrlResult<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">publicUrl</span>)<span class="op">;</span></span></code></pre></div>
       <p>アップロードに成功した場合、戻り値の <code>data</code> にオブジェクトの <code>path</code>
-      プロパティには、<strong>バケット内のパス</strong> が格納されています
-      (基本的に<strong>第22行目</strong>で設定した値と同じになるはずです)。これを、ここでは
-      <strong>coverImageKey</strong> としています。</p>
-      <p>そして、このキーを引数に与えて <code>getPublicUrl</code>
+      プロパティには、<strong>バケット内のパス</strong> が格納されています (基本的に
+      <strong>第22行目</strong> で設定した値と同じになるはずです)。これを、ここでは
+      <strong>coverImageKey</strong> として状態 (State) にセットしています。</p>
+      <p>そして、この値 (<code>data.path</code>) を引数に与えて <code>getPublicUrl</code>
       メソッドを実行すると、その画像にアクセスするための URL を得ることができます。この URL
       については <span class="masked">Supabase の都合で変更になる可能性</span>
       があるため、<code>getPublicUrl</code> を経由して取得するようにしてください。</p>
-      <p>また、このことを考慮し、<strong>データベースにも coverImageUrl ではなく coverImageKey
-      のほうを保存</strong>するように変更します (あとで)。</p>
+      <p>また、URLが変更になる可能性を考慮し、<strong>データベースにも coverImageUrl ではなく
+      coverImageKey のほうを保存</strong>するように変更してください (あとで)。</p>
       <div class="note type-tips">
       <p><strong>補足</strong></p>
-      <p><code>supabase.storage.from("XXX").getPublicUrl("YYY")</code>
-      はログインしていない状態でも呼び出すことができます。つまり、<code>/</code> や
+      <p><code>supabase.storage.from("XXX").getPublicUrl("YYY")</code> は
+      <strong>ログインしていない状態</strong> でも呼び出すことができます。つまり、<code>/</code> や
       <code>/posts/[id]</code> などのログイン不要のページでも使用することができます。</p>
       </div>
       <h2 data-number="3.6" id="画像アップロードのプロトタイプの改良1"><span
       class="header-section-number">3.6</span> 画像アップロードのプロトタイプの改良1</h2>
-      <p>さきのプロトタイプにおいて、<strong>ファイルネームに日本語や特定記号を含むファイルをアップロードできない問題</strong>を解決していきます。</p>
-      <p>解決法のひとつとして、UUID を生成して、ファイルネームを UUID
+      <p>アップロードしようする画像ファイルの名前に
+      <strong>日本語や特定記号が含まれているとアップロードできない問題 (処理が失敗する問題)</strong>
+      を解決していきます。</p>
+      <p>解決法のひとつとして、UUIDv4名前に を生成して、ファイルネームを UUID
       に置き換えるという方法があります。しかし、ここでは、ファイルのハッシュ値を計算して、それをファイルネームにしたいと思います。ハッシュ値を使うことで、同じファイルに対しては、同値が得られるので
       <strong>重複アップロードを防ぐことができ、ストレージの効率的な利用</strong>
-      につながります。</p>
+      が可能になります。</p>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>ファイルのハッシュ値とは何ですか。また、クラウドストレージにアップする際、日本語を含むファイルネームは適さないので、ハッシュ値を計算して、それをファイルネームとして使用すると説明されました。噛み砕いて解説してください。</p>
       </blockquote>
-      <p>ファイルネームをハッシュ値に置き換えてアップロードするプログラムを以下に示します。</p>
+      <p>ファイルネームをハッシュ値に置き換えてアップロードするように改良したプログラムを以下に示します。</p>
       <div class="sourceCode" id="cb12"
       data-caption="src/app/playground/upload-img/page.tsx (改良1)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb12-1"><a href="#cb12-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
@@ -747,15 +748,19 @@ npm i -D @types/crypto-js</code></pre>
       href="lecture11.html#準備-フロントエンド開発">準備
       (フロントエンド開発)</a>のセクションでインストールしました。</p>
       <p><strong>第08行目</strong> から <strong>第12行目</strong>
-      で、ファイルを引数に受け取り、ハッシュ値 (文字列) を返す関数 <code>calculateMD5Hash</code>
-      を定義しています。内容は理解する必要はありません。なお、ここでは <code>page.tsx</code>
-      の内部に定義していますが、実際には <code>src/app/_utils/calculateMD5Hash.ts</code>
+      で、ファイルを引数に受け取り、戻り値としてハッシュ値 (文字列) を返す関数
+      <code>calculateMD5Hash</code> を定義しています。内容は理解する必要はありません
+      (割り切ってブラックボックスとして使いましょう)。なお、ここでは <code>page.tsx</code>
+      のなかに関数を定義していますが、実際には <code>src/app/_utils/calculateMD5Hash.ts</code>
       などに分離することが望ましいです。</p>
       <p><strong>第30行目</strong> で、上記の関数をコールしてハッシュ値を変数 <code>fileHash</code>
       に格納しています。そして、そのハッシュ値を使って <strong>第32行目</strong>
       でバケット内のパスを設定しています。</p>
-      <p>更新したプログラムを実行して、<strong>ファイルネームに日本語を含む画像でもエラーにならずアップロードできること</strong>を確認してください
-      (Supabaseのサイトでも確認してください)。また、同じファイルであれば、同じハッシュ値になることを確認してください。</p>
+      <p>改良後のプログラムを実行して、<span
+      class="masked">ファイルネームに日本語を含む画像でもエラーにならずアップロードできること</span>
+      を確認してください
+      (Supabaseのサイトでも、問題なくアップロードされていることを確認してください)。また、同じファイルであれば
+      <span class="masked">同じハッシュ値になること</span> を確認してください。</p>
       <figure>
       <img src="figs/11/app_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -773,12 +778,12 @@ npm i -D @types/crypto-js</code></pre>
       </blockquote>
       <h2 data-number="3.7" id="画像アップロードのプロトタイプの改良2"><span
       class="header-section-number">3.7</span> 画像アップロードのプロトタイプの改良2</h2>
-      <p>次にアップロードした画像をプレビュー表示できるように改良していきます。画像を表示するので
-      Imageコンポーネント を使用して、その <code>src</code> 属性に <code>coverImageUrl</code>
-      を設定します。</p>
+      <p>次にアップロードした画像を <span class="masked">プレビュー表示</span>
+      できるように改良していきます。画像の表示には <strong>Imageコンポーネント</strong>
+      を使用し、その <code>src</code> 属性に <code>coverImageUrl</code> を設定します。</p>
       <p>実装例を以下に示します。<strong>第06行目</strong> の
       Imageコンポーネントのインポートと、<strong>第22行目</strong> から <strong>第32行目</strong>
-      にかけてのJSX要素の追加が主な変更点になります。</p>
+      にかけての <strong>JSX要素の追加</strong> が主な変更点となります。</p>
       <p>なお、外部サイトの画像を表示する際には<a href="lecture11.html#準備-フロントエンド開発">準備
       (フロントエンド開発)</a>で行なったように <span class="masked">next.config.mjs</span>
       を適切に設定する必要があります。</p>
@@ -822,19 +827,20 @@ npm i -D @types/crypto-js</code></pre>
 <span id="cb13-36"><a href="#cb13-36"></a></span>
 <span id="cb13-37"><a href="#cb13-37"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
       <p>ファイルを編集し、次のように
-      <strong>アップロードした画像のプレビューが表示できること</strong> を確認してください。</p>
+      <strong>アップロードした画像の「プレビュー表示」ができること</strong> を確認してください。</p>
       <figure>
       <img src="figs/11/app_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p><strong>第24行目</strong> のCSSクラス設定で <code>w-1/2</code>
-      を設定しているため、プレビュー画像はコンテナ幅の 1/2 サイズに縮小して表示されています。</p>
+      を設定しているため、<strong>プレビュー画像はコンテナ幅の 1/2
+      サイズに縮小されて表示</strong>されています。</p>
       <h2 data-number="3.8" id="画像アップロードのプロトタイプの改良3"><span
       class="header-section-number">3.8</span> 画像アップロードのプロトタイプの改良3</h2>
-      <p>次に、ファイル選択ダイアログを開くための「<strong>ボタンの外観</strong>」をスタマイズする方法について解説していきます。</p>
+      <p>次に、ファイル選択ダイアログを開くための「<strong>ボタンの外観</strong>」をカスタマイズする方法について解説していきます。</p>
       <p>現在、画面に表示されている「<strong>ファイルを選択</strong>」というボタンはブラウザ固有のUIであり、<span
-      class="masked">CSSによる外観の変更</span>
-      ができません。例えば、以下のようにCSSクラスを設定しても、ボタンの外観は変更されません。実際に試してみてください。</p>
+      class="masked">CSSによる外観の変更</span> ができません。例えば、以下のように CSSクラス
+      を設定しても、ボタンの外観は変更されません。実際に試してみてください。</p>
       <div class="sourceCode" id="cb14"
       data-caption="type=&quot;file&quot; の input 要素にCSSを適用"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">&lt;</span>input</span>
@@ -849,7 +855,7 @@ npm i -D @types/crypto-js</code></pre>
       属性を与えて「<strong>非表示</strong>」にする。</li>
       <li>新たにボタン要素 <code>&lt;button&gt;</code> を追加し、外観をカスタマイズする。</li>
       <li>このボタンが押下されたときに <span
-      class="masked">プログラムを使って非表示になっているinput要素に対するクリックイベント</span>
+      class="masked">プログラムを使って非表示になっているinput要素に対してクリックイベント</span>
       を発生させる。</li>
       </ol>
       <p>これにより、以下のような画面を構成できます。</p>
@@ -956,16 +962,22 @@ npm i -D @types/crypto-js</code></pre>
       <li>DBに保存する値を <code>coverImageURL</code> から <code>coverImageKey</code>
       に変更してください。
       <ul>
-      <li>画像を表示するときは
-      <code>supabase.storage.from(Bucket).getPublicUrl(coverImageKey)</code>
-      から、都度、URLを取得して、それを使用してください。</li>
       <li><code>schema.prisma</code> を変更したら、<a
       href="lecture10.html#テーブルの削除">前回講義の内容</a>
       に従って、テーブルの削除、再作成、RLS設定を実行してください。</li>
       </ul></li>
+      <li>投稿記事の詳細画面 (<code>/posts/[id]</code>) では、<code>coverImageKey</code> から
+      <code>coverImageUrl</code> を取得して画像を表示するようにしてください。
+      <ul>
+      <li>画像を表示するときは
+      <code>supabase.storage.from(Bucket).getPublicUrl(coverImageKey)</code>
+      を使って、都度、URLを取得して、それを使用してください。</li>
+      </ul></li>
       <li>適宜、<code>npm run build</code>
-      を実行してエラーやワーニングが生じていないことを確認する。</li>
+      を実行してエラーやワーニングが生じていないことを確認してください。</li>
       </ul>
+      <p>なお、<strong><em>課題3</em></strong> (最終課題) は、このオリジナルのウェブアプリ
+      (このブログアプリをカスタマイズしたもので可) を開発してもらう内容となります。</p>
       <h1 data-number="5" id="次回講義"><span class="header-section-number">5</span> 次回講義</h1>
       <p>次回の講義では、完成したブログアプリを Vercel
       というクラウドプラットフォームにデプロイする方法について紹介します
