@@ -58,8 +58,8 @@ class="toc-section-number">2.3</span> フロントエンドプログラムの変
 <li><a href="#画像アップロード機能の実装" id="toc-画像アップロード機能の実装"><span
 class="toc-section-number">3</span> 画像アップロード機能の実装</a>
 <ul>
-<li><a href="#準備-supabae設定" id="toc-準備-supabae設定"><span
-class="toc-section-number">3.1</span> 準備 (Supabae設定)</a></li>
+<li><a href="#準備-supabaseの設定" id="toc-準備-supabaseの設定"><span
+class="toc-section-number">3.1</span> 準備 (Supabaseの設定)</a></li>
 <li><a href="#確認-supabase設定" id="toc-確認-supabase設定"><span
 class="toc-section-number">3.2</span> 確認 (Supabase設定)</a></li>
 <li><a href="#準備-フロントエンド開発" id="toc-準備-フロントエンド開発"><span
@@ -292,83 +292,90 @@ Content-Type: application/json</code></pre>
       API を呼び出すフロントエンドプログラムで、HTTPリクエストのヘッダに <code>Authorization</code>
       フィールドを追加するようにしてください。さらに、それらの処理が機能することを実際に確認してください。</p>
       <ul>
-      <li>POST /api/admin/posts</li>
-      <li>PUT /api/admin/posts/[id]</li>
-      <li>DELETE /api/admin/posts/[id]</li>
-      <li>POST /api/admin/categories</li>
-      <li>PUT /api/admin/categories/[id]</li>
-      <li>DELETE /api/admin/categories/[id]</li>
+      <li><strong>POST</strong> /api/admin/posts</li>
+      <li><strong>PUT</strong> /api/admin/posts/[id]</li>
+      <li><strong>DELETE</strong> /api/admin/posts/[id]</li>
+      <li><strong>POST</strong> /api/admin/categories</li>
+      <li><strong>PUT</strong> /api/admin/categories/[id]</li>
+      <li><strong>DELETE</strong> /api/admin/categories/[id]</li>
       </ul>
       <h1 data-number="3" id="画像アップロード機能の実装"><span
       class="header-section-number">3</span> 画像アップロード機能の実装</h1>
-      <p>ここでは、投稿記事に画像 (CovarImage)
-      を添付するための「<strong>ファイルアップロード機能</strong>」を実装します。</p>
-      <p>投稿記事の「タイトル」や「本文」は Supabase の <strong>RDBシステム (PostgreSQL)</strong>
-      を利用して保存するように実装してきました。しかし、RDB は基本的に <span
-      class="masked">「数値」や「文字列」データの管理に特化して設計</span>
-      されており、<strong>画像やPDFなどのバイナリファイルの保存には適していません</strong>
-      (バイナリデータを文字列に変換して保存することは技術的には可能ですが、パフォーマンスやストレージ効率の観点から推奨されません)。</p>
-      <p>以上のことから、画像ファイルの保存 (アップロード) は Supabase
-      が提供する「<strong>ストレージ機能</strong>」を利用するように設計・実装していきます。</p>
-      <h2 data-number="3.1" id="準備-supabae設定"><span class="header-section-number">3.1</span>
-      準備 (Supabae設定)</h2>
-      <p>まずは、Supabase
-      のウェブウェブページで、<strong>ストレージ機能を利用するための準備</strong>
+      <p>ここでは、投稿記事に<strong>画像 (CovarImage)</strong>
+      を添付するための「<strong>ファイルアップロード機能</strong>」を実装していきます。</p>
+      <p>投稿記事の「タイトル」や「本文」などの文字列は Supabase の <strong>RDBシステム
+      (PostgreSQL)</strong> に保存するように実装してきました。しかし、RDB は基本的に <span
+      class="masked">「文字列」や「数値」データの管理に特化して設計</span>
+      されたものであり、<strong>「画像」や「PDF」などのバイナリファイルの保存や管理には適していません</strong>。バイナリデータを文字列に変換して保存することは技術的には可能ですが、パフォーマンスやストレージ利用効率の観点から推奨されません。</p>
+      <p>以上のことから、画像ファイルの保存 (アップロード) については、Supabase
+      が提供する「<strong>ストレージ機能</strong>」を利用するように設計と実装をしていきます。</p>
+      <h2 data-number="3.1" id="準備-supabaseの設定"><span class="header-section-number">3.1</span>
+      準備 (Supabaseの設定)</h2>
+      <p>まずは、Supabase のウェブページ上で、<strong>ストレージ機能を利用するための準備</strong>
       (＝<strong>保存領域の設定とセキュティ設定</strong>) を行なっていきます。</p>
       <p><a href="https://supabase.com/">Supabase</a>にアクセスして、ログインして (前回講義では
       GitHub連携でログインできるように設定しました)、ブログアプリ用に作成したプロジェクト
-      (Next-Blog-App) を選択してください。</p>
-      <p>次に、以下のように「<strong>ストレージ機能
+      (<strong>Next-Blog-App</strong>) を選択してください。</p>
+      <figure>
+      <img src="figs/11/supabase_00.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次に、以下に示すように「<strong>ストレージ機能
       (Storage)</strong>」の設定画面に移動し、「<strong>New
-      bucket</strong>」を選択肢てください。Supabase Storage における Bucket (バケツ)
-      とは、ファイルを整理・分類するための最上位のコンテナになります
-      (Windowsで言えば「フォルダ」よりも上位概念である「ドライブ」のようなものと考えてください)。</p>
+      bucket</strong>」を選択してください。Supabase Storage において、<strong>Bucket
+      (バケツ)</strong> とは、ファイルを整理・分類するための最上位の「コンテナ」になります
+      (Windowsで言えば <span
+      class="masked">「フォルダ」よりも上位概念である「ドライブ」のようなもの</span>
+      と考えてください)。</p>
       <figure>
       <img src="figs/11/supabase_02.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p><strong>Name of bucket</strong> のテキストボックスに <code>cover_image</code>
-      を入力してください。名前には「Only lowercase letters, numbers, dots, and
+      <p>ダイアログ (下図参照) が表示されるので、<strong>Name of bucket</strong>
+      のテキストボックスに <code>cover_image</code> を入力してください。Bucketの名前には「Only
+      lowercase letters, numbers, dots, and
       hyphens」、つまり、小文字、数字、ドット、ハイフンのみが使用可能です。</p>
       <p>また、<strong>Public bucket</strong>
       のスイッチを「<strong>オン</strong>」にしてください。「<strong>Public
-      bucket</strong>」とすることで、次のような特性のバケットとなります。</p>
+      bucket</strong>」にすることで、次のような特性を持った Bucket となります。</p>
       <blockquote>
       <p>Public buckets are not protected. Users can read objects in public buckets without any
       authorization. Row level security (RLS) policies are still required for other operations such
       as object uploads and deletes.</p>
       </blockquote>
       <blockquote>
-      <p>パブリックバケットは保護されません。ユーザーは認証なしでパブリックバケット内のオブジェクトを
-      <strong>読み取ること</strong> ができます。ただし、オブジェクトの <strong>アップロード</strong>
-      や <strong>削除</strong> などの他の操作には、Row Level Security (RLS)
-      のポリシー設定が必要です。</p>
+      <p>Public buckets は保護されません。ユーザは認証なしでパブリックバケット内のオブジェクトを
+      <strong>読み取ること</strong>
+      ができます。ただし、オブジェクトの「アップロード」や「削除」などの他の操作には、<strong>Row
+      Level Security (RLS) のポリシー設定が必要</strong>です。</p>
       </blockquote>
       <figure>
       <img src="figs/11/supabase_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>管理者 (認証済みユーザ) からは SupabaseClient
-      を通じて画像のアップロードや更新、削除をできるようにしたいので、<strong>RLSポリシー</strong>
-      を設定していきます。次のようにポリシー設定画面に進んでください。</p>
+      <p>名前 と Public buckets の設定が完了したら「<strong>Save</strong>Public
+      buckets」ボタンを押下してください。</p>
+      <p>次に、管理者 (認証済みユーザ) から SupabaseClient
+      を通じて画像のアップロードや更新、削除をできるようにするために <strong>RLSポリシー</strong>
+      を設定していきます。以下のように「ポリシー設定画面」に進んでください。</p>
       <figure>
       <img src="figs/11/supabase_04.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>「Get started quickly」を選択してください。</p>
+      <p>「<strong>Get started quickly</strong> (クイックセットアップ)」を選択してください。</p>
       <figure>
       <img src="figs/11/supabase_05.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>「Give users access to a folder only to authenticated users
-      (認証ユーザーだけがフォルダにアクセスできるようにする)」を選択して、「<strong>Use this
+      <p>つづいて「<strong>Give users access to a folder only to authenticated users</strong>
+      (認証ユーザーだけがフォルダにアクセスできるようにする)」を選択し、「<strong>Use this
       template</strong>」ボタンを押下してください。</p>
       <figure>
       <img src="figs/11/supabase_06.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>テンプレートをカスタイマイズします。認証済みユーザに全権限を与えるために、次のように「SELECT」「INSERT」「UPDATE」「DELETE」の
-      <strong>全てのチェックボックスをオン</strong>
+      <p>テンプレートをカスタイマイズします。認証済みユーザには「<strong>全権限</strong>」を与えるために、次のように「SELECT」「INSERT」「UPDATE」「DELETE」の
+      <span class="masked">全てのチェックボックスを「オン」</span>
       にしてください。そして「<strong>Review</strong>」のボタンを押下してください。</p>
       <figure>
       <img src="figs/11/supabase_07.png" alt="img" />
