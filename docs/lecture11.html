@@ -60,8 +60,8 @@ class="toc-section-number">3</span> 画像アップロード機能の実装</a>
 <ul>
 <li><a href="#準備-supabaseの設定" id="toc-準備-supabaseの設定"><span
 class="toc-section-number">3.1</span> 準備 (Supabaseの設定)</a></li>
-<li><a href="#確認-supabase設定" id="toc-確認-supabase設定"><span
-class="toc-section-number">3.2</span> 確認 (Supabase設定)</a></li>
+<li><a href="#確認-supabaseの設定" id="toc-確認-supabaseの設定"><span
+class="toc-section-number">3.2</span> 確認 (Supabaseの設定)</a></li>
 <li><a href="#準備-フロントエンド開発" id="toc-準備-フロントエンド開発"><span
 class="toc-section-number">3.3</span> 準備 (フロントエンド開発)</a></li>
 <li><a href="#画像アップロードのプロトタイプの実装"
@@ -381,8 +381,9 @@ Content-Type: application/json</code></pre>
       <img src="figs/11/supabase_07.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>INSERT や UPDATE などの各操作に適用するポリシーを設定するための SQL文
-      が確認できる画面に移動します。例えば INSERT ついては、次のような SQL が提案されています。</p>
+      <p>INSERT や UPDATE などの各操作に適用するポリシーを設定する SQL
+      が確認できる画面に移動します。例えば「INSERT
+      (ファイルの追加操作)」に対して適用するポリシーについては、次のようなものが提案されています。</p>
       <div class="sourceCode" id="cb6" data-caption="INSERTに際して適用するRLSポリシー"><pre
       class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> POLICY <span class="ot">&quot;Give users authenticated access to folder 2upqz7_0&quot;</span> <span class="kw">ON</span> <span class="kw">storage</span>.objects <span class="cf">FOR</span> <span class="kw">INSERT</span> <span class="kw">TO</span> <span class="kw">public</span> <span class="kw">WITH</span> <span class="kw">CHECK</span> (bucket_id <span class="op">=</span> <span class="st">&#39;cover_image&#39;</span> <span class="kw">AND</span> (<span class="kw">storage</span>.foldername(name))[<span class="dv">1</span>] <span class="op">=</span> <span class="st">&#39;private&#39;</span> <span class="kw">AND</span> auth.<span class="kw">role</span>() <span class="op">=</span> <span class="st">&#39;authenticated&#39;</span>);</span></code></pre></div>
       <p>この SQL は、次の3つ条件を<strong>すべて満たす場合にのみ</strong>
@@ -391,14 +392,14 @@ Content-Type: application/json</code></pre>
       <ul>
       <li>アップロード先のバケット (bucket_id) が <code>cover_image</code> である</li>
       <li>ファイルの保存先が <code>private</code> フォルダである</li>
-      <li>リクエストを行うユーザのロールが 認証済み ()<code>authenticated</code>) である</li>
+      <li>リクエストを行うユーザのロールが 認証済み (<code>authenticated</code>) である</li>
       </ul>
       <p>ざっくりと内容を確認したら「<strong>Save policy</strong>」ボタンを押下してください。</p>
       <figure>
       <img src="figs/11/supabase_08.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>次のように4つのRLSポリシーが設定されていることを確認してください。なお、上記の手順でポリシーを
+      <p>次のように4つのRLSポリシーが設定されていることを確認してください。なお、ポリシーを
       <strong>再設定したいとき</strong>は、三点リーダ <i class="fa-solid fa-ellipsis-vertical"></i>
       から「<i class="fa-solid fa-trash"></i> Delete」を選んで、<span
       class="masked">一旦、4つとも削除</span> してから同じ操作を行ってください。</p>
@@ -407,10 +408,11 @@ Content-Type: application/json</code></pre>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>以上で、Supabase側における利用準備は完了です。</p>
-      <h2 data-number="3.2" id="確認-supabase設定"><span class="header-section-number">3.2</span>
-      確認 (Supabase設定)</h2>
+      <h2 data-number="3.2" id="確認-supabaseの設定"><span class="header-section-number">3.2</span>
+      確認 (Supabaseの設定)</h2>
       <p>Supabase
-      のストレージ機能について、適切に設定できたことを確認していきます。手動で画像をアップロードして、その画像がURLで取得できることを確認していきます。</p>
+      のストレージ機能が「適切に設定できたこと」を確認していきます。手動で画像をアップロードして、その画像を取得する
+      URL が得られることを確認していきます。</p>
       <p>まず、<a href="figs/11/cover-img-yellow.jpg">テスト画像 (黄)</a>をダウンロード
       (右クリックして「<strong>名前を付けてリンク先を保存</strong>」を選択) して、デスクトップなどに
       <code>cover-img-yellow.jpg</code> という名前で保存してください。</p>
@@ -435,9 +437,10 @@ Content-Type: application/json</code></pre>
       <img src="figs/11/supabase_12.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p><strong>ウェブブラウザのアドレスバーにURLを貼り付けて画像が取得できること</strong>を確認してください。この際、<code>cover_image</code>
-      というバケットの <code>private</code> フォルダにアップした <code>cover-img-yellow.jpg</code>
-      というURLで取得できることを確認しておいてください。</p>
+      <p><strong>ウェブブラウザのアドレスバーにURLを貼り付けて画像が取得できること</strong>を確認してください。この際、以下の
+      URL のように「<code>cover_image</code> というバケットの <code>private</code>
+      フォルダにアップした
+      <code>cover-img-yellow.jpg</code>」という階層的な構造のパスになっていることを確認しておいてください。</p>
       <ul>
       <li><code>https://XXXX.supabase.co/storage/v1/object/public/cover_image/private/cover-img-yellow.jpg</code>
       <ul>
@@ -446,14 +449,15 @@ Content-Type: application/json</code></pre>
       </ul>
       <h2 data-number="3.3" id="準備-フロントエンド開発"><span
       class="header-section-number">3.3</span> 準備 (フロントエンド開発)</h2>
-      <p>つづいて、ローカルのプロジェクトにおいて、画像アップロードの準備をしていきます。</p>
+      <p>つづいて、ローカルのプロジェクトにおいて、画像をアップロードする準備をしていきます。</p>
       <p>VSCode
-      に戻って、以下のライブラリをインストールしてください。これは、暗号化関連のライブラリで、アップロードする画像のハッシュ
-      (ファイルの固有の文字列) を作成するために使用します。</p>
+      に戻って、「crypto-js」というライブラリをインストールしてください。これは、暗号化関連のライブラリで、アップロードする画像の<strong>ハッシュ</strong>
+      (＝ファイルの固有の文字列) を作成するために使用します。</p>
       <pre><code>npm i crypto-js
 npm i -D @types/crypto-js</code></pre>
-      <p>Supabase の Storage にアップロードしたファイル (画像) を取得できるようにプロジェクト直下の
-      <strong>next.config.mjs</strong> を次のように編集してください
+      <p>次に、Supabase の Storage にアップロードしたファイル (画像)
+      をアプリから参照できるようにプロジェクト直下の <strong>next.config.mjs</strong>
+      を次のように編集してください
       (<strong>第11行目</strong>から<strong>第15行目</strong>の内容を追加してください)。next.config.mjs
       の役割と設定については<a
       href="lecture07.html#動作確認と画像取得に関する設定変更">第07回講義</a>を参照してください。</p>
@@ -488,11 +492,13 @@ npm i -D @types/crypto-js</code></pre>
       </ul>
       <h2 data-number="3.4" id="画像アップロードのプロトタイプの実装"><span
       class="header-section-number">3.4</span> 画像アップロードのプロトタイプの実装</h2>
-      <p>画像アップロード機能は、記事の<strong>新規作成</strong> (<code>/admin/posts/new</code>)
-      と<strong>編集</strong> (<code>/admin/posts/[id]</code>) のページに追加していきます。</p>
-      <p>しかし、既に、これらのページにはフォームや関連処理が色々と記述されているため、独立した別のページで「アップロード機能」を実装し、処理の理解と動作確認をしてから、それを移植していきたいと思います。</p>
-      <p>まず <code>src/app/playground/upload-img/page.tsx</code> を作成し、次に示す「画像を
-      Supabase のアップロードするだけシンプルなプログラム」を貼り付けてください。</p>
+      <p>画像のアップロード機能は、記事の<strong>新規作成</strong> (<code>/admin/posts/new</code>)
+      と<strong>編集</strong> (<code>/admin/posts/[id]</code>)
+      の2つのページに実装が必要になります。</p>
+      <p>しかし、既に、これらのページにはフォームや関連処理が色々と記述されているため、独立した別のページに「画像のアップロード機能」を実装し、そこで「処理の理解」と「動作確認」ができてから、それを各ページに移植していきたいと思います。</p>
+      <p>まずは <code>src/app/playground/upload-img/page.tsx</code>
+      を作成し、次に示す「<strong>画像を Supabase
+      のアップロードするだけシンプルなプログラム</strong>」を貼り付けてください。</p>
       <div class="sourceCode" id="cb9" data-caption="src/app/playground/upload-img/page.tsx "><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="im">import</span> { useState<span class="op">,</span> ChangeEvent } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
