@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第11回 3I-プログラミング3</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span>
+連絡・概要</a></li>
+<li><a href="#バックエンドにおけるアクセス制御" id="toc-バックエンドにおけるアクセス制御"><span
+class="toc-section-number">2</span> バックエンドにおけるアクセス制御</a>
+<ul>
+<li><a href="#バックエンドの認証戦略" id="toc-バックエンドの認証戦略"><span
+class="toc-section-number">2.1</span> バックエンドの認証戦略</a></li>
+<li><a href="#バックエンドプログラムの変更" id="toc-バックエンドプログラムの変更"><span
+class="toc-section-number">2.2</span> バックエンドプログラムの変更</a></li>
+<li><a href="#フロントエンドプログラムの変更" id="toc-フロントエンドプログラムの変更"><span
+class="toc-section-number">2.3</span> フロントエンドプログラムの変更</a></li>
+</ul></li>
+<li><a href="#画像アップロード機能の実装" id="toc-画像アップロード機能の実装"><span
+class="toc-section-number">3</span> 画像アップロード機能の実装</a>
+<ul>
+<li><a href="#準備-supabae設定" id="toc-準備-supabae設定"><span
+class="toc-section-number">3.1</span> 準備 (Supabae設定)</a></li>
+<li><a href="#確認-supabase設定" id="toc-確認-supabase設定"><span
+class="toc-section-number">3.2</span> 確認 (Supabase設定)</a></li>
+<li><a href="#準備-フロントエンド開発" id="toc-準備-フロントエンド開発"><span
+class="toc-section-number">3.3</span> 準備 (フロントエンド開発)</a></li>
+<li><a href="#画像アップロードのプロトタイプの実装"
+id="toc-画像アップロードのプロトタイプの実装"><span class="toc-section-number">3.4</span>
+画像アップロードのプロトタイプの実装</a></li>
+<li><a href="#画像アップロードのプロトタイプの解説"
+id="toc-画像アップロードのプロトタイプの解説"><span class="toc-section-number">3.5</span>
+画像アップロードのプロトタイプの解説</a></li>
+<li><a href="#画像アップロードのプロトタイプの改良1"
+id="toc-画像アップロードのプロトタイプの改良1"><span class="toc-section-number">3.6</span>
+画像アップロードのプロトタイプの改良1</a></li>
+<li><a href="#画像アップロードのプロトタイプの改良2"
+id="toc-画像アップロードのプロトタイプの改良2"><span class="toc-section-number">3.7</span>
+画像アップロードのプロトタイプの改良2</a></li>
+<li><a href="#画像アップロードのプロトタイプの改良3"
+id="toc-画像アップロードのプロトタイプの改良3"><span class="toc-section-number">3.8</span>
+画像アップロードのプロトタイプの改良3</a></li>
+</ul></li>
+<li><a href="#宿題" id="toc-宿題"><span class="toc-section-number">4</span> 宿題</a></li>
+<li><a href="#次回講義" id="toc-次回講義"><span class="toc-section-number">5</span>
+次回講義</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2024-3I プログラミング3 第11回 講義資料</p>
+      <p>2025年01月16日（木）1・2時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <h1 data-number="2" id="バックエンドにおけるアクセス制御"><span
+      class="header-section-number">2</span> バックエンドにおけるアクセス制御</h1>
+      <p>前回講義では、フロントエンドにおいて <strong>SupabaseClinet</strong>
+      (＝<code>@supabase/supabase-js</code>) を利用した「<strong>アクセス制御</strong>
+      (ログイン機能・認証)」を実装しました。これにより、未認証のユーザ
+      (＝ログインしていないユーザ)は <code>/admin</code> や <code>/admin/posts/new</code> などの
+      <span class="masked">管理者用のページにアクセスできない仕組み</span> を構築しました。</p>
+      <p>しかし、現状では何らかの HTTPクライアント (例えば <strong>ThunderClinet</strong> や
+      <strong>curl コマンド</strong> など) を使って直接的に
+      <code>DELETE /api/admin/posts/xxxxxx</code> をリクエストすると <span
+      class="masked">投稿記事の削除</span>
+      ができてしまいます。つまり、現状では<strong>バックエンドにおけるアクセス制御ができていない状態</strong>
+      (＝ウェブアプリとして問題のある状態) となっています。</p>
+      <p>今回の講義の前半では、この問題を解決すべく <strong>バックエンドにおける認証 /
+      認可の処理を実装</strong> していきます。</p>
+      <h2 data-number="2.1" id="バックエンドの認証戦略"><span
+      class="header-section-number">2.1</span> バックエンドの認証戦略</h2>
+      <p>フロントエンドのログインページ (<code>/login</code>) では「<strong>ID
+      (=メールアドレス)</strong>」と「<strong>パスワード</strong>」を使った<strong>認証</strong>
+      (つまり「<strong>あなたが、本当にあなたであること</strong>」の確認) をしました。</p>
+      <p>バックエンド (ウェブAPIの利用)
+      においても、同様に、IDとパスワードを使った認証は可能です。しかし、そうした場合、ウェブAPIにリクエストを送信するたびに、ID・パスワードの添付が必要になります。HTTPS通信により暗号化は確保されますが、<strong>頻繁に認証情報を送信することはセキュリティ上のリスク</strong>
+      となります。また、バックエンドにおいても、<span
+      class="masked">IDとパスワードが正しいかを頻繁にデータベースに問い合わせること</span>
+      は大きな負荷をかけることになります
+      (DBに対する問い合わせは、処理時間上のボトルネックとなります) 。</p>
+      <p>以上のようなことから、一般的なウェブAPIでは ID と パスワード を使ったものではなく、<span
+      class="masked">トークン (JWT: Json Web Token)</span>
+      による認証・認可の仕組みが採用されます。<a
+      href="lecture10.html#ログイン処理の解説">前回講義</a>でも触れたように、認証に関する文脈で「トークン」とは
+      <span class="masked">認証済みであることを証明する電子証明書</span>
+      となります。つまり「<strong>トークンを保持している</strong>」ことが「<strong>認証済みのユーザーである</strong>」ことを保証します。</p>
+      <p>さらに、<a href="lecture10.html#演習">前回講義で確認</a>してもらったように、トークン (JWT)
+      は <strong>デコードが可能、かつ、署名による検証 (内容の改竄がされていないことの確認)
+      が可能</strong> という特徴があり、<span
+      class="masked">データベースに問い合わせることなく</span>
+      デコードと署名検証という<strong>軽量な処理のみ</strong> でユーザ情報 (ここではメールアドレス)
+      の取得が可能になります。</p>
+      <p>以下、バックエンド (＝ウェブAPI)
+      における「トークンを使用した認証・認可」の具体的な方法について解説していきます。</p>
+      <h2 data-number="2.2" id="バックエンドプログラムの変更"><span
+      class="header-section-number">2.2</span> バックエンドプログラムの変更</h2>
+      <p>記事やカテゴリの追加や編集、削除など <code>/api/admin/</code> 配下のAPIでは
+      <strong>ログインしているユーザ (＝トークンを所持しているユーザ)
+      からのリクエストのみを受け付ける</strong>ようにプログラムを変更していきます。</p>
+      <p>トークン (JWT) は、HTTPリクエストのヘッダの <code>Authorization</code>
+      フィールドに設定されている前提とします。以下は、投稿記事の新規作成API
+      (<code>/api/admin/new</code> に対するPOSTリクエスト) に認証・認可処理を組み込んだ例 (抜粋)
+      になります。</p>
+      <div class="sourceCode" id="cb1"
+      data-caption="src/app/api/admin/posts/new/route.ts (記事の新規投稿API)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// 省略</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">export</span> <span class="kw">const</span> POST <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co">// JWTトークンの検証・認証 (失敗したら 401 Unauthorized を返す)</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">const</span> token <span class="op">=</span> req<span class="op">.</span><span class="at">headers</span><span class="op">.</span><span class="fu">get</span>(<span class="st">&quot;Authorization&quot;</span>) <span class="op">??</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">const</span> { data<span class="op">,</span> error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">getUser</span>(token)<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="cf">if</span> (error)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>({ error<span class="op">:</span> error<span class="op">.</span><span class="at">message</span> }<span class="op">,</span> { status<span class="op">:</span> <span class="dv">401</span> })<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co">// 以下、投稿記事テーブルにレコードを追加する処理 (変更なし)</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="cf">try</span> {</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="co">// 省略</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  } <span class="cf">catch</span> () {</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co">// 省略</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  }</span>
+<span id="cb1-17"><a href="#cb1-17"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>まず、トークンのデコードと署名検証のために <strong>第02行目</strong> で SupabaseClinet
+      をインポートしています。<strong>第06行目</strong> では、HTTPヘッダの
+      <code>Authorization</code> フィールドの値を取得し、変数 <code>token</code>
+      に格納しています。もし、ヘッダに <code>Authorization</code>
+      が含まれていない場合、<code>token</code> には空文字 (<code>""</code>) が格納されます。</p>
+      <p><strong>第07行目</strong> の <code>supabase.auth.getUser(token)</code> では
+      <strong>トークンの署名が検証</strong> されます。もし問題 (＝<span
+      class="masked">署名が無効だったり、トークンの期限が切れている</span> など) があれば、戻り値の
+      <code>error</code> にエラーオブジェクトが格納されます。そして、<strong>第08行目</strong>の
+      if文 によって「<strong>401 Unauthorized</strong>」をレスポンスするようにしています
+      (記事の追加処理は実行されません)。</p>
+      <div class="note type-tips">
+      <p><strong>401 Unauthorized</strong></p>
+      <p>リクエストに有効な認証情報が含まれていない、または、認証情報が無効であることを示すステータスコード</p>
+      </div>
+      <p>一方で、トークンの検証が成功した場合、<code>auth.getUser(token)</code> の戻り値の
+      <code>error</code> は <code>null</code>
+      となり、投稿記事テーブルへのレコード追加処理が実行されます。</p>
+      <p>なお、ここでは使用していませんが、<code>auth.getUser(token)</code> の戻り値である
+      <code>data</code> には <span class="masked">トークン (=JWT) からデコードされた情報</span>
+      が格納されます。例えば <code>data.user.id</code> でID (UID)、<code>data.user.email</code>
+      でメールアドレスが取得できます。これらは、Supabase の認証機能に関するテーブルのカラム
+      (以下の図を参照) のデータとなります (厳密に言えば
+      トークンが発行された時点の情報のスナップショットになります) 。</p>
+      <figure>
+      <img src="figs/11/supabase_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="2.3" id="フロントエンドプログラムの変更"><span
+      class="header-section-number">2.3</span> フロントエンドプログラムの変更</h2>
+      <p>つづいて、APIリクエストにトークンを付加するように、フロントエンドプログラムを変更していきます。<code>src/app/admin/new/page.tsx</code>
+      の変更例 (抜粋) を以下に示します。全体コードについては<a
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/11/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p>
+      <div class="sourceCode" id="cb2" data-caption="src/app/admin/posts/new/page.tsx (抜粋)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// 省略</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">// 省略</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="co">// 省略</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="kw">const</span> { token } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span> <span class="co">// トークンの取得</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="co">// 省略</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="co">// フォームの送信処理</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="kw">const</span> handleSubmit <span class="op">=</span> <span class="kw">async</span> (e<span class="op">:</span> React<span class="op">.</span><span class="at">FormEvent</span><span class="op">&lt;</span><span class="bu">HTMLFormElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="cf">try</span>{</span>
+<span id="cb2-13"><a href="#cb2-13"></a>      <span class="co">// 省略</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>      <span class="cf">if</span> (<span class="op">!</span>token) {</span>
+<span id="cb2-15"><a href="#cb2-15"></a>        <span class="bu">window</span><span class="op">.</span><span class="fu">alert</span>(<span class="st">&quot;予期せぬ動作：トークンが取得できません。&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>      }</span>
+<span id="cb2-18"><a href="#cb2-18"></a>      <span class="co">// 省略</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>      <span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb2-20"><a href="#cb2-20"></a>        method<span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>        cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>        headers<span class="op">:</span> {</span>
+<span id="cb2-23"><a href="#cb2-23"></a>          <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>          Authorization<span class="op">:</span> token<span class="op">,</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>        }<span class="op">,</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>        body<span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(requestBody)<span class="op">,</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>      })<span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>      <span class="co">// 省略</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb2-30"><a href="#cb2-30"></a>      <span class="co">// 省略</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>    }</span>
+<span id="cb2-32"><a href="#cb2-32"></a>    <span class="co">// 省略</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>  }</span>
+<span id="cb2-34"><a href="#cb2-34"></a>  <span class="co">// 省略</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>}<span class="op">;</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p><strong>第02行目</strong>では、<a
+      href="lecture10.html#フロントエンドの認可カスタムフックの定義">前回講義</a>で作成したカスタムフック
+      <strong>useAuth</strong> をインポートしています。<strong>第07行目</strong>では useAuth から
+      <code>token</code> を取得しています。もし、useAuth で何からの問題があれば <code>token</code>
+      には <code>null</code> が格納されるので、フォームの送信処理時に、<strong>第14行目</strong> の
+      if文でアラートが表示されます。</p>
+      <p><strong>第24行目</strong>でHTTPリクエストのヘッダに <code>Authorization</code>
+      を追加しています。これより、HTTPリクエストのヘッダは次のようになります。</p>
+      <pre><code>Authorization: eyJhbGciOiJIUzI1....
+Content-Type: application/json</code></pre>
+      <div class="note type-senior">
+      <p><strong>Authorization ヘッダについて</strong></p>
+      <p>一般的な JWT の送信 (<a
+      href="https://openid-foundation-japan.github.io/rfc6750.ja.html">RFC
+      6750</a>で定義された標準的な方式) では、次のように <strong>Authorizationフィールド</strong>
+      には <code>Bearer</code> というプレフィックス (接頭辞) をつけます (ここでは
+      <code>Bearer</code> の付加を省略しています)。また、バックエンドでは <code>Bearer</code>
+      の部分を取り除いてトークンのみを取得する処理が必要です。</p>
+      <pre><code>Authorization: Bearer eyJhbGciOiJIUzI1....</code></pre>
+      <p>ここでは、プレフィックスの処理が煩雑になるので省略しています。</p>
+      <p>なお、Basic認証では <code>Basic</code>、Digest認証では <code>Digest</code>
+      をプレフィックスにつけます。</p>
+      </div>
+      <h3 data-number="2.3.1" id="演習-15分"><span class="header-section-number">2.3.1</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i> 15分)</h3>
+      <p>認証済みのユーザだけに<strong>記事の新規作成を許可</strong>するようにバックエンドとフロントエンドのプログラムを変更してください。</p>
+      <ul>
+      <li><code>src/app/api/admin/posts/new/route.ts</code></li>
+      <li><code>src/app/admin/posts/new/page.tsx</code></li>
+      </ul>
+      <p>また、実際にアプリを実行して <strong>意図したように動作すること</strong>
+      を確認してください。また、次のようにフロントエンドにおいて
+      <strong>不正なトークンを与えたリクエストした場合</strong>
+      には、処理が拒否されることも確認してください。</p>
+      <div class="sourceCode" id="cb5" data-caption="src/app/admin/posts/new/page.tsx (抜粋)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  method<span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  headers<span class="op">:</span> {</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    Authorization<span class="op">:</span> token <span class="op">+</span> <span class="st">&quot;a&quot;</span><span class="op">,</span> <span class="co">// 無効なトークン </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  }<span class="op">,</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  body<span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(requestBody)<span class="op">,</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>})<span class="op">;</span></span></code></pre></div>
+      <h3 data-number="2.3.2" id="演習-宿題-70分"><span class="header-section-number">2.3.2</span>
+      演習 (宿題: <i class="fa-solid fa-stopwatch"></i> 70分)</h3>
+      <p>記事の新規作成と同様に、以下のAPIについて管理者のみが実行できるようにプログラムを変更してください。また、それらのAPIを呼び出しているフロントエンドプログラムでも、リクエストヘッダに
+      <code>Authorization</code>
+      フィールドを追加するようにしてください。さらに、実際に、それらの処理が機能することを確認してください。</p>
+      <ul>
+      <li>POST /api/admin/categories <strong>【済】</strong></li>
+      <li>PUT /api/admin/categories/[id]</li>
+      <li>DELETE /api/admin/categories/[id]</li>
+      <li>POST /api/admin/posts</li>
+      <li>PUT /api/admin/posts/[id]</li>
+      <li>DELETE /api/admin/posts/[id]</li>
+      </ul>
+      <h1 data-number="3" id="画像アップロード機能の実装"><span
+      class="header-section-number">3</span> 画像アップロード機能の実装</h1>
+      <p>ここでは、投稿記事に画像 (CovarImage)
+      を添付するための「<strong>ファイルアップロード機能</strong>」を実装します。</p>
+      <p>投稿記事の「タイトル」や「本文」は Supabase の <strong>RDBシステム (PostgreSQL)</strong>
+      を利用して保存するように実装してきました。しかし、RDB は基本的に <span
+      class="masked">「数値」や「文字列」データの管理に特化して設計</span>
+      されており、<strong>画像やPDFなどのバイナリファイルの保存には適していません</strong>
+      (バイナリデータを文字列に変換して保存することは技術的には可能ですが、パフォーマンスやストレージ効率の観点から推奨されません)。</p>
+      <p>以上のことから、画像ファイルの保存 (アップロード) は Supabase
+      が提供する「<strong>ストレージ機能</strong>」を利用するように設計・実装していきます。</p>
+      <h2 data-number="3.1" id="準備-supabae設定"><span class="header-section-number">3.1</span>
+      準備 (Supabae設定)</h2>
+      <p>まずは、Supabase
+      のウェブウェブページで、<strong>ストレージ機能を利用するための準備</strong>
+      (＝<strong>保存領域の設定とセキュティ設定</strong>) を行なっていきます。</p>
+      <p><a href="https://supabase.com/">Supabase</a>にアクセスして、ログインして (前回講義では
+      GitHub連携でログインできるように設定しました)、ブログアプリ用に作成したプロジェクト
+      (Next-Blog-App) を選択してください。</p>
+      <p>次に、以下のように「<strong>ストレージ機能
+      (Storage)</strong>」の設定画面に移動し、「<strong>New
+      bucket</strong>」を選択肢てください。Supabase Storage における Bucket (バケツ)
+      とは、ファイルを整理・分類するための最上位のコンテナになります
+      (Windowsで言えば「フォルダ」よりも上位概念である「ドライブ」のようなものと考えてください)。</p>
+      <figure>
+      <img src="figs/11/supabase_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>Name of bucket</strong> のテキストボックスに <code>cover_image</code>
+      を入力してください。名前には「Only lowercase letters, numbers, dots, and
+      hyphens」、つまり、小文字、数字、ドット、ハイフンのみが使用可能です。</p>
+      <p>また、<strong>Public bucket</strong>
+      のスイッチを「<strong>オン</strong>」にしてください。「<strong>Public
+      bucket</strong>」とすることで、次のような特性のバケットとなります。</p>
+      <blockquote>
+      <p>Public buckets are not protected. Users can read objects in public buckets without any
+      authorization. Row level security (RLS) policies are still required for other operations such
+      as object uploads and deletes.</p>
+      </blockquote>
+      <blockquote>
+      <p>パブリックバケットは保護されません。ユーザーは認証なしでパブリックバケット内のオブジェクトを
+      <strong>読み取ること</strong> ができます。ただし、オブジェクトの <strong>アップロード</strong>
+      や <strong>削除</strong> などの他の操作には、Row Level Security (RLS)
+      のポリシー設定が必要です。</p>
+      </blockquote>
+      <figure>
+      <img src="figs/11/supabase_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>管理者 (認証済みユーザ) からは SupabaseClient
+      を通じて画像のアップロードや更新、削除をできるようにしたいので、<strong>RLSポリシー</strong>
+      を設定していきます。次のようにポリシー設定画面に進んでください。</p>
+      <figure>
+      <img src="figs/11/supabase_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「Get started quickly」を選択してください。</p>
+      <figure>
+      <img src="figs/11/supabase_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「Give users access to a folder only to authenticated users
+      (認証ユーザーだけがフォルダにアクセスできるようにする)」を選択して、「<strong>Use this
+      template</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/11/supabase_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>テンプレートをカスタイマイズします。認証済みユーザに全権限を与えるために、次のように「SELECT」「INSERT」「UPDATE」「DELETE」の
+      <strong>全てのチェックボックスをオン</strong>
+      にしてください。そして「<strong>Review</strong>」のボタンを押下してください。</p>
+      <figure>
+      <img src="figs/11/supabase_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>INSERT や UPDATE などの各操作に適用するポリシーを設定するための SQL文
+      が確認できる画面に移動します。例えば INSERT ついては、次のような SQL が提案されています。</p>
+      <div class="sourceCode" id="cb6" data-caption="INSERTに際して適用するRLSポリシー"><pre
+      class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> POLICY <span class="ot">&quot;Give users authenticated access to folder 2upqz7_0&quot;</span> <span class="kw">ON</span> <span class="kw">storage</span>.objects <span class="cf">FOR</span> <span class="kw">INSERT</span> <span class="kw">TO</span> <span class="kw">public</span> <span class="kw">WITH</span> <span class="kw">CHECK</span> (bucket_id <span class="op">=</span> <span class="st">&#39;cover_image&#39;</span> <span class="kw">AND</span> (<span class="kw">storage</span>.foldername(name))[<span class="dv">1</span>] <span class="op">=</span> <span class="st">&#39;private&#39;</span> <span class="kw">AND</span> auth.<span class="kw">role</span>() <span class="op">=</span> <span class="st">&#39;authenticated&#39;</span>);</span></code></pre></div>
+      <p>この SQL は、次の3つ条件を<strong>すべて満たす場合にのみ</strong>
+      ストレージへのファイル挿入 (INSERT)
+      を許可するというポリシーを作成するという内容になっています。</p>
+      <ul>
+      <li>アップロード先のバケット (bucket_id) が <code>cover_image</code> である</li>
+      <li>ファイルの保存先が <code>private</code> フォルダである</li>
+      <li>リクエストを行うユーザのロールが 認証済み ()<code>authenticated</code>) である</li>
+      </ul>
+      <p>ざっくりと内容を確認したら「<strong>Save policy</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/11/supabase_08.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のように4つのRLSポリシーが設定されていることを確認してください。なお、上記の手順でポリシーを
+      <strong>再設定したいとき</strong>は、三点リーダ <i class="fa-solid fa-ellipsis-vertical"></i>
+      から「<i class="fa-solid fa-trash"></i> Delete」を選んで、<span
+      class="masked">一旦、4つとも削除</span> してから同じ操作を行ってください。</p>
+      <figure>
+      <img src="figs/11/supabase_09.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以上で、Supabase側における利用準備は完了です。</p>
+      <h2 data-number="3.2" id="確認-supabase設定"><span class="header-section-number">3.2</span>
+      確認 (Supabase設定)</h2>
+      <p>Supabase
+      のストレージ機能について、適切に設定できたことを確認していきます。手動で画像をアップロードして、その画像がURLで取得できることを確認していきます。</p>
+      <p>まず、<a href="figs/11/cover-img-yellow.jpg">テスト画像 (黄)</a>をダウンロード
+      (右クリックして「<strong>名前を付けてリンク先を保存</strong>」を選択) して、デスクトップなどに
+      <code>cover-img-yellow.jpg</code> という名前で保存してください。</p>
+      <p>次に Supabase のストレージ機能にアクセスして、バケット <code>cover_image</code>
+      を選択し、そこに <code>privte</code>
+      という<strong>フォルダを新規作成</strong>してください。</p>
+      <figure>
+      <img src="figs/11/supabase_10.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>作成した <code>private</code> フォルダを選択して、「<strong>Create
+      folder</strong>」をクリックして、さきほどダウンロードした画像ファイル
+      (<code>cover-img-yellow.jpg</code>) をアップロードしてください
+      (ドラッグアンドドロップでもアップロードできます)。</p>
+      <figure>
+      <img src="figs/11/supabase_11.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>アップロードした画像を選択して、「<strong>Get
+      URL</strong>」ボタンを押下してクリップボードにURLを取得してください。</p>
+      <figure>
+      <img src="figs/11/supabase_12.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>ウェブブラウザのアドレスバーにURLを貼り付けて画像が取得できること</strong>を確認してください。この際、<code>cover_image</code>
+      というバケットの <code>private</code> フォルダにアップした <code>cover-img-yellow.jpg</code>
+      というURLで取得できることを確認しておいてください。</p>
+      <ul>
+      <li><code>https://XXXX.supabase.co/storage/v1/object/public/cover_image/private/cover-img-yellow.jpg</code>
+      <ul>
+      <li><code>XXXX</code> には、Supabase の Project ID に読み替えてください。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.3" id="準備-フロントエンド開発"><span
+      class="header-section-number">3.3</span> 準備 (フロントエンド開発)</h2>
+      <p>つづいて、ローカルのプロジェクトにおいて、画像アップロードの準備をしていきます。</p>
+      <p>VSCode
+      に戻って、以下のライブラリをインストールしてください。これは、暗号化関連のライブラリで、アップロードする画像のハッシュ
+      (ファイルの固有の文字列) を作成するために使用します。</p>
+      <pre><code>npm i crypto-js
+npm i -D @types/crypto-js</code></pre>
+      <p>Supabase の Storage にアップロードしたファイル (画像) を取得できるようにプロジェクト直下の
+      <strong>next.config.mjs</strong> を次のように編集してください
+      (<strong>第11行目</strong>から<strong>第15行目</strong>の内容を追加してください)。next.config.mjs
+      の役割と設定については<a
+      href="lecture07.html#動作確認と画像取得に関する設定変更">第07回講義</a>を参照してください。</p>
+      <div class="sourceCode" id="cb8" data-caption="next.config.mjs"><pre
+      class="sourceCode numberSource js numberLines"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="dt">images</span><span class="op">:</span> {</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="dt">remotePatterns</span><span class="op">:</span> [</span>
+<span id="cb8-5"><a href="#cb8-5"></a>      {</span>
+<span id="cb8-6"><a href="#cb8-6"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;w1980.blob.core.windows.net&quot;</span><span class="op">,</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>      }<span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;placehold.jp&quot;</span> }<span class="op">,</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>      { <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span> <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;images.microcms-assets.io&quot;</span> }<span class="op">,</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>      {</span>
+<span id="cb8-12"><a href="#cb8-12"></a>        <span class="dt">protocol</span><span class="op">:</span> <span class="st">&quot;https&quot;</span><span class="op">,</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>        <span class="dt">hostname</span><span class="op">:</span> <span class="st">&quot;**.supabase.co&quot;</span><span class="op">,</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>        <span class="dt">pathname</span><span class="op">:</span> <span class="st">&quot;/storage/v1/object/public/**&quot;</span><span class="op">,</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>      }<span class="op">,</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    ]<span class="op">,</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>  }<span class="op">,</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>}<span class="op">;</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
+      <p>また、以下のテスト画像をデスクトップなどにダウンロード
+      (リンクを右クリックして「<strong>名前を付けてリンク先を保存</strong>」)
+      しておいてください。<strong>画像の名前は変更せずに、そのまま使用してください</strong>。</p>
+      <ul>
+      <li><a href="figs/11/cover-img-green.jpg">cover-img-green.jpg</a></li>
+      <li><a href="figs/11/cover-img-red.jpg">cover-img-red.jpg</a></li>
+      <li><a href="figs/11/cover-img-purple.jpg">cover-img-purple.jpg</a></li>
+      </ul>
+      <h2 data-number="3.4" id="画像アップロードのプロトタイプの実装"><span
+      class="header-section-number">3.4</span> 画像アップロードのプロトタイプの実装</h2>
+      <p>画像アップロード機能は、記事の<strong>新規作成</strong> (<code>/admin/posts/new</code>)
+      と<strong>編集</strong> (<code>/admin/posts/[id]</code>) のページに追加していきます。</p>
+      <p>しかし、既に、これらのページにはフォームや関連処理が色々と記述されているため、独立した別のページで「アップロード機能」を実装し、処理の理解と動作確認をしてから、それを移植していきたいと思います。</p>
+      <p>まず <code>src/app/playground/upload-img/page.tsx</code> を作成し、次に示す「画像を
+      Supabase のアップロードするだけシンプルなプログラム」を貼り付けてください。</p>
+      <div class="sourceCode" id="cb9" data-caption="src/app/playground/upload-img/page.tsx "><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="im">import</span> { useState<span class="op">,</span> ChangeEvent } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="kw">const</span> bucketName <span class="op">=</span> <span class="st">&quot;cover_image&quot;</span><span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="kw">const</span> [coverImageUrl<span class="op">,</span> setCoverImageUrl] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="kw">const</span> [coverImageKey<span class="op">,</span> setCoverImageKey] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="kw">const</span> { session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="kw">const</span> handleImageChange <span class="op">=</span> <span class="kw">async</span> (e<span class="op">:</span> ChangeEvent<span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="fu">setCoverImageKey</span>(<span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// 画像のキーをリセット</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="fu">setCoverImageUrl</span>(<span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// 画像のURLをリセット</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="co">// 画像が選択されていない場合は戻る</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="cf">if</span> (<span class="op">!</span>e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span> <span class="op">||</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span><span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a></span>
+<span id="cb9-19"><a href="#cb9-19"></a>    <span class="co">// 複数ファイルが選択されている場合は最初のファイルを使用する</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>    <span class="kw">const</span> file <span class="op">=</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span><span class="op">?.</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="co">// バケット内のパスを指定</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>    <span class="kw">const</span> path <span class="op">=</span> <span class="vs">`private/</span><span class="sc">${</span>file<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>    <span class="co">// ファイルが存在する場合は上書きするための設定 → upsert: true</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>    <span class="kw">const</span> { data<span class="op">,</span> error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>      <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb9-26"><a href="#cb9-26"></a>      <span class="op">.</span><span class="fu">upload</span>(path<span class="op">,</span> file<span class="op">,</span> { upsert<span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a></span>
+<span id="cb9-28"><a href="#cb9-28"></a>    <span class="cf">if</span> (error <span class="op">||</span> <span class="op">!</span>data) {</span>
+<span id="cb9-29"><a href="#cb9-29"></a>      <span class="bu">window</span><span class="op">.</span><span class="fu">alert</span>(<span class="vs">`アップロードに失敗 </span><span class="sc">${</span>error<span class="op">.</span><span class="at">message</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>    }</span>
+<span id="cb9-32"><a href="#cb9-32"></a>    <span class="co">// 画像のキー (実質的にバケット内のパス) を取得</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a>    <span class="fu">setCoverImageKey</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>    <span class="kw">const</span> publicUrlResult <span class="op">=</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a>      <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb9-36"><a href="#cb9-36"></a>      <span class="op">.</span><span class="fu">getPublicUrl</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>    <span class="co">// 画像のURLを取得</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a>    <span class="fu">setCoverImageUrl</span>(publicUrlResult<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">publicUrl</span>)<span class="op">;</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a>  }<span class="op">;</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a></span>
+<span id="cb9-41"><a href="#cb9-41"></a>  <span class="co">// ログインしていないとき (＝supabase.storageが使えない状態のとき)</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a>  <span class="cf">if</span> (<span class="op">!</span>session) <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>ログインしていません。<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a></span>
+<span id="cb9-44"><a href="#cb9-44"></a>  <span class="cf">return</span> (</span>
+<span id="cb9-45"><a href="#cb9-45"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a>      <span class="op">&lt;</span>input</span>
+<span id="cb9-47"><a href="#cb9-47"></a>        id<span class="op">=</span><span class="st">&quot;imgSelector&quot;</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a>        <span class="kw">type</span><span class="op">=</span><span class="st">&quot;file&quot;</span> <span class="co">// ファイルを選択するinput要素に設定</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a>        accept<span class="op">=</span><span class="st">&quot;image/*&quot;</span> <span class="co">// 画像ファイルのみを選択可能に設定</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a>        onChange<span class="op">=</span>{handleImageChange}</span>
+<span id="cb9-51"><a href="#cb9-51"></a>      <span class="op">/&gt;</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageKey <span class="op">:</span> {coverImageKey}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageUrl <span class="op">:</span> {coverImageUrl}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a>  )<span class="op">;</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a>}<span class="op">;</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a></span>
+<span id="cb9-58"><a href="#cb9-58"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>まずは、開発モード (<code>npm run dev</code>) でアプリを立ち上げて
+      <code>/playground/upload-img</code>
+      にアクセスして、次のような画面が表示されることを確認してください。ログインしていないときは、ログインしてください。</p>
+      <figure>
+      <img src="figs/11/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次に「<strong>ファイルを選択</strong>」ボタンを押下して、ファイル選択ダイアログを表示し、予めダウンロードしておいた<a
+      href="figs/11/cover-img-green.jpg">cover-img-green.jpg</a>を選択してください。そして、
+      <code>ImageKey</code> と <code>coverImageUrl</code>
+      がどのような値になるか確認してください。</p>
+      <p>また、再度、「<strong>ファイルを選択</strong>」から cover-img-green.jpg (同じファイル)
+      を選択しても問題がないことを確認してください。デベロッパーツールのコンソール出力にもエラー等がでていないことを確認してください。</p>
+      <figure>
+      <img src="figs/11/app_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、Supabase のサイトからストレージにアクセスして、次のように cover-img-green.jpg
+      が正常にアップロードされていることを確認してください。</p>
+      <figure>
+      <img src="figs/11/supabase_13.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h3 data-number="3.4.1" id="演習"><span class="header-section-number">3.4.1</span> 演習</h3>
+      <ul>
+      <li><code>ほげほげ.png</code> や <code>ぴよぴよ.png</code>
+      など、<strong>名前に日本語を含む画像ファイル</strong>をアップロードしようとすると、どのようになるか確認してください。</li>
+      <li><strong>第22行目</strong> の <code>private/${file.name}</code> を
+      <code>hoge/${file.name}</code> に変更して (つまり、保存先のフォルダを <code>private</code>
+      以外のものに設定して) cover-img-green.jpg
+      をアップロードを試みるとどのようになるか確認してください。試したあとは、元に戻しておいてください。</li>
+      <li><strong>第26行目</strong> の <code>upsert: true</code> を <code>upsert: false</code>
+      に変更して cover-img-green.jpg
+      をアップロードを試みるとどのようになるか確認してください。試したあとは、元に戻しておいてください
+      <ul>
+      <li><strong>Upsert</strong> とは <span class="masked">Insert と Update を合体させた造語</span>
+      で、もし、そのファイルが存在していなければ挿入 (Insert)、存在していれば更新 (Update)
+      という意味になります。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.5" id="画像アップロードのプロトタイプの解説"><span
+      class="header-section-number">3.5</span> 画像アップロードのプロトタイプの解説</h2>
+      <p>ファイルアップロードは、SupabaseClient (<strong>第04行目</strong>でインポート済み) を使って
+      <strong>第24行目</strong> で実行しています。</p>
+      <div class="sourceCode" id="cb10" data-caption="src/app/playground/upload-img/page.tsx (抜粋)"
+      data-startFrom="24"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 23;"><span id="cb10-24"><a href="#cb10-24"></a><span class="kw">const</span> { data<span class="op">,</span> error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a>  <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb10-26"><a href="#cb10-26"></a>  <span class="op">.</span><span class="fu">upload</span>(path<span class="op">,</span> file<span class="op">,</span> { upsert<span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span></code></pre></div>
+      <p><code>from</code> の引数には「バケットの名前 (実体は <strong>第07行目</strong> で
+      <code>cover_image</code> を設定)」を与え、<code>upload</code>
+      の各引数には、次の値を与えます。</p>
+      <ul>
+      <li><strong>第1引数</strong>: バケット内のパスを与えます。先に設定した INSERT に関する
+      <strong>RLSポリシー</strong> に従って <code>private/</code>
+      から開始する必要があります。それにつづく名前には <span
+      class="masked">日本語や特定の記号などを含めること</span> ができません。
+      <ul>
+      <li><code>ほげほげ.png</code> のようなファイルを選択してアップロードしようとすると
+      <code>Invalid key: private/ほげほげ.png</code> のようなエラーになります。</li>
+      <li><code>private/</code> 以外の位置にアップロードしようとすると
+      <code>new row violates row-level security policy</code> のようなエラーとなります。</li>
+      </ul></li>
+      <li><strong>第2引数</strong>:
+      単体のファイルを与えます。アップロードできるファイルサイズに制限があります(<a
+      href="https://supabase.com/docs/guides/storage/uploads/file-limits">詳細</a>)。</li>
+      <li><strong>第3引数</strong>: 各種オプションをオブジェクト形式で指定します。
+      <ul>
+      <li><code>upsert</code>: ファイルが存在する場合に上書き更新を許可するかを設定します。</li>
+      </ul></li>
+      </ul>
+      <p>upload メソッドの戻り値は、<code>data</code> と <code>error</code>
+      になります。アップロードに失敗すると <code>error</code>
+      にエラーオブジェクトが格納され、<strong>第28行目</strong> の
+      if文によってアラートを表示して処理を中断します。</p>
+      <div class="sourceCode" id="cb11" data-caption="src/app/playground/upload-img/page.tsx (抜粋)"
+      data-startFrom="28"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 27;"><span id="cb11-28"><a href="#cb11-28"></a><span class="cf">if</span> (error <span class="op">||</span> <span class="op">!</span>data) {</span>
+<span id="cb11-29"><a href="#cb11-29"></a>  <span class="bu">window</span><span class="op">.</span><span class="fu">alert</span>(<span class="vs">`アップロードに失敗 </span><span class="sc">${</span>error<span class="op">.</span><span class="at">message</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb11-30"><a href="#cb11-30"></a>  <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a>}</span>
+<span id="cb11-32"><a href="#cb11-32"></a><span class="co">// 画像のキー (実質的にバケット内のパス) を取得</span></span>
+<span id="cb11-33"><a href="#cb11-33"></a><span class="fu">setCoverImageKey</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb11-34"><a href="#cb11-34"></a><span class="kw">const</span> publicUrlResult <span class="op">=</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb11-35"><a href="#cb11-35"></a>  <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb11-36"><a href="#cb11-36"></a>  <span class="op">.</span><span class="fu">getPublicUrl</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a><span class="co">// 画像のURLを取得</span></span>
+<span id="cb11-38"><a href="#cb11-38"></a><span class="fu">setCoverImageUrl</span>(publicUrlResult<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">publicUrl</span>)<span class="op">;</span></span></code></pre></div>
+      <p>アップロードに成功した場合、戻り値の <code>data</code> にオブジェクトの <code>path</code>
+      プロパティには、<strong>バケット内のパス</strong> が格納されています
+      (基本的に<strong>第22行目</strong>で設定した値と同じになるはずです)。これを、ここでは
+      <strong>coverImageKey</strong> としています。</p>
+      <p>そして、このキーを引数に与えて <code>getPublicUrl</code>
+      メソッドを実行すると、その画像にアクセスするための URL を得ることができます。この URL
+      については <span class="masked">Supabase の都合で変更になる可能性</span>
+      があるため、<code>getPublicUrl</code> を経由して取得するようにしてください。</p>
+      <p>また、このことを考慮し、<strong>データベースにも coverImageUrl ではなく coverImageKey
+      のほうを保存</strong>するように変更します (あとで)。</p>
+      <div class="note type-tips">
+      <p><strong>補足</strong></p>
+      <p><code>supabase.storage.from("XXX").getPublicUrl("YYY")</code>
+      はログインしていない状態でも呼び出すことができます。つまり、<code>/</code> や
+      <code>/posts/[id]</code> などのログイン不要のページでも使用することができます。</p>
+      </div>
+      <h2 data-number="3.6" id="画像アップロードのプロトタイプの改良1"><span
+      class="header-section-number">3.6</span> 画像アップロードのプロトタイプの改良1</h2>
+      <p>さきのプロトタイプにおいて、<strong>ファイルネームに日本語や特定記号を含むファイルをアップロードできない問題</strong>を解決していきます。</p>
+      <p>解決法のひとつとして、UUID を生成して、ファイルネームを UUID
+      に置き換えるという方法があります。しかし、ここでは、ファイルのハッシュ値を計算して、それをファイルネームにしたいと思います。ハッシュ値を使うことで、同じファイルに対しては、同値が得られるので
+      <strong>重複アップロードを防ぐことができ、ストレージの効率的な利用</strong>
+      につながります。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ファイルのハッシュ値とは何ですか。また、クラウドストレージにアップする際、日本語を含むファイルネームは適さないので、ハッシュ値を計算して、それをファイルネームとして使用すると説明されました。噛み砕いて解説してください。</p>
+      </blockquote>
+      <p>ファイルネームをハッシュ値に置き換えてアップロードするプログラムを以下に示します。</p>
+      <div class="sourceCode" id="cb12"
+      data-caption="src/app/playground/upload-img/page.tsx (改良1)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb12-1"><a href="#cb12-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="im">import</span> { useState<span class="op">,</span> ChangeEvent } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="im">import</span> CryptoJS <span class="im">from</span> <span class="st">&quot;crypto-js&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">// ファイルのMD5ハッシュ値を計算する関数</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">const</span> calculateMD5Hash <span class="op">=</span> <span class="kw">async</span> (file<span class="op">:</span> <span class="bu">File</span>)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="kw">const</span> buffer <span class="op">=</span> <span class="cf">await</span> file<span class="op">.</span><span class="fu">arrayBuffer</span>()<span class="op">;</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="kw">const</span> wordArray <span class="op">=</span> CryptoJS<span class="op">.</span><span class="at">lib</span><span class="op">.</span><span class="at">WordArray</span><span class="op">.</span><span class="fu">create</span>(buffer)<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="cf">return</span> CryptoJS<span class="op">.</span><span class="fu">MD5</span>(wordArray)<span class="op">.</span><span class="fu">toString</span>()<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>}<span class="op">;</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb12-15"><a href="#cb12-15"></a>  <span class="kw">const</span> bucketName <span class="op">=</span> <span class="st">&quot;cover_image&quot;</span><span class="op">;</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>  <span class="kw">const</span> [coverImageUrl<span class="op">,</span> setCoverImageUrl] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>  <span class="kw">const</span> [coverImageKey<span class="op">,</span> setCoverImageKey] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>  <span class="kw">const</span> { session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20"></a>  <span class="kw">const</span> handleImageChange <span class="op">=</span> <span class="kw">async</span> (e<span class="op">:</span> ChangeEvent<span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb12-21"><a href="#cb12-21"></a>    <span class="fu">setCoverImageKey</span>(<span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// 画像のキーをリセット</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>    <span class="fu">setCoverImageUrl</span>(<span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// 画像のURLをリセット</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a></span>
+<span id="cb12-24"><a href="#cb12-24"></a>    <span class="co">// 画像が選択されていない場合は戻る</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a>    <span class="cf">if</span> (<span class="op">!</span>e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span> <span class="op">||</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span><span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a></span>
+<span id="cb12-27"><a href="#cb12-27"></a>    <span class="co">// 複数ファイルが選択されている場合は最初のファイルを使用する</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a>    <span class="kw">const</span> file <span class="op">=</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span><span class="op">?.</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a>    <span class="co">// ファイルのハッシュ値を計算</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a>    <span class="kw">const</span> fileHash <span class="op">=</span> <span class="cf">await</span> <span class="fu">calculateMD5Hash</span>(file)<span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a>    <span class="co">// バケット内のパスを指定</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a>    <span class="kw">const</span> path <span class="op">=</span> <span class="vs">`private/</span><span class="sc">${</span>fileHash<span class="sc">}</span><span class="vs">`</span><span class="op">;</span> <span class="co">// ◀ 変更</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a>    <span class="co">// ファイルが存在する場合は上書きするための設定 → upsert: true</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a>    <span class="kw">const</span> { data<span class="op">,</span> error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb12-35"><a href="#cb12-35"></a>      <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb12-36"><a href="#cb12-36"></a>      <span class="op">.</span><span class="fu">upload</span>(path<span class="op">,</span> file<span class="op">,</span> { upsert<span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a></span>
+<span id="cb12-38"><a href="#cb12-38"></a>    <span class="cf">if</span> (error <span class="op">||</span> <span class="op">!</span>data) {</span>
+<span id="cb12-39"><a href="#cb12-39"></a>      <span class="bu">window</span><span class="op">.</span><span class="fu">alert</span>(<span class="vs">`アップロードに失敗 </span><span class="sc">${</span>error<span class="op">.</span><span class="at">message</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a>    }</span>
+<span id="cb12-42"><a href="#cb12-42"></a>    <span class="co">// 画像のキー (実質的にバケット内のパス) を取得</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a>    <span class="fu">setCoverImageKey</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb12-44"><a href="#cb12-44"></a>    <span class="kw">const</span> publicUrlResult <span class="op">=</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb12-45"><a href="#cb12-45"></a>      <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb12-46"><a href="#cb12-46"></a>      <span class="op">.</span><span class="fu">getPublicUrl</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb12-47"><a href="#cb12-47"></a>    <span class="co">// 画像のURLを取得</span></span>
+<span id="cb12-48"><a href="#cb12-48"></a>    <span class="fu">setCoverImageUrl</span>(publicUrlResult<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">publicUrl</span>)<span class="op">;</span></span>
+<span id="cb12-49"><a href="#cb12-49"></a>  }<span class="op">;</span></span>
+<span id="cb12-50"><a href="#cb12-50"></a></span>
+<span id="cb12-51"><a href="#cb12-51"></a>  <span class="co">// ログインしていないとき (＝supabase.storageが使えない状態のとき)</span></span>
+<span id="cb12-52"><a href="#cb12-52"></a>  <span class="cf">if</span> (<span class="op">!</span>session) <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>ログインしていません。<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
+<span id="cb12-53"><a href="#cb12-53"></a></span>
+<span id="cb12-54"><a href="#cb12-54"></a>  <span class="cf">return</span> (</span>
+<span id="cb12-55"><a href="#cb12-55"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb12-56"><a href="#cb12-56"></a>      <span class="op">&lt;</span>input</span>
+<span id="cb12-57"><a href="#cb12-57"></a>        id<span class="op">=</span><span class="st">&quot;imgSelector&quot;</span></span>
+<span id="cb12-58"><a href="#cb12-58"></a>        <span class="kw">type</span><span class="op">=</span><span class="st">&quot;file&quot;</span> <span class="co">// ファイルを選択するinput要素に設定</span></span>
+<span id="cb12-59"><a href="#cb12-59"></a>        accept<span class="op">=</span><span class="st">&quot;image/*&quot;</span> <span class="co">// 画像ファイルのみを選択可能に設定</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a>        onChange<span class="op">=</span>{handleImageChange}</span>
+<span id="cb12-61"><a href="#cb12-61"></a>      <span class="op">/&gt;</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageKey <span class="op">:</span> {coverImageKey}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb12-63"><a href="#cb12-63"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageUrl <span class="op">:</span> {coverImageUrl}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb12-64"><a href="#cb12-64"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb12-65"><a href="#cb12-65"></a>  )<span class="op">;</span></span>
+<span id="cb12-66"><a href="#cb12-66"></a>}<span class="op">;</span></span>
+<span id="cb12-67"><a href="#cb12-67"></a></span>
+<span id="cb12-68"><a href="#cb12-68"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p><strong>第05行目</strong>
+      で、ハッシュ値を計算するためのライブラリをインポートしています。このライブラリは<a
+      href="lecture11.html#準備-フロントエンド開発">準備
+      (フロントエンド開発)</a>のセクションでインストールしました。</p>
+      <p><strong>第08行目</strong> から <strong>第12行目</strong>
+      で、ファイルを引数に受け取り、ハッシュ値 (文字列) を返す関数 <code>calculateMD5Hash</code>
+      を定義しています。内容は理解する必要はありません。なお、ここでは <code>page.tsx</code>
+      の内部に定義していますが、実際には <code>src/app/_utils/calculateMD5Hash.ts</code>
+      などに分離することが望ましいです。</p>
+      <p><strong>第30行目</strong> で、上記の関数をコールしてハッシュ値を変数 <code>fileHash</code>
+      に格納しています。そして、そのハッシュ値を使って <strong>第32行目</strong>
+      でバケット内のパスを設定しています。</p>
+      <p>更新したプログラムを実行して、<strong>ファイルネームに日本語を含む画像でもエラーにならずアップロードできること</strong>を確認してください
+      (Supabaseのサイトでも確認してください)。また、同じファイルであれば、同じハッシュ値になることを確認してください。</p>
+      <figure>
+      <img src="figs/11/app_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>なお、ファイルアップロードの際に、<strong>MIMEタイプ</strong>
+      (＝ファイルの種類を示す識別子)
+      が適切に設定されるため、ファイルネームから「<strong>拡張子</strong>」が失われても問題なく機能します。</p>
+      <figure>
+      <img src="figs/11/supabase_14.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>MIMEタイプとは何ですか。拡張子との違いを教えてください。</p>
+      </blockquote>
+      <h2 data-number="3.7" id="画像アップロードのプロトタイプの改良2"><span
+      class="header-section-number">3.7</span> 画像アップロードのプロトタイプの改良2</h2>
+      <p>次にアップロードした画像をプレビュー表示できるように改良していきます。画像を表示するので
+      Imageコンポーネント を使用して、その <code>src</code> 属性に <code>coverImageUrl</code>
+      を設定します。</p>
+      <p>実装例を以下に示します。<strong>第06行目</strong> の
+      Imageコンポーネントのインポートと、<strong>第22行目</strong> から <strong>第32行目</strong>
+      にかけてのJSX要素の追加が主な変更点になります。</p>
+      <p>なお、外部サイトの画像を表示する際には<a href="lecture11.html#準備-フロントエンド開発">準備
+      (フロントエンド開発)</a>で行なったように <span class="masked">next.config.mjs</span>
+      を適切に設定する必要があります。</p>
+      <div class="sourceCode" id="cb13"
+      data-caption="src/app/playground/upload-img/page.tsx (改良2)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb13-1"><a href="#cb13-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="im">import</span> { useState<span class="op">,</span> ChangeEvent } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="im">import</span> CryptoJS <span class="im">from</span> <span class="st">&quot;crypto-js&quot;</span><span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="im">import</span> Image <span class="im">from</span> <span class="st">&quot;next/image&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">// 省略</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="co">// 省略</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="cf">return</span> (</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>      <span class="op">&lt;</span>input</span>
+<span id="cb13-13"><a href="#cb13-13"></a>        id<span class="op">=</span><span class="st">&quot;imgSelector&quot;</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>        <span class="kw">type</span><span class="op">=</span><span class="st">&quot;file&quot;</span> <span class="co">// ファイルを選択するinput要素に設定</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a>        accept<span class="op">=</span><span class="st">&quot;image/*&quot;</span> <span class="co">// 画像ファイルのみを選択可能に設定</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a>        onChange<span class="op">=</span>{handleImageChange}</span>
+<span id="cb13-17"><a href="#cb13-17"></a>      <span class="op">/&gt;</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageKey <span class="op">:</span> {coverImageKey}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageUrl <span class="op">:</span> {coverImageUrl}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a>      {<span class="co">/* ▼ 追加 ▼ */</span>}</span>
+<span id="cb13-21"><a href="#cb13-21"></a>      {coverImageUrl <span class="op">&amp;&amp;</span> (</span>
+<span id="cb13-22"><a href="#cb13-22"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mt-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>          <span class="op">&lt;</span>Image</span>
+<span id="cb13-24"><a href="#cb13-24"></a>            className<span class="op">=</span><span class="st">&quot;w-1/2 border-2 border-gray-300&quot;</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a>            src<span class="op">=</span>{coverImageUrl}</span>
+<span id="cb13-26"><a href="#cb13-26"></a>            alt<span class="op">=</span><span class="st">&quot;プレビュー画像&quot;</span></span>
+<span id="cb13-27"><a href="#cb13-27"></a>            width<span class="op">=</span>{<span class="dv">1024</span>}</span>
+<span id="cb13-28"><a href="#cb13-28"></a>            height<span class="op">=</span>{<span class="dv">1024</span>}</span>
+<span id="cb13-29"><a href="#cb13-29"></a>            priority</span>
+<span id="cb13-30"><a href="#cb13-30"></a>          <span class="op">/&gt;</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-32"><a href="#cb13-32"></a>      )}</span>
+<span id="cb13-33"><a href="#cb13-33"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb13-34"><a href="#cb13-34"></a>  )<span class="op">;</span></span>
+<span id="cb13-35"><a href="#cb13-35"></a>}<span class="op">;</span></span>
+<span id="cb13-36"><a href="#cb13-36"></a></span>
+<span id="cb13-37"><a href="#cb13-37"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>ファイルを編集し、次のように
+      <strong>アップロードした画像のプレビューが表示できること</strong> を確認してください。</p>
+      <figure>
+      <img src="figs/11/app_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>第24行目</strong> のCSSクラス設定で <code>w-1/2</code>
+      を設定しているため、プレビュー画像はコンテナ幅の 1/2 サイズに縮小して表示されています。</p>
+      <h2 data-number="3.8" id="画像アップロードのプロトタイプの改良3"><span
+      class="header-section-number">3.8</span> 画像アップロードのプロトタイプの改良3</h2>
+      <p>次に、ファイル選択ダイアログを開くための「<strong>ボタンの外観</strong>」をスタマイズする方法について解説していきます。</p>
+      <p>現在、画面に表示されている「<strong>ファイルを選択</strong>」というボタンはブラウザ固有のUIであり、<span
+      class="masked">CSSによる外観の変更</span>
+      ができません。例えば、以下のようにCSSクラスを設定しても、ボタンの外観は変更されません。実際に試してみてください。</p>
+      <div class="sourceCode" id="cb14"
+      data-caption="type=&quot;file&quot; の input 要素にCSSを適用"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">&lt;</span>input</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  id<span class="op">=</span><span class="st">&quot;imgSelector&quot;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="kw">type</span><span class="op">=</span><span class="st">&quot;file&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  accept<span class="op">=</span><span class="st">&quot;image/*&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  className<span class="op">=</span><span class="st">&quot;rounded-md bg-indigo-500 px-3 py-1 text-white&quot;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="op">/&gt;</span></span></code></pre></div>
+      <p>ボタンの外観を自由にカスタマイズするためには、以下のような工夫が必要となります。</p>
+      <ol type="1">
+      <li><code>&lt;input type="file" ...&gt;</code> に <code>hidden</code>
+      属性を与えて「<strong>非表示</strong>」にする。</li>
+      <li>新たにボタン要素 <code>&lt;button&gt;</code> を追加し、外観をカスタマイズする。</li>
+      <li>このボタンが押下されたときに <span
+      class="masked">プログラムを使って非表示になっているinput要素に対するクリックイベント</span>
+      を発生させる。</li>
+      </ol>
+      <p>これにより、以下のような画面を構成できます。</p>
+      <figure>
+      <img src="figs/11/app_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>具体的なコードを以下に示します。</p>
+      <p>プログラムを使って <code>&lt;input type="file" ...&gt;</code>
+      のクリックイベントを発生させるために <code>useRed</code> というフック
+      (<strong>第02行目</strong>でインポート) を利用することがポイントになります。</p>
+      <div class="sourceCode" id="cb15"
+      data-caption="src/app/playground/upload-img/page.tsx (改良3)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb15-1"><a href="#cb15-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="im">import</span> { useState<span class="op">,</span> ChangeEvent<span class="op">,</span> useRef } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span> <span class="co">// ◀ 変更</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="im">import</span> CryptoJS <span class="im">from</span> <span class="st">&quot;crypto-js&quot;</span><span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="im">import</span> Image <span class="im">from</span> <span class="st">&quot;next/image&quot;</span><span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="kw">const</span> calculateMD5Hash <span class="op">=</span> <span class="kw">async</span> (file<span class="op">:</span> <span class="bu">File</span>)<span class="op">:</span> <span class="bu">Promise</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb15-9"><a href="#cb15-9"></a>  <span class="kw">const</span> buffer <span class="op">=</span> <span class="cf">await</span> file<span class="op">.</span><span class="fu">arrayBuffer</span>()<span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>  <span class="kw">const</span> wordArray <span class="op">=</span> CryptoJS<span class="op">.</span><span class="at">lib</span><span class="op">.</span><span class="at">WordArray</span><span class="op">.</span><span class="fu">create</span>(buffer)<span class="op">;</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>  <span class="cf">return</span> CryptoJS<span class="op">.</span><span class="fu">MD5</span>(wordArray)<span class="op">.</span><span class="fu">toString</span>()<span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a>}<span class="op">;</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb15-15"><a href="#cb15-15"></a>  <span class="kw">const</span> bucketName <span class="op">=</span> <span class="st">&quot;cover_image&quot;</span><span class="op">;</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="kw">const</span> [coverImageUrl<span class="op">,</span> setCoverImageUrl] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>  <span class="kw">const</span> [coverImageKey<span class="op">,</span> setCoverImageKey] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>  <span class="kw">const</span> { session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>  <span class="kw">const</span> hiddenFileInputRef <span class="op">=</span> <span class="fu">useRef</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a></span>
+<span id="cb15-21"><a href="#cb15-21"></a>  <span class="kw">const</span> handleImageChange <span class="op">=</span> <span class="kw">async</span> (e<span class="op">:</span> ChangeEvent<span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-22"><a href="#cb15-22"></a>    <span class="fu">setCoverImageKey</span>(<span class="kw">undefined</span>)<span class="op">;</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>    <span class="fu">setCoverImageUrl</span>(<span class="kw">undefined</span>)<span class="op">;</span></span>
+<span id="cb15-24"><a href="#cb15-24"></a></span>
+<span id="cb15-25"><a href="#cb15-25"></a>    <span class="cf">if</span> (<span class="op">!</span>e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span> <span class="op">||</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span><span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a>    <span class="kw">const</span> file <span class="op">=</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">files</span><span class="op">?.</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb15-27"><a href="#cb15-27"></a>    <span class="kw">const</span> fileHash <span class="op">=</span> <span class="cf">await</span> <span class="fu">calculateMD5Hash</span>(file)<span class="op">;</span></span>
+<span id="cb15-28"><a href="#cb15-28"></a>    <span class="kw">const</span> path <span class="op">=</span> <span class="vs">`private/</span><span class="sc">${</span>fileHash<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb15-29"><a href="#cb15-29"></a>    <span class="kw">const</span> { data<span class="op">,</span> error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb15-30"><a href="#cb15-30"></a>      <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb15-31"><a href="#cb15-31"></a>      <span class="op">.</span><span class="fu">upload</span>(path<span class="op">,</span> file<span class="op">,</span> { upsert<span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb15-32"><a href="#cb15-32"></a></span>
+<span id="cb15-33"><a href="#cb15-33"></a>    <span class="cf">if</span> (error <span class="op">||</span> <span class="op">!</span>data) {</span>
+<span id="cb15-34"><a href="#cb15-34"></a>      <span class="bu">window</span><span class="op">.</span><span class="fu">alert</span>(<span class="vs">`アップロードに失敗 </span><span class="sc">${</span>error<span class="op">.</span><span class="at">message</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb15-35"><a href="#cb15-35"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb15-36"><a href="#cb15-36"></a>    }</span>
+<span id="cb15-37"><a href="#cb15-37"></a>    <span class="fu">setCoverImageKey</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb15-38"><a href="#cb15-38"></a>    <span class="kw">const</span> publicUrlResult <span class="op">=</span> supabase<span class="op">.</span><span class="at">storage</span></span>
+<span id="cb15-39"><a href="#cb15-39"></a>      <span class="op">.</span><span class="fu">from</span>(bucketName)</span>
+<span id="cb15-40"><a href="#cb15-40"></a>      <span class="op">.</span><span class="fu">getPublicUrl</span>(data<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb15-41"><a href="#cb15-41"></a>    <span class="fu">setCoverImageUrl</span>(publicUrlResult<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">publicUrl</span>)<span class="op">;</span></span>
+<span id="cb15-42"><a href="#cb15-42"></a>  }<span class="op">;</span></span>
+<span id="cb15-43"><a href="#cb15-43"></a></span>
+<span id="cb15-44"><a href="#cb15-44"></a>  <span class="cf">if</span> (<span class="op">!</span>session) <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>ログインしていません。<span class="op">&lt;/</span>div<span class="op">&gt;;</span></span>
+<span id="cb15-45"><a href="#cb15-45"></a></span>
+<span id="cb15-46"><a href="#cb15-46"></a>  <span class="cf">return</span> (</span>
+<span id="cb15-47"><a href="#cb15-47"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb15-48"><a href="#cb15-48"></a>      <span class="op">&lt;</span>input</span>
+<span id="cb15-49"><a href="#cb15-49"></a>        id<span class="op">=</span><span class="st">&quot;imgSelector&quot;</span></span>
+<span id="cb15-50"><a href="#cb15-50"></a>        <span class="kw">type</span><span class="op">=</span><span class="st">&quot;file&quot;</span></span>
+<span id="cb15-51"><a href="#cb15-51"></a>        accept<span class="op">=</span><span class="st">&quot;image/*&quot;</span></span>
+<span id="cb15-52"><a href="#cb15-52"></a>        onChange<span class="op">=</span>{handleImageChange}</span>
+<span id="cb15-53"><a href="#cb15-53"></a>        hidden<span class="op">=</span>{<span class="kw">true</span>} <span class="co">// ◀ 追加 (非表示に設定)</span></span>
+<span id="cb15-54"><a href="#cb15-54"></a>        ref<span class="op">=</span>{hiddenFileInputRef} <span class="co">// ◀ 追加 (参照を設定)</span></span>
+<span id="cb15-55"><a href="#cb15-55"></a>      <span class="op">/&gt;</span></span>
+<span id="cb15-56"><a href="#cb15-56"></a>      {<span class="co">/* ▼ 追加 ▼ */</span>}</span>
+<span id="cb15-57"><a href="#cb15-57"></a>      <span class="op">&lt;</span>button</span>
+<span id="cb15-58"><a href="#cb15-58"></a>        <span class="co">// 参照を経由してプログラム的にクリックイベントを発生させる</span></span>
+<span id="cb15-59"><a href="#cb15-59"></a>        onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> hiddenFileInputRef<span class="op">.</span><span class="at">current</span><span class="op">?.</span><span class="fu">click</span>()}</span>
+<span id="cb15-60"><a href="#cb15-60"></a>        <span class="kw">type</span><span class="op">=</span><span class="st">&quot;button&quot;</span> </span>
+<span id="cb15-61"><a href="#cb15-61"></a>        className<span class="op">=</span><span class="st">&quot;rounded-md bg-indigo-500 px-3 py-1 text-white&quot;</span></span>
+<span id="cb15-62"><a href="#cb15-62"></a>      <span class="op">&gt;</span></span>
+<span id="cb15-63"><a href="#cb15-63"></a>        ファイルを選択</span>
+<span id="cb15-64"><a href="#cb15-64"></a>      <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb15-65"><a href="#cb15-65"></a>      {<span class="co">/* ▲ 追加 ▲ */</span>}</span>
+<span id="cb15-66"><a href="#cb15-66"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageKey <span class="op">:</span> {coverImageKey}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb15-67"><a href="#cb15-67"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;break-all text-sm&quot;</span><span class="op">&gt;</span>coverImageUrl <span class="op">:</span> {coverImageUrl}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb15-68"><a href="#cb15-68"></a>      {coverImageUrl <span class="op">&amp;&amp;</span> (</span>
+<span id="cb15-69"><a href="#cb15-69"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mt-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb15-70"><a href="#cb15-70"></a>          <span class="op">&lt;</span>Image</span>
+<span id="cb15-71"><a href="#cb15-71"></a>            className<span class="op">=</span><span class="st">&quot;w-1/2 border-2 border-gray-300&quot;</span></span>
+<span id="cb15-72"><a href="#cb15-72"></a>            src<span class="op">=</span>{coverImageUrl}</span>
+<span id="cb15-73"><a href="#cb15-73"></a>            alt<span class="op">=</span><span class="st">&quot;プレビュー画像&quot;</span></span>
+<span id="cb15-74"><a href="#cb15-74"></a>            width<span class="op">=</span>{<span class="dv">1024</span>}</span>
+<span id="cb15-75"><a href="#cb15-75"></a>            height<span class="op">=</span>{<span class="dv">1024</span>}</span>
+<span id="cb15-76"><a href="#cb15-76"></a>            priority</span>
+<span id="cb15-77"><a href="#cb15-77"></a>          <span class="op">/&gt;</span></span>
+<span id="cb15-78"><a href="#cb15-78"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb15-79"><a href="#cb15-79"></a>      )}</span>
+<span id="cb15-80"><a href="#cb15-80"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb15-81"><a href="#cb15-81"></a>  )<span class="op">;</span></span>
+<span id="cb15-82"><a href="#cb15-82"></a>}<span class="op">;</span></span>
+<span id="cb15-83"><a href="#cb15-83"></a></span>
+<span id="cb15-84"><a href="#cb15-84"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>以上で、画像のアップロードとプレビューの機能の単体実装が完了しました。あとは、これを投稿記事の新規作成ページ
+      (<code>/admin/posts/new</code>) と編集ページ (<code>/admin/posts/[id]</code>)
+      に組み込めば完了となります。</p>
+      <h1 data-number="4" id="宿題"><span class="header-section-number">4</span> 宿題</h1>
+      <p>画像アップロード機能を組み込み、次の点に注意しながらブログアプリを完成させてください。</p>
+      <ul>
+      <li>DBに保存する値を <code>coverImageURL</code> から <code>coverImageKey</code>
+      に変更してください。
+      <ul>
+      <li>画像を表示するときは
+      <code>supabase.storage.from(Bucket).getPublicUrl(coverImageKey)</code>
+      から、都度、URLを取得して、それを使用してください。</li>
+      <li><code>schema.prisma</code> を変更したら、<a
+      href="lecture10.html#テーブルの削除">前回講義の内容</a>
+      に従って、テーブルの削除、再作成、RLS設定を実行してください。</li>
+      </ul></li>
+      <li>適宜、<code>npm run build</code>
+      を実行してエラーやワーニングが生じていないことを確認する。</li>
+      </ul>
+      <h1 data-number="5" id="次回講義"><span class="header-section-number">5</span> 次回講義</h1>
+      <p>次回の講義では、完成したブログアプリを Vercel
+      というクラウドプラットフォームにデプロイする方法について紹介します
+      (このブログアプリは、バックエンド処理を必要とするので GitHubPages
+      にはデプロイできません)。</p>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2024/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
