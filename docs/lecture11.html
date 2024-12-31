@@ -558,7 +558,7 @@ npm i -D @types/crypto-js</code></pre>
 <span id="cb9-56"><a href="#cb9-56"></a>}<span class="op">;</span></span>
 <span id="cb9-57"><a href="#cb9-57"></a></span>
 <span id="cb9-58"><a href="#cb9-58"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
-      <p>まずは、開発モード (<code>npm run dev</code>) でアプリを立ち上げて
+      <p>開発モード (<code>npm run dev</code>) でアプリを立ち上げて
       <code>/playground/upload-img</code>
       にアクセスして、次のような画面が表示されることを確認してください。ログインしていないときは、ログインしてください。</p>
       <figure>
@@ -566,8 +566,8 @@ npm i -D @types/crypto-js</code></pre>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>次に「<strong>ファイルを選択</strong>」ボタンを押下して、ファイル選択ダイアログを表示し、予めダウンロードしておいた<a
-      href="figs/11/cover-img-green.jpg">cover-img-green.jpg</a>を選択してください。そして、
-      <code>ImageKey</code> と <code>coverImageUrl</code>
+      href="figs/11/cover-img-green.jpg">cover-img-green.jpg</a>を選択してください。そして、画面上の
+      <code>coverImageKey</code> と <code>coverImageUrl</code>
       がどのような値になるか確認してください。</p>
       <p>また、再度、「<strong>ファイルを選択</strong>」から cover-img-green.jpg (同じファイル)
       を選択しても問題がないことを確認してください。デベロッパーツールのコンソール出力にもエラー等がでていないことを確認してください。</p>
@@ -585,16 +585,16 @@ npm i -D @types/crypto-js</code></pre>
       <ul>
       <li><code>ほげほげ.png</code> や <code>ぴよぴよ.png</code>
       など、<strong>名前に日本語を含む画像ファイル</strong>をアップロードしようとすると、どのようになるか確認してください。</li>
-      <li><strong>第22行目</strong> の <code>private/${file.name}</code> を
-      <code>hoge/${file.name}</code> に変更して (つまり、保存先のフォルダを <code>private</code>
+      <li><strong>第22行目</strong> の <code>`private/${file.name}`</code> を
+      <code>`hoge/${file.name}`</code> に変更して (つまり、保存先のフォルダを <code>private</code>
       以外のものに設定して) cover-img-green.jpg
-      をアップロードを試みるとどのようになるか確認してください。試したあとは、元に戻しておいてください。</li>
+      のアップロードを試みるとどのようになるか確認してください。試したあとは、元に戻しておいてください。</li>
       <li><strong>第26行目</strong> の <code>upsert: true</code> を <code>upsert: false</code>
       に変更して cover-img-green.jpg
-      をアップロードを試みるとどのようになるか確認してください。試したあとは、元に戻しておいてください
+      のアップロードを試みるとどのようになるか確認してください。試したあとは、元に戻しておいてください
       <ul>
       <li><strong>Upsert</strong> とは <span class="masked">Insert と Update を合体させた造語</span>
-      で、もし、そのファイルが存在していなければ挿入 (Insert)、存在していれば更新 (Update)
+      で、当該ファイルが存在していなければ挿入 (Insert)、存在していれば更新 (Update)
       という意味になります。</li>
       </ul></li>
       </ul>
