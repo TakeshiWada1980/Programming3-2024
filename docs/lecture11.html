@@ -98,18 +98,18 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
       <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
       <h1 data-number="2" id="バックエンドにおけるアクセス制御"><span
       class="header-section-number">2</span> バックエンドにおけるアクセス制御</h1>
-      <p>前回講義では、フロントエンドにおいて <strong>SupabaseClinet</strong>
+      <p>前回講義では、フロントエンド側で <strong>SupabaseClinet</strong>
       (＝<code>@supabase/supabase-js</code>) を利用した「<strong>アクセス制御</strong>
-      (ログイン機能・認証)」を実装しました。これにより、未認証のユーザ
-      (＝ログインしていないユーザ)は <code>/admin</code> や <code>/admin/posts/new</code> などの
-      <span class="masked">管理者用のページにアクセスできない仕組み</span> を構築しました。</p>
+      (ログイン機能・認証)」を実装しました。これにより、未認証のユーザ (＝ログインしていないユーザ)
+      は <code>/admin</code> や <code>/admin/posts/new</code> などの <span
+      class="masked">管理者用のページにアクセスできない仕組み</span> を構築しました。</p>
       <p>しかし、現状では何らかの HTTPクライアント (例えば <strong>ThunderClinet</strong> や
       <strong>curl コマンド</strong> など) を使って直接的に
-      <code>DELETE /api/admin/posts/xxxxxx</code> をリクエストすると <span
-      class="masked">投稿記事の削除</span>
-      ができてしまいます。つまり、現状では<strong>バックエンドにおけるアクセス制御ができていない状態</strong>
+      <code>DELETE /api/admin/posts/xxxxxx</code> をリクエストされると <span
+      class="masked">投稿記事が削除</span>
+      されてしまいます。つまり、現状では<strong>バックエンド側のアクセス制御ができていない状態</strong>
       (＝ウェブアプリとして問題のある状態) となっています。</p>
-      <p>今回の講義の前半では、この問題を解決すべく <strong>バックエンドにおける認証 /
+      <p>今回講義の前半では、この問題を解決すべく <strong>バックエンド側の認証 /
       認可の処理を実装</strong> していきます。</p>
       <h2 data-number="2.1" id="バックエンドの認証戦略"><span
       class="header-section-number">2.1</span> バックエンドの認証戦略</h2>
@@ -117,34 +117,32 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
       (=メールアドレス)</strong>」と「<strong>パスワード</strong>」を使った<strong>認証</strong>
       (つまり「<strong>あなたが、本当にあなたであること</strong>」の確認) をしました。</p>
       <p>バックエンド (ウェブAPIの利用)
-      においても、同様に、IDとパスワードを使った認証は可能です。しかし、そうした場合、ウェブAPIにリクエストを送信するたびに、ID・パスワードの添付が必要になります。HTTPS通信により暗号化は確保されますが、<strong>頻繁に認証情報を送信することはセキュリティ上のリスク</strong>
+      においても、同様に、IDとパスワードを使った認証は「可能」です。しかし、その場合、ウェブAPIにリクエストを送るたびに、ID・パスワードの添付が必要となります。HTTPS通信により暗号化は確保されますが、<strong>頻繁に認証情報を送信することはセキュリティ上のリスク</strong>
       となります。また、バックエンドにおいても、<span
-      class="masked">IDとパスワードが正しいかを頻繁にデータベースに問い合わせること</span>
-      は大きな負荷をかけることになります
-      (DBに対する問い合わせは、処理時間上のボトルネックとなります) 。</p>
-      <p>以上のようなことから、一般的なウェブAPIでは ID と パスワード を使ったものではなく、<span
-      class="masked">トークン (JWT: Json Web Token)</span>
+      class="masked">「IDとパスワードが正しい組み合わせであるか？」を頻繁にデータベースに問い合わせること</span>
+      は大きな負荷となります (DBに対する問い合わせは、処理時間上のボトルネックとなります) 。</p>
+      <p>以上のようなことから、一般的なウェブAPIでは ID と パスワード
+      を使った認証・認可ではなく、<span class="masked">トークン (JWT: Json Web Token)</span>
       による認証・認可の仕組みが採用されます。<a
-      href="lecture10.html#ログイン処理の解説">前回講義</a>でも触れたように、認証に関する文脈で「トークン」とは
+      href="lecture10.html#ログイン処理の解説">前回講義</a>でも触れたように、認証に関する文脈で「<strong>トークン</strong>」とは
       <span class="masked">認証済みであることを証明する電子証明書</span>
-      となります。つまり「<strong>トークンを保持している</strong>」ことが「<strong>認証済みのユーザーである</strong>」ことを保証します。</p>
-      <p>さらに、<a href="lecture10.html#演習">前回講義で確認</a>してもらったように、トークン (JWT)
-      は <strong>デコードが可能、かつ、署名による検証 (内容の改竄がされていないことの確認)
+      となります。つまり「<strong>トークンを保持していること</strong>」が「<strong>認証済みのユーザーであること</strong>」を保証します。</p>
+      <p>さらに、<a href="lecture10.html#演習">前回講義で実際に確認</a>してもらったように、トークン
+      (JWT) は <strong>デコードが可能、かつ、署名による検証 (内容が改竄されていないことの確認)
       が可能</strong> という特徴があり、<span
-      class="masked">データベースに問い合わせることなく</span>
-      デコードと署名検証という<strong>軽量な処理のみ</strong> でユーザ情報 (ここではメールアドレス)
-      の取得が可能になります。</p>
+      class="masked">データベースに問い合わせるという負荷の大きな処理を必要とせずに</span>
+      デコードと署名検証という<strong>軽量な処理だけで</strong>、ユーザ認証とユーザ情報に基づく認可が可能になります。</p>
       <p>以下、バックエンド (＝ウェブAPI)
       における「トークンを使用した認証・認可」の具体的な方法について解説していきます。</p>
       <h2 data-number="2.2" id="バックエンドプログラムの変更"><span
       class="header-section-number">2.2</span> バックエンドプログラムの変更</h2>
-      <p>記事やカテゴリの追加や編集、削除など <code>/api/admin/</code> 配下のAPIでは
-      <strong>ログインしているユーザ (＝トークンを所持しているユーザ)
-      からのリクエストのみを受け付ける</strong>ようにプログラムを変更していきます。</p>
-      <p>トークン (JWT) は、HTTPリクエストのヘッダの <code>Authorization</code>
-      フィールドに設定されている前提とします。以下は、投稿記事の新規作成API
-      (<code>/api/admin/new</code> に対するPOSTリクエスト) に認証・認可処理を組み込んだ例 (抜粋)
-      になります。</p>
+      <p>記事やカテゴリの追加や編集、削除など <code>/api/admin/</code> 配下の API
+      に対して、<strong>ログインしているユーザ (＝トークンを所持しているユーザ)
+      からのリクエストのみを受け付ける</strong>ように処理を変更していきます。</p>
+      <p>トークン (JWT) は、HTTPリクエストのヘッダの Authorizationフィールド
+      に設定されている前提とします (トークンを Authorizationフィールド
+      に設定する具体的な方法は後述)。以下は、投稿記事の新規作成API (<code>/api/admin/new</code>
+      に対するPOSTリクエスト) に認証・認可処理を組み込んだ例 (抜粋) となります。</p>
       <div class="sourceCode" id="cb1"
       data-caption="src/app/api/admin/posts/new/route.ts (記事の新規投稿API)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// 省略</span></span>
@@ -170,7 +168,7 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
       に格納しています。もし、ヘッダに <code>Authorization</code>
       が含まれていない場合、<code>token</code> には空文字 (<code>""</code>) が格納されます。</p>
       <p><strong>第07行目</strong> の <code>supabase.auth.getUser(token)</code> では
-      <strong>トークンの署名が検証</strong> されます。もし問題 (＝<span
+      <strong>トークンの署名の検証</strong> が行なわれます。もし問題 (＝<span
       class="masked">署名が無効だったり、トークンの期限が切れている</span> など) があれば、戻り値の
       <code>error</code> にエラーオブジェクトが格納されます。そして、<strong>第08行目</strong>の
       if文 によって「<strong>401 Unauthorized</strong>」をレスポンスするようにしています
@@ -194,7 +192,8 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
       </figure>
       <h2 data-number="2.3" id="フロントエンドプログラムの変更"><span
       class="header-section-number">2.3</span> フロントエンドプログラムの変更</h2>
-      <p>つづいて、APIリクエストにトークンを付加するように、フロントエンドプログラムを変更していきます。<code>src/app/admin/new/page.tsx</code>
+      <p>つづいて、APIリクエストの <span class="masked">Authorizationフィールド</span>
+      にトークンを付加するように、フロントエンドプログラムを変更していきます。<code>src/app/admin/new/page.tsx</code>
       の変更例 (抜粋) を以下に示します。全体コードについては<a
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/11/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p>
       <div class="sourceCode" id="cb2" data-caption="src/app/admin/posts/new/page.tsx (抜粋)"><pre
