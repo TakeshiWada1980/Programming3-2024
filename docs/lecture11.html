@@ -957,14 +957,19 @@ npm i -D @types/crypto-js</code></pre>
       (<code>/admin/posts/new</code>) と編集ページ (<code>/admin/posts/[id]</code>)
       に組み込めば完了となります。</p>
       <h1 data-number="4" id="宿題"><span class="header-section-number">4</span> 宿題</h1>
-      <p>画像アップロード機能を組み込み、次の点に注意しながらブログアプリを完成させてください。</p>
+      <p>投稿記事の「新規作成ページ」と「編集ページ」に画像アップロード機能を組み込み、次の点に注意しながらブログアプリを完成させてください。</p>
       <ul>
       <li>DBに保存する値を <code>coverImageURL</code> から <code>coverImageKey</code>
       に変更してください。
       <ul>
-      <li><code>schema.prisma</code> を変更したら、<a
+      <li><code>schema.prisma</code> の編集が必要になります。編集後は<a
       href="lecture10.html#テーブルの削除">前回講義の内容</a>
       に従って、テーブルの削除、再作成、RLS設定を実行してください。</li>
+      <li><code>npx prisma generate</code> の実行後は、VSCodeの再読込み (<code>Ctrl+Shift+P</code>
+      でコマンドパレットを開いて <code>&gt;Developer: Reload Window</code>
+      を入力して「<strong>ウィンドウの再読み込み</strong>」を選択) も忘れずに実行してください。</li>
+      <li>関連する型についても変更してください。プロジェクト全体を対象に <code>coverImageURL</code>
+      を検索して、内容を確認しながら修正してください。</li>
       </ul></li>
       <li>投稿記事の詳細画面 (<code>/posts/[id]</code>) では、<code>coverImageKey</code> から
       <code>coverImageUrl</code> を取得して画像を表示するようにしてください。
@@ -976,8 +981,13 @@ npm i -D @types/crypto-js</code></pre>
       <li>適宜、<code>npm run build</code>
       を実行してエラーやワーニングが生じていないことを確認してください。</li>
       </ul>
-      <p>なお、<strong><em>課題3</em></strong> (最終課題) は、このオリジナルのウェブアプリ
-      (このブログアプリをカスタマイズしたもので可) を開発してもらう内容となります。</p>
+      <p>なお、<strong><em>課題3</em></strong> (最終課題) は
+      <strong>オリジナルのウェブアプリ</strong>
+      (＝このブログアプリを土台に独自要素を追加したもので可)
+      を考案・開発・デプロイしてもらう内容となります。なお、就活用のポートフォリオでは、実装技術に加えて、課題発見能力
+      (<span class="masked">開発の着想や動機</span>) や課題解決能力 (<span
+      class="masked">独創性やユニークな着眼点</span>)
+      なども評価されます。単純に既成品をクローンしただけのアプリでは、あまり評価されないそうです…。</p>
       <h1 data-number="5" id="次回講義"><span class="header-section-number">5</span> 次回講義</h1>
       <p>次回の講義では、完成したブログアプリを Vercel
       というクラウドプラットフォームにデプロイする方法について紹介します
