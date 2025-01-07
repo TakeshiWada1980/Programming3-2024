@@ -112,6 +112,9 @@ class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
       <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <ul>
+      <li><a href="lecture10.html#課題2">課題2</a> についての連絡があります。</li>
+      </ul>
       <h2 data-number="1.1" id="今後の流れ"><span class="header-section-number">1.1</span>
       今後の流れ</h2>
       <p>今回の講義の内容は、<a
@@ -120,7 +123,7 @@ class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法
       <strong>投稿記事とカテゴリの CRUD (Create / Read / Update / Delete 処理)
       について、フロントエンドとバックエンドの両方で概ね実装が完了</strong>したことになります。</p>
       <p>次のステップとしては <span class="masked">ユーザ認証機能</span>
-      を実装していきます。これにより、<strong>管理者だけが (特定ユーザだけが)
+      を実装していきます。これにより、<strong>管理者だけが (＝ログインした特定ユーザだけが)
       記事やカテゴリの新規作成・編集・削除を実行</strong> できるような仕組みをつくっていきます。</p>
       <p>また、次回講義では「<strong>画像のアップロード機能</strong>」を実装し、次々回の講義では
       <span class="masked">クラウドプラットフォームに「ブログアプリ」をデプロイ (配置・公開)</span>
@@ -201,7 +204,7 @@ class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法
       <p>以上のコマンドを実行して、そのログ (コンソール出力) に <span
       class="masked">エラーやワーニングが報告されないこと</span>
       を確認してください。もし問題があれば、生成AIなどを利用して解決してください
-      (ワーニングについては、必要に応じて黙認も可能です)。</p>
+      (ワーニングについては、必要に応じて無視も可能です)。</p>
       <p>なお、ビルド結果は <code>.next</code>
       フォルダに出力されます。以下のコマンドを使って本番モード (プロダクションモード)
       でアプリの実行が可能です。</p>
@@ -213,9 +216,9 @@ class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法
       を利用して認証機能を実装します。Supabase
       は、ウェブアプリ／ウェブサービスの開発で一般に必要となる「<strong>リレーショナルデータベース</strong>」「<strong>ファイルストレージ</strong>」「<strong>認証機能</strong>」「<strong>サーバレスファンクション</strong>」などのバックエンド機能を包括的に提供してくれるサービスになっています。</p>
       <p>このブログアプリ開発では、Supabaseの「<strong>認証機能</strong>」を投稿記事やカテゴリの新規作成・編集・削除の制限に利用する他に、「<strong>リレーショナルデータベース機能</strong>」を
-      <span
-      class="masked">投稿記事やカテゴリの管理</span>、「<strong>ファイルストレージ機能</strong>」を
-      <span class="masked">記事に添付する画像 (CoverImg) の管理</span> に利用していきます。</p>
+      <span class="masked">投稿記事やカテゴリの管理</span>
+      に利用、また「<strong>ファイルストレージ機能</strong>」を <span
+      class="masked">記事に添付する画像 (CoverImg) の管理</span> に利用していきます。</p>
       <div class="note type-tips">
       <p><strong>データベースシステムの変更 ( SQLite→PostgreSQL) </strong></p>
       <p>ここまでの開発には、データベースとして「SQLite」を使用してきました。しかし、SQLiteは
@@ -1131,10 +1134,15 @@ npx prisma db seed</code></pre>
       href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code03.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
       </ul>
       <h1 data-number="7" id="課題2"><span class="header-section-number">7</span> 課題2</h1>
-      <p>Classroom で配付しているワードファイル <code>NN-課題2-氏名.docx</code>
+      <p>Google Classroom で配付しているワードファイル <code>NN-課題2-氏名.docx</code>
       を雛形に、「リポジトリのURL」の他、以下の各ページの「<strong>スクリーンショット</strong>」と「<strong>画面や機能の解説・アピールポイント</strong>」を記載して提出してください。</p>
       <ul>
-      <li>スクリーンショットは、<strong>PC版</strong> と <strong>スマートフォン版</strong> (<a
+      <li>注意: ワードファイルの編集には、ウェブ版の Office (Microsoft 365 for the web)
+      ではなく、ローカルアプリ版の Office
+      を使用してください。ウェブ版を使用すると体裁が大きく乱れます。また、Google Classroom
+      のプレビュー画面 (提出物の確認画面)
+      では体裁が乱れることがありますが、ダウンロードして開いたときにキレイに表示されれば問題ありません。評価は、ダウンロードしたファイルを対象に行ないます。</li>
+      <li>注意: スクリーンショットは、<strong>PC版</strong> と <strong>スマートフォン版</strong> (<a
       href="lecture10.html#スマホ版のスクショの撮影方法">次のセクション</a>で指定する方法で撮影)
       の「両方」をつけてください。</li>
       </ul>
@@ -1182,6 +1190,7 @@ npx prisma db seed</code></pre>
       href="https://www.google.com/search?q=zod+react+hook+form">react-hook-form &amp; zod</a>
       を利用などがあれば、アピールポイントとして、ワードファイル内に記載してください。</li>
       </ul></li>
+      <li>提出されたファイルはクラスの学生に共有します。</li>
       </ul>
       <h2 data-number="7.1" id="スマホ版のスクショの撮影方法"><span
       class="header-section-number">7.1</span> スマホ版のスクショの撮影方法</h2>
@@ -1207,7 +1216,7 @@ npx prisma db seed</code></pre>
       <ul>
       <li>Zoom (ズーム) の値 (以下では<code>125%</code> になっている部分)
       は、スクショサイズには影響しません。</li>
-      <li>下部は必要に応じて下部の余白はトリミングしてください。</li>
+      <li>必要に応じて <strong>下部の余白はトリミング</strong> してください。</li>
       </ul>
       <figure>
       <img src="figs/10/chrome_04.png" alt="img" />
