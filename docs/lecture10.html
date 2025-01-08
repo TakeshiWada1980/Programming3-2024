@@ -18,7 +18,8 @@
       };
     </script>
 
-    
+     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
 
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link
@@ -113,6 +114,13 @@ class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法
       <!-- ---------------------------------------- -->
       <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
       <ul>
+      <li><strong>業界研究&amp;インターンシップ</strong> 「<strong>ゲーム<span
+      class="math inline">\(\times\)</span>IT業界フォーラム</strong>」
+      <ul>
+      <li>詳細は<a
+      href="https://www.gakujo.ne.jp/2026/events/evt_dtl.aspx?p1=evt392&amp;area=online">こちら</a></li>
+      <li>2/13 (木) &amp; 14 (金) 10:40-18:00 オンライン</li>
+      </ul></li>
       <li><a href="lecture10.html#課題2">課題2</a> についての連絡があります。</li>
       </ul>
       <h2 data-number="1.1" id="今後の流れ"><span class="header-section-number">1.1</span>
@@ -126,8 +134,9 @@ class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法
       を実装していきます。これにより、<strong>管理者だけが (＝ログインした特定ユーザだけが)
       記事やカテゴリの新規作成・編集・削除を実行</strong> できるような仕組みをつくっていきます。</p>
       <p>また、次回講義では「<strong>画像のアップロード機能</strong>」を実装し、次々回の講義では
-      <span class="masked">クラウドプラットフォームに「ブログアプリ」をデプロイ (配置・公開)</span>
-      し、手持ちのスマートフォンなどから「ブログアプリ」にアクセスできるようにしていきます。</p>
+      <span class="masked">Vercel というホスティングサービスに「ブログアプリ」をデプロイ
+      (配置・展開)</span>
+      し、手持ちのスマートフォンなどから「ブログアプリ」にアクセスできるように公開していきます。</p>
       <p>以上のような「認証機能の実装」や「アプリのデプロイ」については、様々な選択肢がありますが、この授業では<a
       href="https://supabase.com/">Supabase</a>と<a
       href="https://vercel.com/">Vercel</a>という2つのウェブサービス (クラウドプラットフォーム)
@@ -410,6 +419,18 @@ class="toc-section-number">7.1</span> スマホ版のスクショの撮影方法
       <p>If you want, you can upgrade your organization to Pro to avoid future pausings, and this
       can be done from the billing settings.</p>
       </blockquote>
+      <p><strong>▼▼ paused になってしまったプロジェクト</strong></p>
+      <figure>
+      <img src="figs/10/supabase_28.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>▼▼ 解除のための操作</strong></p>
+      <p>paused なプロジェクトを選択すると、以下のダイアログが表示されるので「<strong>Restore
+      project</strong>」を選択します。</p>
+      <figure>
+      <img src="figs/10/supabase_29.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       </div>
       <h2 data-number="4.3" id="データベース接続とテーブル作成-初期化"><span
       class="header-section-number">4.3</span> データベース接続とテーブル作成 (初期化)</h2>
@@ -1138,10 +1159,10 @@ npx prisma db seed</code></pre>
       を雛形に、「リポジトリのURL」の他、以下の各ページの「<strong>スクリーンショット</strong>」と「<strong>画面や機能の解説・アピールポイント</strong>」を記載して提出してください。</p>
       <ul>
       <li>注意: ワードファイルの編集には、ウェブ版の Office (Microsoft 365 for the web)
-      ではなく、ローカルアプリ版の Office
-      を使用してください。ウェブ版を使用すると体裁が大きく乱れます。また、Google Classroom
-      のプレビュー画面 (提出物の確認画面)
-      では体裁が乱れることがありますが、ダウンロードして開いたときにキレイに表示されれば問題ありません。評価は、ダウンロードしたファイルを対象に行ないます。</li>
+      <strong>で・は・な・く</strong>、ローカルアプリ版の Office
+      を使用してください。<strong>ウェブ版を使用すると体裁が大きく崩れます</strong>。また、提出後、Google
+      Classroom のプレビュー画面 (提出物の確認画面)
+      では体裁が乱れることがありますが、ダウンロードして開いたときに体裁が乱れてなければ問題ありません。課題を評価する際は、ファイルをダウンロードしてローカルアプリ版で開いて閲覧します。</li>
       <li>注意: スクリーンショットは、<strong>PC版</strong> と <strong>スマートフォン版</strong> (<a
       href="lecture10.html#スマホ版のスクショの撮影方法">次のセクション</a>で指定する方法で撮影)
       の「両方」をつけてください。</li>
@@ -1177,7 +1198,7 @@ npx prisma db seed</code></pre>
       (<code>.docx</code>形式)。ファイル名は <code>NN-課題2-氏名.docx</code>
       としてください。<code>NN</code> は <strong>ゼロ埋め2桁の出席番号
       (本年度のもの)</strong>、氏名はフルネームとして、ハイフンや数字は全て半角文字としてください。姓と名の間には
-      <strong>スペースを入れない</strong> でください。不備は一律で「2点減😭」とします。
+      <strong>スペースを入・れ・な・い</strong> でください。不備は一律で「2点減😭」とします。
       <ul>
       <li>例: <code>03-課題2-高専太郎.docx</code></li>
       <li>例: <code>16-課題2-寝屋川次郎.docx</code><br />
@@ -1186,11 +1207,12 @@ npx prisma db seed</code></pre>
       <li><strong><em>採点</em></strong> :
       「7点」を標準として「10点満点」で評価します。学年末の成績評価の際には「重み」が付けられます。
       <ul>
+      <li>Wordファイル上の体裁の乱れに注意してください。</li>
       <li>画面表示やバリデーションなどの UI/UX の工夫、機能の追加、<a
       href="https://www.google.com/search?q=zod+react+hook+form">react-hook-form &amp; zod</a>
       を利用などがあれば、アピールポイントとして、ワードファイル内に記載してください。</li>
       </ul></li>
-      <li>提出されたファイルはクラスの学生に共有します。</li>
+      <li>提出された課題 (ワードファイル) はクラスの学生に共有します。</li>
       </ul>
       <h2 data-number="7.1" id="スマホ版のスクショの撮影方法"><span
       class="header-section-number">7.1</span> スマホ版のスクショの撮影方法</h2>
