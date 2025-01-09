@@ -662,12 +662,12 @@ npx prisma db seed</code></pre>
       <p>VSCode のターミナルから次のコマンドを実行して、<strong>SupabaseClient</strong>
       を使用するために必要なライブラリをインストールしてください。</p>
       <pre><code>npm i @supabase/supabase-js</code></pre>
-      <p>また、プロジェクトに <code>src/app/utils/supabase.ts</code>
+      <p>また、プロジェクトに <code>src/utils/supabase.ts</code>
       を新規作成して、以下の内容を記述してください。これは、環境変数を読み取って
       <strong>SupabaseClient</strong> (＝<span
       class="masked">データベース操作用のAPI操作ツール</span>)
       のインスタンスを生成、初期化するプログラムになります。</p>
-      <div class="sourceCode" id="cb16" data-caption="src/app/utils/supabase.ts"><pre
+      <div class="sourceCode" id="cb16" data-caption="src/utils/supabase.ts"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> { createClient } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="im">export</span> <span class="kw">const</span> supabase <span class="op">=</span> <span class="fu">createClient</span>(</span>
@@ -682,8 +682,32 @@ npx prisma db seed</code></pre>
       ログインページの実装</h2>
       <p>ブログアプリに、IDとパスワードを使った「<strong>ログインページ</strong>」を実装していきます。</p>
       <p>プロジェクトに <code>src/app/login/page.tsx</code> を新規作成して<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のプログラムを貼り付けて、保存してください。開発モードでアプリを起動して
-      <code>/login</code> にアクセスすると、次のような画面が表示されることを確認してください。</p>
+      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/10/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のプログラムを貼り付けて、保存してください。</p>
+      <p>さらに、<code>src/app/_components/ValidationAlert.tsx</code>
+      を新規作成して、以下のプログラムを貼り付けて、保存してください。これは
+      <code>login/page.tsx</code>
+      から参照しているコンポーネントで、バリデーションエラーを表示するためのものになります。</p>
+      <div class="sourceCode" id="cb17"
+      data-caption="src/app/_components/ValidationAlert.tsx (バリデーションエラーを表示するコンポーネント)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb17-1"><a href="#cb17-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="im">import</span> { faCircleExclamation } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">const</span> ValidationAlert <span class="op">=</span> ({ msg }<span class="op">:</span> { msg<span class="op">:</span> <span class="dt">string</span> }) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="cf">if</span> (msg <span class="op">===</span> <span class="st">&quot;&quot;</span>) {</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>  }</span>
+<span id="cb17-9"><a href="#cb17-9"></a>  <span class="cf">return</span> (</span>
+<span id="cb17-10"><a href="#cb17-10"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1 text-sm font-bold text-rose-400&quot;</span><span class="op">&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>      <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faCircleExclamation} className<span class="op">=</span><span class="st">&quot;mr-0.5&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span>{msg}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a>  )<span class="op">;</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>}<span class="op">;</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="im">export</span> <span class="im">default</span> ValidationAlert<span class="op">;</span></span></code></pre></div>
+      <p>開発モードでアプリを起動して <code>/login</code>
+      にアクセスすると、次のような画面が表示されることを確認してください。</p>
       <figure>
       <img src="figs/10/app_02.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -707,48 +731,48 @@ npx prisma db seed</code></pre>
       の内容について解説していきます。やや長めのプログラムですが、ログイン処理に関する本質的な部分は、次の箇所になります。</p>
       <p>まず、<strong>第07行目</strong>で <code>src/app/utils/supabase.ts</code> から
       SupabaseClient をインポートしています。</p>
-      <div class="sourceCode" id="cb17"
+      <div class="sourceCode" id="cb18"
       data-caption="src/app/login/page.tsx (SupabaseClient のインポート)" data-startFrom="7"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb17-7"><a href="#cb17-7"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb18-7"><a href="#cb18-7"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span></code></pre></div>
       <p>「ログイン」のボタンが押下されると、<strong>第29行目</strong> の <code>handleSubmit</code>
       関数がコールされ、UI/UX関連の処理後に、次のコードが実行されます。</p>
-      <div class="sourceCode" id="cb18"
+      <div class="sourceCode" id="cb19"
       data-caption="src/app/login/page.tsx (ログインボタンの押下処理)" data-startFrom="34"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 33;"><span id="cb18-34"><a href="#cb18-34"></a><span class="cf">try</span> {</span>
-<span id="cb18-35"><a href="#cb18-35"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ログイン処理を実行します。&quot;</span>)<span class="op">;</span></span>
-<span id="cb18-36"><a href="#cb18-36"></a>  <span class="kw">const</span> { error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">signInWithPassword</span>({</span>
-<span id="cb18-37"><a href="#cb18-37"></a>    email<span class="op">,</span></span>
-<span id="cb18-38"><a href="#cb18-38"></a>    password<span class="op">,</span></span>
-<span id="cb18-39"><a href="#cb18-39"></a>  })<span class="op">;</span></span>
-<span id="cb18-40"><a href="#cb18-40"></a>  <span class="cf">if</span> (error) {</span>
-<span id="cb18-41"><a href="#cb18-41"></a>    <span class="fu">setLoginError</span>(</span>
-<span id="cb18-42"><a href="#cb18-42"></a>      <span class="vs">`ログインIDまたはパスワードが違います（</span><span class="sc">${</span>error<span class="op">.</span><span class="at">code</span><span class="sc">}</span><span class="vs">）。`</span></span>
-<span id="cb18-43"><a href="#cb18-43"></a>    )<span class="op">;</span></span>
-<span id="cb18-44"><a href="#cb18-44"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
-<span id="cb18-45"><a href="#cb18-45"></a>    <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb18-46"><a href="#cb18-46"></a>  }</span>
-<span id="cb18-47"><a href="#cb18-47"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ログイン処理に成功しました。&quot;</span>)<span class="op">;</span></span>
-<span id="cb18-48"><a href="#cb18-48"></a>  router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/admin&quot;</span>)<span class="op">;</span></span>
-<span id="cb18-49"><a href="#cb18-49"></a>} <span class="cf">catch</span> (error) {</span>
-<span id="cb18-50"><a href="#cb18-50"></a>  <span class="fu">setLoginError</span>(<span class="st">&quot;ログイン処理中に予期せぬエラーが発生しました。&quot;</span>)<span class="op">;</span></span>
-<span id="cb18-51"><a href="#cb18-51"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
-<span id="cb18-52"><a href="#cb18-52"></a>} <span class="cf">finally</span> {</span>
-<span id="cb18-53"><a href="#cb18-53"></a>  <span class="fu">setIsSubmitting</span>(<span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb18-54"><a href="#cb18-54"></a>}</span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 33;"><span id="cb19-34"><a href="#cb19-34"></a><span class="cf">try</span> {</span>
+<span id="cb19-35"><a href="#cb19-35"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ログイン処理を実行します。&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-36"><a href="#cb19-36"></a>  <span class="kw">const</span> { error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">signInWithPassword</span>({</span>
+<span id="cb19-37"><a href="#cb19-37"></a>    email<span class="op">,</span></span>
+<span id="cb19-38"><a href="#cb19-38"></a>    password<span class="op">,</span></span>
+<span id="cb19-39"><a href="#cb19-39"></a>  })<span class="op">;</span></span>
+<span id="cb19-40"><a href="#cb19-40"></a>  <span class="cf">if</span> (error) {</span>
+<span id="cb19-41"><a href="#cb19-41"></a>    <span class="fu">setLoginError</span>(</span>
+<span id="cb19-42"><a href="#cb19-42"></a>      <span class="vs">`ログインIDまたはパスワードが違います（</span><span class="sc">${</span>error<span class="op">.</span><span class="at">code</span><span class="sc">}</span><span class="vs">）。`</span></span>
+<span id="cb19-43"><a href="#cb19-43"></a>    )<span class="op">;</span></span>
+<span id="cb19-44"><a href="#cb19-44"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb19-45"><a href="#cb19-45"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb19-46"><a href="#cb19-46"></a>  }</span>
+<span id="cb19-47"><a href="#cb19-47"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ログイン処理に成功しました。&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-48"><a href="#cb19-48"></a>  router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/admin&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-49"><a href="#cb19-49"></a>} <span class="cf">catch</span> (error) {</span>
+<span id="cb19-50"><a href="#cb19-50"></a>  <span class="fu">setLoginError</span>(<span class="st">&quot;ログイン処理中に予期せぬエラーが発生しました。&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-51"><a href="#cb19-51"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb19-52"><a href="#cb19-52"></a>} <span class="cf">finally</span> {</span>
+<span id="cb19-53"><a href="#cb19-53"></a>  <span class="fu">setIsSubmitting</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb19-54"><a href="#cb19-54"></a>}</span></code></pre></div>
       <p>メールアドレスとパスワードを使ったログイン (サインイン) を試みているのが
       <strong>第36行目</strong> の <code>supabase.auth.signInWithPassword</code>
       メソッドになります。ログインに成功すると <code>error</code> には <code>null</code>
       が格納され、失敗すると以下のような <span class="masked">エラーオブジェクト</span>
       が格納されます (以下には <code>error</code>
       オブジェクトをJSONに変換したものを掲載しています)。</p>
-      <div class="sourceCode" id="cb19"
+      <div class="sourceCode" id="cb20"
       data-caption="SupabaseClient の auth.signInWithPassword メソッドの戻り値 (例)"><pre
-      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">{</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="dt">&quot;__isAuthError&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;AuthApiError&quot;</span><span class="fu">,</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="dv">400</span><span class="fu">,</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="dt">&quot;code&quot;</span><span class="fu">:</span> <span class="st">&quot;invalid_credentials&quot;</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="fu">}</span></span></code></pre></div>
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">{</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="dt">&quot;__isAuthError&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;AuthApiError&quot;</span><span class="fu">,</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="dv">400</span><span class="fu">,</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="dt">&quot;code&quot;</span><span class="fu">:</span> <span class="st">&quot;invalid_credentials&quot;</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="fu">}</span></span></code></pre></div>
       <p>error が <code>null</code> ではないとき (＝つまり<strong>認証に失敗</strong>したとき) は
       <strong>第40行目</strong> の if 文が実行され、<strong>第45行目</strong> の <code>return</code>
       により <code>handleSubmit</code>
@@ -759,12 +783,12 @@ npx prisma db seed</code></pre>
       でインポートして、<strong>第17行目</strong> で取得している <strong>useRouterフック</strong>
       のメソッドになります。useRouter は <span
       class="masked">ページ遷移を操作するための機能セット</span> を提供するものになります。</p>
-      <div class="sourceCode" id="cb20"
-      data-caption="src/app/login/page.tsx (SupabaseClient のインポート)" data-startFrom="8"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 7;"><span id="cb20-8"><a href="#cb20-8"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span></code></pre></div>
       <div class="sourceCode" id="cb21"
+      data-caption="src/app/login/page.tsx (SupabaseClient のインポート)" data-startFrom="8"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 7;"><span id="cb21-8"><a href="#cb21-8"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb22"
       data-caption="src/app/login/page.tsx (リダイレクトに使用する useRouter フック)"
-      data-startFrom="17"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 16;"><span id="cb21-17"><a href="#cb21-17"></a><span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span></code></pre></div>
+      data-startFrom="17"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 16;"><span id="cb22-17"><a href="#cb22-17"></a><span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span></code></pre></div>
       <hr />
       <p><code>supabase.auth.signInWithPassword()</code> によるログインに成功すると、Supabaseからは
       <span class="masked">アクセストークン (Access Token)</span> と呼ばれる <strong>JWT
@@ -879,56 +903,56 @@ npx prisma db seed</code></pre>
       <p>認可処理に使用する <code>useAuth</code>
       というカスタムフックを作成します。<code>src/app/_hooks/useAuth.ts</code>
       というファイルを作成して、以下のプログラムを貼り付けてください。</p>
-      <div class="sourceCode" id="cb22"
+      <div class="sourceCode" id="cb23"
       data-caption="src/app/_hooks/useAuth.ts (カスタムフックの定義)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="im">import</span> { Session } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="im">export</span> <span class="kw">const</span> useAuth <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb22-6"><a href="#cb22-6"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>  <span class="kw">const</span> [session<span class="op">,</span> setSession] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Session <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>  <span class="kw">const</span> [token<span class="op">,</span> setToken] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a></span>
-<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb22-11"><a href="#cb22-11"></a>    <span class="co">// 初期セッションの取得</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a>    <span class="kw">const</span> initAuth <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb22-13"><a href="#cb22-13"></a>      <span class="cf">try</span> {</span>
-<span id="cb22-14"><a href="#cb22-14"></a>        <span class="kw">const</span> {</span>
-<span id="cb22-15"><a href="#cb22-15"></a>          data<span class="op">:</span> { session }<span class="op">,</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a>        } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">getSession</span>()<span class="op">;</span></span>
-<span id="cb22-17"><a href="#cb22-17"></a>        <span class="fu">setSession</span>(session)<span class="op">;</span></span>
-<span id="cb22-18"><a href="#cb22-18"></a>        <span class="fu">setToken</span>(session<span class="op">?.</span><span class="at">access_token</span> <span class="op">||</span> <span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb22-19"><a href="#cb22-19"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb22-20"><a href="#cb22-20"></a>      } <span class="cf">catch</span> (error) {</span>
-<span id="cb22-21"><a href="#cb22-21"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(</span>
-<span id="cb22-22"><a href="#cb22-22"></a>          <span class="vs">`セッションの取得に失敗しました。</span><span class="sc">\n${</span><span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>)<span class="sc">}</span><span class="vs">`</span></span>
-<span id="cb22-23"><a href="#cb22-23"></a>        )<span class="op">;</span></span>
-<span id="cb22-24"><a href="#cb22-24"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb22-25"><a href="#cb22-25"></a>      }</span>
-<span id="cb22-26"><a href="#cb22-26"></a>    }<span class="op">;</span></span>
-<span id="cb22-27"><a href="#cb22-27"></a>    <span class="fu">initAuth</span>()<span class="op">;</span></span>
-<span id="cb22-28"><a href="#cb22-28"></a></span>
-<span id="cb22-29"><a href="#cb22-29"></a>    <span class="co">// 認証状態の変更を監視</span></span>
-<span id="cb22-30"><a href="#cb22-30"></a>    <span class="kw">const</span> { data<span class="op">:</span> authListener } <span class="op">=</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">onAuthStateChange</span>(</span>
-<span id="cb22-31"><a href="#cb22-31"></a>      <span class="kw">async</span> (<span class="bu">event</span><span class="op">,</span> session) <span class="kw">=&gt;</span> {</span>
-<span id="cb22-32"><a href="#cb22-32"></a>        <span class="fu">setSession</span>(session)<span class="op">;</span></span>
-<span id="cb22-33"><a href="#cb22-33"></a>        <span class="fu">setToken</span>(session<span class="op">?.</span><span class="at">access_token</span> <span class="op">||</span> <span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb22-34"><a href="#cb22-34"></a>      }</span>
-<span id="cb22-35"><a href="#cb22-35"></a>    )<span class="op">;</span></span>
-<span id="cb22-36"><a href="#cb22-36"></a></span>
-<span id="cb22-37"><a href="#cb22-37"></a>    <span class="co">// アンマウント時に監視を解除（クリーンアップ）</span></span>
-<span id="cb22-38"><a href="#cb22-38"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> authListener<span class="op">?.</span><span class="at">subscription</span><span class="op">?.</span><span class="fu">unsubscribe</span>()<span class="op">;</span></span>
-<span id="cb22-39"><a href="#cb22-39"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
-<span id="cb22-40"><a href="#cb22-40"></a></span>
-<span id="cb22-41"><a href="#cb22-41"></a>  <span class="cf">return</span> { isLoading<span class="op">,</span> session<span class="op">,</span> token }<span class="op">;</span></span>
-<span id="cb22-42"><a href="#cb22-42"></a>}<span class="op">;</span></span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="im">import</span> { Session } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="im">export</span> <span class="kw">const</span> useAuth <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>  <span class="kw">const</span> [session<span class="op">,</span> setSession] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Session <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>  <span class="kw">const</span> [token<span class="op">,</span> setToken] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a></span>
+<span id="cb23-10"><a href="#cb23-10"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb23-11"><a href="#cb23-11"></a>    <span class="co">// 初期セッションの取得</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a>    <span class="kw">const</span> initAuth <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-13"><a href="#cb23-13"></a>      <span class="cf">try</span> {</span>
+<span id="cb23-14"><a href="#cb23-14"></a>        <span class="kw">const</span> {</span>
+<span id="cb23-15"><a href="#cb23-15"></a>          data<span class="op">:</span> { session }<span class="op">,</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a>        } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">getSession</span>()<span class="op">;</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a>        <span class="fu">setSession</span>(session)<span class="op">;</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a>        <span class="fu">setToken</span>(session<span class="op">?.</span><span class="at">access_token</span> <span class="op">||</span> <span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a>      } <span class="cf">catch</span> (error) {</span>
+<span id="cb23-21"><a href="#cb23-21"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(</span>
+<span id="cb23-22"><a href="#cb23-22"></a>          <span class="vs">`セッションの取得に失敗しました。</span><span class="sc">\n${</span><span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>)<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb23-23"><a href="#cb23-23"></a>        )<span class="op">;</span></span>
+<span id="cb23-24"><a href="#cb23-24"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb23-25"><a href="#cb23-25"></a>      }</span>
+<span id="cb23-26"><a href="#cb23-26"></a>    }<span class="op">;</span></span>
+<span id="cb23-27"><a href="#cb23-27"></a>    <span class="fu">initAuth</span>()<span class="op">;</span></span>
+<span id="cb23-28"><a href="#cb23-28"></a></span>
+<span id="cb23-29"><a href="#cb23-29"></a>    <span class="co">// 認証状態の変更を監視</span></span>
+<span id="cb23-30"><a href="#cb23-30"></a>    <span class="kw">const</span> { data<span class="op">:</span> authListener } <span class="op">=</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">onAuthStateChange</span>(</span>
+<span id="cb23-31"><a href="#cb23-31"></a>      <span class="kw">async</span> (<span class="bu">event</span><span class="op">,</span> session) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-32"><a href="#cb23-32"></a>        <span class="fu">setSession</span>(session)<span class="op">;</span></span>
+<span id="cb23-33"><a href="#cb23-33"></a>        <span class="fu">setToken</span>(session<span class="op">?.</span><span class="at">access_token</span> <span class="op">||</span> <span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb23-34"><a href="#cb23-34"></a>      }</span>
+<span id="cb23-35"><a href="#cb23-35"></a>    )<span class="op">;</span></span>
+<span id="cb23-36"><a href="#cb23-36"></a></span>
+<span id="cb23-37"><a href="#cb23-37"></a>    <span class="co">// アンマウント時に監視を解除（クリーンアップ）</span></span>
+<span id="cb23-38"><a href="#cb23-38"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> authListener<span class="op">?.</span><span class="at">subscription</span><span class="op">?.</span><span class="fu">unsubscribe</span>()<span class="op">;</span></span>
+<span id="cb23-39"><a href="#cb23-39"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb23-40"><a href="#cb23-40"></a></span>
+<span id="cb23-41"><a href="#cb23-41"></a>  <span class="cf">return</span> { isLoading<span class="op">,</span> session<span class="op">,</span> token }<span class="op">;</span></span>
+<span id="cb23-42"><a href="#cb23-42"></a>}<span class="op">;</span></span></code></pre></div>
       <p>このカスタムフックは <code>page.tsx</code> や
       <code>layout.tsx</code>、その他のカスタムフックのなかで、次のように使用します。</p>
-      <div class="sourceCode" id="cb23" data-caption="useAuthのインポート"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb24" data-caption="useAuthの使用例"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">const</span> { isLoading<span class="op">,</span> session<span class="op">,</span> token } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb24" data-caption="useAuthのインポート"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb24-1"><a href="#cb24-1"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb25" data-caption="useAuthの使用例"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">const</span> { isLoading<span class="op">,</span> session<span class="op">,</span> token } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span></code></pre></div>
       <p>まずは、useAuth
       の「使用方法」から先に確認していきます。このフックは、次の3つの値を返します。</p>
       <ul>
@@ -998,60 +1022,60 @@ npx prisma db seed</code></pre>
       や「条件分岐表示」「動的切り替え」のように表現します。</p>
       <p>実装例を以下に示します。Headerコンポーネントは
       <strong>既に各自でカスタマイズしているので思うので</strong>、必要な部分だけを書き換えるようにしてください。</p>
-      <div class="sourceCode" id="cb25" data-caption="src/app/_components/Header.tsx"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb25-1"><a href="#cb25-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="im">import</span> Link <span class="im">from</span> <span class="st">&quot;next/link&quot;</span><span class="op">;</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="im">import</span> { faFish } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
-<span id="cb25-9"><a href="#cb25-9"></a></span>
-<span id="cb25-10"><a href="#cb25-10"></a><span class="kw">const</span> Header<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb25-11"><a href="#cb25-11"></a>  <span class="co">// ▼ 追加</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a>  <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
-<span id="cb25-13"><a href="#cb25-13"></a>  <span class="kw">const</span> { isLoading<span class="op">,</span> session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
-<span id="cb25-14"><a href="#cb25-14"></a>  <span class="kw">const</span> logout <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb25-15"><a href="#cb25-15"></a>    <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">signOut</span>()<span class="op">;</span></span>
-<span id="cb25-16"><a href="#cb25-16"></a>    router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/&quot;</span>)<span class="op">;</span></span>
-<span id="cb25-17"><a href="#cb25-17"></a>  }<span class="op">;</span></span>
-<span id="cb25-18"><a href="#cb25-18"></a>  <span class="co">// ▲ 追加</span></span>
-<span id="cb25-19"><a href="#cb25-19"></a></span>
-<span id="cb25-20"><a href="#cb25-20"></a>  <span class="cf">return</span> (</span>
-<span id="cb25-21"><a href="#cb25-21"></a>    <span class="op">&lt;</span>header<span class="op">&gt;</span></span>
-<span id="cb25-22"><a href="#cb25-22"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;bg-slate-800 py-2&quot;</span><span class="op">&gt;</span></span>
-<span id="cb25-23"><a href="#cb25-23"></a>        <span class="op">&lt;</span>div</span>
-<span id="cb25-24"><a href="#cb25-24"></a>          className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
-<span id="cb25-25"><a href="#cb25-25"></a>            <span class="st">&quot;mx-4 max-w-2xl md:mx-auto&quot;</span><span class="op">,</span></span>
-<span id="cb25-26"><a href="#cb25-26"></a>            <span class="st">&quot;flex items-center justify-between&quot;</span><span class="op">,</span></span>
-<span id="cb25-27"><a href="#cb25-27"></a>            <span class="st">&quot;text-lg font-bold text-white&quot;</span></span>
-<span id="cb25-28"><a href="#cb25-28"></a>          )}</span>
-<span id="cb25-29"><a href="#cb25-29"></a>        <span class="op">&gt;</span></span>
-<span id="cb25-30"><a href="#cb25-30"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
-<span id="cb25-31"><a href="#cb25-31"></a>            <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/&quot;</span><span class="op">&gt;</span></span>
-<span id="cb25-32"><a href="#cb25-32"></a>              <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faFish} className<span class="op">=</span><span class="st">&quot;mr-1&quot;</span> <span class="op">/&gt;</span></span>
-<span id="cb25-33"><a href="#cb25-33"></a>              MyBlogApp</span>
-<span id="cb25-34"><a href="#cb25-34"></a>            <span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
-<span id="cb25-35"><a href="#cb25-35"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb25-36"><a href="#cb25-36"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-x-6&quot;</span><span class="op">&gt;</span></span>
-<span id="cb25-37"><a href="#cb25-37"></a>            {<span class="co">/* ▼ 追加 */</span>}</span>
-<span id="cb25-38"><a href="#cb25-38"></a>            {<span class="op">!</span>isLoading <span class="op">&amp;&amp;</span></span>
-<span id="cb25-39"><a href="#cb25-39"></a>              (session <span class="op">?</span> (</span>
-<span id="cb25-40"><a href="#cb25-40"></a>                <span class="op">&lt;</span>button onClick<span class="op">=</span>{logout}<span class="op">&gt;</span>Logout<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
-<span id="cb25-41"><a href="#cb25-41"></a>              ) <span class="op">:</span> (</span>
-<span id="cb25-42"><a href="#cb25-42"></a>                <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/login&quot;</span><span class="op">&gt;</span>Login<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
-<span id="cb25-43"><a href="#cb25-43"></a>              ))}</span>
-<span id="cb25-44"><a href="#cb25-44"></a>            {<span class="co">/* ▲ 追加 */</span>}</span>
-<span id="cb25-45"><a href="#cb25-45"></a>            <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/about&quot;</span><span class="op">&gt;</span>About<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
-<span id="cb25-46"><a href="#cb25-46"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb25-47"><a href="#cb25-47"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb25-48"><a href="#cb25-48"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb25-49"><a href="#cb25-49"></a>    <span class="op">&lt;/</span>header<span class="op">&gt;</span></span>
-<span id="cb25-50"><a href="#cb25-50"></a>  )<span class="op">;</span></span>
-<span id="cb25-51"><a href="#cb25-51"></a>}<span class="op">;</span></span>
-<span id="cb25-52"><a href="#cb25-52"></a></span>
-<span id="cb25-53"><a href="#cb25-53"></a><span class="im">export</span> <span class="im">default</span> Header<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb26" data-caption="src/app/_components/Header.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="im">import</span> Link <span class="im">from</span> <span class="st">&quot;next/link&quot;</span><span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="im">import</span> { faFish } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="kw">const</span> Header<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb26-11"><a href="#cb26-11"></a>  <span class="co">// ▼ 追加</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a>  <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>  <span class="kw">const</span> { isLoading<span class="op">,</span> session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>  <span class="kw">const</span> logout <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb26-15"><a href="#cb26-15"></a>    <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">signOut</span>()<span class="op">;</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>    router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/&quot;</span>)<span class="op">;</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>  }<span class="op">;</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a>  <span class="co">// ▲ 追加</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a></span>
+<span id="cb26-20"><a href="#cb26-20"></a>  <span class="cf">return</span> (</span>
+<span id="cb26-21"><a href="#cb26-21"></a>    <span class="op">&lt;</span>header<span class="op">&gt;</span></span>
+<span id="cb26-22"><a href="#cb26-22"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;bg-slate-800 py-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb26-23"><a href="#cb26-23"></a>        <span class="op">&lt;</span>div</span>
+<span id="cb26-24"><a href="#cb26-24"></a>          className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
+<span id="cb26-25"><a href="#cb26-25"></a>            <span class="st">&quot;mx-4 max-w-2xl md:mx-auto&quot;</span><span class="op">,</span></span>
+<span id="cb26-26"><a href="#cb26-26"></a>            <span class="st">&quot;flex items-center justify-between&quot;</span><span class="op">,</span></span>
+<span id="cb26-27"><a href="#cb26-27"></a>            <span class="st">&quot;text-lg font-bold text-white&quot;</span></span>
+<span id="cb26-28"><a href="#cb26-28"></a>          )}</span>
+<span id="cb26-29"><a href="#cb26-29"></a>        <span class="op">&gt;</span></span>
+<span id="cb26-30"><a href="#cb26-30"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb26-31"><a href="#cb26-31"></a>            <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/&quot;</span><span class="op">&gt;</span></span>
+<span id="cb26-32"><a href="#cb26-32"></a>              <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faFish} className<span class="op">=</span><span class="st">&quot;mr-1&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb26-33"><a href="#cb26-33"></a>              MyBlogApp</span>
+<span id="cb26-34"><a href="#cb26-34"></a>            <span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb26-35"><a href="#cb26-35"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb26-36"><a href="#cb26-36"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-x-6&quot;</span><span class="op">&gt;</span></span>
+<span id="cb26-37"><a href="#cb26-37"></a>            {<span class="co">/* ▼ 追加 */</span>}</span>
+<span id="cb26-38"><a href="#cb26-38"></a>            {<span class="op">!</span>isLoading <span class="op">&amp;&amp;</span></span>
+<span id="cb26-39"><a href="#cb26-39"></a>              (session <span class="op">?</span> (</span>
+<span id="cb26-40"><a href="#cb26-40"></a>                <span class="op">&lt;</span>button onClick<span class="op">=</span>{logout}<span class="op">&gt;</span>Logout<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb26-41"><a href="#cb26-41"></a>              ) <span class="op">:</span> (</span>
+<span id="cb26-42"><a href="#cb26-42"></a>                <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/login&quot;</span><span class="op">&gt;</span>Login<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb26-43"><a href="#cb26-43"></a>              ))}</span>
+<span id="cb26-44"><a href="#cb26-44"></a>            {<span class="co">/* ▲ 追加 */</span>}</span>
+<span id="cb26-45"><a href="#cb26-45"></a>            <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/about&quot;</span><span class="op">&gt;</span>About<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb26-46"><a href="#cb26-46"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb26-47"><a href="#cb26-47"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb26-48"><a href="#cb26-48"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb26-49"><a href="#cb26-49"></a>    <span class="op">&lt;/</span>header<span class="op">&gt;</span></span>
+<span id="cb26-50"><a href="#cb26-50"></a>  )<span class="op">;</span></span>
+<span id="cb26-51"><a href="#cb26-51"></a>}<span class="op">;</span></span>
+<span id="cb26-52"><a href="#cb26-52"></a></span>
+<span id="cb26-53"><a href="#cb26-53"></a><span class="im">export</span> <span class="im">default</span> Header<span class="op">;</span></span></code></pre></div>
       <p><strong>第07行目</strong> で <code>useAuth</code>
       をインポートして、<strong>第13行目</strong> で <code>useAuth()</code> を実行し、その戻り値を<a
       href="lecture02.html#分割代入">分割代入</a>しています (このコンポーネントでは
@@ -1104,41 +1128,41 @@ npx prisma db seed</code></pre>
       </figure>
       <p><code>src/app/admin/layout.tsx</code>
       を作成して、以下のプログラムを貼り付けてください。</p>
-      <div class="sourceCode" id="cb27" data-caption="src/app/admin/layout.tsx (ルートガード)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb27-5"><a href="#cb27-5"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a><span class="im">import</span> { useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb27-8"><a href="#cb27-8"></a></span>
-<span id="cb27-9"><a href="#cb27-9"></a><span class="kw">interface</span> Props {</span>
-<span id="cb27-10"><a href="#cb27-10"></a>  children<span class="op">:</span> React<span class="op">.</span><span class="at">ReactNode</span><span class="op">;</span></span>
-<span id="cb27-11"><a href="#cb27-11"></a>}</span>
-<span id="cb27-12"><a href="#cb27-12"></a><span class="kw">const</span> AdminLayout <span class="op">=</span> ({ children }<span class="op">:</span> Props) <span class="kw">=&gt;</span> {</span>
-<span id="cb27-13"><a href="#cb27-13"></a>  <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
-<span id="cb27-14"><a href="#cb27-14"></a>  <span class="kw">const</span> { isLoading<span class="op">,</span> session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
-<span id="cb27-15"><a href="#cb27-15"></a></span>
-<span id="cb27-16"><a href="#cb27-16"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb27-17"><a href="#cb27-17"></a>    <span class="co">// 認証状況の確認中は何もせずに戻る</span></span>
-<span id="cb27-18"><a href="#cb27-18"></a>    <span class="cf">if</span> (isLoading) {</span>
-<span id="cb27-19"><a href="#cb27-19"></a>      <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb27-20"><a href="#cb27-20"></a>    }</span>
-<span id="cb27-21"><a href="#cb27-21"></a>    <span class="co">// 認証確認後、未認証であればログインページにリダイレクト</span></span>
-<span id="cb27-22"><a href="#cb27-22"></a>    <span class="cf">if</span> (session <span class="op">===</span> <span class="kw">null</span>) {</span>
-<span id="cb27-23"><a href="#cb27-23"></a>      router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/login&quot;</span>)<span class="op">;</span></span>
-<span id="cb27-24"><a href="#cb27-24"></a>    }</span>
-<span id="cb27-25"><a href="#cb27-25"></a>  }<span class="op">,</span> [isLoading<span class="op">,</span> router<span class="op">,</span> session])<span class="op">;</span></span>
-<span id="cb27-26"><a href="#cb27-26"></a></span>
-<span id="cb27-27"><a href="#cb27-27"></a>  <span class="co">// 認証済みが確認できるまでは何も表示しない</span></span>
-<span id="cb27-28"><a href="#cb27-28"></a>  <span class="cf">if</span> (<span class="op">!</span>session) {</span>
-<span id="cb27-29"><a href="#cb27-29"></a>    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb27-30"><a href="#cb27-30"></a>  }</span>
-<span id="cb27-31"><a href="#cb27-31"></a>  <span class="cf">return</span> <span class="op">&lt;&gt;</span>{children}<span class="op">&lt;/&gt;;</span></span>
-<span id="cb27-32"><a href="#cb27-32"></a>}<span class="op">;</span></span>
-<span id="cb27-33"><a href="#cb27-33"></a></span>
-<span id="cb27-34"><a href="#cb27-34"></a><span class="im">export</span> <span class="im">default</span> AdminLayout<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb28" data-caption="src/app/admin/layout.tsx (ルートガード)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="im">import</span> { useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="kw">interface</span> Props {</span>
+<span id="cb28-10"><a href="#cb28-10"></a>  children<span class="op">:</span> React<span class="op">.</span><span class="at">ReactNode</span><span class="op">;</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a>}</span>
+<span id="cb28-12"><a href="#cb28-12"></a><span class="kw">const</span> AdminLayout <span class="op">=</span> ({ children }<span class="op">:</span> Props) <span class="kw">=&gt;</span> {</span>
+<span id="cb28-13"><a href="#cb28-13"></a>  <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
+<span id="cb28-14"><a href="#cb28-14"></a>  <span class="kw">const</span> { isLoading<span class="op">,</span> session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
+<span id="cb28-15"><a href="#cb28-15"></a></span>
+<span id="cb28-16"><a href="#cb28-16"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb28-17"><a href="#cb28-17"></a>    <span class="co">// 認証状況の確認中は何もせずに戻る</span></span>
+<span id="cb28-18"><a href="#cb28-18"></a>    <span class="cf">if</span> (isLoading) {</span>
+<span id="cb28-19"><a href="#cb28-19"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb28-20"><a href="#cb28-20"></a>    }</span>
+<span id="cb28-21"><a href="#cb28-21"></a>    <span class="co">// 認証確認後、未認証であればログインページにリダイレクト</span></span>
+<span id="cb28-22"><a href="#cb28-22"></a>    <span class="cf">if</span> (session <span class="op">===</span> <span class="kw">null</span>) {</span>
+<span id="cb28-23"><a href="#cb28-23"></a>      router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/login&quot;</span>)<span class="op">;</span></span>
+<span id="cb28-24"><a href="#cb28-24"></a>    }</span>
+<span id="cb28-25"><a href="#cb28-25"></a>  }<span class="op">,</span> [isLoading<span class="op">,</span> router<span class="op">,</span> session])<span class="op">;</span></span>
+<span id="cb28-26"><a href="#cb28-26"></a></span>
+<span id="cb28-27"><a href="#cb28-27"></a>  <span class="co">// 認証済みが確認できるまでは何も表示しない</span></span>
+<span id="cb28-28"><a href="#cb28-28"></a>  <span class="cf">if</span> (<span class="op">!</span>session) {</span>
+<span id="cb28-29"><a href="#cb28-29"></a>    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb28-30"><a href="#cb28-30"></a>  }</span>
+<span id="cb28-31"><a href="#cb28-31"></a>  <span class="cf">return</span> <span class="op">&lt;&gt;</span>{children}<span class="op">&lt;/&gt;;</span></span>
+<span id="cb28-32"><a href="#cb28-32"></a>}<span class="op">;</span></span>
+<span id="cb28-33"><a href="#cb28-33"></a></span>
+<span id="cb28-34"><a href="#cb28-34"></a><span class="im">export</span> <span class="im">default</span> AdminLayout<span class="op">;</span></span></code></pre></div>
       <p>開発者モードで起動して、未ログイン状態で <code>/admin</code> や
       <code>/admin/posts</code>、<code>/admin/posts/new</code> にアクセスすると
       (ウェブブラウザのアドレバーにパスを入力すると)、ログインページ (<code>/login</code>)
