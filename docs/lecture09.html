@@ -364,42 +364,40 @@ class="toc-section-number">5</span> 投稿記事の新規作成フォームの�
       </div>
       <p><strong>ThunderClinet</strong> を使って、<code>/api/posts</code>
       のレスポンスのボディが次のようになっていること (＝<span
-      class="masked">投稿記事に紐づくカテゴリの「 id」と「name」が取得できること</span>)
+      class="masked">投稿記事に紐づくカテゴリの「id」と「name」が取得できること</span>)
       を確認してください。</p>
       <div class="sourceCode" id="cb5"
       data-caption="select を指定したときの /api/posts のレスポンス(例)"><pre
-      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">{</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">&quot;contents&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">{</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d6993236-ac1c-40cf-a4af-7ff405b7e96f&quot;</span><span class="fu">,</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>      <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4&quot;</span><span class="fu">,</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>      <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4の本文。&lt;br/&gt;投稿4の本文。投稿4の本文。&quot;</span><span class="fu">,</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>      <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.095Z&quot;</span><span class="fu">,</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>      <span class="dt">&quot;categories&quot;</span><span class="fu">:</span> <span class="ot">[]</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="er">//</span> <span class="er">～</span> <span class="er">省略</span> <span class="er">～</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>    <span class="fu">{</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;18cd63c0-d364-4c29-9e92-fa68b8d65cfc&quot;</span><span class="fu">,</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a>      <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1&quot;</span><span class="fu">,</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a>      <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1の本文。&lt;br/&gt;投稿1の本文。投稿1の本文。&quot;</span><span class="fu">,</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a>      <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.073Z&quot;</span><span class="fu">,</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a>      <span class="dt">&quot;categories&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a>        <span class="fu">{</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a>          <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a>            <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;f5ee7b9c-ee8e-466e-aafc-6aa112005d5a&quot;</span><span class="fu">,</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a>            <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ1&quot;</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a>          <span class="fu">}</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a>        <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a>        <span class="fu">{</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a>          <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>            <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;</span><span class="fu">,</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a>            <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ2&quot;</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a>          <span class="fu">}</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a>        <span class="fu">}</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a>      <span class="ot">]</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a>    <span class="fu">}</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a>  <span class="ot">]</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="fu">}</span></span></code></pre></div>
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1"></a><span class="ot">[</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">{</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d6993236-ac1c-40cf-a4af-7ff405b7e96f&quot;</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4&quot;</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4の本文。&lt;br/&gt;投稿4の本文。投稿4の本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.095Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="dt">&quot;categories&quot;</span><span class="fu">:</span> <span class="ot">[]</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="er">//</span> <span class="er">～</span> <span class="er">省略</span> <span class="er">～</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">{</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;18cd63c0-d364-4c29-9e92-fa68b8d65cfc&quot;</span><span class="fu">,</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1&quot;</span><span class="fu">,</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1の本文。&lt;br/&gt;投稿1の本文。投稿1の本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.073Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>    <span class="dt">&quot;categories&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>      <span class="fu">{</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>        <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>          <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;f5ee7b9c-ee8e-466e-aafc-6aa112005d5a&quot;</span><span class="fu">,</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ1&quot;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>        <span class="fu">}</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>      <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>      <span class="fu">{</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>        <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>          <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;</span><span class="fu">,</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ2&quot;</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>        <span class="fu">}</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>      <span class="fu">}</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>    <span class="ot">]</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>  <span class="fu">}</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="ot">]</span></span></code></pre></div>
       <h3 data-number="2.2.1" id="補足-selectプロパティに関する解説-1"><span
       class="header-section-number">2.2.1</span> 補足: selectプロパティに関する解説 1</h3>
       <p>PrismaClient の <strong>findManyメソッド</strong> や <strong>findUniqueメソッド</strong>
