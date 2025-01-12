@@ -43,8 +43,11 @@
       <div id="g-nav-list">
         <!-- ---------------------------------------- -->
          <ul>
-<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span>
-連絡・概要</a></li>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span> 連絡・概要</a>
+<ul>
+<li><a href="#supabase-の状態確認" id="toc-supabase-の状態確認"><span
+class="toc-section-number">1.1</span> Supabase の状態確認</a></li>
+</ul></li>
 <li><a href="#バックエンドにおけるアクセス制御" id="toc-バックエンドにおけるアクセス制御"><span
 class="toc-section-number">2</span> バックエンドにおけるアクセス制御</a>
 <ul>
@@ -95,6 +98,15 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
       <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <h2 data-number="1.1" id="supabase-の状態確認"><span class="header-section-number">1.1</span>
+      Supabase の状態確認</h2>
+      <p>前回講義で解説したように、Freeプランで作成した Supabase のプロジェクトは <span
+      class="masked">7日間、非アクティブ状態が継続すると
+      (＝データベースや認証機能などに対するアクセスがないと)「paused」という状態</span>
+      になってしまいます。この状態では、Supabase の API は機能しないので注意してください。</p>
+      <p>「paused」になってしまった場合は、<a
+      href="lecture10.html#prismaのデータベース接続情報の更新">こちら</a>(セクションの最後の<strong>赤枠コラム</strong>)
+      を参照して回復させてください。</p>
       <h1 data-number="2" id="バックエンドにおけるアクセス制御"><span
       class="header-section-number">2</span> バックエンドにおけるアクセス制御</h1>
       <p>前回講義では、フロントエンド側で <strong>SupabaseClinet</strong>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第12回 3I-プログラミング3</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span>
+連絡・概要</a></li>
+<li><a href="#準備" id="toc-準備"><span class="toc-section-number">2</span> 準備</a>
+<ul>
+<li><a href="#ビルド" id="toc-ビルド"><span class="toc-section-number">2.1</span> ビルド</a></li>
+<li><a href="#push" id="toc-push"><span class="toc-section-number">2.2</span> Push</a></li>
+</ul></li>
+<li><a href="#vercel-の利用登録と設定" id="toc-vercel-の利用登録と設定"><span
+class="toc-section-number">3</span> Vercel の利用登録と設定</a>
+<ul>
+<li><a href="#サインアップ" id="toc-サインアップ"><span class="toc-section-number">3.1</span>
+サインアップ</a></li>
+<li><a href="#githubリポジトリとの連携とデプロイ" id="toc-githubリポジトリとの連携とデプロイ"><span
+class="toc-section-number">3.2</span> GitHubリポジトリとの連携とデプロイ</a></li>
+<li><a href="#ビルドスクリプトの編集" id="toc-ビルドスクリプトの編集"><span
+class="toc-section-number">3.3</span> ビルドスクリプトの編集</a></li>
+<li><a href="#環境変数の設定" id="toc-環境変数の設定"><span class="toc-section-number">3.4</span>
+環境変数の設定</a></li>
+<li><a href="#再デプロイ処理" id="toc-再デプロイ処理"><span class="toc-section-number">3.5</span>
+再デプロイ処理</a></li>
+<li><a href="#公開url-ドメインネーム-の変更" id="toc-公開url-ドメインネーム-の変更"><span
+class="toc-section-number">3.6</span> 公開URL (ドメインネーム) の変更</a></li>
+<li><a href="#cd-continuous-delivery" id="toc-cd-continuous-delivery"><span
+class="toc-section-number">3.7</span> CD (Continuous Delivery)</a></li>
+<li><a href="#リージョン設定" id="toc-リージョン設定"><span class="toc-section-number">3.8</span>
+リージョン設定</a></li>
+</ul></li>
+<li><a href="#github-actions-による定期処理" id="toc-github-actions-による定期処理"><span
+class="toc-section-number">4</span> GitHub Actions による定期処理</a>
+<ul>
+<li><a href="#ワークフローの設定ファイルの作成" id="toc-ワークフローの設定ファイルの作成"><span
+class="toc-section-number">4.1</span> ワークフローの設定ファイルの作成</a></li>
+<li><a href="#動作確認のための手動実行" id="toc-動作確認のための手動実行"><span
+class="toc-section-number">4.2</span> 動作確認のための手動実行</a></li>
+</ul></li>
+<li><a href="#最終課題" id="toc-最終課題"><span class="toc-section-number">5</span>
+最終課題</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2024-3I プログラミング3 第12回 講義資料</p>
+      <p>2025年01月23日（木）1・2時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <p><a href="lecture04.html">第04講義</a>と<a
+      href="lecture05.html">第05回講義</a>で作成した「ToDoアプリ」は、<strong>GitHub Pages</strong>
+      に <strong>デプロイ (＝展開・配置)</strong> して、インターネット上で <strong>公開</strong>
+      することができました。これは「ToDoアプリ」が <strong>フロントエンドプログラム</strong> (つまり
+      <span class="masked">ウェブブラウザ上で実行される JavaScript プログラムのみ</span>)
+      から構成されるため可能な手段でした。</p>
+      <p>しかし、現在、Next.js
+      フレームワークを使って開発している「ブログアプリ」は、サーバ側で動作する
+      <strong>バックエンドプログラムを含んでおり</strong>、それを動かすためには「<strong>Node.js
+      の実行環境</strong>」が必要とな ります。そのため、<strong>GitHub Pages</strong> (＝<span
+      class="masked">Node.js 実行環境を持たない静的ホスティング環境</span>)
+      を利用してデプロイや公開をすることは <strong>で・き・ま・せ・ん</strong>。</p>
+      <p>以上のようなことから、この「ブログアプリ」については「<a
+      href="https://vercel.com/">Vercel</a>」というクラウドプラットフォームにデプロイし、ウェブに公開しています。Vercel
+      は「Next.js」や「<a href="https://v0.dev/">v0</a>」の開発元である <strong>Vercel社</strong>
+      が提供する「<strong>クラウドホスティングプラットフォーム</strong> (＝<span
+      class="masked">ホスティングサービス</span>)」になります。</p>
+      <p>クラウドホスティングプラットフォームとは、ウェブアプリを実行するためのサーバインフラストラクチャを提供し、インターネット上で公開できるようにしてくれるサービスのことです。同様のサービスは様々ありますが、<a
+      href="https://vercel.com/">Vercel</a>の特徴として</p>
+      <ol type="1">
+      <li>Next.js に最適化された実行環境が提供されていること</li>
+      <li><strong>GitHubリポジトリと連携した自動デプロイ (CI/CD パイプライン)</strong>
+      が比較的簡単に構築できること</li>
+      <li>クレジットカード登録不要のフリープランが存在すること</li>
+      </ol>
+      <p>…などが挙げられます。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>ウェブアプリ開発の文脈で「CI/CD」とは何ですか。Next.js
+      でウェブアプリ開発をしている学習者向けに「概念」を解説してください。</p>
+      </blockquote>
+      <p>現在開発している「ブログアプリ」を Vercel にデプロイすれば、スマートフォン や PC から
+      <strong>24時間どこからでも利用できるようになります</strong>。つまり、本格的なウェブアプリとして公開することができるようになります。</p>
+      <p>この Vercel によるデプロイは、<strong>Vercel と GitHub リポジトリの連携設定</strong>
+      をすることで「自動化」することができます。具体的には、Vercel
+      にアカウントを作成して連携を設定すると、以降は <strong>GitHubリポジトリへの Push を Vercel
+      が自動検知</strong>し、<span
+      class="masked">最新コードの取得とビルドを実行して本番環境としてデプロイする</span>
+      という「<strong>自動デプロイフロー</strong>」が構築されます。</p>
+      <ol type="1">
+      <li>Vercel でアカウントを作成し、GitHub リポジトリとの連携を設定</li>
+      <li>GitHub リポジトリへの Push を Vercel が自動検知</li>
+      <li>最新のコードを Vercel が取得</li>
+      <li>Vercel の実行環境でビルド (<code>npm run build</code>) を実行</li>
+      <li>本番環境へ自動デプロイ</li>
+      </ol>
+      <h3 data-number="1.0.1" id="定着確認"><span class="header-section-number">1.0.1</span>
+      定着確認</h3>
+      <ul>
+      <li>ウェブアプリ開発の文脈で「CI/CD」とは何の略語か答えよ。
+      <ul>
+      <li>答え: <span class="masked">「CI」は Continuous Integration
+      (継続的インテグレーション)、「CD」は Continuous Delivery (継続的デリバリー) または Deployment
+      Continuous (継続デプロイメント) の略語。</span></li>
+      </ul></li>
+      </ul>
+      <h1 data-number="2" id="準備"><span class="header-section-number">2</span> 準備</h1>
+      <p>準備として、次の2つを完了させておいてください。</p>
+      <h2 data-number="2.1" id="ビルド"><span class="header-section-number">2.1</span> ビルド</h2>
+      <p>次のコマンドを使って本番環境用（プロダクション環境用）にアプリをビルドして「<strong>エラーが発生しないこと</strong>」を確認してください。また「警告
+      (ワーニング)」についても、可能な限り潰しておいてください。</p>
+      <pre><code>npm run build</code></pre>
+      <p>自分のPCのローカル環境でビルドに失敗している状況では、<strong>Vercel
+      でのビルドもほぼ確実に失敗します</strong>
+      (ここから先の解説を読んで作業をしても失敗します)。</p>
+      <h2 data-number="2.2" id="push"><span class="header-section-number">2.2</span> Push</h2>
+      <p>プロジェクトを GitHubリポジトリ (<code>main</code> ブランチ) に発行しておいてください。</p>
+      <h1 data-number="3" id="vercel-の利用登録と設定"><span class="header-section-number">3</span>
+      Vercel の利用登録と設定</h1>
+      <p>Vercel を利用するためには、はじめに <strong>登録 (サインアップ)</strong>
+      が必要となります。登録には「GitHubアカウント」と「携帯電話
+      (SMSを使った認証に使用)」が必要になります。クレジットカードなどは不要です。</p>
+      <h2 data-number="3.1" id="サインアップ"><span class="header-section-number">3.1</span>
+      サインアップ</h2>
+      <p>Vercel のトップページ(<a
+      href="https://vercel.com/">https://vercel.com/</a>)にアクセスして「<strong>Sign
+      Up</strong>」ボタンを押下してください。ウェブブラウザのウィンドウ幅が狭い場合はボタンが隠れているので注意してください。</p>
+      <figure>
+      <img src="figs/12/vercel_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「<strong>I’m working on personal projects (Hobby)</strong>」を選択してください。</p>
+      <figure>
+      <img src="figs/12/vercel_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「Your
+      Name」のテキストボックスに名前を入力して「<strong>Continue</strong>」ボタンを押下して選択してください。ここで設定した「<strong>名前</strong>」はプレビューモードでデプロイしたときに
+      <span class="masked">URLに含まれる文字列</span>
+      になります。プロダクションモードでデプロイした場合のURL (本番環境用のURL)
+      には含まれません。</p>
+      <figure>
+      <img src="figs/12/vercel_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>GitHub連携でログイン (ソーシャルログイン) したいので「<strong>Continue with
+      GitHub</strong>」を選択してください。</p>
+      <figure>
+      <img src="figs/12/vercel_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>GitHub
+      にログインするための認証情報を入力してください。状況に応じて2段階認証・2要素認証が要求されます。</p>
+      <figure>
+      <img src="figs/12/vercel_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>内容を確認して「<strong>Authorize Vercel</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/12/vercel_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>つづいて、Vercel 側で <strong>SMS (携帯電話) を使った本人認証</strong>
+      が必要になります。手持ちの携帯電話の番号を入力してください。例えば、自分の携帯番号が「<strong>090-XXXX-YYYY</strong>」のときは「<strong>+81
+      90 XXXX YYYY</strong>」のように入力してください (<code>+81</code> を付けるときは、先頭の
+      <code>0</code> は不要になります)。</p>
+      <figure>
+      <img src="figs/12/vercel_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>携帯電話に SMS
+      で「認証コード」が届くので、それを入力して「<strong>Verify</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/12/vercel_08.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>利用目的等のアンケート画面が表示されるので適当に入力して「<strong>Continue</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/12/vercel_10.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以上で Vercel のサインアップが「完了」しました🎉</p>
+      <p>つづいて、ブログアプリの「GitHubリポジトリ」と「Vercel」の連携を設定して、<strong>CD</strong>
+      (＝継続デプロイメント) を構築していきます。</p>
+      <h2 data-number="3.2" id="githubリポジトリとの連携とデプロイ"><span
+      class="header-section-number">3.2</span> GitHubリポジトリとの連携とデプロイ</h2>
+      <p>現在、ウェブブラウザは、次のような画面に移動しているはずです。ここからは「<strong>Vercel
+      にデプロイしたい GitHub リポジトリ</strong>」の設定をしていきます。画面内「<strong>Import Git
+      Repository</strong>」のなかの ❶ をクリックして「<strong>＋Add GitHub
+      Account</strong>」を選択してください。</p>
+      <figure>
+      <img src="figs/12/vercel_11.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Vercel を使ってデプロイしたい「GiuHubリポジトリ」を選択していきます。</p>
+      <p>いまは、任意のリポジトリだけをデプロイしたいので「<strong>Only select
+      repositories</strong>」を選んで、❷ で <strong>ブログアプリのリポジトリ</strong>
+      (<code>next-blog-app</code>)
+      を選択してください。そして「<strong>Install</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/12/vercel_12.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>先ほどの画面に戻ってくるので、上記で選択したブログアプリのリポジトリの右隣の「<strong>Import</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/12/vercel_13.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「<strong>Project
+      Name</strong>」と「<strong>Framework</strong>」を確認して「<strong>Deploy</strong>」ボタンを選択してください。なお「<strong>Framework</strong>」としては「Next.js」のほかに、「Vue.js」「Angular」「Vite」のような
+      <strong>様々なJavaScriptフレームワーク</strong> が利用可能です
+      (例えば、先に作成した「ToDoアプリ」も Vecel にデプロイ可能です)。</p>
+      <figure>
+      <img src="figs/12/vercel_14.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「<strong>Deploy</strong>」ボタンを押下すると、実際に GitHubリポジトリからデータ
+      (プログラムのソースコード) が取得され、Vercel
+      のサーバ環境のなかで「ビルド処理」と「デプロイ処理」が実行されます。これらの処理には数十秒から十数分かかります。</p>
+      <p>しばらくすると、次のようにビルド処理で「<strong>失敗</strong>」することが確認できます。これは、<span
+      class="masked">Vercel が提供するビルド環境を想定した設定ができていないため</span>
+      です。一旦、「<strong>Go to
+      Project</strong>」ボタンを押下して「プロジェクト画面」に戻ってください
+      (あとで戻ってくるので閉じないでおいてください)。</p>
+      <figure>
+      <img src="figs/12/vercel_15.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ウェブブラウザで、別タブを立ち上げ、「ブログアプリ」の <strong>GitHubリポジトリ</strong>
+      を確認してください。</p>
+      <p>こちらでも、デプロイ (Deployments) に「失敗」していることが確認できます。なお、Vercel
+      のデフォルト設定では <code>main</code> ブランチが <strong>本番環境
+      (プロダクションモードでビルドとデプロイをする対象)</strong> として取り扱われます。</p>
+      <figure>
+      <img src="figs/12/vercel_16.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="3.3" id="ビルドスクリプトの編集"><span
+      class="header-section-number">3.3</span> ビルドスクリプトの編集</h2>
+      <p>VSCode に戻って作業します。</p>
+      <p>プロジェクトフォルダの直下の <code>package.json</code> を開いて、以下に示す
+      <strong>第08行目</strong> のように <code>"vercel-build"</code>
+      というカスタムスクリプトを追加してください。</p>
+      <div class="sourceCode" id="cb2"
+      data-caption="package.json &quot;vercel-build&quot; の追加"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;next-blog-app&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1.0&quot;</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;next dev&quot;</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;next build&quot;</span><span class="fu">,</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="dt">&quot;vercel-build&quot;</span><span class="fu">:</span> <span class="st">&quot;prisma generate &amp;&amp; next build&quot;</span><span class="fu">,</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;next start&quot;</span><span class="fu">,</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="dt">&quot;lint&quot;</span><span class="fu">:</span> <span class="st">&quot;next lint&quot;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">},</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="er">//</span> <span class="er">以下、省略</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="fu">}</span></span></code></pre></div>
+      <p>以上のように <code>package.json</code> の <code>scripts</code> セクションに
+      <code>"vercel-build"</code> というカスタムスクリプトを定義しておくと、Vercelでは <span
+      class="masked"><code>"build"</code> スクリプトに代わって <code>"vercel-build"</code>
+      がビルド処理に使われる</span> ようになります。</p>
+      <p><code>"vercel-build"</code> の <code>prisma generate &amp;&amp; next build</code>
+      というコマンドは、以下の2つのコマンドを順番に実行することを意味します。</p>
+      <ol type="1">
+      <li><code>prisma generate</code> : Prisma
+      クライアントを生成します。これにより、データベーススキーマの型定義が TypeScript
+      で利用可能になります。このコマンドの詳細は<a
+      href="lecture08.html#データベースの作成と確認">第08回講義</a>を参照してください。</li>
+      <li><code>next build</code> : Next.js アプリの本番用ビルド (プロダクションモードのビルド)
+      を実行します。</li>
+      </ol>
+      <p>複数のコマンドを <code>&amp;&amp;</code> で連結することで <span
+      class="masked">最初のコマンドが成功した場合にのみ、次のコマンドが実行される</span>
+      ように処理されます。つまり、<code>prisma generate</code> が失敗すると <span
+      class="masked"><code>next build</code> は実行されず、ビルド全体が「失敗」</span>
+      として扱われます。</p>
+      <div class="note type-senior">
+      <p><strong>prisma generateの実行が必要な理由</strong></p>
+      <p><code>prisma generate</code> を実行すると、デフォルトでは
+      <code>node_modules/.prisma/client</code> に PrismaClient
+      が生成されます。しかし、<code>.gitignore</code> の設定によって <code>node_modules</code>
+      配下については <strong>GitHub に Push されません</strong>。</p>
+      <p>その結果、Vercel などのデプロイ環境では <span class="masked">ビルド時に Prisma Client
+      が存在しない状態</span> となります。このため、ビルド処理として <code>prisma generate</code>
+      を実行し、PrismaClient を生成する必要があります。</p>
+      </div>
+      <p><code>package.json</code> を編集したら、再度、プロジェクトを <span class="masked">GitHub に
+      Push</span> してください。</p>
+      <h2 data-number="3.4" id="環境変数の設定"><span class="header-section-number">3.4</span>
+      環境変数の設定</h2>
+      <p>再び、ウェブブラウザで Vercel の「next-blog-app」のページ (プロジェクトのトップページ)
+      に戻ってください。タイミングによりますが、以下のように GitHubへの Push
+      を検知して、再度、ビルド処理が実行されています。</p>
+      <figure>
+      <img src="figs/12/vercel_17.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>しばらくすると、次のようにビルド処理に「<strong>失敗した</strong>」という表示に切り替わります。クリックして詳細を確認してください。</p>
+      <figure>
+      <img src="figs/12/vercel_18.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ログを確認するとビルド処理の失敗原因は <span
+      class="masked">「Supabaseの接続情報が取得できないこと」</span> だと分かります
+      (少しずつ、ログを読み解けるようになってくださいね)。</p>
+      <figure>
+      <img src="figs/12/vercel_19.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>Supabase の接続情報</strong> は <code>prisma/schema.prisma</code> や
+      <code>src/utils/supabase.ts</code> において、以下のように <code>env()</code> や
+      <code>process.env</code> を使用して <span class="masked">「.env」で設定した環境変数</span>
+      から取得するように実装していました。これは、接続情報をソースコードに直接記述すると GitHub に
+      Push した際に情報が流出してしまうのを防ぐための措置でした。</p>
+      <div class="sourceCode" id="cb3" data-caption="prisma/schema.prisma (抜粋)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>datasource db {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  provider  <span class="op">=</span> <span class="st">&quot;postgresql&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  url       <span class="op">=</span> <span class="fu">env</span>(<span class="st">&quot;DATABASE_URL&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  directUrl <span class="op">=</span> <span class="fu">env</span>(<span class="st">&quot;DIRECT_URL&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>}</span></code></pre></div>
+      <div class="sourceCode" id="cb4" data-caption="src/utils/supabase.ts (抜粋)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> { createClient } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="im">export</span> <span class="kw">const</span> supabase <span class="op">=</span> <span class="fu">createClient</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_URL</span><span class="op">!,</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_ANON_KEY</span><span class="op">!</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>)<span class="op">;</span></span></code></pre></div>
+      <p>環境変数を設定した <code>.env</code> は、<code>.gitignore</code> の設定により、GitHub に
+      Push されないようになっています。この結果、Vercel のビルド環境 (デプロイ環境)
+      で「環境変数」が参照できず、上記のように処理に失敗しました。</p>
+      <p>以上のことから <span class="masked">ビルド環境 (デプロイ環境)
+      で環境変数が参照できれば問題解決</span>
+      となります。Vercelの環境変数は、プロジェクトの設定画面から設定することができます。</p>
+      <p>以下のように「<strong>Settings</strong>」から「<strong>Environment
+      Variables</strong>」を選択してください。</p>
+      <figure>
+      <img src="figs/12/vercel_20.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のように <code>.env</code>
+      で設定していた環境変数を設定してください。なお、この際、いずれの設定値も <span
+      class="masked">ダブルクォーテーションで囲まない</span>
+      ように注意してください。また、<strong>設定値の前後にスペースなどを含まないように注意</strong>
+      してください。その他にも、独自の環境変数を追加している場合は、それも同様に設定してください。</p>
+      <figure>
+      <img src="figs/12/vercel_21.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以上で、環境変数の設定が完了しました。</p>
+      <h2 data-number="3.5" id="再デプロイ処理"><span class="header-section-number">3.5</span>
+      再デプロイ処理</h2>
+      <p>環境変数が設定できたので、再度、デプロイ処理を実行してみます。以下のように「<strong>Deployments</strong>」から、最新のコミット
+      (<code>package.json</code>を更新したコミット)
+      の三点リーダをクリックして、「<strong>Redeploy</strong> (再デプロイ)」を選択してください。</p>
+      <figure>
+      <img src="figs/12/vercel_22.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のような確認画面が表示されるので「<strong>Redeploy</strong>」を選択してください。</p>
+      <figure>
+      <img src="figs/12/vercel_23.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>デプロイ処理 (ビルド処理を含む)
+      が再度実行されます。ここまでの設定に問題がなければ、しらばく待った後、次のような画面
+      (Statusが「<strong>Ready</strong>」の状態)になれば成功です🎉</p>
+      <p>❷の「URL」をクリックすると、Vercelにデプロイされ、全世界に公開された「ブログアプリ」にアクセスすることができます
+      (「<strong>Visit</strong>」のボタンでもOKです)。スマートフォンからもアクセスすることができます。</p>
+      <figure>
+      <img src="figs/12/vercel_24.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="3.6" id="公開url-ドメインネーム-の変更"><span
+      class="header-section-number">3.6</span> 公開URL (ドメインネーム) の変更</h2>
+      <p>現在、ウェブアプリの公開アドレスは <code>https://next-blog-app-*****.vercel.app/</code>
+      のようになっていると思います。これは、次の手順で<strong>任意のものに変更することができます</strong>。ただし、既に誰かが使用している場合や、使用中ではないものの最近まで使用されていたドメインを使うことはできません
+      (例えば <code>https://next-blog-app.vercel.app/</code> は使用できません)。</p>
+      <p>以下のように「<strong>Settings</strong>」から「<strong>Domains</strong>」を選択して、「<strong>Edit</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/12/vercel_25.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のように任意のドメインネームを設定して、「<strong>Save</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/12/vercel_26.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="3.7" id="cd-continuous-delivery"><span
+      class="header-section-number">3.7</span> CD (Continuous Delivery)</h2>
+      <p>ここまでの設定により、CD (Continuous Delivery: 継続的デリバリ)
+      が構築できました。以降は、GitHub の <code>main</code> ブランチに対する Push
+      がトリガーとなって、自動的に Vercel でビルドとデプロイが実行されます。</p>
+      <p>実際に Push
+      してから、<strong>デプロイ完了までは数分から数十分ほどかかりま</strong>す。ビルドやデプロイの状況は、Vecelのウェブサイトからプロジェクトを選択して確認することができます。</p>
+      <h2 data-number="3.8" id="リージョン設定"><span class="header-section-number">3.8</span>
+      リージョン設定</h2>
+      <figure>
+      <img src="figs/12/vercel_28.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>リージョンの変更は、再デプロイを実行すると反映されます。</p>
+      <h1 data-number="4" id="github-actions-による定期処理"><span
+      class="header-section-number">4</span> GitHub Actions による定期処理</h1>
+      <p>前々回の講義で解説したように Supabase で作成したプロジェクトは <span
+      class="masked">約7日間放置</span> すると (Supabase のウェブサイトからプロジェクトの DB
+      を参照したり、アプリからウェブAPIにアクセスしないと)、<strong>停止状態 (Paused)</strong>
+      になってしまいます。</p>
+      <p>開発中は (デバッグのために頻繁にウェブAPIにアクセスするため)
+      停止状態になることは稀です。しかし、開発が一段落すると、気付いたときには停止状態になっていることがよくあります
+      (＝<span
+      class="masked">就活のポートフォリオとしては致命的です</span>)。この「ブログアプリ」については、1日1回、トップページにアクセスすれば
+      <code>GET /api/posts</code> リクエストが発生して、内部で <code>prisma.post.findMany()</code>
+      が実行されるため、Supabase が停止状態になることを回避できます。</p>
+      <p>この定期的なアクセス処理は<a
+      href="https://www.google.com/search?q=GitHub+Actions+とは">GitHub Actions</a>を使って <span
+      class="masked">自動化すること</span> ができます。GitHub Actions は <strong>CI/CD</strong>
+      のための機能で <span class="masked">時間指定による処理の定期実行</span> が可能です
+      (その他、GitHub Actions には様々な機能があります)。</p>
+      <p>ここでは1日1回、日本時間の10時15分 (＝<span class="masked">UTC: Coordinated Universal Time
+      (協定世界時) の 01時15分</span>) に <code>https://hoge.vercel.app/</code>
+      にGETリクエストを送信するような処理を GitHub Actions で構築してみたいと思います。</p>
+      <h2 data-number="4.1" id="ワークフローの設定ファイルの作成"><span
+      class="header-section-number">4.1</span> ワークフローの設定ファイルの作成</h2>
+      <p>VSCode で作業します。プロジェクトフォルダの直下に <code>.github</code>
+      というフォルダを作成し、そのなかに <code>workflows</code> というフォルダを作成し、そのなかに
+      <code>daily-ping.yaml</code> というファイルを新規作成してください。</p>
+      <p>ここで <code>.github</code> と <code>workflows</code> というのは GitHub Actions
+      で指定された <strong>特別な名前</strong> なのでスペルミスに注意してください。</p>
+      <figure>
+      <img src="figs/12/vscode_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>作成した <code>daily-ping.yaml</code>
+      に、以下の内容を貼り付けてください。<strong>第06行目</strong>
+      は「定期実行時刻」を設定します。UTC で設定することに注意してください。指定の書式は Linux の<a
+      href="https://www.google.com/search?q=linux+cron">cron</a>と同じです。また、<strong>第18行目</strong>
+      の URL は各自のデプロイ先にあわせて変更してください。</p>
+      <div class="sourceCode" id="cb5" data-caption=".github/workflows/daily-ping.yaml"><pre
+      class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Prevent Supabase Sleep (Daily Ping)</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">    # UTC 01:15 AM に実行 (JST 10:15 AM)</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;15 1 * * *&quot;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="at">  </span><span class="fu">make_request</span><span class="kw">:</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="at">      </span><span class="fu">TZ</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Asia/Tokyo&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Send HTTP GET request</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>          curl -X GET &quot;https://next-blog-app-demo.vercel.app/&quot; -v --fail || exit 1</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Log request time</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>          echo &quot;Keep-alive ping completed at $(date)&quot;</span></code></pre></div>
+      <p>ファイルの編集と保存が完了したら、<span class="masked">コミットして GitHub に Push</span>
+      してください。</p>
+      <h2 data-number="4.2" id="動作確認のための手動実行"><span
+      class="header-section-number">4.2</span> 動作確認のための手動実行</h2>
+      <p>ワークフローの設定が適切にできたかを確認していきます。</p>
+      <p>ウェブブラウザから GitHub
+      リポジトリにアクセスして「<strong>Actions</strong>」のタブに移動してください。さらに、<strong>Prevent
+      Supabase Sleep (Daily Ping)</strong> (＝ <code>daily-ping.yaml</code> の
+      <strong>第01行目</strong>で設定した名前が表示されています) を選択してください。</p>
+      <figure>
+      <img src="figs/12/github_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>このワークフローは、スケジュール実行を想定したものですが <code>daily-ping.yaml</code> の
+      <strong>第07行目</strong> で <code>workflow_dispatch:</code> を記述しているので <span
+      class="masked">ユーザ操作による手動実行</span> も可能になっています。</p>
+      <p>手動実行するために「❸ <strong>Run workflow</strong>」から「❹ <strong>Run
+      workflow</strong>」を押下してください。❹ を押下すると、GitHub の裏側で
+      <code>daily-ping.yaml</code> の <strong>第11行目</strong> で指定した環境 (最新版 Ubuntu Linux)
+      の仮想マシンが起動し、<strong>第18行目</strong> と <strong>第22行目</strong>
+      のコマンドが実行されます。※
+      仮想マシンが起動するまでに十数秒かかることがあります、反応がないからといって「<strong>Run
+      workflow</strong>」ボタンを連打しないようにしてください。</p>
+      <p>ワークフローの実行中は以下のような表示になります。</p>
+      <figure>
+      <img src="figs/12/github_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>正常完了すると、次のような「<strong>緑のチェックマーク</strong>」になります。</p>
+      <figure>
+      <img src="figs/12/github_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>後日、同画面を再確認して、以下のように <code>Scheduled</code>
+      で「緑チェックマーク」がついていれば、スケジュール実行が正常に動作していると言えます。なお、<strong>スケジュール実行の時刻には5分程度の誤差が生じることもあるので注意</strong>してください。</p>
+      <figure>
+      <img src="figs/12/github_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>GitHub Actions のスケジュールワークフローは、当該リポジトリに <span
+      class="masked">60日間、何も Push しないと無効化 (停止)</span> するので注意してください。</p>
+      <h1 data-number="5" id="最終課題"><span class="header-section-number">5</span> 最終課題</h1>
+      <ul>
+      <li><strong><em>提出期限</em></strong> : <strong>02月24日 (月) 23時</strong></li>
+      <li><strong><em>提出先</em></strong> :</li>
+      </ul>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2024/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
