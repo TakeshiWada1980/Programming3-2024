@@ -138,14 +138,14 @@ id="toc-画像アップロードのプロトタイプの改良3"><span class="to
       による認証・認可の仕組みが採用されます。<a
       href="lecture10.html#ログイン処理の解説">前回講義</a>でも触れたように、認証に関する文脈で「<strong>トークン</strong>」とは
       <span class="masked">認証済みであることを証明する電子証明書</span>
-      となります。つまり「<strong>トークンを保持していること</strong>」が「<strong>認証済みのユーザーであること</strong>」を保証します。</p>
+      となります。つまり「<strong>トークンを保持していること</strong>」が「<strong>認証済みのユーザであること</strong>」を保証します。</p>
       <p>さらに、<a href="lecture10.html#演習">前回講義で実際に確認</a>してもらったように、トークン
       (JWT) は <strong>デコードが可能、かつ、署名による検証 (内容が改竄されていないことの確認)
       が可能</strong> という特徴があり、<span
       class="masked">データベースに問い合わせるという負荷の大きな処理を必要とせずに</span>
-      デコードと署名検証という<strong>軽量な処理だけで</strong>、ユーザ認証とユーザ情報に基づく認可が可能になります。</p>
+      デコードと署名検証という<strong>軽量な処理だけで</strong>、「ユーザ認証」と「ユーザ情報に基づく認可」が可能になります。</p>
       <p>以下、バックエンド (＝ウェブAPI)
-      における「トークンを使用した認証・認可」の具体的な方法について解説していきます。</p>
+      における「<strong>トークンを使用した認証・認可</strong>」の具体的な方法について解説していきます。</p>
       <h2 data-number="2.2" id="バックエンドプログラムの変更"><span
       class="header-section-number">2.2</span> バックエンドプログラムの変更</h2>
       <p>記事やカテゴリの追加や編集、削除など <code>/api/admin/</code> 配下の API
@@ -317,10 +317,12 @@ Content-Type: application/json</code></pre>
       を添付するための「<strong>ファイルアップロード機能</strong>」を実装していきます。</p>
       <p>投稿記事の「タイトル」や「本文」などの文字列は Supabase の <strong>RDBシステム
       (PostgreSQL)</strong> に保存するように実装してきました。しかし、RDB は基本的に <span
-      class="masked">「文字列」や「数値」データの管理に特化して設計</span>
+      class="masked">「文字列」や「数値」などのデータ管理に特化して設計</span>
       されたものであり、<strong>「画像」や「PDF」などのバイナリファイルの保存や管理には適していません</strong>。バイナリデータを文字列に変換して保存することは技術的には可能ですが、パフォーマンスやストレージ利用効率の観点から推奨されません。</p>
       <p>以上のことから、画像ファイルの保存 (アップロード) については、Supabase
-      が提供する「<strong>ストレージ機能</strong>」を利用するように設計と実装をしていきます。</p>
+      が提供する「<strong>ストレージ機能</strong> (<a
+      href="https://supabase.com/docs/guides/storage">Supabase
+      Storage</a>)」を利用するように設計と実装をしていきます。</p>
       <h2 data-number="3.1" id="準備-supabaseの設定"><span class="header-section-number">3.1</span>
       準備 (Supabaseの設定)</h2>
       <p>まずは、Supabase のウェブページ上で、<strong>ストレージ機能を利用するための準備</strong>
@@ -365,8 +367,8 @@ Content-Type: application/json</code></pre>
       <img src="figs/11/supabase_03.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>名前 と Public buckets の設定が完了したら「<strong>Save</strong>Public
-      buckets」ボタンを押下してください。</p>
+      <p>名前 と Public buckets
+      の設定が完了したら「<strong>Save</strong>」ボタンを押下してください。</p>
       <p>次に、管理者 (認証済みユーザ) から SupabaseClient
       を通じて画像のアップロードや更新、削除をできるようにするために <strong>RLSポリシー</strong>
       を設定していきます。以下のように「ポリシー設定画面」に進んでください。</p>
