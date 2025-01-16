@@ -156,17 +156,22 @@ class="toc-section-number">4.2</span> 動作確認のための手動実行</a></
       <p>準備として、次の2つを完了させておいてください。</p>
       <h2 data-number="2.1" id="キャッシュの制御"><span class="header-section-number">2.1</span>
       キャッシュの制御</h2>
-      <p>Vercelにプロジェクトをデプロイすると、特に API
-      の「GETリクエスト」において意図せぬキャッシュが発生することがあります。これを回避するために
-      <code>src/app/api/admin/posts</code> や <code>src/app/api/posts</code> など
-      (カテゴリについても同様)、GETリクエストを処理する <code>route.ts</code>
-      に以下のような1文を追加してください。</p>
+      <p>Vercel
+      にアプリをデプロイすると、特に「<strong>APIに対するGETリクエスト</strong>」において、意図せぬ
+      <span class="masked">キャッシュ処理</span> が発生することがあります。例えば、<span
+      class="masked">記事を新規投稿したのに一覧に表示 (反映) されない</span>
+      といったことが発生します。これは、サーバサイドのキャッシュに起因するものなので、ブラウザで
+      <code>F5</code> や <code>Ctrl+F5</code> で再読込みをしても解消されません。</p>
+      <p>この問題を回避するために <code>src/app/api/admin/posts</code> や
+      <code>src/app/api/posts</code> などの <strong>GETリクエスト</strong> を処理する
+      <code>route.ts</code>
+      に以下のような1文を追加してください。カテゴリ関連のGETリクエストのAPIについても、同様に追加してください。</p>
       <p>これにより、バックエンドにおけるキャッシュが無効化できます。</p>
-      <div class="sourceCode" id="cb1" data-caption="src/app/api/posts/route.ts "><pre
+      <div class="sourceCode" id="cb1" data-caption="src/app/api/posts/route.ts (抜粋)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">export</span> <span class="kw">const</span> revalidate <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// キャッシュを無効化</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">export</span> <span class="kw">const</span> revalidate <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// ◀ サーバサイドのキャッシュを無効化</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="co">// 以下省略</span></span></code></pre></div>
