@@ -47,8 +47,10 @@
 連絡・概要</a></li>
 <li><a href="#準備" id="toc-準備"><span class="toc-section-number">2</span> 準備</a>
 <ul>
-<li><a href="#ビルド" id="toc-ビルド"><span class="toc-section-number">2.1</span> ビルド</a></li>
-<li><a href="#push" id="toc-push"><span class="toc-section-number">2.2</span> Push</a></li>
+<li><a href="#キャッシュの制御" id="toc-キャッシュの制御"><span
+class="toc-section-number">2.1</span> キャッシュの制御</a></li>
+<li><a href="#ビルド" id="toc-ビルド"><span class="toc-section-number">2.2</span> ビルド</a></li>
+<li><a href="#push" id="toc-push"><span class="toc-section-number">2.3</span> Push</a></li>
 </ul></li>
 <li><a href="#vercel-の利用登録と設定" id="toc-vercel-の利用登録と設定"><span
 class="toc-section-number">3</span> Vercel の利用登録と設定</a>
@@ -152,14 +154,30 @@ class="toc-section-number">4.2</span> 動作確認のための手動実行</a></
       </ul>
       <h1 data-number="2" id="準備"><span class="header-section-number">2</span> 準備</h1>
       <p>準備として、次の2つを完了させておいてください。</p>
-      <h2 data-number="2.1" id="ビルド"><span class="header-section-number">2.1</span> ビルド</h2>
+      <h2 data-number="2.1" id="キャッシュの制御"><span class="header-section-number">2.1</span>
+      キャッシュの制御</h2>
+      <p>Vercelにプロジェクトをデプロイすると、特に API
+      の「GETリクエスト」において意図せぬキャッシュが発生することがあります。これを回避するために
+      <code>src/app/api/admin/posts</code> や <code>src/app/api/posts</code> など
+      (カテゴリについても同様)、GETリクエストを処理する <code>route.ts</code>
+      に以下のような1文を追加してください。</p>
+      <p>これにより、バックエンドにおけるキャッシュが無効化できます。</p>
+      <div class="sourceCode" id="cb1" data-caption="src/app/api/posts/route.ts "><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> prisma <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">export</span> <span class="kw">const</span> revalidate <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// キャッシュを無効化</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">// 以下省略</span></span></code></pre></div>
+      <h2 data-number="2.2" id="ビルド"><span class="header-section-number">2.2</span> ビルド</h2>
       <p>次のコマンドを使って本番環境用（プロダクション環境用）にアプリをビルドして「<strong>エラーが発生しないこと</strong>」を確認してください。また「警告
       (ワーニング)」についても、可能な限り潰しておいてください。</p>
       <pre><code>npm run build</code></pre>
       <p>自分のPCのローカル環境でビルドに失敗している状況では、<strong>Vercel
       でのビルドもほぼ確実に失敗します</strong>
       (ここから先の解説を読んで作業をしても失敗します)。</p>
-      <h2 data-number="2.2" id="push"><span class="header-section-number">2.2</span> Push</h2>
+      <h2 data-number="2.3" id="push"><span class="header-section-number">2.3</span> Push</h2>
       <p>プロジェクトを GitHubリポジトリ (<code>main</code> ブランチ) に発行しておいてください。</p>
       <h1 data-number="3" id="vercel-の利用登録と設定"><span class="header-section-number">3</span>
       Vercel の利用登録と設定</h1>
@@ -287,21 +305,21 @@ class="toc-section-number">4.2</span> 動作確認のための手動実行</a></
       <p>プロジェクトフォルダの直下の <code>package.json</code> を開いて、以下に示す
       <strong>第08行目</strong> のように <code>"vercel-build"</code>
       というカスタムスクリプトを追加してください。</p>
-      <div class="sourceCode" id="cb2"
+      <div class="sourceCode" id="cb3"
       data-caption="package.json &quot;vercel-build&quot; の追加"><pre
-      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;next-blog-app&quot;</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1.0&quot;</span><span class="fu">,</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;next dev&quot;</span><span class="fu">,</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;next build&quot;</span><span class="fu">,</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="dt">&quot;vercel-build&quot;</span><span class="fu">:</span> <span class="st">&quot;prisma generate &amp;&amp; next build&quot;</span><span class="fu">,</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;next start&quot;</span><span class="fu">,</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="dt">&quot;lint&quot;</span><span class="fu">:</span> <span class="st">&quot;next lint&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">},</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="er">//</span> <span class="er">以下、省略</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="fu">}</span></span></code></pre></div>
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;next-blog-app&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1.0&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;next dev&quot;</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;next build&quot;</span><span class="fu">,</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="dt">&quot;vercel-build&quot;</span><span class="fu">:</span> <span class="st">&quot;prisma generate &amp;&amp; next build&quot;</span><span class="fu">,</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;next start&quot;</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="dt">&quot;lint&quot;</span><span class="fu">:</span> <span class="st">&quot;next lint&quot;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">},</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="er">//</span> <span class="er">以下、省略</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">}</span></span></code></pre></div>
       <p>以上のように <code>package.json</code> の <code>scripts</code> セクションに
       <code>"vercel-build"</code> というカスタムスクリプトを定義しておくと、Vercelでは <span
       class="masked"><code>"build"</code> スクリプトに代わって <code>"vercel-build"</code>
@@ -359,19 +377,19 @@ class="toc-section-number">4.2</span> 動作確認のための手動実行</a></
       <code>process.env</code> を使用して <span class="masked">「.env」で設定した環境変数</span>
       から取得するように実装していました。これは、接続情報をソースコードに直接記述すると GitHub に
       Push した際に情報が流出してしまうのを防ぐための措置でした。</p>
-      <div class="sourceCode" id="cb3" data-caption="prisma/schema.prisma (抜粋)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1"></a>datasource db {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  provider  <span class="op">=</span> <span class="st">&quot;postgresql&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  url       <span class="op">=</span> <span class="fu">env</span>(<span class="st">&quot;DATABASE_URL&quot;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  directUrl <span class="op">=</span> <span class="fu">env</span>(<span class="st">&quot;DIRECT_URL&quot;</span>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a>}</span></code></pre></div>
-      <div class="sourceCode" id="cb4" data-caption="src/utils/supabase.ts (抜粋)"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> { createClient } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="im">export</span> <span class="kw">const</span> supabase <span class="op">=</span> <span class="fu">createClient</span>(</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_URL</span><span class="op">!,</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_ANON_KEY</span><span class="op">!</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb4" data-caption="prisma/schema.prisma (抜粋)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a>datasource db {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  provider  <span class="op">=</span> <span class="st">&quot;postgresql&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  url       <span class="op">=</span> <span class="fu">env</span>(<span class="st">&quot;DATABASE_URL&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  directUrl <span class="op">=</span> <span class="fu">env</span>(<span class="st">&quot;DIRECT_URL&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>}</span></code></pre></div>
+      <div class="sourceCode" id="cb5" data-caption="src/utils/supabase.ts (抜粋)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> { createClient } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="im">export</span> <span class="kw">const</span> supabase <span class="op">=</span> <span class="fu">createClient</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_URL</span><span class="op">!,</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_ANON_KEY</span><span class="op">!</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>)<span class="op">;</span></span></code></pre></div>
       <p>環境変数を設定した <code>.env</code> は、<code>.gitignore</code> の設定により、GitHub に
       Push されないようになっています。この結果、Vercel のビルド環境 (デプロイ環境)
       で「環境変数」が参照できず、上記のように処理に失敗しました。</p>
@@ -482,29 +500,29 @@ class="toc-section-number">4.2</span> 動作確認のための手動実行</a></
       は「定期実行時刻」を設定します。UTC で設定することに注意してください。指定の書式は Linux の<a
       href="https://www.google.com/search?q=linux+cron">cron</a>と同じです。また、<strong>第18行目</strong>
       の URL は各自のデプロイ先にあわせて変更してください。</p>
-      <div class="sourceCode" id="cb5" data-caption=".github/workflows/daily-ping.yaml"><pre
-      class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Prevent Supabase Sleep (Daily Ping)</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">    # UTC 01:15 AM に実行 (JST 10:15 AM)</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;15 1 * * *&quot;</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="at">  </span><span class="fu">make_request</span><span class="kw">:</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="at">      </span><span class="fu">TZ</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Asia/Tokyo&quot;</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Send HTTP GET request</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a>          curl -X GET &quot;https://next-blog-app-demo.vercel.app/&quot; -v --fail || exit 1</span>
-<span id="cb5-19"><a href="#cb5-19"></a></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Log request time</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a>          echo &quot;Keep-alive ping completed at $(date)&quot;</span></code></pre></div>
+      <div class="sourceCode" id="cb6" data-caption=".github/workflows/daily-ping.yaml"><pre
+      class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Prevent Supabase Sleep (Daily Ping)</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">    # UTC 01:15 AM に実行 (JST 10:15 AM)</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;15 1 * * *&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="at">  </span><span class="fu">make_request</span><span class="kw">:</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="at">      </span><span class="fu">TZ</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Asia/Tokyo&quot;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Send HTTP GET request</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a>          curl -X GET &quot;https://next-blog-app-demo.vercel.app/&quot; -v --fail || exit 1</span>
+<span id="cb6-19"><a href="#cb6-19"></a></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Log request time</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a>          echo &quot;Keep-alive ping completed at $(date)&quot;</span></code></pre></div>
       <p>ファイルの編集と保存が完了したら、<span class="masked">コミットして GitHub に Push</span>
       してください。</p>
       <h2 data-number="4.2" id="動作確認のための手動実行"><span
