@@ -104,8 +104,10 @@ class="toc-section-number">5.2</span> アイコン用の画像の配置</a></li>
 <li><a href="#最終課題-課題3" id="toc-最終課題-課題3"><span class="toc-section-number">6</span>
 最終課題 (課題3)</a>
 <ul>
+<li><a href="#注意事項" id="toc-注意事項"><span class="toc-section-number">6.1</span>
+注意事項</a></li>
 <li><a href="#readmeの構成.mdについて" id="toc-readmeの構成.mdについて"><span
-class="toc-section-number">6.1</span> READMEの構成.mdについて</a></li>
+class="toc-section-number">6.2</span> READMEの構成.mdについて</a></li>
 </ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -754,6 +756,9 @@ class="toc-section-number">6.1</span> READMEの構成.mdについて</a></li>
       <li>GitHub をリモートリポジトリに設定して「オリジナルウェブアプリ」を開発する。</li>
       <li>オリジナルウェブアプリを<a
       href="https://vercel.com/">Vercel</a>にデプロイ・公開する。</li>
+      <li>Supabase が停止モードにならないように GitHub Actions を利用して<a
+      href="lecture12.html#github-actions-による定期処理">定期的に Ping を飛ばす処理</a>を設定する
+      (ログから正常動作することも確認する)。</li>
       <li>2年次に作成した作品置き場としての <strong>ポートフォリオ</strong> (GitHubPagse)
       のなかに、開発したウェブアプリの「<strong>タイトル</strong>」「<strong>概要（スクリーンショット2枚以上）</strong>」「<strong>リポジトリ
       (URL)</strong>」「<strong>公開URL</strong>」を掲載する。
@@ -767,9 +772,10 @@ class="toc-section-number">6.1</span> READMEの構成.mdについて</a></li>
       <li><strong><em>評価</em></strong> : GitHubリポジトリの <strong>README</strong>
       の内容を「<strong>5点満点</strong>」、アプリ本体やソースコードを「<strong>5点満点</strong>」で、「<strong>合計10点満点</strong>」で評価します。「7.6点」を標準とします。
       <ul>
-      <li>ゼロベースの新規開発に取り組んだ場合は、上記の合計に大きく加点します。</li>
+      <li>ゼロベースの新規開発に取り組んだ場合は、上記の合計に加点します (10点が上限)。</li>
       <li>「Vercel にデプロイ・公開されていない」「提出上の不備がある
-      (提出遅れやURLの記述ミスを含む)」「作品集としてのポートフォリオに記載がない」などは、上記の合計から減点します。</li>
+      (提出遅れやURLの記述ミスを含む)」「作品集としてのポートフォリオに記載がない」などは、上記の合計から減点します
+      (0点が下限)。</li>
       </ul></li>
       <li><strong><em>提出先</em></strong> : <a
       href="https://forms.office.com/r/Y6zmvsvT8V">Microsoft Forms</a>
@@ -783,10 +789,26 @@ class="toc-section-number">6.1</span> READMEの構成.mdについて</a></li>
       </ul></li>
       <li>提出された課題は、教員と知能情報コースの学生に公開します。</li>
       </ul>
-      <h2 data-number="6.1" id="readmeの構成.mdについて"><span
-      class="header-section-number">6.1</span> READMEの構成.mdについて</h2>
-      <p>次のような内容を記載すること推奨します
-      (あくまでも「例」です)。基本的には情報量が多いほど高評価です。</p>
+      <h2 data-number="6.1" id="注意事項"><span class="header-section-number">6.1</span>
+      注意事項</h2>
+      <ul>
+      <li>開発したウェブアプリは、少なくとも <strong>2025年3月31日</strong>
+      までは稼働している状態にしてください。</li>
+      <li>Supabase
+      は7日間アクセスがないと「停止モード」になります。課題評価時に「停止モード」になっていると、適切に評価できません。停止モードにならないるように
+      GitHub Action で Ping を飛ばすようにしてください。</li>
+      <li>アプリのなかで <strong>ログイン (認証) が必要なページや機能</strong>
+      について、実際に動作を見て欲しいものがあれば TeamsChat で認証情報を送ってください。
+      <ul>
+      <li><span class="masked">ゲストログイン機能
+      (IDやパスワードを入力しなくとも、押下するだけでログインできる機能)</span>
+      を実装することもありです。</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="6.2" id="readmeの構成.mdについて"><span
+      class="header-section-number">6.2</span> READMEの構成.mdについて</h2>
+      <p>次のような内容を記載すること推奨します (あくまでも「<strong>例</strong>」です)。</p>
+      <p><strong>基本的には情報量が多いほど「高評価」です</strong>。</p>
       <div class="sourceCode" id="cb10" data-caption="README.md"><pre
       class="sourceCode numberSource md numberLines"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu"># アプリの名前</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
@@ -796,40 +818,42 @@ class="toc-section-number">6.1</span> READMEの構成.mdについて</a></li>
 <span id="cb10-6"><a href="#cb10-6"></a><span class="ss">  - </span>課題発見能力、課題解決能力、人となりなどを見てもらえます。</span>
 <span id="cb10-7"><a href="#cb10-7"></a><span class="ss">- </span>公開URL</span>
 <span id="cb10-8"><a href="#cb10-8"></a></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="fu">## 機能・特徴</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="fu">## 特徴と機能の説明</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="ss">- </span>スクリーンショットなどを添えながら機能や工夫点、こわだりのポイントを解説する。</span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="ss">    - </span>特に認証しないと表示できない画面は、ここで記述しておかないと読み手には伝わらない。</span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="ss">- </span>最低でも3個ぐらいは、特徴を箇条書きしましょう。</span>
-<span id="cb10-14"><a href="#cb10-14"></a></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="fu">## 使用技術 (技術スタック)</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="ss">- </span>使用した言語やフレームワーク</span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="ss">    - </span>少なくとも TypeScript と Next.js は書いておくべき。</span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="ss">    - </span>その他、アプリを構成する主要なライブラリなどを記載する。</span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="ss">- </span>開発に使用したツールやウェブサービス</span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="ss">    - </span>VSCode、Supabase、Vercel は書いておくべき。</span>
-<span id="cb10-22"><a href="#cb10-22"></a><span class="ss">- </span>システム構成図</span>
-<span id="cb10-23"><a href="#cb10-23"></a></span>
-<span id="cb10-24"><a href="#cb10-24"></a><span class="fu">## 開発期間・体制</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="ss">- </span>スクリーンショットや動画 (アニメ) を添えながら基本機能や工夫点を解説する。</span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="ss">- </span>最低でも3個ぐらいは、特徴を箇条書きしましょう。</span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="ss">- </span>この項目の情報量が評価に大きく関係します。</span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="ss">    - </span>特に認証をログインを必要とする画面や機能は、ここで記述しないと評価者に伝わらない。</span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="fu">## 使用技術 (技術スタック)</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="ss">- </span>使用した言語やフレームワーク</span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="ss">    - </span>少なくとも TypeScript と Next.js、Prisma は書いておくべき。</span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="ss">    - </span>その他、アプリを構成する主要なライブラリなどを記載する。</span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="ss">    - </span>ReReact Hook Form や zod、SWR を使っている場合は明示する。</span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="ss">- </span>開発に使用したツールやウェブサービス</span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="ss">    - </span>VSCode、Supabase、Vercel は書いておくべき。</span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="ss">- </span>システム構成図</span>
 <span id="cb10-25"><a href="#cb10-25"></a></span>
-<span id="cb10-26"><a href="#cb10-26"></a><span class="ss">- </span>開発体制: 個人開発</span>
-<span id="cb10-27"><a href="#cb10-27"></a><span class="ss">- </span>開発期間: 2024.12 ~ 2025.2 (約XXX時間)</span>
-<span id="cb10-28"><a href="#cb10-28"></a></span>
-<span id="cb10-29"><a href="#cb10-29"></a><span class="fu">## 工夫した点・苦労した点</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="fu">## 開発期間・体制</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="ss">- </span>開発体制: 個人開発</span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="ss">- </span>開発期間: 2024.12 ~ 2025.2 (約XXX時間)</span>
 <span id="cb10-30"><a href="#cb10-30"></a></span>
-<span id="cb10-31"><a href="#cb10-31"></a><span class="ss">- </span>特に、技術的な目標や挑戦を持って開発した場合は記載すると良いです。</span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="fu">## 工夫した点・苦労した点</span></span>
 <span id="cb10-32"><a href="#cb10-32"></a></span>
-<span id="cb10-33"><a href="#cb10-33"></a><span class="fu">## 既知の課題と今後の展望</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="ss">- </span>特に、技術的な目標や挑戦を持って取り組んだ場合は記載すると良いです。</span>
 <span id="cb10-34"><a href="#cb10-34"></a></span>
-<span id="cb10-35"><a href="#cb10-35"></a><span class="ss">- </span>改良・改善したいこと。</span>
-<span id="cb10-36"><a href="#cb10-36"></a><span class="ss">- </span>機能拡張のロードマップなど。</span>
-<span id="cb10-37"><a href="#cb10-37"></a></span>
-<span id="cb10-38"><a href="#cb10-38"></a><span class="fu">## 連絡先 (任意)</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="fu">## 既知の課題と今後の展望</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37"></a><span class="ss">- </span>改良・改善したいこと。</span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="ss">- </span>機能拡張のロードマップなど。</span>
 <span id="cb10-39"><a href="#cb10-39"></a></span>
-<span id="cb10-40"><a href="#cb10-40"></a><span class="ss">- </span>作品集としてのポートフォリオのURL</span>
-<span id="cb10-41"><a href="#cb10-41"></a><span class="ss">- </span>SNSアカウント</span>
-<span id="cb10-42"><a href="#cb10-42"></a><span class="ss">- </span>所属など</span></code></pre></div>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="fu">## 連絡先 (任意)</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="ss">- </span>作品集としてのポートフォリオのURL</span>
+<span id="cb10-43"><a href="#cb10-43"></a><span class="ss">- </span>SNSアカウント</span>
+<span id="cb10-44"><a href="#cb10-44"></a><span class="ss">- </span>所属など</span></code></pre></div>
       <ul>
       <li>システム構成図の例
       <ul>
