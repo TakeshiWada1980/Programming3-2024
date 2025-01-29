@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script> 
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第13回 3I-プログラミング3</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span> 連絡・概要</a>
+<ul>
+<li><a href="#課題3" id="toc-課題3"><span class="toc-section-number">1.1</span> 課題3</a></li>
+<li><a href="#ゲームtimesit業界フォーラム" id="toc-ゲームtimesit業界フォーラム"><span
+class="toc-section-number">1.2</span> ゲーム<span
+class="math inline">\(\times\)</span>IT業界フォーラム</a></li>
+<li><a href="#next.js-のバージョンに関する注意" id="toc-next.js-のバージョンに関する注意"><span
+class="toc-section-number">1.3</span> Next.js のバージョンに関する注意</a></li>
+<li><a href="#schema.prisma-のシンタックスハイライト"
+id="toc-schema.prisma-のシンタックスハイライト"><span class="toc-section-number">1.4</span>
+schema.prisma のシンタックスハイライト</a></li>
+</ul></li>
+<li><a href="#トースト通知機能" id="toc-トースト通知機能"><span class="toc-section-number">2</span>
+トースト通知機能</a>
+<ul>
+<li><a href="#実装の手順" id="toc-実装の手順"><span class="toc-section-number">2.1</span>
+実装の手順</a></li>
+</ul></li>
+<li><a href="#モーダル表示" id="toc-モーダル表示"><span class="toc-section-number">3</span>
+モーダル表示</a>
+<ul>
+<li><a href="#実装の手順-1" id="toc-実装の手順-1"><span class="toc-section-number">3.1</span>
+実装の手順</a></li>
+</ul></li>
+<li><a href="#shadcnui" id="toc-shadcnui"><span class="toc-section-number">4</span> shadcn/ui</a>
+<ul>
+<li><a href="#実装の手順-2" id="toc-実装の手順-2"><span class="toc-section-number">4.1</span>
+実装の手順</a></li>
+</ul></li>
+<li><a href="#lucide-react-icon" id="toc-lucide-react-icon"><span
+class="toc-section-number">5</span> Lucide React Icon</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2024-3I プログラミング3 第13回 講義資料</p>
+      <p>2025年01月30日（木）1・2時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <h2 data-number="1.1" id="課題3"><span class="header-section-number">1.1</span> 課題3</h2>
+      <p>詳細は、<a href="lecture12.html#最終課題-課題3">前回の講義資料</a>を確認してください。</p>
+      <ul>
+      <li><code>README.md</code> の記述がポイントになります。説明をよく読むようにしてください。</li>
+      <li>学年末なので特に期限に注意してください
+      (提出後にアプリのバージョンアップを継続することは問題ありません)。</li>
+      </ul>
+      <h2 data-number="1.2" id="ゲームtimesit業界フォーラム"><span
+      class="header-section-number">1.2</span> ゲーム<span
+      class="math inline">\(\times\)</span>IT業界フォーラム</h2>
+      <p><strong>業界研究&amp;インターンシップ</strong> 「<strong>ゲーム<span
+      class="math inline">\(\times\)</span>IT業界フォーラム</strong>」の案内です。詳細は<a
+      href="https://www.gakujo.ne.jp/2026/events/evt_dtl.aspx?p1=evt392&amp;area=online">こちら</a>から確認してください。</p>
+      <p>2/13 (木) と 14 (金) の 10:40-18:00 にオンライン形式で実施されます (要・事前登録)。</p>
+      <blockquote>
+      <p>（１）「業界」や「会社」「仕事」について話が聞ける！<br />
+      ゲーム・IT業界を代表する企業や急成長している企業から会社のことや仕事の話を聞き、理解を深められます。</p>
+      <p>（２）このイベントでしか得られないインターンシップ情報をGETできる！<br />
+      就業体験の場である<strong>インターンシップを行う企業から「実施内容」「スケジュール」「選考方法」などについて直接情報を得られます</strong>。（対応は企業により異なります）</p>
+      </blockquote>
+      <h2 data-number="1.3" id="next.js-のバージョンに関する注意"><span
+      class="header-section-number">1.3</span> Next.js のバージョンに関する注意</h2>
+      <p>完全新規でオリジナルアプリを開発する場合は、環境構築の際に <span class="masked">Next.js
+      のバージョン</span> に注意してください。</p>
+      <p>最新バージョンである「<strong>15</strong>」を使用すると、この授業で示したサンプルコードでは動作しない場合があります。特に、バックエンドにおける
+      <code>/api/posts/[id]</code> のような <strong>ルートパラメータ</strong>
+      の取得方法が非同期に変わっているので注意してください。このあたりの対応に不安がある場合は、<a
+      href="lecture06.html#next.js-の-開発環境構築">第06回講義</a>で解説したように、バージョン「<strong>14</strong>」を使用してください。</p>
+      <ul>
+      <li>参考: <a href="https://tech-hint.hatenablog.com/entry/2024/11/07/133604">Next.js
+      15で変更されたRoute Handlersのパラメータ処理について</a></li>
+      </ul>
+      <h2 data-number="1.4" id="schema.prisma-のシンタックスハイライト"><span
+      class="header-section-number">1.4</span> schema.prisma のシンタックスハイライト</h2>
+      <p>VSCode の拡張機能として Prisma (識別子 <code>prisma.prisma</code>) をインストールすると
+      <code>schema.prisma</code> がシンタックスハイライトされるようになります。</p>
+      <figure>
+      <img src="figs/13/vscode_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="2" id="トースト通知機能"><span class="header-section-number">2</span>
+      トースト通知機能</h1>
+      <p><a
+      href="https://www.npmjs.com/package/react-hot-toast">react-hot-toast</a>というライブラリを使用して
+      <strong>トースト通知</strong> の機能を実装したサンプルを紹介します。</p>
+      <figure>
+      <img src="figs/13/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="2.1" id="実装の手順"><span class="header-section-number">2.1</span>
+      実装の手順</h2>
+      <p>VSCodeのターミナル (<code>Ctrl+J</code>)
+      から以下のコマンドを実行してライブラリをインストールします。</p>
+      <pre><code>npm i react-hot-toast</code></pre>
+      <p>サンプルコードを以下に示します。</p>
+      <div class="sourceCode" id="cb2" data-caption="src/app/playground/toast/page.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> toast<span class="op">,</span> { Toaster } <span class="im">from</span> <span class="st">&quot;react-hot-toast&quot;</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="kw">const</span> buttonStyle <span class="op">=</span> <span class="fu">twMerge</span>(</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="st">&quot;rounded-md  px-3 py-1 &quot;</span><span class="op">,</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="st">&quot;font-bold text-white&quot;</span><span class="op">,</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="st">&quot;bg-indigo-500 hover:bg-indigo-700&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>  )<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="kw">const</span> successNotify <span class="op">=</span> (msg<span class="op">:</span> <span class="dt">string</span>) <span class="kw">=&gt;</span> toast<span class="op">.</span><span class="fu">success</span>(msg)<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="kw">const</span> errorNotify <span class="op">=</span> (msg<span class="op">:</span> <span class="dt">string</span>) <span class="kw">=&gt;</span> toast<span class="op">.</span><span class="fu">error</span>(msg)<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold &quot;</span><span class="op">&gt;</span>トースト通知<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-x-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>        <span class="op">&lt;</span>button</span>
+<span id="cb2-20"><a href="#cb2-20"></a>          className<span class="op">=</span>{buttonStyle}</span>
+<span id="cb2-21"><a href="#cb2-21"></a>          onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">successNotify</span>(<span class="st">&quot;成功スタイルのトースト通知&quot;</span>)}</span>
+<span id="cb2-22"><a href="#cb2-22"></a>        <span class="op">&gt;</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>          success</span>
+<span id="cb2-24"><a href="#cb2-24"></a>        <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>        <span class="op">&lt;</span>button</span>
+<span id="cb2-26"><a href="#cb2-26"></a>          className<span class="op">=</span>{buttonStyle}</span>
+<span id="cb2-27"><a href="#cb2-27"></a>          onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">errorNotify</span>(<span class="st">&quot;エラースタイルのトースト通知&quot;</span>)}</span>
+<span id="cb2-28"><a href="#cb2-28"></a>        <span class="op">&gt;</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>          error</span>
+<span id="cb2-30"><a href="#cb2-30"></a>        <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a></span>
+<span id="cb2-33"><a href="#cb2-33"></a>      <span class="op">&lt;</span>Toaster position<span class="op">=</span><span class="st">&quot;top-center&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>  )<span class="op">;</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a>}<span class="op">;</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>トーストの「<strong>表示位置</strong>」や「<strong>外観
+      (アイコンや背景色)</strong>」、<span
+      class="masked">表示されてから自動消去されるまでの時間</span>
+      などもカスタマイズ可能です。詳細については<a
+      href="https://react-hot-toast.com/docs">公式ドキュメント</a>を参照してください。</p>
+      <h1 data-number="3" id="モーダル表示"><span class="header-section-number">3</span>
+      モーダル表示</h1>
+      <p><a
+      href="https://www.npmjs.com/package/react-modal">react-modal</a>というライブラリを使用して
+      <strong>モーダルウィンドウ</strong> を実装したサンプルを紹介します。</p>
+      <figure>
+      <img src="figs/13/app_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="3.1" id="実装の手順-1"><span class="header-section-number">3.1</span>
+      実装の手順</h2>
+      <p>VSCodeのターミナルからライブラリをインストールします。react-modal は
+      <strong>TypeScriptの型定義が同梱されていないため</strong>、別途 <span class="masked"><span
+      class="citation" data-cites="types">@types</span>
+      パッケージとして提供されている型定義ファイル</span>
+      をインストールする必要があります（型定義ファイルは開発時のみ必要なため、devDependencies として
+      <code>-D</code> オプションを付けてインストールします）。</p>
+      <pre><code>npm i react-modal
+npm i -D @types/react-modal</code></pre>
+      <p>まずは、モーダルウィンドウの外観を定義するコンポーネントを実装します。</p>
+      <div class="sourceCode" id="cb4"
+      data-caption="src/app/playground/modal/_components/Modal.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="im">import</span> React<span class="op">,</span> { ReactNode } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="im">import</span> ReactModal <span class="im">from</span> <span class="st">&quot;react-modal&quot;</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="im">import</span> { faXmark } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">interface</span> Props {</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  isOpen<span class="op">:</span> <span class="dt">boolean</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  onClose<span class="op">:</span> () <span class="kw">=&gt;</span> <span class="dt">void</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  children<span class="op">:</span> ReactNode<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>}</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="im">export</span> <span class="kw">const</span> Modal<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span><span class="op">&lt;</span>Props<span class="op">&gt;</span> <span class="op">=</span> (props) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  <span class="kw">const</span> { isOpen<span class="op">,</span> onClose<span class="op">,</span> children } <span class="op">=</span> props<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>  <span class="cf">return</span> (</span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="op">&lt;</span>ReactModal</span>
+<span id="cb4-18"><a href="#cb4-18"></a>      isOpen<span class="op">=</span>{isOpen}</span>
+<span id="cb4-19"><a href="#cb4-19"></a>      onRequestClose<span class="op">=</span>{onClose}</span>
+<span id="cb4-20"><a href="#cb4-20"></a>      contentLabel<span class="op">=</span><span class="st">&quot;Modal&quot;</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>      closeTimeoutMS<span class="op">=</span>{<span class="dv">300</span>}</span>
+<span id="cb4-22"><a href="#cb4-22"></a>      ariaHideApp<span class="op">=</span>{<span class="kw">false</span>}</span>
+<span id="cb4-23"><a href="#cb4-23"></a>      className<span class="op">=</span><span class="st">&quot;relative z-50 h-screen w-screen bg-black/50&quot;</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>      overlayClassName<span class="op">=</span><span class="st">&quot;fixed inset-0 bg-black_main flex items-center justify-center z-50&quot;</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a>    <span class="op">&gt;</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex size-full flex-col items-center justify-center&quot;</span><span class="op">&gt;</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex w-full justify-end md:w-[640px]&quot;</span><span class="op">&gt;</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a>          <span class="op">&lt;</span>button className<span class="op">=</span><span class="st">&quot;px-3 py-0.5  md:px-1&quot;</span> onClick<span class="op">=</span>{onClose}<span class="op">&gt;</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a>            <span class="op">&lt;</span>FontAwesomeIcon</span>
+<span id="cb4-30"><a href="#cb4-30"></a>              className<span class="op">=</span><span class="st">&quot;cursor-pointer text-2xl text-white hover:text-gray-300&quot;</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a>              icon<span class="op">=</span>{faXmark}</span>
+<span id="cb4-32"><a href="#cb4-32"></a>            <span class="op">/&gt;</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a>          <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;w-full bg-white p-3 md:w-[640px] md:rounded-md&quot;</span><span class="op">&gt;</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a>          {children}</span>
+<span id="cb4-37"><a href="#cb4-37"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a>    <span class="op">&lt;/</span>ReactModal<span class="op">&gt;</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a>  )<span class="op">;</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>つづいて、上記で定義した <code>Modal</code> コンポーネントを呼び出します。</p>
+      <div class="sourceCode" id="cb5" data-caption="src/app/playground/modal/page.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="im">import</span> { Modal } <span class="im">from</span> <span class="st">&quot;./_components/Modal&quot;</span><span class="op">;</span> <span class="co">// コンポーネントのインポート</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="kw">const</span> [isModalOpen<span class="op">,</span> setIsModalOpen] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="cf">return</span> (</span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>モーダル<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-x-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>        <span class="op">&lt;</span>button</span>
+<span id="cb5-14"><a href="#cb5-14"></a>          className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
+<span id="cb5-15"><a href="#cb5-15"></a>            <span class="st">&quot;rounded-md  px-3 py-1&quot;</span><span class="op">,</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>            <span class="st">&quot;font-bold text-white&quot;</span><span class="op">,</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>            <span class="st">&quot;bg-indigo-500 hover:bg-indigo-700&quot;</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>          )}</span>
+<span id="cb5-19"><a href="#cb5-19"></a>          onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">setIsModalOpen</span>(<span class="kw">true</span>)}</span>
+<span id="cb5-20"><a href="#cb5-20"></a>        <span class="op">&gt;</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>          モーダルウィンドウを開く</span>
+<span id="cb5-22"><a href="#cb5-22"></a>        <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a></span>
+<span id="cb5-25"><a href="#cb5-25"></a>      <span class="op">&lt;</span>Modal isOpen<span class="op">=</span>{isModalOpen} onClose<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">setIsModalOpen</span>(<span class="kw">false</span>)}<span class="op">&gt;</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>        {<span class="co">/* モーダル内に表示するコンテンツを &lt;Modal&gt;...&lt;/Modal&gt; の子要素として与える */</span>}</span>
+<span id="cb5-27"><a href="#cb5-27"></a>        <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;text-xl font-bold&quot;</span><span class="op">&gt;</span>徒然草<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>            <span class="op">&lt;</span>p<span class="op">&gt;</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>              つれづれなるままに、日暮らし硯に向かひて、心にうつりゆくよしなしごとを、</span>
+<span id="cb5-32"><a href="#cb5-32"></a>              そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。</span>
+<span id="cb5-33"><a href="#cb5-33"></a>            <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a>      <span class="op">&lt;/</span>Modal<span class="op">&gt;</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a>  )<span class="op">;</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a>}<span class="op">;</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a></span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <h1 data-number="4" id="shadcnui"><span class="header-section-number">4</span> shadcn/ui</h1>
+      <p><a href="https://ui.shadcn.com/docs/components/">shadcn/ui</a>という
+      <strong>UIコンポーネントコレクション</strong>
+      を利用するサンプルを示します。以下に示すように「スイッチ」や「カレンダ」「アコーディオン」「ドロップダウンメニュー」など
+      <strong>統一感のある各種UIコンポーネントを提供</strong> してくれます。</p>
+      <figure>
+      <img src="figs/13/shadcn-ui_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>利用可能なコンポーネントの一覧は<a
+      href="https://ui.shadcn.com/docs/components/">こちら</a>から確認することができます。</p>
+      <h2 data-number="4.1" id="実装の手順-2"><span class="header-section-number">4.1</span>
+      実装の手順</h2>
+      <p>shadcn/ui
+      のセットアップは一般的なライブラリとはやや異なります。まずは、VSCodeのターミナルから、以下のコマンドを実行してください。</p>
+      <pre><code>npx shadcn@latest init</code></pre>
+      <p>いくつかの質問が表示されるので、以下のように回答します。</p>
+      <blockquote>
+      <p>Which style would you like to use? » <strong>New York</strong><br />
+      Which color would you like to use as the base color? » <strong>Slate</strong><br />
+      Would you like to use CSS variables for theming? … <strong>no</strong></p>
+      </blockquote>
+      <p><strong>(実行例)</strong></p>
+      <pre><code>Need to install the following packages:
+shadcn@2.3.0
+Ok to proceed? (y) y
+
+✔ Preflight checks.
+✔ Verifying framework. Found Next.js.
+✔ Validating Tailwind CSS.
+✔ Validating import alias.
+√ Which style would you like to use? » New York
+√ Which color would you like to use as the base color? » Slate
+√ Would you like to use CSS variables for theming? ... no
+✔ Writing components.json.
+✔ Checking registry.
+✔ Updating tailwind.config.ts
+✔ Updating src\app\globals.css
+✔ Installing dependencies.
+✔ Created 1 file:
+  - src\lib\utils.ts
+
+Success! Project initialization completed.
+You may now add components.</code></pre>
+      <p>つづいて、必要なUIを選んでインストールします。例えば<a
+      href="https://ui.shadcn.com/docs/components/switch">スイッチUI</a>を追加する場合は、以下のようにコマンドを実行します。</p>
+      <pre><code>npx shadcn@latest add switch</code></pre>
+      <p>また、<a
+      href="https://ui.shadcn.com/docs/components/calendar">カレンダUI</a>を追加する場合は、以下のようにコマンドを実行します。</p>
+      <pre><code>npx shadcn@latest add calendar</code></pre>
+      <p>上記によってインストールされたライブラリは <code>/src/components/ui/</code>
+      にインストールされます。</p>
+      <p>実装例を以下に示します。</p>
+      <figure>
+      <img src="figs/13/app_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>サンプルコードを以下に示します。</p>
+      <div class="sourceCode" id="cb10" data-caption="src/app/playground/shadcn-ui/page.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb10-1"><a href="#cb10-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="im">import</span> dayjs <span class="im">from</span> <span class="st">&quot;dayjs&quot;</span><span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="im">import</span> { Switch } <span class="im">from</span> <span class="st">&quot;@/components/ui/switch&quot;</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="im">import</span> { Calendar } <span class="im">from</span> <span class="st">&quot;@/components/ui/calendar&quot;</span><span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="co">// スイッチ関連</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="kw">const</span> [isDebugMode<span class="op">,</span> setIsDebugMode] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="kw">const</span> handleIsDebugModeChange <span class="op">=</span> (checked<span class="op">:</span> <span class="dt">boolean</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb10-11"><a href="#cb10-11"></a>    <span class="cf">if</span> (checked) {</span>
+<span id="cb10-12"><a href="#cb10-12"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Debug mode is enabled.&quot;</span>)<span class="op">;</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>    } <span class="cf">else</span> {</span>
+<span id="cb10-14"><a href="#cb10-14"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Debug mode is disabled.&quot;</span>)<span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>    }</span>
+<span id="cb10-16"><a href="#cb10-16"></a>    <span class="fu">setIsDebugMode</span>(checked)<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a>  }<span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a></span>
+<span id="cb10-19"><a href="#cb10-19"></a>  <span class="co">// カレンダ関連</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>  <span class="kw">const</span> dtFmt <span class="op">=</span> <span class="st">&quot;YYYY年MM月DD日が選択されました。&quot;</span><span class="op">;</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a>  <span class="kw">const</span> [date<span class="op">,</span> setDate] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="bu">Date</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">&gt;</span>()<span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a>  <span class="kw">const</span> [msg<span class="op">,</span> setMsg] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;</span>(<span class="st">&quot;日付を選択してください。&quot;</span>)<span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a></span>
+<span id="cb10-24"><a href="#cb10-24"></a>  <span class="kw">const</span> handleDateChange <span class="op">=</span> (date<span class="op">:</span> <span class="bu">Date</span> <span class="op">|</span> <span class="dt">undefined</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb10-25"><a href="#cb10-25"></a>    <span class="cf">if</span> (date <span class="op">===</span> <span class="kw">undefined</span>) {</span>
+<span id="cb10-26"><a href="#cb10-26"></a>      <span class="fu">setMsg</span>(<span class="st">&quot;日付を選択してください。&quot;</span>)<span class="op">;</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a>    }</span>
+<span id="cb10-29"><a href="#cb10-29"></a>    <span class="fu">setMsg</span>(<span class="fu">dayjs</span>(date)<span class="op">.</span><span class="fu">format</span>(dtFmt))<span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a>    <span class="fu">setDate</span>(date)<span class="op">;</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a>  }<span class="op">;</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a></span>
+<span id="cb10-33"><a href="#cb10-33"></a>  <span class="cf">return</span> (</span>
+<span id="cb10-34"><a href="#cb10-34"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-4 text-2xl font-bold&quot;</span><span class="op">&gt;</span>shadcn<span class="op">/</span>ui<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex flex-col gap-y-4&quot;</span><span class="op">&gt;</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex items-center gap-x-3&quot;</span><span class="op">&gt;</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a>          <span class="op">&lt;</span>Switch</span>
+<span id="cb10-40"><a href="#cb10-40"></a>            id<span class="op">=</span><span class="st">&quot;debug-mode&quot;</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a>            checked<span class="op">=</span>{isDebugMode}</span>
+<span id="cb10-42"><a href="#cb10-42"></a>            onCheckedChange<span class="op">=</span>{handleIsDebugModeChange}</span>
+<span id="cb10-43"><a href="#cb10-43"></a>          <span class="op">/&gt;</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a>          <span class="op">&lt;</span>label htmlFor<span class="op">=</span><span class="st">&quot;debug-mode&quot;</span> className<span class="op">=</span><span class="st">&quot;cursor-pointer&quot;</span><span class="op">&gt;</span></span>
+<span id="cb10-45"><a href="#cb10-45"></a>            デバッグモード</span>
+<span id="cb10-46"><a href="#cb10-46"></a>          <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb10-47"><a href="#cb10-47"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-48"><a href="#cb10-48"></a></span>
+<span id="cb10-49"><a href="#cb10-49"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;&quot;</span><span class="op">&gt;</span></span>
+<span id="cb10-50"><a href="#cb10-50"></a>          <span class="op">&lt;</span>Calendar</span>
+<span id="cb10-51"><a href="#cb10-51"></a>            mode<span class="op">=</span><span class="st">&quot;single&quot;</span></span>
+<span id="cb10-52"><a href="#cb10-52"></a>            selected<span class="op">=</span>{date}</span>
+<span id="cb10-53"><a href="#cb10-53"></a>            onSelect<span class="op">=</span>{handleDateChange}</span>
+<span id="cb10-54"><a href="#cb10-54"></a>            className<span class="op">=</span><span class="st">&quot;inline-block rounded-md border&quot;</span></span>
+<span id="cb10-55"><a href="#cb10-55"></a>          <span class="op">/&gt;</span></span>
+<span id="cb10-56"><a href="#cb10-56"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-57"><a href="#cb10-57"></a>        <span class="op">&lt;</span>div<span class="op">&gt;</span>{msg}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-58"><a href="#cb10-58"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-59"><a href="#cb10-59"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb10-60"><a href="#cb10-60"></a>  )<span class="op">;</span></span>
+<span id="cb10-61"><a href="#cb10-61"></a>}<span class="op">;</span></span>
+<span id="cb10-62"><a href="#cb10-62"></a></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <h1 data-number="5" id="lucide-react-icon"><span class="header-section-number">5</span> Lucide
+      React Icon</h1>
+      <p>shadcn/ui をインストールすると、それに関連する関係で <code>lucide-react</code>
+      という「<strong>アイコンセットを提供するライブラリ</strong>」もインストールされます。このライブラリはアイコンは、既に紹介済みの<a
+      href="https://fontawesome.com/">FontAwesome</a>と併用することも可能です。</p>
+      <figure>
+      <img src="figs/13/app_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Lucide React が提供するアイコンの一覧 (2025/01/29時点で<strong>1548個</strong>) は<a
+      href="https://lucide.dev/icons/">こちら</a>から検索・確認できます。</p>
+      <p>以下に、実装例を示します。</p>
+      <div class="sourceCode" id="cb11" data-caption="src/app/playground/lucide-icon/page.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb11-1"><a href="#cb11-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="im">import</span> { Camera<span class="op">,</span> ThumbsUp<span class="op">,</span> Squirrel<span class="op">,</span> Settings } <span class="im">from</span> <span class="st">&quot;lucide-react&quot;</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="cf">return</span> (</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-4 text-2xl font-bold&quot;</span><span class="op">&gt;</span>Lucide React Icon<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-4&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex flex-col items-center&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;rounded-md border-2 p-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>            <span class="op">&lt;</span>Camera className<span class="op">=</span><span class="st">&quot;size-24 text-red-500&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span>Camera<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex flex-col items-center&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;rounded-md border-2 p-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>            <span class="op">&lt;</span>ThumbsUp className<span class="op">=</span><span class="st">&quot;size-24 text-red-500&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span>ThumbsUp<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex flex-col items-center&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;rounded-md border-2 p-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a>            <span class="op">&lt;</span>Squirrel className<span class="op">=</span><span class="st">&quot;size-24 text-red-500&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span>Squirrel<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex flex-col items-center&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;rounded-md border-2 p-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb11-30"><a href="#cb11-30"></a>            <span class="op">&lt;</span>Settings className<span class="op">=</span><span class="st">&quot;size-24 text-red-500&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-32"><a href="#cb11-32"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span>Settings<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-33"><a href="#cb11-33"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-34"><a href="#cb11-34"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb11-35"><a href="#cb11-35"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb11-36"><a href="#cb11-36"></a>  )<span class="op">;</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a>}<span class="op">;</span></span>
+<span id="cb11-38"><a href="#cb11-38"></a></span>
+<span id="cb11-39"><a href="#cb11-39"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2024/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
