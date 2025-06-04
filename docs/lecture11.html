@@ -354,6 +354,9 @@ Content-Type: application/json</code></pre>
       のテキストボックスに <code>cover_image</code> を入力してください。Bucketの名前には「Only
       lowercase letters, numbers, dots, and
       hyphens」、つまり、小文字、数字、ドット、ハイフンのみが使用可能です。</p>
+      <div class="note type-caution">
+      <p>アンダーバーが使用できなくなりました。<code>cover-image</code> に読み替えてください。</p>
+      </div>
       <p>また、<strong>Public bucket</strong>
       のスイッチを「<strong>オン</strong>」にしてください。「<strong>Public
       bucket</strong>」にすることで、次のような特性を持った Bucket となります。</p>
@@ -436,7 +439,7 @@ Content-Type: application/json</code></pre>
       (右クリックして「<strong>名前を付けてリンク先を保存</strong>」を選択) して、デスクトップなどに
       <code>cover-img-yellow.jpg</code> という名前で保存してください。</p>
       <p>次に Supabase のストレージ機能にアクセスして、バケット <code>cover_image</code>
-      を選択し、そこに <code>privte</code>
+      を選択し、そこに <code>private</code>
       という<strong>フォルダを新規作成</strong>してください。</p>
       <figure>
       <img src="figs/11/supabase_10.png" alt="img" />
@@ -684,7 +687,7 @@ npm i -D @types/crypto-js</code></pre>
       <p>アップロードしようする画像ファイルの名前に
       <strong>日本語や特定記号が含まれているとアップロードできない問題 (処理が失敗する問題)</strong>
       を解決していきます。</p>
-      <p>解決法のひとつとして、UUIDv4名前に を生成して、ファイルネームを UUID
+      <p>解決法のひとつとして、UUIDv を生成して、ファイルネームを UUID
       に置き換えるという方法があります。しかし、ここでは、ファイルのハッシュ値を計算して、それをファイルネームにしたいと思います。ハッシュ値を使うことで、同じファイルに対しては、同値が得られるので
       <strong>重複アップロードを防ぐことができ、ストレージの効率的な利用</strong>
       が可能になります。</p>
